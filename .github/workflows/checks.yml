@@ -81,6 +81,14 @@ jobs:
             ${{ runner.os }}-${{ matrix.node }}-
             ${{ runner.os }}-
       - name: Build
+        env:
+          COMMIT_SHA: ${{ github.sha }}
         run: |
           yarn
-          yarn publish
+          yarn build
+          yarn export
+          cp ./CNAME ./out/CNAME
+          cp ./.nojekyll ./out/.nojekyll
+          git add ./out
+          git commit -m "chore: publish docs for $COMMIT_SHA"
+          git subtree push --prefix out origin gh-pages
