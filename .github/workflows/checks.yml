@@ -12,22 +12,30 @@ jobs:
       CI: true
     steps:
       - uses: actions/checkout@v2
+
       - name: Node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - name: Cache node modules
-        uses: actions/cache@v1
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache
         with:
-          path: ~/.yarn
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node }}-
             ${{ runner.os }}-
+
       - name: Lint
         run: |
           yarn
           yarn compas lint
+
   build:
     strategy:
       matrix:
@@ -38,22 +46,30 @@ jobs:
       CI: true
     steps:
       - uses: actions/checkout@v2
+
       - name: Node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - name: Cache node modules
-        uses: actions/cache@v1
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache
         with:
-          path: ~/.yarn
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node }}-
             ${{ runner.os }}-
+
       - name: Build
         run: |
           yarn
           yarn build
+
   deploy:
     strategy:
       matrix:
@@ -68,14 +84,20 @@ jobs:
       CI: true
     steps:
       - uses: actions/checkout@v2
+
       - name: Node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - name: Cache node modules
-        uses: actions/cache@v1
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache
         with:
-          path: ~/.yarn
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node }}-
