@@ -1,0 +1,42 @@
+{
+  "name": "compas-docs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export"
+  },
+  "dependencies": {
+    "babel-preset-react-app": "10.0.0",
+    "next": "10.0.3",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "tailwindcss": "1.9.6"
+  },
+  "devDependencies": {
+    "@babel/core": "7.12.10",
+    "@compas/lint-config": "0.0.103",
+    "@compas/cli": "0.0.103",
+    "@types/node": "14.14.14",
+    "@types/react": "17.0.0",
+    "@types/react-dom": "17.0.0",
+    "babel-loader": "8.2.2",
+    "babel-plugin-module-resolver": "4.1.0",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "fork-ts-checker-webpack-plugin": "6.0.7",
+    "postcss-flexbugs-fixes": "5.0.2",
+    "postcss-import": "14.0.0",
+    "postcss-preset-env": "6.7.0",
+    "react-is": "17.0.1"
+  },
+  "browserslist": [
+    "defaults",
+    "not ie < 11",
+    "last 2 versions",
+    "> 1%",
+    "iOS 7",
+    "last 3 iOS versions"
+  ]
+}
