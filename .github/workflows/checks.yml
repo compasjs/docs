@@ -80,15 +80,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node }}-
             ${{ runner.os }}-
+
       - name: Build
-        env:
-          COMMIT_SHA: ${{ github.sha }}
         run: |
           yarn
           yarn build
           yarn export
           cp ./CNAME ./out/CNAME
           cp ./.nojekyll ./out/.nojekyll
-          git add ./out
-          git commit -m "chore: publish docs for $COMMIT_SHA"
-          git subtree push --prefix out origin gh-pages
+
+      - name: Deploy
+        uses: s0/git-publish-subdir-action@v2.4.0
+        env:
+          REPO: self
+          BRANCH: gh-pages
+          FOLDER: out
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MESSAGE: "chore: publish docs for {sha}\n\n{msg}"
