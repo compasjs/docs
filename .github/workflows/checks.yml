@@ -27,8 +27,7 @@ jobs:
       - name: Lint
         run: |
           yarn
-          yarn format
-          yarn checks:run
+          yarn compas lint
   build:
     strategy:
       matrix:
@@ -55,3 +54,33 @@ jobs:
         run: |
           yarn
           yarn build
+  deploy:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [15]
+    runs-on: ${{ matrix.os }}
+    needs:
+      - build
+      - lint
+    if: github.ref == 'refs/heads/main'
+    env:
+      CI: true
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node }}-
+            ${{ runner.os }}-
+      - name: Build
+        run: |
+          yarn
+          yarn publish
