@@ -9,7 +9,7 @@ const isNil = (value) => value === null || value === undefined;
 export async function getContent() {
   const contentDir = pathJoin(process.cwd(), "src/content");
 
-  if (!isNil(_cachedRead)) {
+  if (!isNil(_cachedRead) && process.env.NODE_ENV === "production") {
     return _cachedRead;
   }
 
