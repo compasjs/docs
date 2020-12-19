@@ -36,40 +36,6 @@ jobs:
           yarn
           yarn compas lint
 
-  build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [15]
-    runs-on: ${{ matrix.os }}
-    env:
-      CI: true
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.node }}-
-            ${{ runner.os }}-
-
-      - name: Build
-        run: |
-          yarn
-          yarn build
-
   deploy:
     strategy:
       matrix:
@@ -77,7 +43,6 @@ jobs:
         node: [15]
     runs-on: ${{ matrix.os }}
     needs:
-      - build
       - lint
     if: github.ref == 'refs/heads/main'
     env:
@@ -103,13 +68,12 @@ jobs:
             ${{ runner.os }}-${{ matrix.node }}-
             ${{ runner.os }}-
 
-      - name: Build
+      - name: Copy to out
+        # We keep running Yarn here, as we may want to add some preprocessing
         run: |
           yarn
-          yarn build
-          yarn export
+          cp -r ./src/ ./out
           cp ./CNAME ./out/CNAME
-          cp ./.nojekyll ./out/.nojekyll
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@v2.4.0

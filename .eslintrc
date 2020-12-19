@@ -1,6 +1,0 @@
-{
-  "extends": ["./node_modules/@compas/lint-config/index.js"],
-  "rules": {
-    "import/no-commonjs": "off"
-  }
-}

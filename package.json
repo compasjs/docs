@@ -2,41 +2,21 @@
   "name": "compas-docs",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "export": "next export"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@compas/cli": "0.0.103",
     "@compas/lint-config": "0.0.103",
-    "@types/node": "14.14.14",
-    "@types/react": "17.0.0",
-    "@types/react-dom": "17.0.0",
-    "eslint-plugin-jsx-a11y": "6.4.1",
-    "fork-ts-checker-webpack-plugin": "6.0.7",
-    "gray-matter": "4.0.2",
-    "next": "10.0.3",
-    "postcss-flexbugs-fixes": "5.0.2",
-    "postcss-import": "14.0.0",
-    "postcss-preset-env": "6.7.0",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-is": "17.0.1",
-    "remark-autolink-headings": "6.0.1",
-    "remark-parse": "9.0.0",
-    "remark-react": "8.0.0",
-    "remark-slug": "6.0.0",
-    "tailwindcss": "1.9.5",
-    "unified": "9.2.0"
+    "@compas/stdlib": "0.0.103"
   },
-  "browserslist": [
-    "defaults",
-    "not ie < 11",
-    "last 2 versions",
-    "> 1%",
-    "iOS 7",
-    "last 3 iOS versions"
-  ]
+  "prettier": "@compas/lint-config/prettierrc.js",
+  "engines": {
+    "node": ">=15"
+  }
 }
