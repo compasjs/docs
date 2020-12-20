@@ -1,7 +1,6 @@
-const base = require("@compas/lint-config");
+/* eslint-disable import/no-commonjs */
 
-base.root = true;
-
-base.ignorePatterns = base.ignorePatterns || [];
-
-module.exports = base;
+module.exports = {
+  extends: ["./node_modules/@compas/lint-config"],
+  root: true,
+};

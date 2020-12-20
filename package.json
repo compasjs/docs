@@ -15,7 +15,6 @@
     "@compas/lint-config": "0.0.103",
     "@compas/stdlib": "0.0.103"
   },
-  "prettier": "@compas/lint-config/prettierrc.js",
   "engines": {
     "node": ">=15"
   }
