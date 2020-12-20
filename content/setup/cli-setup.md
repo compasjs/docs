@@ -13,8 +13,9 @@ yarn add @compas/lint-config @compas/cli --exact --dev
 
 ### Configuration
 
-The `@compas/lint-config` provides a Prettier config and ESLint configuration.
-This totals in three files created in your project:
+The `@compas/lint-config` package provides a Prettier config and ESLint
+configuration. To get the configuration in your project, create the following
+three files:
 
 **/.eslintrc.cjs**
 
@@ -82,4 +83,52 @@ This environment variable is also document in [Environment variables](TODO)
 
 ### Running scripts
 
-TODO
+The `@compas/cli` package also comes with more features. Some of these will be
+explored in later parts of this setup guide. For now, we will take a look at the
+script runner.
+
+The script runner at its base starts your scripts the same way as you would with
+Node.js.
+
+```shell
+yarn compas ./src/a.js
+# Is the same as `node ./src/a.js`
+```
+
+However, it can also run named scripts. It will look for scripts defined in your
+`package.json` and in the `scripts` directory at the root of your project.
+Create a file in `scripts/hello.js` with the following contents:
+
+```js
+import { mainFn } from "@compas/stdlib";
+
+mainFn(import.meta, main);
+
+function main(logger) {
+  logger.info("Hello!");
+}
+```
+
+When running `yarn compas help` it should list `hello` under the available
+script names. Let's run it:
+
+```shell
+yarn compas hello
+# Is the same as
+yarn compas run hello
+```
+
+As you may have seen in the output from `yarn compas help`, there is also a
+`--watch` flag. This flag can be used when specifying a path, but also when
+running a 'named' script.
+
+Let's start our `hello` script in watch-mode:
+
+```shell
+yarn compas --watch hello
+```
+
+Now when making any changes to the log line and saving, you should see the
+script being restarted. If you just want to restart, type in `rs` and press
+enter in your terminal. By default, all your JavaScript files are watched. This
+is customizable via the [watch options](TODO).
