@@ -79,3 +79,49 @@ some utilities for that as well:
 `createTestAppAndClient` can be used in combination with an App and Axios
 instance to listen to a random port and set the correct `baseURL` in Axios. The
 listening app can than be stopped by passing it to `closeTestApp`.
+
+### Setup as a service
+
+As we have seen previously in the [services setup](/setup/services-setup), we
+can set variables 'globally' while still being testable. Since you may need to
+add various middleware or maybe to construct some middleware like `session`. It
+may be a good idea to create a service out of it.
+
+A good pattern to use, is to create a `src/services/core.js` file which contains
+services not altered by specific business logic, that only need a one time
+setup, like our Koa app.
+
+```js
+export let logger = undefined;
+export let app = undefined;
+
+export function setLogger(newLogger) {
+  newLogger.info("setting services->logger");
+  logger = newLogger;
+}
+
+export function setApp(newApp) {
+  if (logger) {
+    logger.info("setting services->app");
+  }
+  app = newApp;
+}
+```
+
+And changing your `scripts/api.js` to the following:
+
+```js
+import { getApp } from "@compas/server";
+import { mainFn } from "@compas/stdlib";
+import { app, setLogger, setApp } from "../src/services/core.js";
+
+mainFn(import.meta, main);
+
+async function main(logger) {
+  // Making sure we have a logger setup
+  setLogger(logger);
+  setApp(getApp({}));
+
+  app.listen(3000);
+}
+```

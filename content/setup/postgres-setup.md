@@ -104,3 +104,79 @@ yarn compas database
 # or
 node ./scripts/database.js
 ```
+
+### Services and testing
+
+The database connection is most likely the best example where ES Module live
+bindings shine. By setting the connection as such, we can quickly swap out the
+database connection used in tests. Add the following to `src/services/core.js`
+
+```js
+export let sql = undefined;
+
+export function setSql(connection) {
+  if (logger) {
+    logger.info("setting services->sql");
+  }
+  sql = connection;
+}
+```
+
+Now create a file for some logic at `src/todo/events.js` with the following:
+
+```js
+import { sql } from "../services/core.js";
+
+/**
+ * Count all rows in "myTable"
+ * @returns {Promise<number>}
+ */
+export async function todoCount() {
+  const [result] = await sql`select COUNT(*) as sum from "myTable"`;
+
+  return result.sum;
+}
+```
+
+Notice that we don't have `myTable` yet, but we can still write a test for it.
+Create `src/todo/events.test.js` and add the following contents:
+
+```js
+import { test, mainTestFn } from "@compas/cli";
+import {
+  createTestPostgresDatabase,
+  cleanupTestPostgresDatabase,
+} from "@compas/store";
+import { sql, setSql } from "../services/core.js";
+import { todoCount } from "./events.js";
+
+test("todo/events", async (t) => {
+  t.test("setup", async () => {
+    // A sub test doesn't need to do any assertions
+    setSql(await createTestPostgresDatabase());
+
+    // Create `myTable`
+    await sql`CREATE TABLE "myTable" ( id SERIAL PRIMARY KEY );`;
+    // Insert some values
+    await sql`INSERT INTO "myTable" ("id") VALUES (DEFAULT), (DEFAULT);`;
+  });
+
+  t.test("todoCount - return the correct number", async (t) => {
+    // This uses our test connection, created above.
+    const result = await todoCount();
+    t.equal(result, 2);
+  });
+
+  t.test("teardown", async () => {
+    // Cleans up the created database
+    await cleanupTestPostgresDatabase(sql);
+    // Make sure to reset the 'sql' variable
+    setSql(undefined);
+  });
+});
+```
+
+For these cases `@compas/store` exports the function
+`createTestPostgresDatabase` and `cleanupTestPostgresDatabase`. This creates a
+structural copy of your database, truncating all tables and returns the
+connection.
