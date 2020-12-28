@@ -3,17 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "export": "next export"
-  },
+  "scripts": {},
   "dependencies": {},
   "devDependencies": {
-    "@compas/cli": "0.0.103",
-    "@compas/lint-config": "0.0.103",
-    "@compas/stdlib": "0.0.103"
+    "@compas/cli": "0.0.106",
+    "@compas/code-gen": "0.0.106",
+    "@compas/insight": "0.0.106",
+    "@compas/lint-config": "0.0.106",
+    "@compas/server": "0.0.106",
+    "@compas/stdlib": "0.0.106",
+    "@compas/store": "0.0.106"
   },
   "engines": {
     "node": ">=15"
