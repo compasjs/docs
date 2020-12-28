@@ -19,6 +19,14 @@ package.json file:
 }
 ```
 
+Another useful file to create now, is a `.env` file with the following contents:
+
+```dotenv
+NODE_ENV=development
+```
+
+This changes some defaults, for example pretty printing in the logger.
+
 ### Stdlib
 
 A package provided by Compas is `@compas/stdlib`. This contains various small
