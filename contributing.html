@@ -41,13 +41,10 @@ yarn compas coverage -- --check-coverage
 yarn compas coverage -- report --reporter lcov
 # Link your local compas checkout to another project
 yarn compas link &amp;&amp; yarn compas linkExternally ../other-project/</code></pre>
-<p><strong>Documentation &amp; Typescript types</strong>:</p>
-<pre><code># Build docs from index.d.ts files and put in /docs/api.md
-yarn compas typedoc
-# Sync content of README.md&#x27;s based on the README.md in the root
-yarn compas syncMetadata
-# Sync assets/examples to the documentation files
-yarn compas syncDocExamples</code></pre>
+<p><strong>Documentation</strong>:</p>
+<pre><code># Sync content of README.md&#x27;s based on the README.md in the root
+yarn compas syncMetadata</code></pre>
+<p>For more information see the <a href="https://github.com/compasjs/docs">docs repository</a></p>
 <p><strong>Code generation, @compas/store structure changes</strong>:</p>
 <pre><code># Generate to ignored files for testing stuff out
 yarn compas generate
