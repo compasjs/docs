@@ -9,9 +9,12 @@
         <link rel="canonical" href="https://pre.compasjs.com/setup/server-setup.html"/>
         <style>
             body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
-            code {background: white;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
     <body>
@@ -26,19 +29,19 @@ based on <a href="https://koajs.com/">Koa</a>. The server consist of built-in er
 handling, a logger and security headers.</p>
 <h2 id="default-server">Default server</h2>
 <p>Create a file at <code>scripts/api.js</code> with the following contents:</p>
-<pre><code class="language-js">import { getApp } from &quot;@compas/server&quot;;
-import { mainFn } from &quot;@compas/stdlib&quot;;
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { getApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/server&quot;</span>;
+<span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
 
-mainFn(import.meta, main);
+mainFn(<span class="hljs-keyword">import</span>.meta, main);
 
-async function main() {
-  const app = getApp({});
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> app = getApp({});
 
-  app.listen(3000);
+  app.listen(<span class="hljs-number">3000</span>);
 }</code></pre>
 <p>When we run this file we can already check out some default features.</p>
 <pre><code class="language-shell">yarn compas api
-# Or
+<span class="hljs-meta">#</span><span class="bash"> Or</span>
 node ./scripts/api.js</code></pre>
 <p>We are going to do some GET requests, you can use your browser or another HTTP
 client, like <a href="https://httpie.io/">httpie</a> .</p>
@@ -91,33 +94,33 @@ may be a good idea to create a service out of it.</p>
 <p>A good pattern to use, is to create a <code>src/services/core.js</code> file which contains
 services not altered by specific business logic, that only need a one time
 setup, like our Koa app.</p>
-<pre><code class="language-js">export let logger = undefined;
-export let app = undefined;
+<pre><code class="language-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> logger = <span class="hljs-literal">undefined</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> app = <span class="hljs-literal">undefined</span>;
 
-export function setLogger(newLogger) {
-  newLogger.info(&quot;setting services-&gt;logger&quot;);
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setLogger</span>(<span class="hljs-params">newLogger</span>) </span>{
+  newLogger.info(<span class="hljs-string">&quot;setting services-&gt;logger&quot;</span>);
   logger = newLogger;
 }
 
-export function setApp(newApp) {
-  if (logger) {
-    logger.info(&quot;setting services-&gt;app&quot;);
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setApp</span>(<span class="hljs-params">newApp</span>) </span>{
+  <span class="hljs-keyword">if</span> (logger) {
+    logger.info(<span class="hljs-string">&quot;setting services-&gt;app&quot;</span>);
   }
   app = newApp;
 }</code></pre>
 <p>And changing your <code>scripts/api.js</code> to the following:</p>
-<pre><code class="language-js">import { getApp } from &quot;@compas/server&quot;;
-import { mainFn } from &quot;@compas/stdlib&quot;;
-import { app, setLogger, setApp } from &quot;../src/services/core.js&quot;;
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { getApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/server&quot;</span>;
+<span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
+<span class="hljs-keyword">import</span> { app, setLogger, setApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../src/services/core.js&quot;</span>;
 
-mainFn(import.meta, main);
+mainFn(<span class="hljs-keyword">import</span>.meta, main);
 
-async function main(logger) {
-  // Making sure we have a logger setup
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params">logger</span>) </span>{
+  <span class="hljs-comment">// Making sure we have a logger setup</span>
   setLogger(logger);
   setApp(getApp({}));
 
-  app.listen(3000);
+  app.listen(<span class="hljs-number">3000</span>);
 }</code></pre>
 
     </article>

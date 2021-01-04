@@ -9,9 +9,12 @@
         <link rel="canonical" href="https://pre.compasjs.com/setup/test-runner.html"/>
         <style>
             body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
-            code {background: white;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
     <body>
@@ -28,14 +31,14 @@ suites. <code>AssertionErrors</code> by using Node.js builtin
 <a href="https://nodejs.org/api/assert.html">assert</a> -module are handled as well.</p>
 <h2 id="basic-test-file">Basic test file</h2>
 <p>A basic test file looks like the following:</p>
-<pre><code class="language-js">import { test } from &quot;@compas/cli&quot;;
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { test } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/cli&quot;</span>;
 
-test(&quot;my test&quot;, (t) =&gt; {
-  t.equal(1, 1);
-  t.ok(true);
-  t.notOk(false);
-  t.notEqual(&quot;foo&quot;, &quot;bar&quot;);
-  t.deepEqual([1, 2], [1, 2]);
+test(<span class="hljs-string">&quot;my test&quot;</span>, <span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> {
+  t.equal(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+  t.ok(<span class="hljs-literal">true</span>);
+  t.notOk(<span class="hljs-literal">false</span>);
+  t.notEqual(<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>);
+  t.deepEqual([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]);
 });</code></pre>
 <h2 id="running-tests">Running tests</h2>
 <p>There are two ways to run tests. The short way is to use <code>yarn compas test</code>
@@ -43,9 +46,9 @@ which will run all test files in your project. There is also the option to run a
 test file directly like <code>node ./file.test.js</code> or
 <code>yarn compas run ./file.test.js</code>. However, to do this you need to add the
 following to your test file:</p>
-<pre><code class="language-js">import { mainTestFn } from &quot;@compas/cli&quot;;
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { mainTestFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/cli&quot;</span>;
 
-mainTestFn(import.meta);</code></pre>
+mainTestFn(<span class="hljs-keyword">import</span>.meta);</code></pre>
 <p>It works based on <code>mainFn</code> as explained in
 <a href="/setup/project-setup.md">Project setup</a>.</p>
 <h2 id="setup-and-teardown-per-test-file">Setup and teardown per test file</h2>
@@ -53,85 +56,85 @@ mainTestFn(import.meta);</code></pre>
 tests in a single file. This is often called <code>beforeAll</code> / <code>afterAll</code>. We don&#39;t
 need this in the compas provided test runner as all tests run in the order they
 are specified.</p>
-<pre><code class="language-js">import { test, mainTestFn } from &quot;@compas/cli&quot;;
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { test, mainTestFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/cli&quot;</span>;
 
-mainTestFn(import.meta);
+mainTestFn(<span class="hljs-keyword">import</span>.meta);
 
-test(&quot;setup and teardown&quot;, (t) =&gt; {
-  let myTestGlobal = undefined;
+test(<span class="hljs-string">&quot;setup and teardown&quot;</span>, <span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> {
+  <span class="hljs-keyword">let</span> myTestGlobal = <span class="hljs-literal">undefined</span>;
 
-  // Every callback function can be async
-  t.test(&quot;setup&quot;, async () =&gt; {
-    myTestGlobal = 10;
+  <span class="hljs-comment">// Every callback function can be async</span>
+  t.test(<span class="hljs-string">&quot;setup&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+    myTestGlobal = <span class="hljs-number">10</span>;
   });
 
-  t.test(&quot;my test global is there&quot;, (t) =&gt; {
-    t.equal(myTestGlobal, 10);
+  t.test(<span class="hljs-string">&quot;my test global is there&quot;</span>, <span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> {
+    t.equal(myTestGlobal, <span class="hljs-number">10</span>);
   });
 
-  // In this example not necessary since myTestGlobal will
-  // be out of scope for all other code
-  t.test(&quot;teardown&quot;, (t) =&gt; {
-    myTestGlobal = undefined;
-    t.pass(&quot;successful teardown&quot;);
+  <span class="hljs-comment">// In this example not necessary since myTestGlobal will</span>
+  <span class="hljs-comment">// be out of scope for all other code</span>
+  t.test(<span class="hljs-string">&quot;teardown&quot;</span>, <span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> {
+    myTestGlobal = <span class="hljs-literal">undefined</span>;
+    t.pass(<span class="hljs-string">&quot;successful teardown&quot;</span>);
   });
 });</code></pre>
 <h2 id="asserting-on-throws">Asserting on throws</h2>
 <p>Asserting on throws is another overlooked part of some test runners. This test
 runner does not provide any fancy util like <code>t.throws(functionThatThrows)</code>, but
 expects the user to use normal control flow like try / catch.</p>
-<pre><code class="language-js">const throws = async () =&gt; {
-  throw new Error(&quot;Oops!&quot;);
+<pre><code class="language-js"><span class="hljs-keyword">const</span> throws = <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Oops!&quot;</span>);
 };
 
-const doesNotThrow = () =&gt; {};
+<span class="hljs-keyword">const</span> doesNotThrow = <span class="hljs-function">() =&gt;</span> {};
 
-test(&quot;Throws vs not throws&quot;, async (t) =&gt; {
-  try {
-    await throws();
-    t.fail(`The &#39;throws&#39; function should have thrown.`);
-  } catch (e) {
-    t.equal(e.message, &quot;Oops!&quot;);
+test(<span class="hljs-string">&quot;Throws vs not throws&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">await</span> throws();
+    t.fail(<span class="hljs-string">`The &#x27;throws&#x27; function should have thrown.`</span>);
+  } <span class="hljs-keyword">catch</span> (e) {
+    t.equal(e.message, <span class="hljs-string">&quot;Oops!&quot;</span>);
   }
 
-  try {
+  <span class="hljs-keyword">try</span> {
     doesNotThrow();
-    t.pass(&quot;The function did not throw!&quot;);
-  } catch (e) {
-    t.fail(`The &#39;doesNotThrow&#39; function did throw.`);
+    t.pass(<span class="hljs-string">&quot;The function did not throw!&quot;</span>);
+  } <span class="hljs-keyword">catch</span> (e) {
+    t.fail(<span class="hljs-string">`The &#x27;doesNotThrow&#x27; function did throw.`</span>);
 
-    // A logger from @compas/insight is available
+    <span class="hljs-comment">// A logger from @compas/insight is available</span>
     t.log.error(e);
   }
 });</code></pre>
 <h2 id="test-configuration">Test configuration</h2>
 <p>Test configuration is auto loaded from <code>{root}/test/config.js</code>. An example with
 the defaults is below:</p>
-<pre><code class="language-js">// Individual test timeout, i.e. the function provided to `test` and `t.test`
-export const timeout = 2500;
+<pre><code class="language-js"><span class="hljs-comment">// Individual test timeout, i.e. the function provided to `test` and `t.test`</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> timeout = <span class="hljs-number">2500</span>;
 
-export async function setup() {
-  // Global setup function
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setup</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// Global setup function</span>
 }
 
-export async function teardown() {
-  // Global teardown function
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">teardown</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// Global teardown function</span>
 }</code></pre>
 <p>Timeout is also configurable for subtests via <code>t.timeout</code> like so:</p>
-<pre><code class="language-js">test(&quot;configurable timeout&quot;, (t) =&gt; {
-  t.timeout = 20;
+<pre><code class="language-js">test(<span class="hljs-string">&quot;configurable timeout&quot;</span>, <span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> {
+  t.timeout = <span class="hljs-number">20</span>;
 
-  t.test(&quot;race with the timeout&quot;, async (t) =&gt; {
-    try {
-      await new Promise((resolve) =&gt; {
-        // No exception happening here
-        setTimeout(() =&gt; {
+  t.test(<span class="hljs-string">&quot;race with the timeout&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> {
+        <span class="hljs-comment">// No exception happening here</span>
+        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
           resolve();
-        }, 5);
+        }, <span class="hljs-number">5</span>);
       });
-      t.pass(&quot;subtest is faster than the parent timeout of 20 milliseconds&quot;);
-    } catch (e) {
-      t.fail(&quot;This should not trigger&quot;);
+      t.pass(<span class="hljs-string">&quot;subtest is faster than the parent timeout of 20 milliseconds&quot;</span>);
+    } <span class="hljs-keyword">catch</span> (e) {
+      t.fail(<span class="hljs-string">&quot;This should not trigger&quot;</span>);
       t.log.error(e);
     }
   });

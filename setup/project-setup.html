@@ -9,9 +9,12 @@
         <link rel="canonical" href="https://pre.compasjs.com/setup/project-setup.html"/>
         <style>
             body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
-            code {background: white;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
     <body>
@@ -30,9 +33,9 @@ This results in projects created on top of Compas, to also use ES modules.</p>
 <p>To enable this, make sure to use Node.js 14 or higher and create the following
 package.json file:</p>
 <pre><code class="language-json">{
-  &quot;name&quot;: &quot;compas-todo&quot;,
-  &quot;private&quot;: true,
-  &quot;type&quot;: &quot;module&quot;
+  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;compas-todo&quot;</span>,
+  <span class="hljs-attr">&quot;private&quot;</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;module&quot;</span>
 }</code></pre>
 <p>Another useful file to create now, is a <code>.env</code> file with the following contents:</p>
 <pre><code class="language-dotenv">NODE_ENV=development</code></pre>
@@ -55,21 +58,21 @@ things:</p>
 <li>Create a logger from <a href="TODO">@compas/insight</a></li>
 </ul>
 <p>Let&#39;s create two files. Both exporting a constant and calling <code>mainFn</code>:</p>
-<pre><code class="language-js">// src/a.js
-import { mainFn } from &quot;@compas/stdlib&quot;;
-import { b } from &quot;./b.js&quot;;
+<pre><code class="language-js"><span class="hljs-comment">// src/a.js</span>
+<span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
+<span class="hljs-keyword">import</span> { b } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./b.js&quot;</span>;
 
-mainFn(import.meta, (logger) =&gt; logger.info(&quot;Hello from a.js. B is&quot;, b));
+mainFn(<span class="hljs-keyword">import</span>.meta, <span class="hljs-function">(<span class="hljs-params">logger</span>) =&gt;</span> logger.info(<span class="hljs-string">&quot;Hello from a.js. B is&quot;</span>, b));
 
-export const a = true;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> a = <span class="hljs-literal">true</span>;
 
-// src/b.js
-import { mainFn } from &quot;@compas/stdlib&quot;;
-import { a } from &quot;./a.js&quot;;
+<span class="hljs-comment">// src/b.js</span>
+<span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
+<span class="hljs-keyword">import</span> { a } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./a.js&quot;</span>;
 
-mainFn(import.meta, (logger) =&gt; logger.info(&quot;Hello from b.js. A is&quot;, a));
+mainFn(<span class="hljs-keyword">import</span>.meta, <span class="hljs-function">(<span class="hljs-params">logger</span>) =&gt;</span> logger.info(<span class="hljs-string">&quot;Hello from b.js. A is&quot;</span>, a));
 
-export const b = false;</code></pre>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> b = <span class="hljs-literal">false</span>;</code></pre>
 <p>Now if we run <code>src/a.js</code>, we see the following:</p>
 <pre><code class="language-txt">$ node ./src/a.js
 Hello from a.js. B is false</code></pre>
