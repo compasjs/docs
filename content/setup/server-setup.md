@@ -1,10 +1,18 @@
+---
+type: page
+title: Server setup
+description: Create a Koa based server
+tags: []
+order: 5
+---
+
 # Server setup
 
 Compas also provides some utilities for constructing an HTTP server. This is
 based on [Koa](https://koajs.com/). The server consist of built-in error
 handling, a logger and security headers.
 
-### Default server
+## Default server
 
 Create a file at `scripts/api.js` with the following contents:
 
@@ -60,7 +68,7 @@ Notes that all logs also contain a `requestId`. This is automatically added when
 you use the logger provided by `ctx.log`. To read more about the event
 callstack, check the [event docs](TODO).
 
-### Other middleware
+## Other middleware
 
 - `createBodyParsers` can be used to create a json body parser, and a separate
   multipart body parser.
@@ -71,7 +79,7 @@ callstack, check the [event docs](TODO).
 - `session` is a cookie based session handling, ties together with the
   `SessionStore` provided by [@compas/store](TODO)
 
-### Testing
+## Testing
 
 Testing an api is of coure also necessary. The @compas/server package exports
 some utilities for that as well:
@@ -80,7 +88,7 @@ some utilities for that as well:
 instance to listen to a random port and set the correct `baseURL` in Axios. The
 listening app can than be stopped by passing it to `closeTestApp`.
 
-### Setup as a service
+## Setup as a service
 
 As we have seen previously in the [services setup](/setup/services-setup), we
 can set variables 'globally' while still being testable. Since you may need to

@@ -1,4 +1,4 @@
-name: Checks
+name: CI / push
 on: [push]
 
 jobs:
@@ -72,8 +72,7 @@ jobs:
         # We keep running Yarn here, as we may want to add some preprocessing
         run: |
           yarn
-          cp -r ./src/ ./out
-          cp ./CNAME ./out/CNAME
+          yarn compas build
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@v2.4.0

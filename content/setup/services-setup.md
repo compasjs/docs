@@ -1,3 +1,11 @@
+---
+type: page
+title: Services setup
+description: Setup reusable services
+tags: []
+order: 4
+---
+
 # Services setup
 
 A lot of the time you have variables that need a setup, and are then long-lived
@@ -9,7 +17,7 @@ anymore. Because all places use it directly. It also introduces some mental
 gymnastics, because primitives like a number behaved differently when required,
 than an object.
 
-### ES Module live bindings
+## ES Module live bindings
 
 Enter ES Module live bindings. ES Module live bindings allow you to export a
 variable and in the same file replace it. Let's look at an example.

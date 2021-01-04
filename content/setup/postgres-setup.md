@@ -1,11 +1,17 @@
-# Postgres setup
+---
+type: page
+title: Postgres setup
+description: Connect Compas to Postgres
+tags: []
+order: 6
+---
 
-> TODO: Services?
+# Postgres setup
 
 Most projects also require some way of persisting data. Compas aides in
 providing a PostgreSQL client and some utilities around setting up a database.
 
-### Starting PostgreSQL
+## Starting PostgreSQL
 
 First that we need to make sure we have a running PostgreSQL instance. Compas
 helps here, by managing a Docker based PostgreSQL server. Previously you have
@@ -28,7 +34,7 @@ yarn compas docker down
 yarn compas docker clean
 ```
 
-### Setup @compas/store
+## Setup @compas/store
 
 The `@compas/store` packages provides a few abstractions over PostgreSQL and
 Minio:
@@ -69,7 +75,7 @@ And lastly we need to install `@compas/store`:
 yarn add @compas/store --exact
 ```
 
-### Connecting
+## Connecting
 
 Now that we have everything setup, let's see if we can make a connection to
 PostgreSQL. Create a file at `scripts/database.js` with the following contents:
@@ -105,7 +111,7 @@ yarn compas database
 node ./scripts/database.js
 ```
 
-### Services and testing
+## Services and testing
 
 The database connection is most likely the best example where ES Module live
 bindings shine. By setting the connection as such, we can quickly swap out the

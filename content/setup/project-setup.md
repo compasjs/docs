@@ -1,3 +1,11 @@
+---
+type: page
+title: Project setup
+description: Setup Compas stdlib and get to know mainFn
+tags: []
+order: 1
+---
+
 # Project setup
 
 This series of setup documents explains the setup used in Node.js & Compas based
@@ -27,7 +35,7 @@ NODE_ENV=development
 
 This changes some defaults, for example pretty printing in the logger.
 
-### Stdlib
+## Stdlib
 
 A package provided by Compas is `@compas/stdlib`. This contains various small
 utility functions, like recursively looping over all files in a directory.

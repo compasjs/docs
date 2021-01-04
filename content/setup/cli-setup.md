@@ -1,3 +1,11 @@
+---
+type: page
+title: CLI and linting
+description: Setup Compas based lint configuration and get to know the CLI
+tags: []
+order: 2
+---
+
 # Setting up the CLI and linting
 
 Of course a project needs linting and Compas provides a 2-step approach:
@@ -11,7 +19,7 @@ Start with installing the dependencies:
 yarn add @compas/lint-config @compas/cli --exact --dev
 ```
 
-### Configuration
+## Configuration
 
 The `@compas/lint-config` package provides a Prettier config and ESLint
 configuration. To get the configuration in your project, create the following
@@ -53,7 +61,7 @@ By following the respective guides / configuration options:
 
 Now is also a good time to set up your IDE to use your local configuration.
 
-### Running the linter
+## Running the linter
 
 At the moment we have only configured the underlying tools but have not run
 anything yet. This is where `@compas/cli` comes in. This package also has a
@@ -81,7 +89,7 @@ unset CI
 
 This environment variable is also document in [Environment variables](TODO)
 
-### Running scripts
+## Running scripts
 
 The `@compas/cli` package also comes with more features. Some of these will be
 explored in later parts of this setup guide. For now, we will take a look at the

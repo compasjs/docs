@@ -1,3 +1,11 @@
+---
+type: page
+title: Writing tests
+description: Setup Compas based test runner for ES Modules
+tags: []
+order: 3
+---
+
 # Writing tests
 
 A project setup needs a test runner of course. Compas comes with its own test
@@ -6,7 +14,7 @@ with a few assertions, async testing, and the possibility of doing nesting test
 suites. `AssertionErrors` by using Node.js builtin
 [assert](https://nodejs.org/api/assert.html) -module are handled as well.
 
-### Basic test file
+## Basic test file
 
 A basic test file looks like the following:
 
@@ -22,7 +30,7 @@ test("my test", (t) => {
 });
 ```
 
-### Running tests
+## Running tests
 
 There are two ways to run tests. The short way is to use `yarn compas test`
 which will run all test files in your project. There is also the option to run a
@@ -39,7 +47,7 @@ mainTestFn(import.meta);
 It works based on `mainFn` as explained in
 [Project setup](/setup/project-setup.md).
 
-### Setup and teardown per test file
+## Setup and teardown per test file
 
 Most test runners have a special global function that runs before or after all
 tests in a single file. This is often called `beforeAll` / `afterAll`. We don't
@@ -72,7 +80,7 @@ test("setup and teardown", (t) => {
 });
 ```
 
-### Asserting on throws
+## Asserting on throws
 
 Asserting on throws is another overlooked part of some test runners. This test
 runner does not provide any fancy util like `t.throws(functionThatThrows)`, but
@@ -105,7 +113,7 @@ test("Throws vs not throws", async (t) => {
 });
 ```
 
-### Test configuration
+## Test configuration
 
 Test configuration is auto loaded from `{root}/test/config.js`. An example with
 the defaults is below:

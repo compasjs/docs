@@ -12,7 +12,9 @@
     "@compas/lint-config": "0.0.106",
     "@compas/server": "0.0.106",
     "@compas/stdlib": "0.0.106",
-    "@compas/store": "0.0.106"
+    "@compas/store": "0.0.106",
+    "front-matter": "4.0.2",
+    "marked": "1.2.7"
   },
   "engines": {
     "node": ">=15"
