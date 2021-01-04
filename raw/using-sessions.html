@@ -1,0 +1,77 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Sessions</title>
+        <meta name="description" content="Compas old docs"/>
+        <link rel="canonical" href="https://pre.compasjs.com/raw/using-sessions.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/raw/index.html">Old docs</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="using-sessions">Using sessions</h1>
+<p>To use persistent sessions, lbu provides two building blocks:</p>
+<ul>
+<li>@lbu/store provides a persisted session store</li>
+<li>@lbu/server wraps koa-session middleware with some defaults</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Have your app up and running</li>
+<li>Be able to connect to PostgeSQL</li>
+</ul>
+<h2 id="implementation">Implementation</h2>
+<p>Mounting sessions is pretty straight forward. First of all create a database
+connection and session store:</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { newPostgresConnection, newSessionStore } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/store&quot;</span>;
+
+<span class="hljs-keyword">const</span> sql = newPostgresConnection({});
+<span class="hljs-keyword">const</span> store = newSessionStore(sql, {});</code></pre>
+<p>The second argument for <code>newSessionStore</code> allows you to tune the interval at
+which expired sessions will be cleaned up. By default, it will start the cleanup
+task every 45 minutes. It is also possible to disable with <code>disableInterval</code>.</p>
+<p>Next we will mount the session middleware:</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { getApp, session } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/server&quot;</span>;
+
+<span class="hljs-keyword">const</span> app = getApp({
+  <span class="hljs-comment">/* ... */</span>
+});
+app.use(
+  session(app, {
+    store,
+    <span class="hljs-comment">// any other argument to koa-session</span>
+  }),
+);</code></pre>
+<p>Note that the call to session will use some defaults and has some expectations:</p>
+<ul>
+<li><code>APP_KEYS</code> should be in the environment when <code>NODE_ENV=production</code>. When
+<code>NODE_ENV</code> is anything else, <code>APP_KEYS</code> will not be used.</li>
+<li>The default cookie name is <code>process.env.APP_NAME.toLowerCase() + &quot;.sess&quot;</code></li>
+<li>The cookie expires after 10 days</li>
+<li>The cookie is updated when half of the expire time is up.</li>
+</ul>
+<p>That&#39;s it!</p>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/raw/index.html">Old docs</a></nav>
+    </footer>
+    </body>
+</html>
+  

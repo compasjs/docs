@@ -1,0 +1,1208 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Changelog</title>
+        <meta name="description" content="Compas changelog"/>
+        <link rel="canonical" href="https://pre.compasjs.com/changelog.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="changelog">CHANGELOG</h1>
+<h3 id="v00106"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.106">v0.0.106</a></h3>
+<ul>
+<li>*: remove @name usage in JSDoc</li>
+<li>build(deps): bump @types/node from 14.14.14 to 14.14.16
+(<a href="https://github.com/compasjs/compas/pull/569">#569</a>)</li>
+<li>build(deps-dev): bump react-query from 3.4.1 to 3.5.5
+(<a href="https://github.com/compasjs/compas/pull/570">#570</a>)</li>
+<li>code-gen: generate some default type imports for sql and router generator
+(<a href="https://github.com/compasjs/compas/pull/571">#571</a>)</li>
+<li>insight,stdlib: stricter NODE_ENV checks
+(<a href="https://github.com/compasjs/compas/pull/572">#572</a>)</li>
+<li>store: rename isQueryObject to isQueryPart
+(<a href="https://github.com/compasjs/compas/pull/573">#573</a>)</li>
+</ul>
+<h3 id="v00105"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.105">v0.0.105</a></h3>
+<ul>
+<li>build(deps): bump eslint from 7.15.0 to 7.16.0
+(<a href="https://github.com/compasjs/compas/pull/557">#557</a>)</li>
+<li>build(deps): bump eslint-config-prettier from 7.0.0 to 7.1.0
+(<a href="https://github.com/compasjs/compas/pull/556">#556</a>)</li>
+<li>build(deps-dev): bump axios from 0.21.0 to 0.21.1
+(<a href="https://github.com/compasjs/compas/pull/561">#561</a>)</li>
+<li>build(deps-dev): bump react-query from 3.4.0 to 3.4.1
+(<a href="https://github.com/compasjs/compas/pull/562">#562</a>)</li>
+<li>cli: fix usage of code-gen internals in visualise
+(<a href="https://github.com/compasjs/compas/pull/563">#563</a>)</li>
+<li>code-gen: fix duplicate check and hash calculation for validators
+(<a href="https://github.com/compasjs/compas/pull/565">#565</a>)</li>
+<li>code-gen: remove getGroupsThatIncludeType
+(<a href="https://github.com/compasjs/compas/pull/564">#564</a>)</li>
+</ul>
+<h3 id="v00104"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.104">v0.0.104</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.14.11 to 14.14.14
+(<a href="https://github.com/compasjs/compas/pull/545">#545</a>,
+<a href="https://github.com/compasjs/compas/pull/548">#548</a>,
+<a href="https://github.com/compasjs/compas/pull/552">#552</a>)</li>
+<li>build(deps): bump ini from 1.3.5 to 1.3.7
+(<a href="https://github.com/compasjs/compas/pull/546">#546</a>)</li>
+<li>build(deps): bump minio from 7.0.17 to 7.0.18
+(<a href="https://github.com/compasjs/compas/pull/553">#553</a>)</li>
+<li>build(deps-dev): bump react-query from 2.26.4 to 3.4.0
+(<a href="https://github.com/compasjs/compas/pull/550">#550</a>,
+<a href="https://github.com/compasjs/compas/pull/554">#554</a>,
+<a href="https://github.com/compasjs/compas/pull/555">#555</a>)</li>
+<li>build(deps-dev): bump typescript from 4.1.2 to 4.1.3
+(<a href="https://github.com/compasjs/compas/pull/549">#549</a>)</li>
+<li>build(deps-dev): bump yup from 0.32.6 to 0.32.8
+(<a href="https://github.com/compasjs/compas/pull/544">#544</a>)</li>
+<li>chore: only run CodeQL checks on main</li>
+<li>code-gen: remove App#new</li>
+<li>code-gen: remove trailing dot from propertyPath when validating query
+arguments (<a href="https://github.com/compasjs/compas/pull/543">#543</a>)</li>
+<li>code-gen: support react-query v3</li>
+</ul>
+<h3 id="v00103"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.103">v0.0.103</a></h3>
+<ul>
+<li>bench: make validator benchmarks more comparable
+(<a href="https://github.com/compasjs/compas/pull/536">#536</a>)</li>
+<li>build(deps): bump @types/node from 14.14.9 to 14.14.11
+(<a href="https://github.com/compasjs/compas/pull/541">#541</a>,
+<a href="https://github.com/compasjs/compas/pull/513">#513</a>)</li>
+<li>build(deps): bump eslint from 7.14.0 to 7.15.0
+(<a href="https://github.com/compasjs/compas/pull/531">#531</a>)</li>
+<li>build(deps): bump eslint-config-prettier from 6.15.0 to 7.0.0
+(<a href="https://github.com/compasjs/compas/pull/537">#537</a>)</li>
+<li>build(deps): bump minio from 7.0.16 to 7.0.17
+(<a href="https://github.com/compasjs/compas/pull/512">#512</a>)</li>
+<li>build(deps): bump prettier from 2.2.0 to 2.2.1
+(<a href="https://github.com/compasjs/compas/pull/520">#520</a>)</li>
+<li>build(deps-dev): bump react-query from 2.26.3 to 2.26.4
+(<a href="https://github.com/compasjs/compas/pull/538">#538</a>)</li>
+<li>build(deps-dev): bump yup from 0.30.0 to 0.32.6
+(<a href="https://github.com/compasjs/compas/pull/510">#510</a>,
+<a href="https://github.com/compasjs/compas/pull/528">#528</a>,
+<a href="https://github.com/compasjs/compas/pull/529">#529</a>,
+<a href="https://github.com/compasjs/compas/pull/530">#530</a>,
+<a href="https://github.com/compasjs/compas/pull/539">#539</a>,
+<a href="https://github.com/compasjs/compas/pull/540">#540</a>)</li>
+<li>chore: bump dependabot config so github picks it up</li>
+<li>chore: checkout CodeQL</li>
+<li>chore: initial release notes for 0.0.103
+(<a href="https://github.com/compasjs/compas/pull/527">#527</a>)</li>
+<li>chore: remove external checks on CI</li>
+<li>chore: rename lbu to compas</li>
+<li>code-gen: add dumpApiStructure and throwingValidators options
+(<a href="https://github.com/compasjs/compas/pull/534">#534</a>)</li>
+<li>code-gen: add support for OR in the sql where partials
+(<a href="https://github.com/compasjs/compas/pull/518">#518</a>)</li>
+<li>code-gen: add support for custom any validators
+(<a href="https://github.com/compasjs/compas/pull/517">#517</a>)</li>
+<li>code-gen: almost always inline &#39;any&#39; validators</li>
+<li>code-gen: decently stable hash calculation for anonymous validators
+(<a href="https://github.com/compasjs/compas/pull/519">#519</a>)</li>
+<li>code-gen: fix generic type sql transformer</li>
+<li>code-gen: fix property access quoting in sql result transformers</li>
+<li>code-gen: inline basic validators
+(<a href="https://github.com/compasjs/compas/pull/521">#521</a>)</li>
+<li>code-gen: introduce query-builder, drop query-traverser
+(<a href="https://github.com/compasjs/compas/pull/511">#511</a>)</li>
+<li>code-gen: remove validatorSetError
+(<a href="https://github.com/compasjs/compas/pull/535">#535</a>)</li>
+<li>code-gen: simplify object strict validation</li>
+<li>code-gen: validators for sql where and builders
+(<a href="https://github.com/compasjs/compas/pull/526">#526</a>)</li>
+<li>code-gen: various inline validator fixes, inline booleans</li>
+<li>docs: use a Jekyll plugin to generate the sitemap</li>
+<li>lint-config: add no-unsafe-optional-chain rule to lint config
+(<a href="https://github.com/compasjs/compas/pull/533">#533</a>)</li>
+</ul>
+<p>For a detailed description and more details about this release, please read the
+<a href="https://compasjs.com/releases/0.0.103.html">release notes</a>.</p>
+<h3 id="v00102"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.102">v0.0.102</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.14.7 to 14.14.9
+(<a href="https://github.com/compasjs/compas/pull/493">#493</a>,
+<a href="https://github.com/compasjs/compas/pull/501">#501</a>)</li>
+<li>build(deps): bump eslint from 7.13.0 to 7.14.0
+(<a href="https://github.com/compasjs/compas/pull/504">#504</a>)</li>
+<li>build(deps): bump prettier from 2.1.2 to 2.2.0
+(<a href="https://github.com/compasjs/compas/pull/505">#505</a>)</li>
+<li>build(deps-dev): bump fastest-validator from 1.8.0 to 1.9.0
+(<a href="https://github.com/compasjs/compas/pull/492">#492</a>)</li>
+<li>build(deps-dev): bump react-query from 2.26.2 to 2.26.3
+(<a href="https://github.com/compasjs/compas/pull/503">#503</a>)</li>
+<li>build(deps-dev): bump typescript from 4.0.5 to 4.1.2
+(<a href="https://github.com/compasjs/compas/pull/500">#500</a>)</li>
+<li>build(deps-dev): bump yup from 0.29.3 to 0.30.0
+(<a href="https://github.com/compasjs/compas/pull/499">#499</a>)</li>
+<li>ci: move to new set-env way
+(<a href="https://github.com/compasjs/compas/pull/496">#496</a>)</li>
+<li>code-gen: deduplicate values passed to anyOf
+(<a href="https://github.com/compasjs/compas/pull/506">#506</a>)</li>
+<li>code-gen: support not defined route responses
+(<a href="https://github.com/compasjs/compas/pull/507">#507</a>)</li>
+<li>lint-config: use meriyah parser in prettier, disable eslint import rules</li>
+<li>stdlib: improve error formatting
+(<a href="https://github.com/compasjs/compas/pull/502">#502</a>)</li>
+</ul>
+<p>Overall a few small breaking changes. We format errors with AppError#format in
+more places now, which should result in consistent behaviour. Running
+<code>yarn compoas lint</code> should be 10 - 20 % faster than before, however this also
+meant disabling some slow rules related to analyzing imports, namely
+<code>import/named, import/namespace &amp; import/export</code>.</p>
+<p>Not sure what the timeline will be on the next release, because the
+<a href="https://github.com/compasjs/compas/issues/388">query-builder</a> is somewhat more
+complex than expected.</p>
+<h3 id="v00101"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.101">v0.0.101</a></h3>
+<ul>
+<li>store: support POSTGRES_{HOST,USER,PASSWORD,DATABASE}</li>
+</ul>
+<h3 id="v00100"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.100">v0.0.100</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.14.6 to 14.14.7
+(<a href="https://github.com/compasjs/compas/pull/486">#486</a>)</li>
+<li>cli: better timeout error message in the test runner</li>
+<li>cli: log response status in proxy
+(<a href="https://github.com/compasjs/compas/pull/489">#489</a>)</li>
+<li>code-gen: better error message when loading from remote.</li>
+<li>code-gen: support setting primary key in generated insert queries
+(<a href="https://github.com/compasjs/compas/pull/491">#491</a>)</li>
+<li>server: expose x-request-id in CORS headers
+(<a href="https://github.com/compasjs/compas/pull/490">#490</a>)</li>
+</ul>
+<h3 id="v0099"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.99">v0.0.99</a></h3>
+<ul>
+<li>build(deps): bump eslint from 7.12.1 to 7.13.0
+(<a href="https://github.com/compasjs/compas/pull/485">#485</a>)</li>
+<li>build(deps-dev): bump react from 16.14.0 to 17.0.1
+(<a href="https://github.com/compasjs/compas/pull/478">#478</a>)</li>
+<li>cli: better error messages when graphviz is not installed
+(<a href="https://github.com/compasjs/compas/pull/480">#480</a>)</li>
+<li>cli: visualise use format and output from cli arguments
+(<a href="https://github.com/compasjs/compas/pull/484">#484</a>)</li>
+<li>code-gen: add raw value support to AnyType</li>
+<li>code-gen: fix deletedAt check with Date in the future
+(<a href="https://github.com/compasjs/compas/pull/483">#483</a>)</li>
+<li>code-gen: micro optimization in array validators</li>
+</ul>
+<p>The most notable feature is
+<code>T.any().raw(&quot;QueryPart&quot;, { typeScript: &quot;import { QueryPart } from &#39;@lbu/store&#39;;&quot; })</code>
+support. This allows you to generate correct typings and integrate with native
+types provided by the platform or other packages. There should be no breaking
+changes.</p>
+<h3 id="v0098"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.98">v0.0.98</a></h3>
+<ul>
+<li>build(deps-dev): bump react-query from 2.25.2 to 2.26.2
+(<a href="https://github.com/compasjs/compas/pull/465">#465</a>,
+<a href="https://github.com/compasjs/compas/pull/474">#474</a>)</li>
+<li>cli: add visualise command, sql only
+(<a href="https://github.com/compasjs/compas/pull/472">#472</a>)</li>
+<li>code-gen: add field checks to partials when on staging
+(<a href="https://github.com/compasjs/compas/pull/477">#477</a>)</li>
+<li>code-gen: various small fixes
+(<a href="https://github.com/compasjs/compas/pull/475">#475</a>)</li>
+<li>store: various migration error handling improvements
+(<a href="https://github.com/compasjs/compas/pull/476">#476</a>)</li>
+</ul>
+<p>No release notes, but migration file has changed, so a database reset is
+necessary. We also are stricter on input values in the query partials, so expect
+tests breaking.</p>
+<h3 id="v0097"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.97">v0.0.97</a></h3>
+<ul>
+<li>code-gen: fix generating ES Modules when it&#39;s not needed</li>
+</ul>
+<h3 id="v0096"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.96">v0.0.96</a></h3>
+<ul>
+<li>bench: add yup and fastest-validators to the benchmarks
+(<a href="https://github.com/compasjs/compas/pull/463">#463</a>)</li>
+<li>code-gen: always use string for date in browser environments</li>
+<li>code-gen: only use an extensions in imports in ES Modules
+(<a href="https://github.com/compasjs/compas/pull/464">#464</a>)</li>
+</ul>
+<h3 id="v0095"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.95">v0.0.95</a></h3>
+<ul>
+<li>code-gen: some refactoring for more correct type output</li>
+</ul>
+<h3 id="v0094"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.94">v0.0.94</a></h3>
+<ul>
+<li>code-gen: collect static check errors and pretty print
+(<a href="https://github.com/compasjs/compas/pull/457">#457</a>)</li>
+<li>code-gen: flatten output (<a href="https://github.com/compasjs/compas/pull/460">#460</a>)</li>
+<li>code-gen: sort structure imports and root exports
+(<a href="https://github.com/compasjs/compas/pull/459">#459</a>)</li>
+<li>stdlib: add support for util.inspect.custom to AppError
+(<a href="https://github.com/compasjs/compas/pull/458">#458</a>)</li>
+</ul>
+<p>Structure and validators imports and exports have changed. Make sure to fix
+these.</p>
+<h3 id="v0093"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.93">v0.0.93</a></h3>
+<ul>
+<li>insight: remove dependency on stdlib</li>
+</ul>
+<h3 id="v0092"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.92">v0.0.92</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.14.5 to 14.14.6
+(<a href="https://github.com/compasjs/compas/pull/451">#451</a>)</li>
+<li>code-gen: add more input checks to App.addRelations</li>
+<li>code-gen: fix TS strict for apiClient with file uploads</li>
+<li>code-gen: fix missing response when importing from OpenApi spec</li>
+<li>code-gen: fix recursive types with a suffix</li>
+<li>code-gen: fix whereIn and whereNotIn generation</li>
+<li>code-gen: process data before resolving addRelations</li>
+<li>stdlib: cache environment variables
+(<a href="https://github.com/compasjs/compas/pull/454">#454</a>)</li>
+</ul>
+<h3 id="v0091"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.91">v0.0.91</a></h3>
+<ul>
+<li>code-gen: fix default allowNull on uuid type</li>
+</ul>
+<h3 id="v0090"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.90">v0.0.90</a></h3>
+<ul>
+<li>code-gen: fix tags set on a RouteBuilder
+(<a href="https://github.com/compasjs/compas/pull/449">#449</a>)</li>
+<li>code-gen: short circuit insert queries without values
+(<a href="https://github.com/compasjs/compas/pull/448">#448</a>)</li>
+<li>code-gen: support allow null on various types, loosen schema
+(<a href="https://github.com/compasjs/compas/pull/450">#450</a>)</li>
+</ul>
+<p>No release notes today :S</p>
+<h3 id="v0089"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.89">v0.0.89</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.14.2 to 14.14.5
+(<a href="https://github.com/compasjs/compas/pull/422">#422</a>,
+<a href="https://github.com/compasjs/compas/pull/435">#435</a>)</li>
+<li>build(deps): bump eslint from 7.12.0 to 7.12.1
+(<a href="https://github.com/compasjs/compas/pull/434">#434</a>)</li>
+<li>build(deps): bump eslint-config-prettier from 6.14.0 to 6.15.0
+(<a href="https://github.com/compasjs/compas/pull/441">#441</a>)</li>
+<li>build(deps-dev): bump typescript from 4.0.3 to 4.0.5
+(<a href="https://github.com/compasjs/compas/pull/433">#433</a>)</li>
+<li>chore: lowercase &#39;type&#39; in logs
+(<a href="https://github.com/compasjs/compas/pull/429">#429</a>)</li>
+<li>cli: skip restart debounce on &#39;rs&#39; in watch mode
+(<a href="https://github.com/compasjs/compas/pull/440">#440</a>)</li>
+<li>code-gen: add docs to types
+(<a href="https://github.com/compasjs/compas/pull/442">#442</a>)</li>
+<li>docs: update README.md (<a href="https://github.com/compasjs/compas/pull/432">#432</a>)</li>
+<li>stdlib: use format error on global exception handlers
+(<a href="https://github.com/compasjs/compas/pull/443">#443</a>)</li>
+<li>store: fix typ definition of isQueryPart</li>
+<li>store: floor result of average time to completion
+(<a href="https://github.com/compasjs/compas/pull/430">#430</a>)</li>
+<li>store: queue scheduling and updating of recurring jobs
+(<a href="https://github.com/compasjs/compas/pull/431">#431</a>)</li>
+</ul>
+<p>For a detailed description and more details about this release, please read the
+<a href="https://compasjs.com/releases/0.0.89.html">release notes</a>.</p>
+<h3 id="v0088"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.88">v0.0.88</a></h3>
+<ul>
+<li>build(deps): bump c8 from 7.3.4 to 7.3.5
+(<a href="https://github.com/compasjs/compas/pull/418">#418</a>)</li>
+<li>build(deps): bump eslint from 7.11.0 to 7.12.0
+(<a href="https://github.com/compasjs/compas/pull/415">#415</a>)</li>
+<li>build(deps-dev): bump axios from 0.20.0 to 0.21.0
+(<a href="https://github.com/compasjs/compas/pull/414">#414</a>)</li>
+<li>code-gen: subquery support in &#39;in&#39; and &#39;notIn&#39; sql where
+(<a href="https://github.com/compasjs/compas/pull/420">#420</a>)</li>
+<li>code-gen: support Typescript script mode
+(<a href="https://github.com/compasjs/compas/pull/416">#416</a>)</li>
+<li>docs: add information about test and bench to cli.md</li>
+<li>insight: add application name to context
+(<a href="https://github.com/compasjs/compas/pull/419">#419</a>)</li>
+<li>insight: improve performance of ndjson logging
+(<a href="https://github.com/compasjs/compas/pull/417">#417</a>)</li>
+</ul>
+<h3 id="v0087"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.87">v0.0.87</a></h3>
+<ul>
+<li>code-gen: follow references completely when linking up</li>
+<li>code-gen: make sure apiClient types are registered</li>
+</ul>
+<h3 id="v0086"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.86">v0.0.86</a></h3>
+<ul>
+<li>server: add support for keeping a public cookie
+(<a href="https://github.com/compasjs/compas/pull/412">#412</a>)</li>
+</ul>
+<h3 id="v0085"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.85">v0.0.85</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.14.0 to 14.14.2
+(<a href="https://github.com/compasjs/compas/pull/410">#410</a>)</li>
+<li>build(deps): bump eslint-config-prettier from 6.13.0 to 6.14.0
+(<a href="https://github.com/compasjs/compas/pull/409">#409</a>)</li>
+<li>build(deps-dev): bump react-query from 2.23.1 to 2.25.2
+(<a href="https://github.com/compasjs/compas/pull/411">#411</a>)</li>
+<li>ci: fix create release workflow</li>
+<li>ci: improve release note formatting</li>
+<li>code-gen: fix api client error handling with streams
+(<a href="https://github.com/compasjs/compas/pull/408">#408</a>)</li>
+<li>code-gen: improve types of generated routes</li>
+<li>code-gen: improve types of sql traversal queries</li>
+<li>code-gen: router rename event before validators</li>
+<li>stdlib: add stream to buffer function
+(<a href="https://github.com/compasjs/compas/pull/407">#407</a>)</li>
+</ul>
+<h3 id="v0084"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.84">v0.0.84</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.11.10 to 14.14.0
+(<a href="https://github.com/compasjs/compas/pull/405">#405</a>)</li>
+<li>chore: automatically create a release on new tags</li>
+<li>ci: run tests and benchmarks on Node.js 15
+(<a href="https://github.com/compasjs/compas/pull/403">#403</a>)</li>
+<li>code-gen: do loose structure validation
+(<a href="https://github.com/compasjs/compas/pull/398">#398</a>)</li>
+<li>code-gen: fix structure dump
+(<a href="https://github.com/compasjs/compas/pull/396">#396</a>)</li>
+<li>code-gen: fix where &#39;in&#39; and &#39;notIn&#39; generation</li>
+<li>code-gen: implement &#39;patch&#39; method support
+(<a href="https://github.com/compasjs/compas/pull/404">#404</a>)</li>
+<li>code-gen: support adding relations to &#39;foreign&#39; structure.
+(<a href="https://github.com/compasjs/compas/pull/402">#402</a>)</li>
+<li>server: skip event logging on OPTIONS requests
+(<a href="https://github.com/compasjs/compas/pull/397">#397</a>)</li>
+</ul>
+<p>For a detailed description and more details about this release, please read the
+<a href="https://compasjs.com/releases/0.0.84.html">release notes</a>.</p>
+<h3 id="v0083"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.83">v0.0.83</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.11.8 to 14.11.10
+(<a href="https://github.com/compasjs/compas/pull/390">#390</a>)</li>
+<li>build(deps): bump c8 from 7.3.3 to 7.3.4
+(<a href="https://github.com/compasjs/compas/pull/382">#382</a>)</li>
+<li>build(deps): bump eslint-config-prettier from 6.12.0 to 6.13.0
+(<a href="https://github.com/compasjs/compas/pull/389">#389</a>)</li>
+<li>build(deps-dev): bump react from 16.13.1 to 16.14.0
+(<a href="https://github.com/compasjs/compas/pull/381">#381</a>)</li>
+<li>code-gen: disable some sql generation parts when type is a view
+(<a href="https://github.com/compasjs/compas/pull/392">#392</a>)</li>
+<li>code-gen: refactor types, validator and sql generators
+(<a href="https://github.com/compasjs/compas/pull/377">#377</a>)</li>
+<li>store: add support to explain and analyze any query
+(<a href="https://github.com/compasjs/compas/pull/391">#391</a>)</li>
+<li>store: support nested file groups with custom ordering
+(<a href="https://github.com/compasjs/compas/pull/393">#393</a>)</li>
+</ul>
+<p>For a detailed description and more details about this release, please read the
+<a href="https://compasjs.com/releases/0.0.83.html">release notes</a>.</p>
+<h3 id="v0082"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.82">v0.0.82</a></h3>
+<ul>
+<li>build(deps): bump chokidar from 3.4.2 to 3.4.3
+(<a href="https://github.com/compasjs/compas/pull/379">#379</a>)</li>
+<li>store: add export for &#39;addRecurringJobToQueue&#39;
+(<a href="https://github.com/compasjs/compas/pull/376">#376</a>)</li>
+<li>store: add tests for recurring job scheduling
+(<a href="https://github.com/compasjs/compas/pull/380">#380</a>)</li>
+</ul>
+<h3 id="v0081"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.81">v0.0.81</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.11.4 to 14.11.8
+(<a href="https://github.com/compasjs/compas/pull/362">#362</a>,
+<a href="https://github.com/compasjs/compas/pull/368">#368</a>,
+<a href="https://github.com/compasjs/compas/pull/374">#374</a>)</li>
+<li>build(deps): bump c8 from 7.3.1 to 7.3.3
+(<a href="https://github.com/compasjs/compas/pull/369">#369</a>)</li>
+<li>build(deps): bump eslint from 7.10.0 to 7.11.0
+(<a href="https://github.com/compasjs/compas/pull/373">#373</a>)</li>
+<li>build(deps): bump koa-session from 6.0.0 to 6.1.0
+(<a href="https://github.com/compasjs/compas/pull/365">#365</a>)</li>
+<li>ci: dispatch sha and pr to external e2e test repo
+(<a href="https://github.com/compasjs/compas/pull/359">#359</a>)</li>
+<li>code-gen: add T.searchable and support boolean in where clauses
+(<a href="https://github.com/compasjs/compas/pull/371">#371</a>)</li>
+<li>docs: include contributing.md on Github pages</li>
+<li>store: add meta field on file
+(<a href="https://github.com/compasjs/compas/pull/363">#363</a>)</li>
+<li>store: add support for recurring jobs
+(<a href="https://github.com/compasjs/compas/pull/364">#364</a>)</li>
+<li>store: try multiple ways of resolving a migration namespace import
+(<a href="https://github.com/compasjs/compas/pull/361">#361</a>)</li>
+</ul>
+<p>For a detailed description and more details about this release, please read the
+<a href="https://compasjs.com/releases/0.0.81.html">release notes</a>.</p>
+<h3 id="v0080"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.80">v0.0.80</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.11.2 to 14.11.4
+(<a href="https://github.com/compasjs/compas/pull/351">#351</a>)</li>
+<li>code-gen: fix generated query function promise type
+(<a href="https://github.com/compasjs/compas/pull/352">#352</a>)</li>
+<li>insight: add basic event system
+(<a href="https://github.com/compasjs/compas/pull/356">#356</a>)</li>
+<li>insight: add function to get rowCount and diskSize per postgres table
+(<a href="https://github.com/compasjs/compas/pull/355">#355</a>)</li>
+<li>server: implement event from insight on the context
+(<a href="https://github.com/compasjs/compas/pull/357">#357</a>)</li>
+</ul>
+<h3 id="v0079"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.79">v0.0.79</a></h3>
+<ul>
+<li>build(deps): bump postgres from 2.0.0-beta.0 to 2.0.0-beta.2
+(<a href="https://github.com/compasjs/compas/pull/332">#332</a>,
+<a href="https://github.com/compasjs/compas/pull/346">#346</a>)</li>
+<li>build(deps-dev): bump react-query from 2.23.0 to 2.23.1
+(<a href="https://github.com/compasjs/compas/pull/349">#349</a>)</li>
+<li>chore: automatically add link to release notes in the changelog and update
+publish guide</li>
+<li>chore: cleanup dependabot config</li>
+<li>chore: change default branch name to <code>main</code></li>
+<li>cli: warn on usage of parent <code>t.xx</code> in sub tests
+(<a href="https://github.com/compasjs/compas/pull/348">#348</a>)</li>
+<li>code-gen: generate cancel token support in browser environments
+(<a href="https://github.com/compasjs/compas/pull/347">#347</a>)</li>
+<li>code-gen: open api importer fixes
+(<a href="https://github.com/compasjs/compas/pull/345">#345</a>)</li>
+<li>code-gen: remove defaultValue from generated where type
+(<a href="https://github.com/compasjs/compas/pull/339">#339</a>)</li>
+<li>code-gen: support <code>withSoftDeletes</code> and remove <code>withHistory</code>
+(<a href="https://github.com/compasjs/compas/pull/334">#334</a>)</li>
+<li>store: cleanup table names
+(<a href="https://github.com/compasjs/compas/pull/350">#350</a>)</li>
+<li>store: consistent internal query formatting</li>
+<li>store: enable soft deletes for fileStore
+(<a href="https://github.com/compasjs/compas/pull/340">#340</a>)</li>
+<li>store: reset postgres#end timeout in tests</li>
+<li>store: return hash changes from getMigrationsToBeApplied
+(<a href="https://github.com/compasjs/compas/pull/341">#341</a>)</li>
+</ul>
+<p>For a detailed description and more details about this release, please read the
+<a href="https://compasjs.com/releases/0.0.79.html">release notes</a>.</p>
+<h3 id="v0078"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.78">v0.0.78</a></h3>
+<ul>
+<li>code-gen: fix default value of <code>docString</code>
+(<a href="https://github.com/compasjs/compas/pull/326">#326</a>)</li>
+</ul>
+<h3 id="v0077"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.77">v0.0.77</a></h3>
+<ul>
+<li>cli: remove concurrent test support
+(<a href="https://github.com/compasjs/compas/pull/324">#324</a>)</li>
+<li>code-gen: validator default to undefined on empty strings
+(<a href="https://github.com/compasjs/compas/pull/325">#325</a>)</li>
+</ul>
+<h3 id="v0076"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.76">v0.0.76</a></h3>
+<ul>
+<li>build(deps): bump eslint from 7.9.0 to 7.10.0
+(<a href="https://github.com/compasjs/compas/pull/313">#313</a>)</li>
+<li>build(deps): bump eslint-config-prettier from 6.11.0 to 6.12.0
+(<a href="https://github.com/compasjs/compas/pull/312">#312</a>)</li>
+<li>build(deps): bump eslint-plugin-import from 2.22.0 to 2.22.1
+(<a href="https://github.com/compasjs/compas/pull/321">#321</a>)</li>
+<li>cli: allow running tests in concurrently
+(<a href="https://github.com/compasjs/compas/pull/322">#322</a>)</li>
+<li>cli: allow switching between postgres versions
+(<a href="https://github.com/compasjs/compas/pull/317">#317</a>)</li>
+<li>cli: make sure Postgres is ready before returning from <code>docker up</code>
+(<a href="https://github.com/compasjs/compas/pull/306">#306</a>)</li>
+<li>code-gen: convert default value always to a string</li>
+<li>code-gen: generate sql where clause for optional values with a default type
+(<a href="https://github.com/compasjs/compas/pull/314">#314</a>)</li>
+<li>code-gen: sql follow references in DDL and where clause
+(<a href="https://github.com/compasjs/compas/pull/315">#315</a>)</li>
+<li>code-gen: support providing default types on a RouteCreator
+(<a href="https://github.com/compasjs/compas/pull/318">#318</a>)</li>
+<li>code-gen: verify path params against params type before generating
+(<a href="https://github.com/compasjs/compas/pull/305">#305</a>)</li>
+<li>docs: consistent urls in config and sitemap</li>
+<li>docs: update env documentation</li>
+<li>docs: update sitemap to use extensions on the urls</li>
+<li>store: remove FileStoreContext out of files
+(<a href="https://github.com/compasjs/compas/pull/320">#320</a>)</li>
+</ul>
+<h3 id="v0075"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.75">v0.0.75</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.11.1 to 14.11.2
+(<a href="https://github.com/compasjs/compas/pull/299">#299</a>)</li>
+<li>build(deps): bump c8 from 7.3.0 to 7.3.1
+(<a href="https://github.com/compasjs/compas/pull/301">#301</a>)</li>
+<li>code-gen: apiClient should not call getHeaders in browser environment
+(<a href="https://github.com/compasjs/compas/pull/302">#302</a>)</li>
+<li>docs: move to plain Github pages and Jekyll
+(<a href="https://github.com/compasjs/compas/pull/298">#298</a>)</li>
+</ul>
+<h3 id="v0074"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.74">v0.0.74</a></h3>
+<ul>
+<li>build(deps-dev): bump react-query from 2.22.0 to 2.23.0
+(<a href="https://github.com/compasjs/compas/pull/292">#292</a>)</li>
+<li>build(deps-dev): bump typescript from 4.0.2 to 4.0.3
+(<a href="https://github.com/compasjs/compas/pull/293">#293</a>)</li>
+<li>cli: fix bench callback type</li>
+<li>cli: fix recursive error formatting</li>
+<li>cli: lint exit with error when CI=true</li>
+<li>code-gen: scoped api client generation for browser envs
+(<a href="https://github.com/compasjs/compas/pull/294">#294</a>,
+<a href="https://github.com/compasjs/compas/pull/295">#295</a>)</li>
+</ul>
+<h3 id="v0073"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.73">v0.0.73</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.10.2 to 14.11.1
+(<a href="https://github.com/compasjs/compas/pull/281">#281</a>,
+<a href="https://github.com/compasjs/compas/pull/287">#287</a>)</li>
+<li>build(deps-dev): bump react-query from 2.20.0 to 2.22.0
+(<a href="https://github.com/compasjs/compas/pull/282">#282</a>,
+<a href="https://github.com/compasjs/compas/pull/288">#288</a>)</li>
+<li>chore: cleanup fs/promises imports
+(<a href="https://github.com/compasjs/compas/pull/289">#289</a>)</li>
+<li>chore: disable testing.js script, since the generated code is not checked in</li>
+<li>cli: catch and handle assertion errors in tests
+(<a href="https://github.com/compasjs/compas/pull/285">#285</a>)</li>
+<li>code-gen,stdlib: move templates to code-gen
+(<a href="https://github.com/compasjs/compas/pull/286">#286</a>)</li>
+<li>code-gen: apiClient calls returns Promise</li>
+<li>code-gen: apiClient handleError should use response headers and data</li>
+<li>stdlib,cli,server: add and use AppError.format
+(<a href="https://github.com/compasjs/compas/pull/284">#284</a>)</li>
+</ul>
+<h3 id="v0072"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.72">v0.0.72</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.10.1 to 14.10.2
+(<a href="https://github.com/compasjs/compas/pull/277">#277</a>)</li>
+<li>build(deps): bump prettier from 2.1.1 to 2.1.2
+(<a href="https://github.com/compasjs/compas/pull/278">#278</a>)</li>
+<li>build(deps-dev): bump react-query from 2.17.0 to 2.20.0
+(<a href="https://github.com/compasjs/compas/pull/268">#268</a>,
+<a href="https://github.com/compasjs/compas/pull/275">#275</a>,
+<a href="https://github.com/compasjs/compas/pull/276">#276</a>,
+<a href="https://github.com/compasjs/compas/pull/280">#280</a>)</li>
+<li>chore: add SECURITY.md (<a href="https://github.com/compasjs/compas/pull/271">#271</a>)</li>
+<li>code-gen: AppError and response validation in apiClient
+(<a href="https://github.com/compasjs/compas/pull/274">#274</a>)</li>
+<li>code-gen: add group and item sorting before generation
+(<a href="https://github.com/compasjs/compas/pull/272">#272</a>)</li>
+<li>code-gen: experiment with using <code>isBrowser</code> and <code>isNode</code> in the generated file
+type</li>
+<li>code-gen: make tags available in the router</li>
+<li>code-gen: use isNode check in apiClient generator
+(<a href="https://github.com/compasjs/compas/pull/273">#273</a>)</li>
+<li>server: consistent logging of request length</li>
+</ul>
+<h3 id="v0071"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.71">v0.0.71</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.6.4 to 14.10.1
+(<a href="https://github.com/compasjs/compas/pull/264">#264</a>,
+<a href="https://github.com/compasjs/compas/pull/261">#261</a>)</li>
+<li>build(deps): bump eslint from 7.8.1 to 7.9.0
+(<a href="https://github.com/compasjs/compas/pull/265">#265</a>)</li>
+<li>build(deps): bump node-fetch from 2.6.0 to 2.6.1
+(<a href="https://github.com/compasjs/compas/pull/258">#258</a>)</li>
+<li>build(deps-dev): bump react-query from 2.15.4 to 2.17.0
+(<a href="https://github.com/compasjs/compas/pull/263">#263</a>,
+<a href="https://github.com/compasjs/compas/pull/266">#266</a>)</li>
+<li>cli: format info property on caught exceptions in bench and test
+(<a href="https://github.com/compasjs/compas/pull/257">#257</a>)</li>
+<li>code-gen: add simple options to App#generate to provide better defaults
+(<a href="https://github.com/compasjs/compas/pull/260">#260</a>)</li>
+<li>code-gen: add validators in App#addRaw and before dumping structure
+(<a href="https://github.com/compasjs/compas/pull/259">#259</a>)</li>
+<li>code-gen: consistent handling of references</li>
+<li>code-gen: consistent usage of &#39;item&#39; in generators</li>
+<li>code-gen: fix sql generation of nullable foreign key column
+(<a href="https://github.com/compasjs/compas/pull/255">#255</a>)</li>
+<li>code-gen: object validation strict by default
+(<a href="https://github.com/compasjs/compas/pull/256">#256</a>)</li>
+<li>code-gen: remove unnecessary internal nesting on structure</li>
+<li>store: fix sessions with a maxAge of &#39;session&#39;
+(<a href="https://github.com/compasjs/compas/pull/267">#267</a>)</li>
+</ul>
+<h3 id="v0070"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.70">v0.0.70</a></h3>
+<ul>
+<li>code-gen: fix breaking changes in react-query types
+(<a href="https://github.com/compasjs/compas/pull/252">#252</a>)</li>
+</ul>
+<h3 id="v0069"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.69">v0.0.69</a></h3>
+<ul>
+<li>build(deps-dev): bump react-query from 2.15.1 to 2.15.4
+(<a href="https://github.com/compasjs/compas/pull/249">#249</a>)</li>
+<li>code-gen: add sql properties to generated types
+(<a href="https://github.com/compasjs/compas/pull/250">#250</a>)</li>
+<li>code-gen: remove stub generators
+(<a href="https://github.com/compasjs/compas/pull/247">#247</a>)</li>
+</ul>
+<h3 id="v0068"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.68">v0.0.68</a></h3>
+<ul>
+<li>build(deps): bump @types/node from 14.6.1 to 14.6.4
+(<a href="https://github.com/compasjs/compas/pull/229">#229</a>,
+<a href="https://github.com/compasjs/compas/pull/237">#237</a>)</li>
+<li>build(deps): bump eslint from 7.7.0 to 7.8.1
+(<a href="https://github.com/compasjs/compas/pull/224">#224</a>)</li>
+<li>build(deps-dev): bump react-query from 2.12.1 to 2.15.1
+(<a href="https://github.com/compasjs/compas/pull/222">#222</a>,
+<a href="https://github.com/compasjs/compas/pull/225">#225</a>,
+<a href="https://github.com/compasjs/compas/pull/228">#228</a>,
+<a href="https://github.com/compasjs/compas/pull/238">#238</a>,
+<a href="https://github.com/compasjs/compas/pull/241">#241</a>)</li>
+<li>build(deps-dev): bump typedoc from 0.18.0 to 0.19.0</li>
+<li>chore: add coverage summary to PR&#39;s
+(<a href="https://github.com/compasjs/compas/pull/243">#243</a>)</li>
+<li>chore: create script to automate changelog a little bit</li>
+<li>chore: fix PR links in the changelog</li>
+<li>chore: fix linting (<a href="https://github.com/compasjs/compas/pull/231">#231</a>)</li>
+<li>chore: remove typedoc setup
+(<a href="https://github.com/compasjs/compas/pull/236">#236</a>)</li>
+<li>chore: setup CODEOWNERS again</li>
+<li>ci: comment benchmark result to PR
+(<a href="https://github.com/compasjs/compas/pull/244">#244</a>)</li>
+<li>ci: create dependabot config file
+(<a href="https://github.com/compasjs/compas/pull/226">#226</a>)</li>
+<li>cli, stdlib: move bench to cli
+(<a href="https://github.com/compasjs/compas/pull/240">#240</a>)</li>
+<li>cli: add some testing for the provided template
+(<a href="https://github.com/compasjs/compas/pull/234">#234</a>)</li>
+<li>cli: configure timeout of sub tests via <code>t.timeout</code>
+(<a href="https://github.com/compasjs/compas/pull/232">#232</a>)</li>
+<li>code-gen: add optional, omit and pick types
+(<a href="https://github.com/compasjs/compas/pull/220">#220</a>)</li>
+<li>code-gen: change default number to be an integer instead of float
+(<a href="https://github.com/compasjs/compas/pull/221">#221</a>)</li>
+<li>code-gen: self host validation for App.extend
+(<a href="https://github.com/compasjs/compas/pull/246">#246</a>)</li>
+<li>docs: regenerate for v0.0.67</li>
+<li>stdlib: improve perf of uuid
+(<a href="https://github.com/compasjs/compas/pull/242">#242</a>)</li>
+<li>stdlib: support custom exec options
+(<a href="https://github.com/compasjs/compas/pull/233">#233</a>)</li>
+</ul>
+<h3 id="v0067"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.67">v0.0.67</a></h3>
+<ul>
+<li>cli: add command to reset current database
+(<a href="https://github.com/compasjs/compas/pull/213">#213</a>)</li>
+<li>cli: run test teardown before printing results
+(<a href="https://github.com/compasjs/compas/pull/212">#212</a>)</li>
+<li>code-gen: follow references when resolving defaults in sql generation
+(<a href="https://github.com/compasjs/compas/pull/215">#215</a>)</li>
+</ul>
+<h3 id="v0066"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.66">v0.0.66</a></h3>
+<p>Everything is breaking!</p>
+<ul>
+<li>code-gen: add default min(1) to string type</li>
+<li>code-gen: generated ORDER BY for select queries withDates</li>
+<li>cli: configure test timeout, setup and teardown function in test/config.js</li>
+<li>store: add copyAllObjects to clone a complete bucket</li>
+<li>store: configurable postgres template support</li>
+</ul>
+<h3 id="v0065"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.65">v0.0.65</a></h3>
+<ul>
+<li>cli: increase static test timeout to 15 seconds</li>
+</ul>
+<h3 id="v0064"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.64">v0.0.64</a></h3>
+<ul>
+<li>cli: various exit code fixes</li>
+<li>store: add setupTestDatabase</li>
+<li>cli: replace tape with custom test runner</li>
+</ul>
+<h5 id="breaking">Breaking</h5>
+<p>Tape is replace by a custom test runner.</p>
+<ul>
+<li>Make sure to <code>import { test } from &quot;@lbu/cli</code> instead of
+<code>import test from tape</code></li>
+<li>To run a test file via <code>lbu run</code> add <code>mainTestFn</code> to the file</li>
+<li>Unnecessary <code>async</code> and <code>.end()</code> calls can be removed</li>
+<li>Only a handful of assertions, see
+<a href="https://compasjs.com/#/api?id=interface-testrunner"><code>TestRunner</code></a></li>
+</ul>
+<h3 id="v0063"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.63">v0.0.63</a></h3>
+<ul>
+<li>code-gen: remove support for both files and body add the same time</li>
+<li>server: remove support for fields in a multipart scenario</li>
+</ul>
+<h5 id="breaking-1">Breaking</h5>
+<ul>
+<li>Use separate routes when both files and body are currently on a single route.</li>
+</ul>
+<h3 id="v0062"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.62">v0.0.62</a></h3>
+<ul>
+<li>cli: use http-proxy directly</li>
+<li>cli: support &#39;rs&#39; in watch mode, mimicking nodemon</li>
+<li>stdlib: add exitCode to <code>exec</code></li>
+<li>stdlib: rename <code>code</code> to <code>exitCode</code> in <code>spawn</code></li>
+<li>server,code-gen: fix serialization of nested objects</li>
+<li>code-gen: postgres relation generation fixes</li>
+</ul>
+<h5 id="breaking-2">Breaking</h5>
+<ul>
+<li>The return type of <code>spawn</code> and <code>exec</code> now have an <code>exitCode</code></li>
+<li>Using a lower level <code>http-proxy</code> for <code>lbu proxy</code></li>
+</ul>
+<h3 id="v0061"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.61">v0.0.61</a></h3>
+<ul>
+<li>code-gen: cleanup tags in doc blocks Conditionally render tags if they exists
+in doc blocks for router, apiClient and reactQuery</li>
+<li>server: log key and info if originalError is also AppError</li>
+</ul>
+<h5 id="breaking-3">Breaking</h5>
+<ul>
+<li>code-gen: remove tag middleware</li>
+<li>cli: replace nodemon with chokidar</li>
+<li>server: handle multipart request with formidable (without koa-body)</li>
+<li>code-gen: transform array/objects to Querystrings because of missing support
+in FormData</li>
+</ul>
+<h3 id="v0060"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.60">v0.0.60</a></h3>
+<ul>
+<li>stdlib: remove logger as argument to mainFn</li>
+<li>stdlib: add process exception handling in mainFn</li>
+<li>stdlib: AppError check typeof status and key parameter</li>
+</ul>
+<h5 id="breaking-4">Breaking</h5>
+<ul>
+<li>Remove logger argument from <code>mainFn</code>, change to
+<code>mainFn(import.meta, () =&gt; {})</code></li>
+</ul>
+<h3 id="v0059"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.59">v0.0.59</a></h3>
+<ul>
+<li>cli: add some logging to proxy errors</li>
+<li>code-gen: fix react-query enabled check</li>
+</ul>
+<h3 id="v0058"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.58">v0.0.58</a></h3>
+<ul>
+<li>code-gen: fix setting headers in form-data upload</li>
+<li>code-gen: add support for file download in the apiClient</li>
+</ul>
+<h3 id="v0057"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.57">v0.0.57</a></h3>
+<ul>
+<li>cli: fix memory leak in proxy</li>
+<li>cli: add some request logging to the proxy</li>
+<li>server: add request content-length to server logs</li>
+</ul>
+<h3 id="v0056"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.56">v0.0.56</a></h3>
+<ul>
+<li>cli: use isProduction and isStaging in template</li>
+<li>cli: add proxy command for local development. Usable via <code>yarn compoas proxy</code></li>
+<li>store: make sure sessionStore checks expired sessions</li>
+<li>server: use isProduction and isStaging in defaults</li>
+<li>server: simplify session handling</li>
+<li>server: fix sendFile compatibility with FileStore and FileCache</li>
+</ul>
+<h3 id="v0055"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.55">v0.0.55</a></h3>
+<ul>
+<li>code-gen: fix reactQuery disabled options</li>
+<li>code-gen: add getGroupsThatIncludeType utility</li>
+<li>store: fix types for FileCache</li>
+<li>stdlib: add isProduction and isStaging helpers</li>
+<li>server: cors allow localhost when <code>isStaging</code></li>
+<li>server: set localhost cookies when server runs on staging</li>
+</ul>
+<h3 id="v0054"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.54">v0.0.54</a></h3>
+<ul>
+<li>code-gen: hotfix apiClient body template error (missing comma)</li>
+</ul>
+<h3 id="v0053"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.53">v0.0.53</a></h3>
+<ul>
+<li>docs: more docs for @lbu/server and @lbu/store</li>
+<li>docs: add sitemap.xml</li>
+<li>deps: bump various dependencies</li>
+<li>code-gen: fix FormData package usage in the apiClient</li>
+<li>code-gen: fix headers send by the apiClient when using FormData</li>
+<li>code-gen: render Date as type string in all cases for frontend generation</li>
+<li>stdlib: improve benchmark performance</li>
+</ul>
+<h3 id="v0052"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.52">v0.0.52</a></h3>
+<ul>
+<li>code-gen: add AppErrorResponse to generated reactQueries.ts</li>
+<li>store: remove auto delete interval from session store</li>
+<li>store: provide clean method on session store</li>
+<li>server: support custom _domain and _secure on session cookies</li>
+<li>server: fork koa-compose</li>
+</ul>
+<h5 id="breaking-5">Breaking</h5>
+<ul>
+<li>Run <code>const store = newSessionStore(); store.clean()</code> in a user scheduled job.
+The session store does not automatically cleanup old sessions</li>
+<li><code>closeTestApp</code> always returns a Promise</li>
+</ul>
+<h3 id="v0051"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.51">v0.0.51</a></h3>
+<ul>
+<li>code-gen: support generating left join queries for oneToMany relations</li>
+<li>code-gen: fix for Typescript not recognizing interfaces used in JS files</li>
+</ul>
+<h3 id="v0050"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.50">v0.0.50</a></h3>
+<ul>
+<li>code-gen: fix bug on <code>SelectWith</code> query identifiers</li>
+</ul>
+<h3 id="v0049"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.49">v0.0.49</a></h3>
+<ul>
+<li>code-gen: fix syntax error in apiClient (introduced in v0.0.48)</li>
+</ul>
+<h3 id="v0048"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.48">v0.0.48</a></h3>
+<ul>
+<li>stdlib: mainFn exit with status(1) when catching errors</li>
+<li>stdlib,cli: add experimental support for benchmarking</li>
+<li>code-gen: support both body and files on a single route</li>
+<li>code-gen: support generating left join queries for manyToOne relations</li>
+<li>code-gen: various small fixes</li>
+</ul>
+<h3 id="v0047"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.47">v0.0.47</a></h3>
+<ul>
+<li>code-gen: small fix for reference sql generation</li>
+</ul>
+<h3 id="v0046"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.46">v0.0.46</a></h3>
+<ul>
+<li>store: catch migrations errors and exit correctly</li>
+<li>store: add typescript types</li>
+<li>lint-config: more strict on control flow</li>
+<li>code-gen: fix sql injection in <code>idIn</code> generated queries</li>
+<li>code-gen: remove mock generator</li>
+<li>code-gen: add relation type</li>
+<li>code-gen: only import what is needed in generated reactQueries file</li>
+</ul>
+<h5 id="breaking-6">Breaking</h5>
+<ul>
+<li><code>T.reference().field</code> is removed. Use <code>T.relation().manyToOne()</code></li>
+<li>Removed the mock generator</li>
+</ul>
+<h3 id="v0045"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.45">v0.0.45</a></h3>
+<ul>
+<li><p>code-gen: hotfix sql template issues for postgres 2.0</p>
+<p>Fixes introduces template bug in 0.0.44</p>
+</li>
+</ul>
+<h3 id="v0044"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.44">v0.0.44</a></h3>
+<ul>
+<li><p>BREAKING: code-gen: sql template column and table identifiers to camelCase</p>
+<p>Generated sql templates use camelCase nameschema instead of snake_case now.
+All migrations or queries depended on LBU structure needs to be updated.</p>
+</li>
+</ul>
+<h3 id="v0043"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.43">v0.0.43</a></h3>
+<ul>
+<li>stdlib: add AppError#instanceOf</li>
+<li>code-gen: build path params type if necessary but not provided by user</li>
+<li>server: fix koa-session options type</li>
+<li>store: drop Postgres connections to database if used as a template for test
+database</li>
+<li>code-gen: simplify TypeCreator methods</li>
+<li>code-gen: support inferring basic types</li>
+<li>code-gen: router supports arrays for tag and group middleware</li>
+<li>code-gen: support generating <code>CREATE INDEX</code> statements</li>
+<li>code-gen: added File type</li>
+</ul>
+<h5 id="breaking-7">Breaking</h5>
+<ul>
+<li>Generated router exposes <code>setBodyParsers</code> which accepts the result of
+<code>createBodyParsers()</code></li>
+<li>Passing in <code>dumpStructure</code> to <code>App.generate</code> is required if you want the
+router to expose lbu structure automatically</li>
+<li>TypeCreator methods now only accept a name. This affects <code>anyOf</code>, <code>array</code> and
+<code>object</code></li>
+<li><code>x instanceof AppError</code> should be replaced with <code>AppError.instanceOf(x)</code></li>
+</ul>
+<h3 id="v0042"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.42">v0.0.42</a></h3>
+<ul>
+<li>code-gen: useQuery hook now enabled by default</li>
+</ul>
+<h3 id="v0041"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.41">v0.0.41</a></h3>
+<ul>
+<li>server: fix cors issue, and do some micro optimizations</li>
+</ul>
+<h3 id="v0040"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.40">v0.0.40</a></h3>
+<ul>
+<li>code-gen: generate valid dependant queries for react-query &gt;=2 (#88, #80)</li>
+</ul>
+<h3 id="v0039"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.39">v0.0.39</a></h3>
+<ul>
+<li>code-gen: always quote object keys on mock objects</li>
+</ul>
+<h3 id="v0038"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.38">v0.0.38</a></h3>
+<ul>
+<li>code-gen: validator supports collecting errors instead of throwing</li>
+<li>code-gen: always quote object keys in types generator</li>
+</ul>
+<h3 id="v0037"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.37">v0.0.37</a></h3>
+<ul>
+<li>code-gen: fix generic Typescript type when key is an union type</li>
+</ul>
+<h3 id="v0036"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.36">v0.0.36</a></h3>
+<ul>
+<li>code-gen: fix react-query import in generated file</li>
+</ul>
+<h3 id="v0035"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.35">v0.0.35</a></h3>
+<ul>
+<li>server: add server testing utilities</li>
+<li>code-gen: e2e testing of generated router, validator and apiClient</li>
+<li>cli: remove asyncShould(Not)Throw functions added to tape</li>
+<li>code-gen: generate Postgres upsert queries for all searchable fields</li>
+</ul>
+<h3 id="v0034"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.34">v0.0.34</a></h3>
+<ul>
+<li>code-gen: try an fix for <code>WHERE IN</code> generation.</li>
+</ul>
+<h3 id="v0033"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.33">v0.0.33</a></h3>
+<ul>
+<li>code-gen: fix api client generation of interceptors</li>
+</ul>
+<h3 id="v0032"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.32">v0.0.32</a></h3>
+<ul>
+<li>code-gen: various fixes</li>
+<li>code-gen: fixed x-request-id in apiClient</li>
+<li>code-gen: add option to disable mock and validator generator for a type</li>
+</ul>
+<h3 id="v0031"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.31">v0.0.31</a></h3>
+<ul>
+<li>stdlib: resolve camelToSnakeCase issue with long strings</li>
+</ul>
+<h3 id="v0030"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.30">v0.0.30</a></h3>
+<ul>
+<li>docs: add api docs for code-gen and server</li>
+<li>code-gen: various fixes</li>
+<li>deps: various bumps</li>
+</ul>
+<h3 id="v0029"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.29">v0.0.29</a></h3>
+<ul>
+<li>server: add support for CORS_URL env variable</li>
+<li>stdlib: add type definition file</li>
+<li>stdlib: add uuid.isValid function</li>
+<li>code-gen: improve router generated JSDoc</li>
+</ul>
+<h3 id="v0028"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.28">v0.0.28</a></h3>
+<ul>
+<li>code-gen: remove axios dependency in loadFromRemote and accept as argument</li>
+</ul>
+<h3 id="v0027"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.27">v0.0.27</a></h3>
+<ul>
+<li>stdlib: expose pathJoin as alternative for <code>import { join } from &quot;path&quot;;</code></li>
+<li>cli: add coverage command, runs tests and collects coverage information</li>
+<li>insight,cli: provide typescript declaration files</li>
+<li>docs: initialize docsify</li>
+<li>docs: add typedoc for generating api information based on declaration files</li>
+</ul>
+<h3 id="v0026"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.26">v0.0.26</a></h3>
+<ul>
+<li>@lbu/code-gen: make sure to deepcopy baseData for type plugins</li>
+</ul>
+<h3 id="v0025"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.25">v0.0.25</a></h3>
+<ul>
+<li>@lbu/code-gen: add react-query generator</li>
+<li>@lbu/lint-config: remove JSDoc plugin</li>
+<li>@lbu/code-gen: make generators stable</li>
+<li>@lbu/cli: update boilerplate add (test-)services code</li>
+</ul>
+<h3 id="v0024"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.24">v0.0.24</a></h3>
+<ul>
+<li>@lbu/code-gen: fix nested reference lookups in sql code-generation</li>
+</ul>
+<h3 id="v0023"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.23">v0.0.23</a></h3>
+<ul>
+<li>@lbu/lint-config: version bumps and disabled jsdoc/require-returns-description
+rule</li>
+<li>@lbu/code-gen: minor fixes to the update queries generation</li>
+</ul>
+<h3 id="v0022"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.22">v0.0.22</a></h3>
+<ul>
+<li>@lbu/code-gen: fix setting column to null in update queries</li>
+</ul>
+<h3 id="v0021"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.21">v0.0.21</a></h3>
+<ul>
+<li>@lbu/code-gen: rework sql generator, now snake-cases table and column names</li>
+<li>@lbu/code-gen: add support to generate count queries</li>
+<li>@lbu/code-gen: add support to add createdAt and updatedAt fields for objects
+with queries enabled</li>
+<li>@lbu/code-gen: add support for insert-on-update history table when generating
+sql</li>
+<li>@lbu/code-gen: add support to dump a Postgres DDL based on lbu structure</li>
+<li>@lbu/store: Most components are now backed by the sql generator</li>
+<li>@lbu/lint-config: add jsdoc linting</li>
+<li>@lbu/stdlib: support controlled output of newlines</li>
+</ul>
+<h3 id="v0020"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.20">v0.0.20</a></h3>
+<ul>
+<li>@lbu/code-gen: support OpenAPI conversion</li>
+<li>@lbu/store: add file-cache, uses memory &amp; local disk to speed up retrieving
+items from S3</li>
+<li>*: various dependency bumps</li>
+<li>@lbu/store: cleaner result on getMigrationsToBeApplied</li>
+<li>@lbu/server: make sendFile compatible with file-cache</li>
+</ul>
+<h3 id="v0019"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.19">v0.0.19</a></h3>
+<ul>
+<li>@lbu/insight: BREAKING, remove &#39;varargs&#39; support from logger</li>
+<li>@lbu/code-gen: reuse generated validators</li>
+<li>@lbu/code-gen: strip more new lines from output, which results in better
+readability</li>
+</ul>
+<h3 id="v0018"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.18">v0.0.18</a></h3>
+<ul>
+<li>@lbu/stdlib: vendor uuid v4 generation</li>
+</ul>
+<h3 id="v0017"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.17">v0.0.17</a></h3>
+<ul>
+<li>@lbu/cli: various template fixes</li>
+<li>@lbu/*: various dependency updates</li>
+<li>@lbu/server: add a sendFile utility</li>
+<li>@lbu/stdlib: add camelToSnakecase utility</li>
+<li>@lbu/store: add JobQueue implementation</li>
+<li>@lbu/code-gen: normalize generate &amp; generateStubs</li>
+<li>@lbu/code-gen: add basic sql query generator</li>
+</ul>
+<h3 id="v0016"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.16">v0.0.16</a></h3>
+<ul>
+<li>@lbu/code-gen: minor fixes</li>
+<li>@lbu/cli: add tape as a dependency</li>
+<li>@lbu/store: only truncate tables in testing when there are tables to be
+truncated</li>
+<li>@lbu/stdlib: add noop function</li>
+</ul>
+<h3 id="v0015"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.15">v0.0.15</a></h3>
+<ul>
+<li>@lbu/server,stdlib: move AppError to stdlib</li>
+<li>@lbu/code-gen: small fixes</li>
+</ul>
+<h3 id="v0014"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.14">v0.0.14</a></h3>
+<ul>
+<li>@lbu/store: add session store</li>
+<li>@lbu/server: add session middleware</li>
+<li>@lbu/code-gen: rename _Optional to _Input</li>
+<li>@lbu/code-gen: add date type</li>
+</ul>
+<h3 id="v0013"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.13">v0.0.13</a></h3>
+<ul>
+<li>@lbu/code-gen: add dumpStructure option to generateStubs</li>
+</ul>
+<h3 id="v0012"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.12">v0.0.12</a></h3>
+<ul>
+<li>Move project to Github</li>
+<li>@lbu/cli: add docker clean command</li>
+<li>@lbu/code-gen: remove the need to register coreTypes</li>
+<li>@lbu/code-gen: support generating stubs</li>
+<li>@lbu/stdlib: small fixes</li>
+<li>@lbu/store: small fixes for database creation</li>
+</ul>
+<h3 id="v0011"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.11">v0.0.11</a></h3>
+<ul>
+<li>@lbu/store: initial release! Already supports test databases, migrations and a
+persistent file store in combination with minio</li>
+<li>@lbu/server: remove global state from body parsers</li>
+<li>@lbu/code-gen: various bug fixes. The output should be ESLint error free after
+formatting.</li>
+<li>@lbu/cli: update template</li>
+<li>@lbu/cli: improve command executor, now supports passing in flags to Node.js
+as well as to the program it self</li>
+<li>Various test and documentation improvements</li>
+</ul>
+<h3 id="v0010"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.10">v0.0.10</a></h3>
+<ul>
+<li><p>Set minimum Node.js version to Node.js 14</p>
+</li>
+<li><p>@lbu/cli: Refactored</p>
+<ul>
+<li>Improved argument parser, logging and reload handling</li>
+<li>Supports arguments and passing arguments to Node.js</li>
+</ul>
+</li>
+<li><p>@lbu/code-gen: Refactored</p>
+<ul>
+<li>Moved to a double plugin structure with Generators and Types plugins</li>
+<li>Generator plugins replace the previous store and generator plugins</li>
+<li>Type plugins implement TypeBuilding, and code generation for specific types.
+All type plugins support the core generators</li>
+<li>All plugins except Models are now operating on a group based way of
+generating. This ensures that auto-completion stays relevant to the context
+that you are working in</li>
+</ul>
+</li>
+<li><p>@lbu/insight: removed global state from log parser</p>
+</li>
+<li><p>@lbu/insight: support <code>arrayBuffers</code> when printing memory usage</p>
+</li>
+<li><p>@lbu/insight: cleanup logger a bit</p>
+</li>
+<li><p>@lbu/server: supply <code>isServerLog</code> to check if a json object may be output from
+the log midleware</p>
+</li>
+<li><p>@lbu/stdlib: removed global state from teplates</p>
+</li>
+<li><p>@lbu/*: various dependency updates</p>
+</li>
+<li><p>@lbu/*: various docs improvements</p>
+</li>
+</ul>
+<h3 id="v009"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.12">v0.0.9</a></h3>
+<ul>
+<li>Export named functions instead of const and shorthand functions</li>
+<li>@lbu/cli: Fix script ordering</li>
+<li>@lbu/cli: Execute nodemon as a library</li>
+<li>@lbu/code-gen: Various fixes</li>
+<li>@lbu/code-gen: More logging in App build and Runner</li>
+<li>@lbu/code-gen: Router refactoring, add group support. Also includes api client
+generated exports.</li>
+<li>@lbu/code-gen: ModelBuilder refactoring, add docs, optional &amp; default on all
+models</li>
+<li>@lbu/lint-config: Move to Prettier 2.0</li>
+<li>@lbu/insight: Return a Logger instance instead of a POJO</li>
+<li>@lbu/stdlib: Remove translation system</li>
+</ul>
+<h3 id="v008"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.8">v0.0.8</a></h3>
+<ul>
+<li>Various fixes</li>
+<li>@lbu/insight: Simple log processing setup</li>
+</ul>
+<h3 id="v007"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.7">v0.0.7</a></h3>
+<ul>
+<li>BREAKING: export es modules and drop CommonJS support</li>
+<li>BREAKING: Only supporting &gt;= Node.js 13</li>
+<li>@lbu/code-gen: Big refactor, now with a separate model &amp; mocks generator</li>
+<li>@lbu/cli: Supports yarn scripts in watch mode</li>
+<li>@lbu/insight: A tad faster</li>
+<li>@lbu/lint-config: Support ES modules</li>
+<li>@lbu/server: Refactor error handler, inline cors, improvements to defaults</li>
+<li>@lbu/stdlib: Translation system, utilities for moving from CommonJS to ES
+modules</li>
+</ul>
+<h3 id="v006"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.6">v0.0.6</a></h3>
+<ul>
+<li>@lbu/code-gen: JSDoc generation and router tags support</li>
+<li>@lbu/*: Various bugs fixed</li>
+</ul>
+<h3 id="v005"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.5">v0.0.5</a></h3>
+<ul>
+<li>Rewritten from scratch in plain old JavaScript</li>
+<li>@lbu/cli is now more a script runner than anything else</li>
+<li>@lbu/koa is replaced by @lbu/server</li>
+<li>@lbu/register is removed</li>
+<li>@lbu/lint-config drops Typescript support</li>
+<li>@lbu/stdlib now contains a basic templating functionality</li>
+<li>@lbu/code-gen is refactored, needs some more thinking before adding a fluent
+api back</li>
+</ul>
+<h3 id="v004"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.4">v0.0.4</a></h3>
+<ul>
+<li>Replaced @lbu/validator with @lbu/code-gen</li>
+<li>@lbu/code-gen supports generating validator functions and routers</li>
+<li>Add @lbu/koa with some minimal middleware</li>
+</ul>
+<h3 id="v003"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.3">v0.0.3</a></h3>
+<ul>
+<li>@lbu/validator refactor and pretty much stable feature wise</li>
+<li>Various fixes in @lbu/cli and @lbu/stdlib</li>
+</ul>
+<h3 id="v002"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.2">v0.0.2</a></h3>
+<ul>
+<li>Add @lbu/register</li>
+<li>Add @lbu/cli lint command</li>
+<li>Improve @lbu/cli template</li>
+</ul>
+<h3 id="v001"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.1">v0.0.1</a></h3>
+<ul>
+<li>Initial release</li>
+</ul>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a></nav>
+    </footer>
+    </body>
+</html>
+  

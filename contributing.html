@@ -1,0 +1,112 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Contributing</title>
+        <meta name="description" content="Compas contributing guide"/>
+        <link rel="canonical" href="https://pre.compasjs.com/contributing.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="contributing">CONTRIBUTING</h1>
+<h3 id="development--scripts">Development &amp; scripts</h3>
+<p>Development should be pretty straight forward. Run <code>yarn compas test --watch</code> to
+run the test suite. Before making a commit, make sure to run <code>yarn compas lint</code>.
+Note that this automatically will try to fix most issues that popup. All
+commands in this repo can be run vai the &#39;self-hosted&#39; <code>@compas/cli</code>. Run
+<code>yarn compas help</code> for an overview. Below a few commands related to things you
+could be working on:</p>
+<p><strong>General</strong>:</p>
+<pre><code># Format with ESLint &amp; Prettier
+yarn compas lint (--watch)
+# Run the tests
+yarn compas test (--watch)
+# Run coverage test
+yarn compas coverage -- --check-coverage
+yarn compas coverage -- report --reporter lcov
+# Link your local compas checkout to another project
+yarn compas link &amp;&amp; yarn compas linkExternally ../other-project/</code></pre>
+<p><strong>Documentation &amp; Typescript types</strong>:</p>
+<pre><code># Build docs from index.d.ts files and put in /docs/api.md
+yarn compas typedoc
+# Sync content of README.md&#x27;s based on the README.md in the root
+yarn compas syncMetadata
+# Sync assets/examples to the documentation files
+yarn compas syncDocExamples</code></pre>
+<p><strong>Code generation, @compas/store structure changes</strong>:</p>
+<pre><code># Generate to ignored files for testing stuff out
+yarn compas generate
+# Generate for @compas/ packages
+yarn compas internal_generate</code></pre>
+<h3 id="improving-test-coverage">Improving test coverage</h3>
+<p>There are a bunch of things not covered by tests, there are a few ways to
+improve coverage, but let&#39;s start by running <code>yarn compas coverage</code> and opening
+<code>file:///path/to/repo/coverage/lcov-report/index.html</code> in your browser.</p>
+<p>If it is your first time doing this, start by checking out files in the
+<code>generated</code> directory. Most of these files are partially covered, and it should
+be pretty straight forward to find a related function that is tested, and doing
+the same for the yet untested function. For new cases related to code
+generation, add the missing case in <code>gen/testing.js</code> and regenerate with
+<code>yarn compas gen &amp;&amp; yarn compas lint</code>. Then run <code>yarn compas coverage</code> again to
+see that the new case is not yet covered by tests.</p>
+<h3 id="debugging-tests">Debugging tests</h3>
+<p>Debug that file as if you debug whatever other Node.js script. E.g in Webstorm:
+(right-mouse click -&gt; Debug <code>file.test.js</code>)</p>
+<h3 id="publishing">Publishing</h3>
+<ul>
+<li>Ensure you are logged in to npm with <code>npm whoami</code>, when logged out;
+<code>npm login</code></li>
+<li>Ensure you have the <code>main</code>-branch checked out, and are completely up-to-date</li>
+<li>Write to the changelog<ul>
+<li>Run <code>yarn compas changelog</code></li>
+<li>Replace <code>x.x.x</code> with the new version (3 times) in <code>docs/changelog.md</code></li>
+<li>Write about the changes and how to use it them, in <code>docs/releases/x.x.x.md</code></li>
+</ul>
+</li>
+<li>Run the linter with <code>yarn compas lint</code></li>
+<li>Commit with <code>*: prepare release for vX.X.X</code> and push to master</li>
+<li>Run <code>yarn release</code>. This will build &amp; publish all packages<ul>
+<li>Specify the new version</li>
+<li>Check packages it will publish and send <code>y</code></li>
+<li>Give a new OTP every time it is asked.</li>
+</ul>
+</li>
+</ul>
+<h3 id="webstorm">WebStorm</h3>
+<ul>
+<li><code>Help</code> &gt; <code>Edit Custom Properties...</code> &gt;
+<code>idea.javascript.max.evaluation.complexity=80</code></li>
+<li>Open <code>/package.json</code> &gt; <code>Find Actions</code> &gt; <code>Apply Prettier Code Style Rules</code></li>
+<li>Open <code>/.eslintrc.cjs</code> &gt; <code>Find Actions</code> &gt; <code>Apply ESLint Code Style Rules</code></li>
+<li><code>Settings</code> &gt; <code>Node.js And NPM</code> &gt; <code>Coding assistance for Node.js</code></li>
+<li><code>Edit configurations...</code> &gt; <code>Templates/Node.js</code>:<ul>
+<li><code>V8 Profiling</code> &gt; <code>Allow taking heap snapshots</code></li>
+<li><code>Configuration</code> &gt; <code>Working directory</code> &gt; <code>/path/to/checkout/root</code></li>
+</ul>
+</li>
+</ul>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a></nav>
+    </footer>
+    </body>
+</html>
+  

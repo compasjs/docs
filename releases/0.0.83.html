@@ -1,0 +1,252 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Release v0.0.83</title>
+        <meta name="description" content="Release notes for Compas v0.0.83"/>
+        <link rel="canonical" href="https://pre.compasjs.com/releases/0.0.83.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/releases/index.html">Releases</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="release-notes-v0083">Release notes v0.0.83</h1>
+<p>As I already apologized in advance in the previous release notes, let&#39;s get
+started! Since we have some breaking changes to the structure format you should
+update in the following order:</p>
+<ul>
+<li>Packages</li>
+<li>Backends</li>
+<li>Generated clients</li>
+</ul>
+<p>Note that some parts of this document can be a bit hard to read through, but
+take it as a reference to explore the newly generated features.</p>
+<h3 id="code-gen">Code gen</h3>
+<p>The code generators got a complete refactor. We did this to allow some planned
+features, make types more correct, and all in all just give it a nice cleanup.
+This allowed us to make the validators more tree shakeable and have a more
+extensive sql query setup in the future. We also dropped support for generator
+plugins and type plugins. Instead, we are going to aim for structure stability
+so that anyone can generate whatever they want, in whatever language they want.</p>
+<p>This all probably breaks your code, so below a list of situations and how to
+migrate them over.</p>
+<h5 id="generated-clients">Generated clients</h5>
+<p>It is not necessary anymore to pass in <code>collectValidatorErrors</code> to
+<code>app.generate()</code> calls. We now always collect all errors. In the near future we
+are planning to
+<a href="https://github.com/compasjs/compas/issues/205">collect an error set</a>, so you
+are able to statically check if you handle all possible cases.</p>
+<p>Before generating again, make sure to remove the current generator output. We
+are now able to generate TypeScript files for all the generators, which is
+enabled by default.</p>
+<p>A lot of generated types are not available anymore. However, the types that are
+generated should be more relevant, for example dates are now be handled
+correctly.</p>
+<p>When you want to use validators, make sure to import them from the specific
+file, ( eg <code>./generated/my-group/validators.ts</code>). This will hopefully allow
+Webpack to strip out any unused validators.</p>
+<p>The generated api client and react-query based hooks should still work the same.</p>
+<h5 id="packages">Packages</h5>
+<p>Packages that use queries should allow overriding the generated queries. This
+can be archived with something like the following in <code>src/generated.js</code>:</p>
+<pre><code class="language-js"><span class="hljs-comment">// An example taken from @lbu/store</span>
+<span class="hljs-keyword">import</span> { queries <span class="hljs-keyword">as</span> defaultQueries } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./generated/index.js&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> queries = defaultQueries;
+
+<span class="hljs-comment">/**
+ * Overwrite used generated queries.
+ * This is needed when you want cascading soft deletes to any of the exposed types
+ * <span class="hljs-doctag">@param <span class="hljs-type">{typeof defaultQueries}</span> <span class="hljs-variable">q</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setStoreQueries</span>(<span class="hljs-params">q</span>) </span>{
+  queries = q;
+}</code></pre>
+<p>This way the package can still do cascading soft deletes across user code if
+necessary. The package should then use
+<code>import { queries } from &quot;./generated.js&quot;;</code> instead of
+<code>import { xxxQueries } from &quot;./generated/queries.js&quot;;</code></p>
+<h5 id="backends">Backends</h5>
+<p>The generated router &amp; validators work practically the same as the previous
+generated versions. The most notably change here is that the exports go via
+<code>./generated/index.js</code>.</p>
+<p>The big hit here is with queries and structure changes. <code>T.objects</code> that have
+enabled queries are changed the most:</p>
+<p>We automatically add primary keys of type &#39;uuid&#39; if none is provided. This can
+be disabled by passing in <code>withPrimaryKey: false</code> in to <code>.enableQueries()</code>.</p>
+<p>Another new option is added to <code>.enableQueries()</code>, &#39;isView&#39;. This disables some
+parts of the generator that have to do with <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code>
+queries.</p>
+<p>The sql relation system is revamped. They now need to be provided via
+<code>T.object().relations()</code>, which accepts any number of relations. To create
+relations the <code>TypeCreator</code> (<code>T.</code>) supports the following:</p>
+<ul>
+<li><code>T.oneToMany(&quot;key1&quot;, T.reference())</code>: The &#39;1&#39; side of a 1 - many relation</li>
+<li><code>T.manyToOne(&quot;key2&quot;, T.reference(), &quot;key1&quot;)</code>: The &#39;many&#39; side of many - 1
+relation. This side will get an extra field that has a foreign key to the
+primary key of <code>T.reference()</code>.</li>
+<li><code>T.oneToOne(&quot;key3&quot;, T.reference(), &quot;key4&quot;)</code>: The owning side of a 1 - 1
+relation. The object where this relation is added will get an extra field that
+has a foreign key the primary key of the provided <code>T.reference()</code>. The inverse
+side is automatically added.</li>
+</ul>
+<p>Both <code>T.manyToOne()</code> and <code>T.oneToOne()</code> support <code>.optional()</code>. This results in a
+nullable field, and the generated structure will by default add an
+<code>ON DELETE SET NULL</code>. The error messages have some improvements here as well, so
+if something is missing, the generator will let you know.</p>
+<p>The output of the &#39;sql&#39; generator does not contain everything from the previous
+generator. The <code>Upsert</code> queries and selects with joins (eg.
+<code>userSelectWithPosts</code>) are missing. However, most of the time the generated
+queries should be compatible with the new output, so it is fine to keep the
+previous <code>generated/queries.js</code> for a bit while migrating those queries to the
+business domain.</p>
+<p>The sql output is now modular build. This is allowed by a custom query builder
+provided by @lbu/store. More on that builder later in these release notes. The
+generated queries also do not use the &#39;group&#39; name in any of the output. This
+results in more exported functions for you to use. Say that we have an object
+called &#39;user&#39;, we get the following functions:</p>
+<p>Partials:</p>
+<ul>
+<li><code>userFields(): QueryPart</code>: Returns qualified names for all field of the user
+table. This can be used in <code>SELECT</code> queries and for <code>RETURNING</code> part in
+<code>INSERT/UPDATE</code> queries.</li>
+<li><code>userWhere(): QueryPart</code>: Builds a <code>WHERE</code> statement dynamically. This has
+some new options like <code>isNull</code>, <code>isNotNull</code> , <code>notEqual</code>, <code>notLike</code> and
+<code>notIn</code>.</li>
+<li><code>userOrderBy(): QueryPart</code>: An appropriate default <code>ORDER BY</code> statement for
+the specific table. Also supports tables without any of <code>withDates</code> and
+<code>withSoftDeletes</code> enabled.</li>
+<li><code>userInsertValues(): QueryPart</code>: Creates the <code>VALUES</code> part of an <code>INSERT</code>
+query, making sure that the defaults provided by <code>.default()</code> are all taken
+into account.</li>
+<li><code>userUpdateSet(): QueryPart</code>: Builds the <code>SET</code> part of an <code>UPDATE</code> query.
+Making sure <code>updatedAt</code> is added when necessary.</li>
+</ul>
+<p>Basic CRUD queries:</p>
+<ul>
+<li><code>userSelect(sql, where)</code>: Execute a <code>SELECT</code> query</li>
+<li><code>userCount(sql, where)</code>: Count the affected rows and returns a <code>number</code></li>
+<li><code>userInsert(sql, where)</code>: Execute an <code>INSERT</code> query, will return the affected
+rows.</li>
+<li><code>userUpdate(sql, where)</code>: Execute an <code>UPDATE</code> query, will return the affected
+rows.</li>
+<li><code>userDelete(sql, where)</code>: Execute a <code>DELETE</code> query. When the option
+<code>withSoftDeletes</code> is true, this will be an <code>UPDATE</code> query.</li>
+<li><code>userDeletePermanent(sql, where)</code>: Only generated when the option
+<code>withSoftDeletes</code> is true, this will execute a <code>DELETE</code> query and is thus
+destructive.</li>
+</ul>
+<p>The &#39;delete&#39; queries in a <code>withSoftDeletes</code> situation will now cascade this
+automatically to the dependent relations. It is advised to always run this in a
+transaction.</p>
+<p>Traverse the graph:</p>
+<p>The last &#39;query&#39; added is <code>traverseUser()</code>. This is a set of functions that are
+able to get relations via other relations. Say we have
+<code>Post &lt;-&gt; User &lt;-&gt; Group</code>, we can easily fetch all posts created by users in the
+group of a specific user, with only a single &#39;id&#39; of the user, like so:
+<code>traverseUser({ id: &quot;my id&quot; }).getGroup().getUsers().getPosts()</code>. Along the way
+you can do some more filtering. Future versions may add features like limiting
+the amount of results per step.</p>
+<p>We also revamped the <code>dumpStructure</code> option that could be passed to
+<code>app.generate()</code>. It will now create a file as well in the output directory.
+This file should not be committed to version control, and is still only an
+example to help you with migrations.</p>
+<p>As noted in the &#39;Packages&#39; part of this changelog, it is advisable to call any
+<code>setPackageQueries</code> of the packages you are using.</p>
+<p>The last lovely feature that is added, is stable fields output. This makes sure
+the date fields added by <code>withDates</code> and <code>withSoftDeletes</code> are always last, and
+the (injected) primary key is always first.</p>
+<h3 id="store">Store</h3>
+<p>The store got some features added. We migrated to the new generated queries
+without any breaking changes.</p>
+<p>We now export a <code>query</code> function this is a tagged template function, and thus
+supports to be called like the following:</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> bucketName = <span class="hljs-string">&quot;bar&quot;</span>;
+
+<span class="hljs-comment">// Typeof myQuery = `QueryPart`, this is the same as returned by the &#x27;partial&#x27; generated queries</span>
+<span class="hljs-keyword">const</span> myQuery = query<span class="hljs-string">`SELECT <span class="hljs-subst">${fileFields()}</span> FROM &quot;file&quot; f WHERE f.&quot;bucketName&quot; = <span class="hljs-subst">${bucketName}</span>`</span>;
+myQuery.append(query<span class="hljs-string">`ORDER BY <span class="hljs-subst">${fileOrderBy()}</span>`</span>);
+
+<span class="hljs-keyword">const</span> queryResult = <span class="hljs-keyword">await</span> myQuery.exec(sql);</code></pre>
+<p>The <code>query</code> function is used by all newly generated queries, and allows
+injection safe query building. It also supports providing another <code>QueryPart</code> as
+an injected value as well as <code>.append</code>-ing one.</p>
+<p>Another neat function added is <code>explainAnalyzeQuery</code>. This can run any query
+safely (in a rolled back transaction) and return the query plan as either text
+or json. Note that the result you get on a development setup is most likely not
+the same as the one you will get in production. So keep that in my mind while
+exploring :)</p>
+<p>Lastly there is now support for grouping and ordering files. The two entities
+added are <code>fileGroup</code> and <code>fileGroupView</code>. As the name suggests <code>fileGroupView</code>
+is backed by a view, and only adds the calculated <code>isDirectory</code> property. Most
+operations should be done via the generated queries, however there are three
+functions exported that will help you with your operations:</p>
+<ul>
+<li><code>hoistChildrenToParent</code>: move all children a level up in the tree. Most likely
+used in preparation of deleting a group.</li>
+<li><code>updateFileGroupOrder</code>: given an array of id&#39;s atomically updates the order to
+reflect the order of the array, without the need of a transaction. Note that
+the provided id&#39;s do not necessarily be of the same parent, and thus any
+number of groups can be sorted in a single call.</li>
+<li><code>getNestedFileGroups</code>: returns the nested structure of a group starting at any
+arbitrary root, and able to include the referenced files. The resulting nested
+structure is also sorted.</li>
+</ul>
+<p>There is also support for an arbitrary meta field on any file and fileGroup like
+so:</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> App.new();
+<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator(<span class="hljs-string">&quot;store&quot;</span>);
+
+app.add(
+  T.object(<span class="hljs-string">&quot;fileMeta&quot;</span>).keys({
+    <span class="hljs-comment">// Put your custom meta data here</span>
+  }),
+);
+
+app.add(
+  T.anyOf(<span class="hljs-string">&quot;fileGroupMeta&quot;</span>).values(
+    {
+      <span class="hljs-comment">// Custom metadata</span>
+    },
+    {
+      <span class="hljs-comment">// Or another structure with different meta data</span>
+    },
+  ),
+);</code></pre>
+<p>When migrating from existing implementations of grouping, it is advisable to
+change all relations to point to <code>T.reference(&quot;store&quot;, &quot;file&quot;)</code> and places that
+need a group to <code>T.reference(&quot;store&quot;, &quot;fileGroup&quot;)</code>.</p>
+<h3 id="in-closing">In closing</h3>
+<p>This release contains probably the most breaking changes till now. We are aiming
+for structure stability and a first beta on <code>0.1.0</code> in the upcoming weeks. Till
+then, expect some new query capabilities like
+<a href="https://github.com/compasjs/compas/issues/383">atomic updates</a>,
+<a href="https://github.com/compasjs/compas/issues/388">a query builder</a>,
+<a href="https://github.com/compasjs/compas/issues/385">many to many relations</a>,
+<a href="https://github.com/compasjs/compas/issues/387">unique index and upsert support</a>
+and many more.</p>
+<p><del>Dang, my vacation was exactly long enough to complete this, but it&#39;s over now
+-_-.</del></p>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/releases/index.html">Releases</a></nav>
+    </footer>
+    </body>
+</html>
+  

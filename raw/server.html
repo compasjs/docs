@@ -1,0 +1,76 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Server</title>
+        <meta name="description" content="Compas old docs"/>
+        <link rel="canonical" href="https://pre.compasjs.com/raw/server.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/raw/index.html">Old docs</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="server">Server</h1>
+<p>The server contains various Koa middleware and an easy way to instantiate a new
+app.</p>
+<h2 id="get-app">Get App</h2>
+<p>The main export of this package is <code>getApp</code> this is a utility function that sets
+up various middleware to provide a ready to go experience. The below list
+explains the default settings, see
+<a href="/api?id=interface-getappoptions">GetAppOptions</a> for more details about all the
+supported options.</p>
+<ul>
+<li>Setup <code>app.proxy</code> to <code>true</code> when in production. This makes sure Koa is using
+headers provided by the proxy.</li>
+<li>A <code>/_health</code> route that responds with <code>200 OK</code> on all requests. Can be used to
+check if the api is already running.</li>
+<li>Logging middleware powered by <a href="/insight.md">@lbu/insight</a>. Adds a <code>requestId</code>
+to the context of the logger, which makes sure that logs of a request stay
+together. The logger is accessible on <code>ctx.log</code> in the middleware.</li>
+<li>An error handling middleware, supporting
+<a href="http://localhost:3000/#/api?id=class-apperror-t">AppError</a> errors, as well as
+sending a <code>500 Internal Server Error</code> for all other errors. It uses the before
+mentioned logging middleware to log all errors.</li>
+<li>A 404 handler for unhandled requests</li>
+<li>A basic CORS handler powered by <code>process.env.CORS_URL</code>. See
+<a href="/env.md">environment</a> for more information.</li>
+</ul>
+<h2 id="other-middleware">Other middleware</h2>
+<ul>
+<li><code>createBodyParsers</code> can be used to create a json body parser and a separate
+multipart body parser.</li>
+<li><code>compose</code> can be used to manually compose multiple middleware in to a single
+callable middleware</li>
+<li><code>sendFile</code> is a utility to easily send out files. Supports partial responses,
+when for example sending a video.</li>
+<li><code>session</code> is a cookie based session handling, ties together with the
+<code>SessionStore</code> provided by <a href="/store.md">@lbu/store</a></li>
+</ul>
+<h2 id="testing">Testing</h2>
+<p>This package also provides some utilities for testing your api.</p>
+<p><code>createTestAppAndClient</code> can be used in combination with an App and Axios
+instance to listen to a random port and set the correct <code>baseURL</code> in Axios. The
+listening app can than be stopped by passing it to <code>closeTestApp</code>.</p>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/raw/index.html">Old docs</a></nav>
+    </footer>
+    </body>
+</html>
+  

@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Insight</title>
+        <meta name="description" content="Compas old docs"/>
+        <link rel="canonical" href="https://pre.compasjs.com/raw/insight.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/raw/index.html">Old docs</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="insight">Insight</h1>
+<p>The insight package provides a logger and a few other utilities to make process
+information available in the logs. There are a few basic limitations put up to
+improve logging:</p>
+<ul>
+<li>There are only two log levels: info and error</li>
+<li>The log methods (<code>info</code> and <code>error</code>) only accept a single parameter</li>
+<li>The logs are serialized to json in production</li>
+</ul>
+<p>The idea is that you don&#39;t need more than two log levels for a web server
+running in production. A log line is either information that is used for
+statistics, e.g. response times, information used for debugging purposes or
+something unexpected.</p>
+<p>For the first two of the above scenario&#39;s we use <code>info</code> and for the last one we
+use <code>error</code>. Then we can have a trigger in the log aggregator that actively
+warns when it sees an &#39;error&#39; log. This also means that we only use error logs
+on 500 / 5xx http status codes and not for things like <code>401</code> or <code>404</code>, since
+that is correctly handled already.</p>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/raw/index.html">Old docs</a></nav>
+    </footer>
+    </body>
+</html>
+  

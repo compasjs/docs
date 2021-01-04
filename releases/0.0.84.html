@@ -1,0 +1,89 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Release v0.0.84</title>
+        <meta name="description" content="Release notes for Compas v0.0.84"/>
+        <link rel="canonical" href="https://pre.compasjs.com/releases/0.0.84.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/releases/index.html">Releases</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="release-notes-v0084">Release notes v0.0.84</h1>
+<p>This release contains some small fixes and features compared to the previous
+release. We also enabled tests and benchmarks in CI for the newly released
+Node.js 15!</p>
+<h3 id="code-gen">Code gen</h3>
+<p>In preparation for structure stability we do loose validation of the structure
+to generate for. This enables us to add new fields in releases without breaking
+the generators of previous releases.</p>
+<p>A small feature added to the route builder is support for &#39;PATCH&#39; requests. Lbu
+still prefers to use &#39;PUT&#39; by convention, but this allows a wider range of
+OpenAPI specs to be imported.</p>
+<p>We also have a few fixes for the previous release. The structure is now
+correctly dumped. In lbu 0.0.83 we didn&#39;t nest groups in the <code>structure</code> export
+from <code>structure.js</code>. And sql <code>in</code> and <code>notIn</code> in the generated were clause
+should use the correct sql types now, even when the field is an reference.</p>
+<p>Lastly support is added for <code>app.addRelations(reference, ...relations)</code>. LBU
+requires that both sides of a relation are registered, but that wasn&#39;t possible
+without a hack:</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { storeStructure } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./generated/index.js&quot;</span>;
+<span class="hljs-keyword">import</span> { App, TypeCreator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@lbu/code-gen&quot;</span>;
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> App.new();
+<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator();
+
+app.add(
+  T.object(<span class="hljs-string">&quot;myEntity&quot;</span>)
+    .keys({})
+    .relations(T.manyToOne(<span class="hljs-string">&quot;file&quot;</span>, T.reference(<span class="hljs-string">&quot;store&quot;</span>, <span class="hljs-string">&quot;file&quot;</span>), <span class="hljs-string">&quot;entities&quot;</span>)),
+);
+
+storeStructure.store.file.relations.push(
+  T.oneToMany(<span class="hljs-string">&quot;entities&quot;</span>, T.reference(<span class="hljs-string">&quot;app&quot;</span>, <span class="hljs-string">&quot;myEntity&quot;</span>)),
+);</code></pre>
+<p>While the new variant looks a bit cleaner:</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { App, TypeCreator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@lbu/code-gen&quot;</span>;
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> App.new();
+<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator();
+
+app.add(
+  T.object(<span class="hljs-string">&quot;myEntity&quot;</span>)
+    .keys({})
+    .relations(T.manyToOne(<span class="hljs-string">&quot;file&quot;</span>, T.reference(<span class="hljs-string">&quot;store&quot;</span>, <span class="hljs-string">&quot;file&quot;</span>), <span class="hljs-string">&quot;entities&quot;</span>)),
+);
+
+app.addRelations(
+  T.reference(<span class="hljs-string">&quot;store&quot;</span>, <span class="hljs-string">&quot;file&quot;</span>),
+  T.oneToMany(<span class="hljs-string">&quot;entities&quot;</span>, T.reference(<span class="hljs-string">&quot;app&quot;</span>, <span class="hljs-string">&quot;myEntity&quot;</span>)),
+);</code></pre>
+<h3 id="server">Server</h3>
+<p>We don&#39;t log the event call stack anymore for &#39;OPTIONS&#39; requests. This is done
+to keep the logs a bit cleaner.</p>
+<h3 id="in-closing">In closing</h3>
+<p>That&#39;s all for now. Have fun!</p>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/releases/index.html">Releases</a></nav>
+    </footer>
+    </body>
+</html>
+  
