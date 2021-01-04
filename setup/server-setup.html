@@ -1,0 +1,131 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Server setup</title>
+        <meta name="description" content="Create a Koa based server"/>
+        <link rel="canonical" href="https://pre.compasjs.com/setup/server-setup.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            code {background: white;}
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/setup/index.html">Project setup</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="server-setup">Server setup</h1>
+<p>Compas also provides some utilities for constructing an HTTP server. This is
+based on <a href="https://koajs.com/">Koa</a>. The server consist of built-in error
+handling, a logger and security headers.</p>
+<h2 id="default-server">Default server</h2>
+<p>Create a file at <code>scripts/api.js</code> with the following contents:</p>
+<pre><code class="language-js">import { getApp } from &quot;@compas/server&quot;;
+import { mainFn } from &quot;@compas/stdlib&quot;;
+
+mainFn(import.meta, main);
+
+async function main() {
+  const app = getApp({});
+
+  app.listen(3000);
+}</code></pre>
+<p>When we run this file we can already check out some default features.</p>
+<pre><code class="language-shell">yarn compas api
+# Or
+node ./scripts/api.js</code></pre>
+<p>We are going to do some GET requests, you can use your browser or another HTTP
+client, like <a href="https://httpie.io/">httpie</a> .</p>
+<ol>
+<li>Check if the server is running</li>
+</ol>
+<pre><code class="language-shell">http GET http://localhost:3000/_health</code></pre>
+<ol start="2">
+<li>404 handling</li>
+</ol>
+<pre><code class="language-shell">http GET http://localhost:3000/oops</code></pre>
+<ol start="3">
+<li>Logging</li>
+</ol>
+<p>Check the logs of the running server. You should see quite a bit of output
+there. Notice that the <code>/_health</code> request is missing. In order, you should see
+the following:</p>
+<ul>
+<li>Formatted 404 error with stack trace. This is an &#39;info&#39; log for any non 500
+response status error.</li>
+<li>The request log to <code>/oops</code>, containing some request and response information.</li>
+<li>Event callstack, this can be used for timings, analytics or other diagnostic
+purposes.</li>
+</ul>
+<p>Notes that all logs also contain a <code>requestId</code>. This is automatically added when
+you use the logger provided by <code>ctx.log</code>. To read more about the event
+callstack, check the <a href="TODO">event docs</a>.</p>
+<h2 id="other-middleware">Other middleware</h2>
+<ul>
+<li><code>createBodyParsers</code> can be used to create a json body parser, and a separate
+multipart body parser.</li>
+<li><code>compose</code> can be used to manually compose multiple middleware in to a single
+callable middleware</li>
+<li><code>sendFile</code> is a utility to easily send out files. Supports partial responses,
+when for example sending a video.</li>
+<li><code>session</code> is a cookie based session handling, ties together with the
+<code>SessionStore</code> provided by <a href="TODO">@compas/store</a></li>
+</ul>
+<h2 id="testing">Testing</h2>
+<p>Testing an api is of coure also necessary. The @compas/server package exports
+some utilities for that as well:</p>
+<p><code>createTestAppAndClient</code> can be used in combination with an App and Axios
+instance to listen to a random port and set the correct <code>baseURL</code> in Axios. The
+listening app can than be stopped by passing it to <code>closeTestApp</code>.</p>
+<h2 id="setup-as-a-service">Setup as a service</h2>
+<p>As we have seen previously in the <a href="/setup/services-setup">services setup</a>, we
+can set variables &#39;globally&#39; while still being testable. Since you may need to
+add various middleware or maybe to construct some middleware like <code>session</code>. It
+may be a good idea to create a service out of it.</p>
+<p>A good pattern to use, is to create a <code>src/services/core.js</code> file which contains
+services not altered by specific business logic, that only need a one time
+setup, like our Koa app.</p>
+<pre><code class="language-js">export let logger = undefined;
+export let app = undefined;
+
+export function setLogger(newLogger) {
+  newLogger.info(&quot;setting services-&gt;logger&quot;);
+  logger = newLogger;
+}
+
+export function setApp(newApp) {
+  if (logger) {
+    logger.info(&quot;setting services-&gt;app&quot;);
+  }
+  app = newApp;
+}</code></pre>
+<p>And changing your <code>scripts/api.js</code> to the following:</p>
+<pre><code class="language-js">import { getApp } from &quot;@compas/server&quot;;
+import { mainFn } from &quot;@compas/stdlib&quot;;
+import { app, setLogger, setApp } from &quot;../src/services/core.js&quot;;
+
+mainFn(import.meta, main);
+
+async function main(logger) {
+  // Making sure we have a logger setup
+  setLogger(logger);
+  setApp(getApp({}));
+
+  app.listen(3000);
+}</code></pre>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/setup/index.html">Project setup</a></nav>
+    </footer>
+    </body>
+</html>
+  

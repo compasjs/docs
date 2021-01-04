@@ -1,0 +1,150 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Compas</title>
+        <meta name="description" content="Unified backend tooling"/>
+        <link rel="canonical" href="https://pre.compasjs.com/index.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            code {background: white;}
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="compas">Compas</h1>
+<p>Unified backend tooling</p>
+<hr>
+<h2 id="features">Features</h2>
+<ul>
+<li>Minimal project boilerplate</li>
+<li>Script runner, can watch &amp; reload almost anything</li>
+<li>Test and benchmark runner</li>
+<li>Flexible code generators supporting routers, validators, api clients, CRUD
+queries and more in the future.</li>
+<li>Opinionated structured logging</li>
+<li>Common Koa middleware wrapped in a single function</li>
+<li>Various utilities like loading .env files, executing other processes and a
+basic string templating system</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Node.js &gt;= 14</li>
+<li>Yarn 1.x.x</li>
+</ul>
+<h2 id="why">Why</h2>
+<p>My work involved doing many small projects. I had a hard time backporting
+incremental fixes to existing projects. To facilitate my needs more and to stop
+copying and pasting things around, this project was born.</p>
+<h2 id="features-breakdown">Features breakdown</h2>
+<p><strong>@compas/cli</strong>:</p>
+<ul>
+<li>Run user scripts (in watch mode)</li>
+<li>Run the linter</li>
+<li>A Compas based boilerplate</li>
+<li>Test runner</li>
+<li>Benchmark runner</li>
+<li>Necessary Docker container management</li>
+<li>Visualise the known database structure of @compas/code-gen</li>
+</ul>
+<p><strong>@compas/lint-config</strong>:</p>
+<ul>
+<li>All necessary ESLint and Prettier dependencies</li>
+<li>Default configuration for ESLint and Prettier</li>
+</ul>
+<p><strong>@compas/insight</strong>:</p>
+<ul>
+<li>A structured logger<ul>
+<li>Writing newline delimited JSON in production</li>
+<li>Pretty printing for development</li>
+</ul>
+</li>
+<li>Various utilities to get insight in the running process</li>
+<li>A manual event system</li>
+</ul>
+<p><strong>@compas/stdlib</strong>:</p>
+<ul>
+<li>Various lodash inspired utilities (isNil, isPlainObject, ...)</li>
+<li>Wrappers for child_process execution and spawning</li>
+<li>A <code>mainFn</code> wrapper that reads <code>.env</code> and calls the provided function if the
+file is the process entrypoint</li>
+<li>Replacements for CommonJS <code>__dirname</code> and <code>__filename</code></li>
+</ul>
+<p><strong>@compas/server</strong>:</p>
+<ul>
+<li>Wrapper around Koa instance creation</li>
+<li>404 en error handling</li>
+<li>Handle CORS</li>
+<li>Send file helper</li>
+<li>Session support with safe, browser readable cookies</li>
+</ul>
+<p><strong>@compas/store</strong>:</p>
+<ul>
+<li>Wrapper around the Minio S3 client</li>
+<li>Wrapper around Postgres connection</li>
+<li>Utilities for providing temporary databases in a test environment</li>
+<li>Postgres migrations</li>
+<li>Postgres and S3 combined for file storage</li>
+<li>Caching files from S3 in memory or on local disk</li>
+<li>Postgres powered queue implementation<ul>
+<li>Supports priority, scheduling, multiple async workers and recurring jobs</li>
+</ul>
+</li>
+<li>koa-session compatible SessionStore backed by Postgres</li>
+</ul>
+<p><strong>@compas/code-gen</strong>:</p>
+<ul>
+<li>Code generators for the following:<ul>
+<li>router, with wildcard and path parameter support</li>
+<li>validators, pure JavaScript implementation</li>
+<li>sql, CRUD Postgres queries and nested result support</li>
+<li>Axios based api client</li>
+<li>TypeScript or JSDoc types</li>
+<li>react-query hooks</li>
+</ul>
+</li>
+<li>An extendable set of types:<ul>
+<li>boolean, number, string;</li>
+<li>object, array, any;</li>
+<li>date, uuid;</li>
+<li>generic, anyOf, reference;</li>
+</ul>
+</li>
+<li>Remote structure loader</li>
+<li>OpenAPI to Compas structure converter</li>
+</ul>
+<h2 id="docs-and-development">Docs and development</h2>
+<p>See <a href="https://compasjs.com">the website</a> for the changelog, all available APIs
+and various guides.</p>
+<p>For contributing see <a href="https://compasjs.com/contributing">contributing.md</a>.</p>
+<h2 id="new-features">New features</h2>
+<p>New features added should fall under the following categories:</p>
+<ul>
+<li>It improves the interface between api and client in some way. An example may
+be to support websockets in @compas/code-gen</li>
+<li>It improves the developer experience one way or another while developing an
+api For example the <code>compas docker</code> commands or various utilities provided by
+@compas/stdlib</li>
+</ul>
+<p>Although some parts heavily rely on conventions set by the packages, we
+currently aim not to be a framework. We aim to provide a good developer
+experience, useful abstractions around the basics, and a stable backend &lt;-&gt;
+client interface.</p>
+
+    </article>
+    <article><ul><li><a href="https://pre.compasjs.com/setup/index.html">Project setup</a></li></ul></article>
+    </main>
+    <footer>
+        <nav></nav>
+    </footer>
+    </body>
+</html>
+  

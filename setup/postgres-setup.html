@@ -1,0 +1,168 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Postgres setup</title>
+        <meta name="description" content="Connect Compas to Postgres"/>
+        <link rel="canonical" href="https://pre.compasjs.com/setup/postgres-setup.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            code {background: white;}
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/setup/index.html">Project setup</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="postgres-setup">Postgres setup</h1>
+<p>Most projects also require some way of persisting data. Compas aides in
+providing a PostgreSQL client and some utilities around setting up a database.</p>
+<h2 id="starting-postgresql">Starting PostgreSQL</h2>
+<p>First that we need to make sure we have a running PostgreSQL instance. Compas
+helps here, by managing a Docker based PostgreSQL server. Previously you have
+already installed <code>@compas/cli</code>, which contains the necessary commands.</p>
+<pre><code class="language-shell">yarn compas docker up</code></pre>
+<p>As you may have seen in the output, it does not only start a PostgreSQL
+container, but also a Minio container. Minio is a S3 compatible document store,
+which can be used for saving files.</p>
+<p>Some other docker commands provided by <code>@compas/cli</code>:</p>
+<pre><code class="language-shell"># Stop the running containers
+yarn compas docker down
+# Remove all created Docker containers and volumes
+yarn compas docker clean</code></pre>
+<h2 id="setup-compasstore">Setup @compas/store</h2>
+<p>The <code>@compas/store</code> packages provides a few abstractions over PostgreSQL and
+Minio:</p>
+<ul>
+<li>Schema migration runner</li>
+<li>Persistent file storage</li>
+<li>Cache files on local disk</li>
+<li>Job queue implementation, supporting priority, recurring jobs, scheduled jobs
+and multiple workers</li>
+<li>Session store compatible with the <code>session</code> middleware exported by
+<code>@compas/server</code>.</li>
+<li>Test databases for integration testing</li>
+</ul>
+<p>These features are mostly powered by a set of environment variables. Add the
+following to you <code>.env</code> file:</p>
+<pre><code class="language-dotenv">APP_NAME=compastodo
+# Postgres
+POSTGRES_HOST=localhost:5432
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+# Minio
+MINIO_URI=localhost
+MINIO_PORT=9000
+MINIO_ACCESS_KEY=minio
+MINIO_SECRET_KEY=minio123</code></pre>
+<p>Let&#39;s break it down a bit. <code>APP_NAME</code> is used in various places, but most
+importantly it is the default name for your database, file bucket and logs. Then
+we have some PostgreSQL connection configuration, kept as simple as possible,
+and the same for Minio.</p>
+<p>And lastly we need to install <code>@compas/store</code>:</p>
+<pre><code class="language-shell">yarn add @compas/store --exact</code></pre>
+<h2 id="connecting">Connecting</h2>
+<p>Now that we have everything setup, let&#39;s see if we can make a connection to
+PostgreSQL. Create a file at <code>scripts/database.js</code> with the following contents:</p>
+<pre><code class="language-js">import { mainFn } from &quot;@compas/stdlib&quot;;
+import { newPostgresConnection } from &quot;@compas/store&quot;;
+
+// Remember, mainFn reads our `.env` file automatically
+mainFn(import.meta, main);
+
+async function main(logger) {
+  const sql = await newPostgresConnection({
+    createIfNotExists: true, // Create a new database if `compastodo` is not found
+  });
+
+  logger.info({
+    result: await sql`SELECT 1 + 1 as &quot;sum&quot;`,
+  });
+
+  // Close the connection
+  await sql.end();
+}</code></pre>
+<p>This ties in various parts of your local environment. We don&#39;t have any tables
+yet in our database, so we execute a &#39; simple&#39; sum query and log the result. So
+let&#39;s run it:</p>
+<pre><code class="language-shell">yarn compas database
+# or
+node ./scripts/database.js</code></pre>
+<h2 id="services-and-testing">Services and testing</h2>
+<p>The database connection is most likely the best example where ES Module live
+bindings shine. By setting the connection as such, we can quickly swap out the
+database connection used in tests. Add the following to <code>src/services/core.js</code></p>
+<pre><code class="language-js">export let sql = undefined;
+
+export function setSql(connection) {
+  if (logger) {
+    logger.info(&quot;setting services-&gt;sql&quot;);
+  }
+  sql = connection;
+}</code></pre>
+<p>Now create a file for some logic at <code>src/todo/events.js</code> with the following:</p>
+<pre><code class="language-js">import { sql } from &quot;../services/core.js&quot;;
+
+/**
+ * Count all rows in &quot;myTable&quot;
+ * @returns {Promise&lt;number&gt;}
+ */
+export async function todoCount() {
+  const [result] = await sql`select COUNT(*) as sum from &quot;myTable&quot;`;
+
+  return result.sum;
+}</code></pre>
+<p>Notice that we don&#39;t have <code>myTable</code> yet, but we can still write a test for it.
+Create <code>src/todo/events.test.js</code> and add the following contents:</p>
+<pre><code class="language-js">import { test, mainTestFn } from &quot;@compas/cli&quot;;
+import {
+  createTestPostgresDatabase,
+  cleanupTestPostgresDatabase,
+} from &quot;@compas/store&quot;;
+import { sql, setSql } from &quot;../services/core.js&quot;;
+import { todoCount } from &quot;./events.js&quot;;
+
+test(&quot;todo/events&quot;, async (t) =&gt; {
+  t.test(&quot;setup&quot;, async () =&gt; {
+    // A sub test doesn&#39;t need to do any assertions
+    setSql(await createTestPostgresDatabase());
+
+    // Create `myTable`
+    await sql`CREATE TABLE &quot;myTable&quot; ( id SERIAL PRIMARY KEY );`;
+    // Insert some values
+    await sql`INSERT INTO &quot;myTable&quot; (&quot;id&quot;) VALUES (DEFAULT), (DEFAULT);`;
+  });
+
+  t.test(&quot;todoCount - return the correct number&quot;, async (t) =&gt; {
+    // This uses our test connection, created above.
+    const result = await todoCount();
+    t.equal(result, 2);
+  });
+
+  t.test(&quot;teardown&quot;, async () =&gt; {
+    // Cleans up the created database
+    await cleanupTestPostgresDatabase(sql);
+    // Make sure to reset the &#39;sql&#39; variable
+    setSql(undefined);
+  });
+});</code></pre>
+<p>For these cases <code>@compas/store</code> exports the function
+<code>createTestPostgresDatabase</code> and <code>cleanupTestPostgresDatabase</code>. This creates a
+structural copy of your database, truncating all tables and returns the
+connection.</p>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/setup/index.html">Project setup</a></nav>
+    </footer>
+    </body>
+</html>
+  

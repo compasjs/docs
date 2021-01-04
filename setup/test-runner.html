@@ -1,0 +1,148 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Writing tests</title>
+        <meta name="description" content="Setup Compas based test runner for ES Modules"/>
+        <link rel="canonical" href="https://pre.compasjs.com/setup/test-runner.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            code {background: white;}
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/setup/index.html">Project setup</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="writing-tests">Writing tests</h1>
+<p>A project setup needs a test runner of course. Compas comes with its own test
+runner loosely inspired by <a href="https://github.com/substack/tape">tape</a>. It comes
+with a few assertions, async testing, and the possibility of doing nesting test
+suites. <code>AssertionErrors</code> by using Node.js builtin
+<a href="https://nodejs.org/api/assert.html">assert</a> -module are handled as well.</p>
+<h2 id="basic-test-file">Basic test file</h2>
+<p>A basic test file looks like the following:</p>
+<pre><code class="language-js">import { test } from &quot;@compas/cli&quot;;
+
+test(&quot;my test&quot;, (t) =&gt; {
+  t.equal(1, 1);
+  t.ok(true);
+  t.notOk(false);
+  t.notEqual(&quot;foo&quot;, &quot;bar&quot;);
+  t.deepEqual([1, 2], [1, 2]);
+});</code></pre>
+<h2 id="running-tests">Running tests</h2>
+<p>There are two ways to run tests. The short way is to use <code>yarn compas test</code>
+which will run all test files in your project. There is also the option to run a
+test file directly like <code>node ./file.test.js</code> or
+<code>yarn compas run ./file.test.js</code>. However, to do this you need to add the
+following to your test file:</p>
+<pre><code class="language-js">import { mainTestFn } from &quot;@compas/cli&quot;;
+
+mainTestFn(import.meta);</code></pre>
+<p>It works based on <code>mainFn</code> as explained in
+<a href="/setup/project-setup.md">Project setup</a>.</p>
+<h2 id="setup-and-teardown-per-test-file">Setup and teardown per test file</h2>
+<p>Most test runners have a special global function that runs before or after all
+tests in a single file. This is often called <code>beforeAll</code> / <code>afterAll</code>. We don&#39;t
+need this in the compas provided test runner as all tests run in the order they
+are specified.</p>
+<pre><code class="language-js">import { test, mainTestFn } from &quot;@compas/cli&quot;;
+
+mainTestFn(import.meta);
+
+test(&quot;setup and teardown&quot;, (t) =&gt; {
+  let myTestGlobal = undefined;
+
+  // Every callback function can be async
+  t.test(&quot;setup&quot;, async () =&gt; {
+    myTestGlobal = 10;
+  });
+
+  t.test(&quot;my test global is there&quot;, (t) =&gt; {
+    t.equal(myTestGlobal, 10);
+  });
+
+  // In this example not necessary since myTestGlobal will
+  // be out of scope for all other code
+  t.test(&quot;teardown&quot;, (t) =&gt; {
+    myTestGlobal = undefined;
+    t.pass(&quot;successful teardown&quot;);
+  });
+});</code></pre>
+<h2 id="asserting-on-throws">Asserting on throws</h2>
+<p>Asserting on throws is another overlooked part of some test runners. This test
+runner does not provide any fancy util like <code>t.throws(functionThatThrows)</code>, but
+expects the user to use normal control flow like try / catch.</p>
+<pre><code class="language-js">const throws = async () =&gt; {
+  throw new Error(&quot;Oops!&quot;);
+};
+
+const doesNotThrow = () =&gt; {};
+
+test(&quot;Throws vs not throws&quot;, async (t) =&gt; {
+  try {
+    await throws();
+    t.fail(`The &#39;throws&#39; function should have thrown.`);
+  } catch (e) {
+    t.equal(e.message, &quot;Oops!&quot;);
+  }
+
+  try {
+    doesNotThrow();
+    t.pass(&quot;The function did not throw!&quot;);
+  } catch (e) {
+    t.fail(`The &#39;doesNotThrow&#39; function did throw.`);
+
+    // A logger from @compas/insight is available
+    t.log.error(e);
+  }
+});</code></pre>
+<h2 id="test-configuration">Test configuration</h2>
+<p>Test configuration is auto loaded from <code>{root}/test/config.js</code>. An example with
+the defaults is below:</p>
+<pre><code class="language-js">// Individual test timeout, i.e. the function provided to `test` and `t.test`
+export const timeout = 2500;
+
+export async function setup() {
+  // Global setup function
+}
+
+export async function teardown() {
+  // Global teardown function
+}</code></pre>
+<p>Timeout is also configurable for subtests via <code>t.timeout</code> like so:</p>
+<pre><code class="language-js">test(&quot;configurable timeout&quot;, (t) =&gt; {
+  t.timeout = 20;
+
+  t.test(&quot;race with the timeout&quot;, async (t) =&gt; {
+    try {
+      await new Promise((resolve) =&gt; {
+        // No exception happening here
+        setTimeout(() =&gt; {
+          resolve();
+        }, 5);
+      });
+      t.pass(&quot;subtest is faster than the parent timeout of 20 milliseconds&quot;);
+    } catch (e) {
+      t.fail(&quot;This should not trigger&quot;);
+      t.log.error(e);
+    }
+  });
+});</code></pre>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/setup/index.html">Project setup</a></nav>
+    </footer>
+    </body>
+</html>
+  

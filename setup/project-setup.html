@@ -1,0 +1,96 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Project setup</title>
+        <meta name="description" content="Setup Compas stdlib and get to know mainFn"/>
+        <link rel="canonical" href="https://pre.compasjs.com/setup/project-setup.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            code {background: white;}
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/setup/index.html">Project setup</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="project-setup">Project setup</h1>
+<p>This series of setup documents explains the setup used in Node.js &amp; Compas based
+backends.</p>
+<p>Let&#39;s start with creating a new project, in these docs <code>compas-todo</code>. Create a
+new directory and open a terminal in that directory. Compas projects use
+<a href="https://nodejs.org/dist/latest-v15.x/docs/api/esm.html#esm_introduction">ES modules</a>.
+This results in projects created on top of Compas, to also use ES modules.</p>
+<p>To enable this, make sure to use Node.js 14 or higher and create the following
+package.json file:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;compas-todo&quot;,
+  &quot;private&quot;: true,
+  &quot;type&quot;: &quot;module&quot;
+}</code></pre>
+<p>Another useful file to create now, is a <code>.env</code> file with the following contents:</p>
+<pre><code class="language-dotenv">NODE_ENV=development</code></pre>
+<p>This changes some defaults, for example pretty printing in the logger.</p>
+<h2 id="stdlib">Stdlib</h2>
+<p>A package provided by Compas is <code>@compas/stdlib</code>. This contains various small
+utility functions, like recursively looping over all files in a directory.</p>
+<blockquote>
+<p>All commands provided here use Yarn v1. However, using NPM (via the <code>npm</code> and
+<code>npx</code>) commands should work as well.</p>
+</blockquote>
+<p>Installing Compas packages works exactly like you would expect:</p>
+<pre><code class="language-shell">yarn add @compas/stdlib --exact</code></pre>
+<p>An often used utility provided by the stdlib is <code>mainFn</code>. This does a few
+things:</p>
+<ul>
+<li>Only runs if the file that you call <code>mainFn</code> in, is the &#39;main&#39; file</li>
+<li>Reads the <code>.env</code> file if exists</li>
+<li>Calls the provided callback, and handles uncaught exceptions.</li>
+<li>Create a logger from <a href="TODO">@compas/insight</a></li>
+</ul>
+<p>Let&#39;s create two files. Both exporting a constant and calling <code>mainFn</code>:</p>
+<pre><code class="language-js">// src/a.js
+import { mainFn } from &quot;@compas/stdlib&quot;;
+import { b } from &quot;./b.js&quot;;
+
+mainFn(import.meta, (logger) =&gt; logger.info(&quot;Hello from a.js. B is&quot;, b));
+
+export const a = true;
+
+// src/b.js
+import { mainFn } from &quot;@compas/stdlib&quot;;
+import { a } from &quot;./a.js&quot;;
+
+mainFn(import.meta, (logger) =&gt; logger.info(&quot;Hello from b.js. A is&quot;, a));
+
+export const b = false;</code></pre>
+<p>Now if we run <code>src/a.js</code>, we see the following:</p>
+<pre><code class="language-txt">$ node ./src/a.js
+Hello from a.js. B is false</code></pre>
+<p>When running <code>src/b.js</code>:</p>
+<pre><code class="language-txt">$ node ./src/b.js
+Hello from b.js. A is true</code></pre>
+<p>As you can see in the output, only a single callback passed to <code>mainFn</code> is
+called. This callback in <code>src/a.js</code> only being called when it is the starting
+point of your program, ie started via <code>node ./src/a.js</code>. Consequently, the
+callback passed in <code>src/b.js</code> is only called when you start your program with
+<code>node ./src/b.js</code>.</p>
+<p>Congrats! Your first Compas based project is alive :) The next steps cover a few
+other essentials like linting, testing, setting up an HTTP server, connecting to
+Postgres and finalizes with setting up the code generators.</p>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://pre.compasjs.com/index.html">Compas</a> > <a href="https://pre.compasjs.com/setup/index.html">Project setup</a></nav>
+    </footer>
+    </body>
+</html>
+  

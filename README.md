@@ -1,3 +1,0 @@
-# Compas
-
-Unified backend tooling
