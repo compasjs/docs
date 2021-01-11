@@ -24,6 +24,57 @@
     <main>
     <article>
         <h1 id="changelog">CHANGELOG</h1>
+<h3 id="v00109"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.109">v0.0.109</a></h3>
+<ul>
+<li>build(deps-dev): bump react-query from 3.5.11 to 3.5.12
+(<a href="https://github.com/compasjs/compas/pull/608">#608</a>)</li>
+<li>chore: fix linting on CI</li>
+<li>chore: various code-gen OpenAPI fixes + bench using Github API spec
+(<a href="https://github.com/compasjs/compas/pull/609">#609</a>)</li>
+<li>cli: harden test runner by waiting till all results are collected from the
+workers</li>
+<li>code-gen: add support for idempotent routes
+(<a href="https://github.com/compasjs/compas/pull/607">#607</a>)</li>
+<li>store: format caught job queue errors</li>
+<li>bench: create benchmark against the Github v3 API</li>
+<li>code-gen: transform named types in the OpenAPI importer</li>
+<li>code-gen: support default and optional path and query params in openAPI
+converter</li>
+<li>code-gen: deep copy validation result on App extend</li>
+</ul>
+<h3 id="v00108"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.108">v0.0.108</a></h3>
+<ul>
+<li>build(deps): bump @types/minio from 7.0.6 to 7.0.7
+(<a href="https://github.com/compasjs/compas/pull/596">#596</a>)</li>
+<li>build(deps): bump @types/node from 14.14.19 to 14.14.20
+(<a href="https://github.com/compasjs/compas/pull/584">#584</a>)</li>
+<li>build(deps): bump chokidar from 3.4.3 to 3.5.0
+(<a href="https://github.com/compasjs/compas/pull/594">#594</a>)</li>
+<li>build(deps): bump koa from 2.13.0 to 2.13.1
+(<a href="https://github.com/compasjs/compas/pull/585">#585</a>)</li>
+<li>build(deps-dev): bump react-query from 3.5.9 to 3.5.11
+(<a href="https://github.com/compasjs/compas/pull/592">#592</a>,
+<a href="https://github.com/compasjs/compas/pull/586">#586</a>)</li>
+<li>chore: fix changelog for v0.0.107</li>
+<li>chore: verify oneToOneReverse sql builder</li>
+<li>cli: add verbose option to proxy
+(<a href="https://github.com/compasjs/compas/pull/587">#587</a>)</li>
+<li>cli: bump dependencies for template</li>
+<li>code-gen: add support for sql ILIKE
+(<a href="https://github.com/compasjs/compas/pull/599">#599</a>)</li>
+<li>code-gen: allow custom shortName and detect duplicate short names
+(<a href="https://github.com/compasjs/compas/pull/602">#602</a>)</li>
+<li>code-gen: fix loading of patterns via OpenAPI spec
+(<a href="https://github.com/compasjs/compas/pull/601">#601</a>)</li>
+<li>code-gen: generated router should work without events on the context
+(<a href="https://github.com/compasjs/compas/pull/591">#591</a>)</li>
+<li>server: add option to logger to disable event creation and logging
+(<a href="https://github.com/compasjs/compas/pull/590">#590</a>)</li>
+<li>store: prioritize priority over scheduled at in JobWorker
+(<a href="https://github.com/compasjs/compas/pull/600">#600</a>)</li>
+<li>store: remove duplicate recurring jobs when recurring job is registered</li>
+<li>store: use different internal function for minio listObjects</li>
+</ul>
 <h3 id="v00107"><a href="https://github.com/compasjs/compas/releases/tag/v0.0.107">v0.0.107</a></h3>
 <ul>
 <li>build(deps): bump @types/node from 14.14.16 to 14.14.19
