@@ -8,6 +8,57 @@ order: 2
 
 # CHANGELOG
 
+### [v0.0.109](https://github.com/compasjs/compas/releases/tag/v0.0.109)
+
+- build(deps-dev): bump react-query from 3.5.11 to 3.5.12
+  ([#608](https://github.com/compasjs/compas/pull/608))
+- chore: fix linting on CI
+- chore: various code-gen OpenAPI fixes + bench using Github API spec
+  ([#609](https://github.com/compasjs/compas/pull/609))
+- cli: harden test runner by waiting till all results are collected from the
+  workers
+- code-gen: add support for idempotent routes
+  ([#607](https://github.com/compasjs/compas/pull/607))
+- store: format caught job queue errors
+- bench: create benchmark against the Github v3 API
+- code-gen: transform named types in the OpenAPI importer
+- code-gen: support default and optional path and query params in openAPI
+  converter
+- code-gen: deep copy validation result on App extend
+
+### [v0.0.108](https://github.com/compasjs/compas/releases/tag/v0.0.108)
+
+- build(deps): bump @types/minio from 7.0.6 to 7.0.7
+  ([#596](https://github.com/compasjs/compas/pull/596))
+- build(deps): bump @types/node from 14.14.19 to 14.14.20
+  ([#584](https://github.com/compasjs/compas/pull/584))
+- build(deps): bump chokidar from 3.4.3 to 3.5.0
+  ([#594](https://github.com/compasjs/compas/pull/594))
+- build(deps): bump koa from 2.13.0 to 2.13.1
+  ([#585](https://github.com/compasjs/compas/pull/585))
+- build(deps-dev): bump react-query from 3.5.9 to 3.5.11
+  ([#592](https://github.com/compasjs/compas/pull/592),
+  [#586](https://github.com/compasjs/compas/pull/586))
+- chore: fix changelog for v0.0.107
+- chore: verify oneToOneReverse sql builder
+- cli: add verbose option to proxy
+  ([#587](https://github.com/compasjs/compas/pull/587))
+- cli: bump dependencies for template
+- code-gen: add support for sql ILIKE
+  ([#599](https://github.com/compasjs/compas/pull/599))
+- code-gen: allow custom shortName and detect duplicate short names
+  ([#602](https://github.com/compasjs/compas/pull/602))
+- code-gen: fix loading of patterns via OpenAPI spec
+  ([#601](https://github.com/compasjs/compas/pull/601))
+- code-gen: generated router should work without events on the context
+  ([#591](https://github.com/compasjs/compas/pull/591))
+- server: add option to logger to disable event creation and logging
+  ([#590](https://github.com/compasjs/compas/pull/590))
+- store: prioritize priority over scheduled at in JobWorker
+  ([#600](https://github.com/compasjs/compas/pull/600))
+- store: remove duplicate recurring jobs when recurring job is registered
+- store: use different internal function for minio listObjects
+
 ### [v0.0.107](https://github.com/compasjs/compas/releases/tag/v0.0.107)
 
 - build(deps): bump @types/node from 14.14.16 to 14.14.19
