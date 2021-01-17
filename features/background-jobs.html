@@ -24,7 +24,183 @@
     <main>
     <article>
         <h1 id="background-jobs">Background jobs</h1>
+<p>Compas comes with a background job system backed by Postgres. Jobs may be
+scheduled, have a priority and can be recurring.</p>
 <h2 id="api">API</h2>
+<p>Provided by <code>@compas/store</code>.</p>
+<h3 id="jobqueueworker">JobQueueWorker</h3>
+<p>A class representing a worker. By default a JobQueueWorker handles all jobs,
+however it is possible to have a specific worker for jobs with specific names.</p>
+<p><strong>constructor()</strong>:</p>
+<p>Create a new JobQueueWorker instance.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>sql</code>: A Postgres connection. The connection should not be in a transaction
+already.</li>
+<li><code>name</code> (string): Optional name that this JobQueueWorker will filter the jobs
+on. If not necessary, argument can be skipped.</li>
+<li><code>options</code>:<ul>
+<li><code>pollInterval</code> (number): Interval in milliseconds that the worker should
+look for new jobs. Is only used if no job is found directly after completing
+a job. Defaults to 1500 milliseconds</li>
+<li><code>parallelCount</code> (number): The number of parallel jobs to take on. This
+number should not be higher than the amount of connections your sql instance
+may create. Defaults to 1.</li>
+<li><code>handler</code> (function): The callback that is called on new jobs. If a job
+throws, the job is not marked as complete and retried most likely
+immediately. The handler is called with the following parameters:<ul>
+<li><code>sql</code>: A Postgres connection already in transaction. If the transaction is
+aborted, the job is not marked complete.</li>
+<li><code>job</code>: The job, containing <code>name</code>, <code>data</code>, <code>priority</code>, <code>scheduledAt</code> and
+<code>createdAt</code> properties.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Returns a new <code>JobQueueWorker</code> instance that is not started yet.</p>
+<p><strong>start()</strong>:</p>
+<p>Starts the worker if not already started. Returns synchronously.</p>
+<p><strong>stop</strong>:</p>
+<p>Stops the worker if not already stopped. Already running jobs will finish, but
+no new jobs will be picked up. Returns synchronously.</p>
+<p><strong>pendingQueueSize()</strong>:</p>
+<p>Get the amount of pending jobs left. If <code>name</code> is passed in the constructor,
+only pending jobs with the specified name will be returned.</p>
+<p>Returns a promise that fulfills with an object.</p>
+<ul>
+<li><code>pendingCount</code>: The amount of jobs to be done in the future</li>
+<li><code>scheduledCount</code>: The amount of jobs that is waiting on an available worker
+now.</li>
+</ul>
+<p><strong>averageTimeToCompletion()</strong>:</p>
+<p>Get the average time to job completion between the specified start and end
+dates. If <code>name</code> is passed in the constructor, only jobs with the specified name
+will calculated.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>startDate</code> (Date): Date to filter jobs that completed after the specified
+timestamp.</li>
+<li><code>endDate</code> (Date): Date to filter jobs that completed before the specified
+timestamp.</li>
+</ul>
+<p>Returns a promise that fulfills with a number.</p>
+<p><strong>Example</strong></p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { JobQueueWorker } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/store&quot;</span>;
+
+mainFn(<span class="hljs-keyword">import</span>.meta, main);
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params">logger</span>) </span>{
+  <span class="hljs-keyword">const</span> handler = <span class="hljs-function">(<span class="hljs-params">sql, { name, data }</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (name === <span class="hljs-string">&quot;myImportantJob&quot;</span>) {
+      logger.info(data);
+    } <span class="hljs-keyword">else</span> {
+      logger.error({
+        <span class="hljs-attr">message</span>: <span class="hljs-string">&quot;Unhandled job&quot;</span>,
+        name,
+      });
+    }
+  };
+
+  <span class="hljs-keyword">const</span> worker = <span class="hljs-keyword">new</span> JobQueueWorker(sql, {
+    handler,
+    <span class="hljs-attr">parallelCount</span>: <span class="hljs-number">2</span>,
+  });
+
+  worker.start();
+  <span class="hljs-keyword">const</span> startDate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
+  <span class="hljs-keyword">const</span> endDate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
+
+  <span class="hljs-comment">// Set startDate 3 days in the past</span>
+  startDate.setUTCDate(startDate.getUTCDate() - <span class="hljs-number">3</span>);
+
+  logger.info({
+    <span class="hljs-attr">pendingQueueSize</span>: <span class="hljs-keyword">await</span> worker.pendingQueueSize(),
+    <span class="hljs-attr">averageTimeToCompletion</span>: <span class="hljs-keyword">await</span> worker.averageTimeToCompletion(
+      startDate,
+      endDate,
+    ),
+  });
+  worker.stop();
+}</code></pre>
+<h3 id="addjobtoqueue">addJobToQueue</h3>
+<p>Inserts a new job in to the queue. This job can be completely empty and will
+then default to an immediate job with the highest priority.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>sql</code>: A Postgres connection, used to insert the job.</li>
+<li><code>job</code>:<ul>
+<li><code>name</code> (string): A job name, which would be used for dispatching the job in
+a generic JobQueueWorker, or can be filtered on in a specific JobQueueWorker
+instance</li>
+<li><code>scheduledAt</code> (Date): When this job should be executed, defaults to now</li>
+<li><code>priority</code> (number): Priority of this job. A higher number results in a
+lower priority. Defaults to <code>1</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Returns a promise that is fulfilled with the <code>id</code> of the created job.</p>
+<p>Examples:</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { addJobToQueue } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/store&quot;</span>;
+
+<span class="hljs-keyword">await</span> addJobToQueue(sql, {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;myJob&quot;</span>,
+});
+<span class="hljs-keyword">await</span> addJobToQueue(sql, {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;unimportantJob&quot;</span>,
+  <span class="hljs-attr">priority</span>: <span class="hljs-number">10</span>,
+});
+<span class="hljs-keyword">await</span> addJobToQueue(sql, {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;jobWithPayload&quot;</span>,
+  <span class="hljs-attr">data</span>: {
+    <span class="hljs-attr">my</span>: <span class="hljs-string">&quot;payload&quot;</span>,
+  },
+});</code></pre>
+<h3 id="addrecurringjobtoqueue">addRecurringJobToQueue</h3>
+<p>Wraps the passed in job specification in a built-in recurring job. The built-in
+recurring job handles rescheduling of the job. When a recurring job is already
+scheduled with the same name, all parameters are overwritten. The reschedule
+mechanism will try to reschedule based on the previous <code>scheduledAt</code>. If the
+newly calculated date is in the past, the calculation will happen with the
+current timestamp.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>sql</code>: A postgres connection, used to insert or upsert the job</li>
+<li><code>options</code>:<ul>
+<li><code>name</code> (string): The job name, dispatched via the normal job handler</li>
+<li><code>priority</code> (number): Priority that the scheduler should get, the scheduled
+job is always on a lower priority. Defaults to <code>1</code></li>
+<li><code>interval</code> (object): Interval specification. At least a single key should
+exist.<ul>
+<li>years</li>
+<li>months</li>
+<li>days</li>
+<li>hours</li>
+<li>minutes</li>
+<li>seconds</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Returns a promise that is fulfilled once the insert or update has happened</p>
+<p>Examples:</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { addRecurringJobToQueue } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/store&quot;</span>;
+
+<span class="hljs-keyword">await</span> addRecurringJobToQueue(sql, {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;recurringJob&quot;</span>,
+  <span class="hljs-attr">interval</span>: {
+    <span class="hljs-attr">hours</span>: <span class="hljs-number">1</span>,
+  },
+});
+<span class="hljs-comment">// Oops, override priority. This job is not important</span>
+<span class="hljs-keyword">await</span> addRecurringJobToQueue(sql, {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;recurringJob&quot;</span>,
+  <span class="hljs-attr">priority</span>: <span class="hljs-number">5</span>,
+  <span class="hljs-attr">interval</span>: {
+    <span class="hljs-attr">hours</span>: <span class="hljs-number">1</span>,
+  },
+});</code></pre>
 
     </article>
     
