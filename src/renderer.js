@@ -107,7 +107,13 @@ async function renderIndexNavigation(event, cname, structure, page) {
       annotateItemWithContents(newEventFromEvent(event), it),
     ),
   );
-  sortContentItemArray(navigationList);
+
+  try {
+    sortContentItemArray(navigationList);
+  } catch (e) {
+    e.info.page = page.metadata;
+    throw e;
+  }
 
   if (navigationList.length === 0) {
     return "";
