@@ -6,16 +6,16 @@
   "scripts": {},
   "dependencies": {},
   "devDependencies": {
-    "@compas/cli": "0.0.111",
-    "@compas/code-gen": "0.0.111",
-    "@compas/insight": "0.0.111",
-    "@compas/lint-config": "0.0.111",
-    "@compas/server": "0.0.111",
-    "@compas/stdlib": "0.0.111",
-    "@compas/store": "0.0.110",
+    "@compas/cli": "0.0.112",
+    "@compas/code-gen": "0.0.112",
+    "@compas/insight": "0.0.112",
+    "@compas/lint-config": "0.0.112",
+    "@compas/server": "0.0.112",
+    "@compas/stdlib": "0.0.112",
+    "@compas/store": "0.0.112",
     "front-matter": "4.0.2",
     "highlight.js": "10.5.0",
-    "marked": "1.2.7"
+    "marked": "1.2.8"
   },
   "engines": {
     "node": ">=15"
