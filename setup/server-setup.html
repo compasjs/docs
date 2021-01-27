@@ -38,21 +38,25 @@ mainFn(<span class="hljs-keyword">import</span>.meta, main);
   <span class="hljs-keyword">const</span> app = getApp({});
 
   app.listen(<span class="hljs-number">3000</span>);
-}</code></pre>
+}
+</code></pre>
 <p>When we run this file we can already check out some default features.</p>
 <pre><code class="language-shell">yarn compas api
 <span class="hljs-meta">#</span><span class="bash"> Or</span>
-node ./scripts/api.js</code></pre>
+node ./scripts/api.js
+</code></pre>
 <p>We are going to do some GET requests, you can use your browser or another HTTP
 client, like <a href="https://httpie.io/">httpie</a> .</p>
 <ol>
 <li>Check if the server is running</li>
 </ol>
-<pre><code class="language-shell">http GET http://localhost:3000/_health</code></pre>
+<pre><code class="language-shell">http GET http://localhost:3000/_health
+</code></pre>
 <ol start="2">
 <li>404 handling</li>
 </ol>
-<pre><code class="language-shell">http GET http://localhost:3000/oops</code></pre>
+<pre><code class="language-shell">http GET http://localhost:3000/oops
+</code></pre>
 <ol start="3">
 <li>Logging</li>
 </ol>
@@ -107,7 +111,8 @@ setup, like our Koa app.</p>
     logger.info(<span class="hljs-string">&quot;setting services-&gt;app&quot;</span>);
   }
   app = newApp;
-}</code></pre>
+}
+</code></pre>
 <p>And changing your <code>scripts/api.js</code> to the following:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { getApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/server&quot;</span>;
 <span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
@@ -121,7 +126,8 @@ mainFn(<span class="hljs-keyword">import</span>.meta, main);
   setApp(getApp({}));
 
   app.listen(<span class="hljs-number">3000</span>);
-}</code></pre>
+}
+</code></pre>
 
     </article>
     

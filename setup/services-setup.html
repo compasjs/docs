@@ -39,13 +39,15 @@ variable and in the same file replace it. Let&#39;s look at an example.</p>
 
 <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setCounter</span>(<span class="hljs-params">newValue</span>) </span>{
   counter = newValue;
-}</code></pre>
+}
+</code></pre>
 <p>Then using it would look like the following:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { counter, setCounter } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./serverices/counter.js&quot;</span>;
 
 <span class="hljs-built_in">console</span>.log(counter); <span class="hljs-comment">// undefined</span>
 setCounter(<span class="hljs-number">5</span>);
-<span class="hljs-built_in">console</span>.log(counter); <span class="hljs-comment">// 5</span></code></pre>
+<span class="hljs-built_in">console</span>.log(counter); <span class="hljs-comment">// 5</span>
+</code></pre>
 <p>As you can see, code can use the imported variable directly when doing read
 operations. When exporting a &#39; setXx&#39;-function, you can replace the variable
 anytime; when your application is starting up, or replacing it with a mock when

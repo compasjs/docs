@@ -85,7 +85,8 @@ mainFn(<span class="hljs-keyword">import</span>.meta, main);
   <span class="hljs-keyword">await</span> runMigrations(mc);
 
   <span class="hljs-keyword">await</span> sql.end();
-}</code></pre>
+}
+</code></pre>
 <h3 id="general-notes">General notes</h3>
 <p>To calculate if a repeatable migration needs to run again, a sha1 is calculated
 and stored in the database.</p>
@@ -96,7 +97,8 @@ B
 // node_modules/B/migrations/namespaces.txt
 C
 // node_modules/C/migrations/namespaces.txt
-A</code></pre>
+A
+</code></pre>
 <p>The migration order is dependent on the following:</p>
 <ul>
 <li>An <code>import</code>-ed namespace will run first</li>
@@ -190,7 +192,8 @@ supports the following:</p>
   start.setDate(start.getDate() - <span class="hljs-number">1</span>);
   <span class="hljs-keyword">const</span> end = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
   <span class="hljs-keyword">const</span> average = <span class="hljs-keyword">await</span> queueWorker.averageTimeToCompletion(start, end);
-}</code></pre>
+}
+</code></pre>
 <h2 id="code-gen-and-structure">Code-gen and structure</h2>
 <p>To reference to any of the postgres tables, or use any of the provided types,
 this package exports its structure used for code generation with
@@ -202,7 +205,8 @@ this package exports its structure used for code generation with
 app.extend(storeStructure);
 
 <span class="hljs-comment">// Use group &quot;store&quot; if you want all of it,</span>
-<span class="hljs-comment">// Else use references like `T.reference(&quot;store&quot;, &quot;file)` so the generator will only include that type.</span></code></pre>
+<span class="hljs-comment">// Else use references like `T.reference(&quot;store&quot;, &quot;file)` so the generator will only include that type.</span>
+</code></pre>
 
     </article>
     

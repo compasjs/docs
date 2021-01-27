@@ -74,7 +74,8 @@ can be archived with something like the following in <code>src/generated.js</cod
  */</span>
 <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setStoreQueries</span>(<span class="hljs-params">q</span>) </span>{
   queries = q;
-}</code></pre>
+}
+</code></pre>
 <p>This way the package can still do cascading soft deletes across user code if
 necessary. The package should then use
 <code>import { queries } from &quot;./generated.js&quot;;</code> instead of
@@ -180,7 +181,8 @@ supports to be called like the following:</p>
 <span class="hljs-keyword">const</span> myQuery = query<span class="hljs-string">`SELECT <span class="hljs-subst">${fileFields()}</span> FROM &quot;file&quot; f WHERE f.&quot;bucketName&quot; = <span class="hljs-subst">${bucketName}</span>`</span>;
 myQuery.append(query<span class="hljs-string">`ORDER BY <span class="hljs-subst">${fileOrderBy()}</span>`</span>);
 
-<span class="hljs-keyword">const</span> queryResult = <span class="hljs-keyword">await</span> myQuery.exec(sql);</code></pre>
+<span class="hljs-keyword">const</span> queryResult = <span class="hljs-keyword">await</span> myQuery.exec(sql);
+</code></pre>
 <p>The <code>query</code> function is used by all newly generated queries, and allows
 injection safe query building. It also supports providing another <code>QueryPart</code> as
 an injected value as well as <code>.append</code>-ing one.</p>
@@ -225,7 +227,8 @@ app.add(
       <span class="hljs-comment">// Or another structure with different meta data</span>
     },
   ),
-);</code></pre>
+);
+</code></pre>
 <p>When migrating from existing implementations of grouping, it is advisable to
 change all relations to point to <code>T.reference(&quot;store&quot;, &quot;file&quot;)</code> and places that
 need a group to <code>T.reference(&quot;store&quot;, &quot;fileGroup&quot;)</code>.</p>

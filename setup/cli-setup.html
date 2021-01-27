@@ -30,7 +30,8 @@
 <li>Running the linter via <code>@compas/cli</code></li>
 </ul>
 <p>Start with installing the dependencies:</p>
-<pre><code class="language-shell">yarn add @compas/lint-config @compas/cli --exact --dev</code></pre>
+<pre><code class="language-shell">yarn add @compas/lint-config @compas/cli --exact --dev
+</code></pre>
 <h2 id="configuration">Configuration</h2>
 <p>The <code>@compas/lint-config</code> package provides a Prettier config and ESLint
 configuration. To get the configuration in your project, create the following
@@ -41,15 +42,18 @@ three files:</p>
 <span class="hljs-built_in">module</span>.exports = {
   <span class="hljs-attr">extends</span>: [<span class="hljs-string">&quot;./node_modules/@compas/lint-config&quot;</span>],
   <span class="hljs-attr">root</span>: <span class="hljs-literal">true</span>,
-};</code></pre>
+};
+</code></pre>
 <p><strong>/.prettierrc.cjs</strong></p>
 <pre><code class="language-js"><span class="hljs-comment">/* eslint-disable import/no-commonjs */</span>
 
 <span class="hljs-built_in">module</span>.exports = {
   ...require(<span class="hljs-string">&quot;@compas/lint-config/prettierrc.js&quot;</span>),
-};</code></pre>
+};
+</code></pre>
 <p><strong>/.prettierignore</strong></p>
-<pre><code class="language-ignorelang">coverage/**</code></pre>
+<pre><code class="language-ignorelang">coverage/**
+</code></pre>
 <p>This way you should be able to easily override any configuration if necessary.
 By following the respective guides / configuration options:</p>
 <ul>
@@ -63,7 +67,8 @@ By following the respective guides / configuration options:</p>
 anything yet. This is where <code>@compas/cli</code> comes in. This package also has a
 range of features, but for now we focus on two of them. Let&#39;s start with running
 the linters:</p>
-<pre><code class="language-shell">yarn compas lint</code></pre>
+<pre><code class="language-shell">yarn compas lint
+</code></pre>
 <blockquote>
 <p>When using NPM use <code>npx compas lint</code></p>
 </blockquote>
@@ -74,7 +79,8 @@ mode. This way it will only report errors and not run the auto fixer. This can
 be enabled by setting <code>CI=true</code>:</p>
 <pre><code class="language-shell">export CI=true
 yarn compas lint
-unset CI</code></pre>
+unset CI
+</code></pre>
 <p>This environment variable is also document in <a href="TODO">Environment variables</a></p>
 <h2 id="running-scripts">Running scripts</h2>
 <p>The <code>@compas/cli</code> package also comes with more features. Some of these will be
@@ -83,7 +89,8 @@ script runner.</p>
 <p>The script runner at its base starts your scripts the same way as you would with
 Node.js.</p>
 <pre><code class="language-shell">yarn compas ./src/a.js
-<span class="hljs-meta">#</span><span class="bash"> Is the same as `node ./src/a.js`</span></code></pre>
+<span class="hljs-meta">#</span><span class="bash"> Is the same as `node ./src/a.js`</span>
+</code></pre>
 <p>However, it can also run named scripts. It will look for scripts defined in your
 <code>package.json</code> and in the <code>scripts</code> directory at the root of your project.
 Create a file in <code>scripts/hello.js</code> with the following contents:</p>
@@ -93,17 +100,20 @@ mainFn(<span class="hljs-keyword">import</span>.meta, main);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params">logger</span>) </span>{
   logger.info(<span class="hljs-string">&quot;Hello!&quot;</span>);
-}</code></pre>
+}
+</code></pre>
 <p>When running <code>yarn compas help</code> it should list <code>hello</code> under the available
 script names. Let&#39;s run it:</p>
 <pre><code class="language-shell">yarn compas hello
 <span class="hljs-meta">#</span><span class="bash"> Is the same as</span>
-yarn compas run hello</code></pre>
+yarn compas run hello
+</code></pre>
 <p>As you may have seen in the output from <code>yarn compas help</code>, there is also a
 <code>--watch</code> flag. This flag can be used when specifying a path, but also when
 running a &#39;named&#39; script.</p>
 <p>Let&#39;s start our <code>hello</code> script in watch-mode:</p>
-<pre><code class="language-shell">yarn compas --watch hello</code></pre>
+<pre><code class="language-shell">yarn compas --watch hello
+</code></pre>
 <p>Now when making any changes to the log line and saving, you should see the
 script being restarted. If you just want to restart, type in <code>rs</code> and press
 enter in your terminal. By default, all your JavaScript files are watched. This

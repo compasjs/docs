@@ -122,7 +122,8 @@ mainFn(<span class="hljs-keyword">import</span>.meta, main);
     ),
   });
   worker.stop();
-}</code></pre>
+}
+</code></pre>
 <h3 id="addjobtoqueue">addJobToQueue</h3>
 <p>Inserts a new job in to the queue. This job can be completely empty and will
 then default to an immediate job with the highest priority.</p>
@@ -155,7 +156,8 @@ lower priority. Defaults to <code>1</code>.</li>
   <span class="hljs-attr">data</span>: {
     <span class="hljs-attr">my</span>: <span class="hljs-string">&quot;payload&quot;</span>,
   },
-});</code></pre>
+});
+</code></pre>
 <h3 id="addrecurringjobtoqueue">addRecurringJobToQueue</h3>
 <p>Wraps the passed in job specification in a built-in recurring job. The built-in
 recurring job handles rescheduling of the job. When a recurring job is already
@@ -200,7 +202,8 @@ exist.<ul>
   <span class="hljs-attr">interval</span>: {
     <span class="hljs-attr">hours</span>: <span class="hljs-number">1</span>,
   },
-});</code></pre>
+});
+</code></pre>
 
     </article>
     

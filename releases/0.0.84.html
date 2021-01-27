@@ -55,7 +55,8 @@ app.add(
 
 storeStructure.store.file.relations.push(
   T.oneToMany(<span class="hljs-string">&quot;entities&quot;</span>, T.reference(<span class="hljs-string">&quot;app&quot;</span>, <span class="hljs-string">&quot;myEntity&quot;</span>)),
-);</code></pre>
+);
+</code></pre>
 <p>While the new variant looks a bit cleaner:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { App, TypeCreator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@lbu/code-gen&quot;</span>;
 
@@ -71,7 +72,8 @@ app.add(
 app.addRelations(
   T.reference(<span class="hljs-string">&quot;store&quot;</span>, <span class="hljs-string">&quot;file&quot;</span>),
   T.oneToMany(<span class="hljs-string">&quot;entities&quot;</span>, T.reference(<span class="hljs-string">&quot;app&quot;</span>, <span class="hljs-string">&quot;myEntity&quot;</span>)),
-);</code></pre>
+);
+</code></pre>
 <h3 id="server">Server</h3>
 <p>We don&#39;t log the event call stack anymore for &#39;OPTIONS&#39; requests. This is done
 to keep the logs a bit cleaner.</p>

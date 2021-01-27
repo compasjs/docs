@@ -39,7 +39,8 @@ test(<span class="hljs-string">&quot;my test&quot;</span>, <span class="hljs-fun
   t.notOk(<span class="hljs-literal">false</span>);
   t.notEqual(<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>);
   t.deepEqual([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]);
-});</code></pre>
+});
+</code></pre>
 <h2 id="running-tests">Running tests</h2>
 <p>There are two ways to run tests. The short way is to use <code>yarn compas test</code>
 which will run all test files in your project. There is also the option to run a
@@ -48,7 +49,8 @@ test file directly like <code>node ./file.test.js</code> or
 following to your test file:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { mainTestFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/cli&quot;</span>;
 
-mainTestFn(<span class="hljs-keyword">import</span>.meta);</code></pre>
+mainTestFn(<span class="hljs-keyword">import</span>.meta);
+</code></pre>
 <p>It works based on <code>mainFn</code> as explained in
 <a href="/setup/project-setup.md">Project setup</a>.</p>
 <h2 id="setup-and-teardown-per-test-file">Setup and teardown per test file</h2>
@@ -78,7 +80,8 @@ test(<span class="hljs-string">&quot;setup and teardown&quot;</span>, <span clas
     myTestGlobal = <span class="hljs-literal">undefined</span>;
     t.pass(<span class="hljs-string">&quot;successful teardown&quot;</span>);
   });
-});</code></pre>
+});
+</code></pre>
 <h2 id="asserting-on-throws">Asserting on throws</h2>
 <p>Asserting on throws is another overlooked part of some test runners. This test
 runner does not provide any fancy util like <code>t.throws(functionThatThrows)</code>, but
@@ -106,7 +109,8 @@ test(<span class="hljs-string">&quot;Throws vs not throws&quot;</span>, <span cl
     <span class="hljs-comment">// A logger from @compas/insight is available</span>
     t.log.error(e);
   }
-});</code></pre>
+});
+</code></pre>
 <h2 id="test-configuration">Test configuration</h2>
 <p>Test configuration is auto loaded from <code>{root}/test/config.js</code>. An example with
 the defaults is below:</p>
@@ -119,7 +123,8 @@ the defaults is below:</p>
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">teardown</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-comment">// Global teardown function</span>
-}</code></pre>
+}
+</code></pre>
 <p>Timeout is also configurable for subtests via <code>t.timeout</code> like so:</p>
 <pre><code class="language-js">test(<span class="hljs-string">&quot;configurable timeout&quot;</span>, <span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> {
   t.timeout = <span class="hljs-number">20</span>;
@@ -138,7 +143,8 @@ the defaults is below:</p>
       t.log.error(e);
     }
   });
-});</code></pre>
+});
+</code></pre>
 
     </article>
     

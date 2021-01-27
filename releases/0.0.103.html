@@ -62,14 +62,16 @@ app.add(
     <span class="hljs-attr">javaScript</span>: <span class="hljs-string">&#x27;import { myValidator } from &quot;./dist/custom-validators.js&quot;;&#x27;</span>,
     <span class="hljs-attr">typeScript</span>: <span class="hljs-string">&#x27;import { myValidator } from &quot;./src/custom-validators.ts&quot;;&#x27;</span>,
   }),
-);</code></pre>
+);
+</code></pre>
 <pre><code class="language-ts"><span class="hljs-comment">// src/custom-validator.js</span>
 
 <span class="hljs-keyword">type</span> MyType = { <span class="hljs-attr">myType</span>: <span class="hljs-literal">true</span> };
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isMyType</span>(<span class="hljs-params">value</span>): <span class="hljs-title">value</span> <span class="hljs-title">is</span> <span class="hljs-title">MyType</span> </span>{
   <span class="hljs-keyword">return</span> value?.myType === <span class="hljs-literal">true</span>;
-}</code></pre>
+}
+</code></pre>
 <p>This way you can even reuse you custom validator as a TypeScript type-guard.</p>
 <h5 id="inline-validators">Inline validators</h5>
 <p>To improve performance and reduce call stacks, we introduce inline validators.
@@ -136,7 +138,8 @@ first any packages, then private services and then the final project that
 depends on these packages and services. Projects that only use the api client
 generators, should wait on the respective api&#39;s to update.</p>
 <p>The first thing is to clean up the current installation:</p>
-<pre><code class="language-shell">yarn lbu docker clean</code></pre>
+<pre><code class="language-shell">yarn lbu docker clean
+</code></pre>
 <p>This will remove the Docker containers and volumes created by LBU. Next install
 the new packages, by replacing <code>@lbu</code> with <code>@compas</code> and changing the versions
 to <code>0.0.103</code>. At this point it is a good time tho rename all your imports and
@@ -155,7 +158,8 @@ point is:</p>
   <span class="hljs-attr">isNode</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">dumpStructure</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">dumpPostgres</span>: <span class="hljs-literal">true</span>,
-};</code></pre>
+};
+</code></pre>
 <p>For projects already running in production (not advisable...), recurring jobs
 should be automatically upgraded. This will be removed in the next feature
 release. Migrations are a bit trickier and require a manual query:</p>
@@ -165,7 +169,8 @@ release. Migrations are a bit trickier and require a manual query:</p>
   namespace = <span class="hljs-string">&#x27;@compas/store&#x27;</span>
 <span class="hljs-keyword">WHERE</span>
   namespace = <span class="hljs-string">&#x27;@lbu/store&#x27;</span>;
-<span class="hljs-keyword">COMMIT</span>;</code></pre>
+<span class="hljs-keyword">COMMIT</span>;
+</code></pre>
 <p>Other than the breaking changes mentioned earlier in this doc, this should be
 it.</p>
 <h3 id="in-closing">In closing</h3>

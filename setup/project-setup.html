@@ -36,9 +36,11 @@ package.json file:</p>
   <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;compas-todo&quot;</span>,
   <span class="hljs-attr">&quot;private&quot;</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;module&quot;</span>
-}</code></pre>
+}
+</code></pre>
 <p>Another useful file to create now, is a <code>.env</code> file with the following contents:</p>
-<pre><code class="language-dotenv">NODE_ENV=development</code></pre>
+<pre><code class="language-dotenv">NODE_ENV=development
+</code></pre>
 <p>This changes some defaults, for example pretty printing in the logger.</p>
 <h2 id="stdlib">Stdlib</h2>
 <p>A package provided by Compas is <code>@compas/stdlib</code>. This contains various small
@@ -48,7 +50,8 @@ utility functions, like recursively looping over all files in a directory.</p>
 <code>npx</code>) commands should work as well.</p>
 </blockquote>
 <p>Installing Compas packages works exactly like you would expect:</p>
-<pre><code class="language-shell">yarn add @compas/stdlib --exact</code></pre>
+<pre><code class="language-shell">yarn add @compas/stdlib --exact
+</code></pre>
 <p>An often used utility provided by the stdlib is <code>mainFn</code>. This does a few
 things:</p>
 <ul>
@@ -72,13 +75,16 @@ mainFn(<span class="hljs-keyword">import</span>.meta, <span class="hljs-function
 
 mainFn(<span class="hljs-keyword">import</span>.meta, <span class="hljs-function">(<span class="hljs-params">logger</span>) =&gt;</span> logger.info(<span class="hljs-string">&quot;Hello from b.js. A is&quot;</span>, a));
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> b = <span class="hljs-literal">false</span>;</code></pre>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> b = <span class="hljs-literal">false</span>;
+</code></pre>
 <p>Now if we run <code>src/a.js</code>, we see the following:</p>
 <pre><code class="language-txt">$ node ./src/a.js
-Hello from a.js. B is false</code></pre>
+Hello from a.js. B is false
+</code></pre>
 <p>When running <code>src/b.js</code>:</p>
 <pre><code class="language-txt">$ node ./src/b.js
-Hello from b.js. A is true</code></pre>
+Hello from b.js. A is true
+</code></pre>
 <p>As you can see in the output, only a single callback passed to <code>mainFn</code> is
 called. This callback in <code>src/a.js</code> only being called when it is the starting
 point of your program, ie started via <code>node ./src/a.js</code>. Consequently, the

@@ -48,7 +48,8 @@ test(<span class="hljs-string">&quot;My test&quot;</span>, <span class="hljs-fun
     <span class="hljs-comment">// warning: called &#x27;t.ok&#x27; on parent &#x27;t&#x27;. Accept &#x27;t&#x27; as argument in the callback of &#x27;t.test(msg, callback)&#x27;.</span>
     t.ok(<span class="hljs-literal">true</span>);
   });
-});</code></pre>
+});
+</code></pre>
 <p>This caught a single usage in the lbu codebase
 <a href="https://github.com/compasjs/compas/blob/fba1ffe00a9f6dc43ed75c521f62eb9a9fb2c985/packages/stdlib/src/lodash.test.js#L112">here</a>
 .</p>
@@ -88,7 +89,8 @@ export const MyComponent = () =&gt; {
       &lt;img src={URL.createObjectURL(imageBlob)} /&gt;
     &lt;/div&gt;
   );
-};</code></pre>
+};
+</code></pre>
 <p>The other big thing is soft delete support in sql generation. This can be
 enabled by passing in <code>withSoftDeletes: true</code> in <code>enableQueries</code> calls. This
 takes over the old <code>withHistory</code>, and immediately removed support. Soft deletes
@@ -125,7 +127,8 @@ app.add(
 <span class="hljs-comment">// countWithDeleted === 1</span>
 
 <span class="hljs-comment">// Remove record completely</span>
-<span class="hljs-keyword">await</span> appQueries.myValueDeletePermanent(sql, { <span class="hljs-attr">id</span>: myValue.id });</code></pre>
+<span class="hljs-keyword">await</span> appQueries.myValueDeletePermanent(sql, { <span class="hljs-attr">id</span>: myValue.id });
+</code></pre>
 <p>Note that cascading soft deletes is not included in this release. The generated
 DDL, enabled by <code>app.generate({ ..., dumpPostgres: true })</code> does not yet
 interact with <code>withSoftDeletes</code>. For an example of how to use it manually see

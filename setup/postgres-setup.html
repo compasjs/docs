@@ -30,7 +30,8 @@ providing a PostgreSQL client and some utilities around setting up a database.</
 <p>First that we need to make sure we have a running PostgreSQL instance. Compas
 helps here, by managing a Docker based PostgreSQL server. Previously you have
 already installed <code>@compas/cli</code>, which contains the necessary commands.</p>
-<pre><code class="language-shell">yarn compas docker up</code></pre>
+<pre><code class="language-shell">yarn compas docker up
+</code></pre>
 <p>As you may have seen in the output, it does not only start a PostgreSQL
 container, but also a Minio container. Minio is a S3 compatible document store,
 which can be used for saving files.</p>
@@ -38,7 +39,8 @@ which can be used for saving files.</p>
 <pre><code class="language-shell"><span class="hljs-meta">#</span><span class="bash"> Stop the running containers</span>
 yarn compas docker down
 <span class="hljs-meta">#</span><span class="bash"> Remove all created Docker containers and volumes</span>
-yarn compas docker clean</code></pre>
+yarn compas docker clean
+</code></pre>
 <h2 id="setup-compasstore">Setup @compas/store</h2>
 <p>The <code>@compas/store</code> packages provides a few abstractions over PostgreSQL and
 Minio:</p>
@@ -63,13 +65,15 @@ POSTGRES_PASSWORD=postgres
 MINIO_URI=localhost
 MINIO_PORT=9000
 MINIO_ACCESS_KEY=minio
-MINIO_SECRET_KEY=minio123</code></pre>
+MINIO_SECRET_KEY=minio123
+</code></pre>
 <p>Let&#39;s break it down a bit. <code>APP_NAME</code> is used in various places, but most
 importantly it is the default name for your database, file bucket and logs. Then
 we have some PostgreSQL connection configuration, kept as simple as possible,
 and the same for Minio.</p>
 <p>And lastly we need to install <code>@compas/store</code>:</p>
-<pre><code class="language-shell">yarn add @compas/store --exact</code></pre>
+<pre><code class="language-shell">yarn add @compas/store --exact
+</code></pre>
 <h2 id="connecting">Connecting</h2>
 <p>Now that we have everything setup, let&#39;s see if we can make a connection to
 PostgreSQL. Create a file at <code>scripts/database.js</code> with the following contents:</p>
@@ -90,13 +94,15 @@ mainFn(<span class="hljs-keyword">import</span>.meta, main);
 
   <span class="hljs-comment">// Close the connection</span>
   <span class="hljs-keyword">await</span> sql.end();
-}</code></pre>
+}
+</code></pre>
 <p>This ties in various parts of your local environment. We don&#39;t have any tables
 yet in our database, so we execute a &#39; simple&#39; sum query and log the result. So
 let&#39;s run it:</p>
 <pre><code class="language-shell">yarn compas database
 <span class="hljs-meta">#</span><span class="bash"> or</span>
-node ./scripts/database.js</code></pre>
+node ./scripts/database.js
+</code></pre>
 <h2 id="services-and-testing">Services and testing</h2>
 <p>The database connection is most likely the best example where ES Module live
 bindings shine. By setting the connection as such, we can quickly swap out the
@@ -108,7 +114,8 @@ database connection used in tests. Add the following to <code>src/services/core.
     logger.info(<span class="hljs-string">&quot;setting services-&gt;sql&quot;</span>);
   }
   sql = connection;
-}</code></pre>
+}
+</code></pre>
 <p>Now create a file for some logic at <code>src/todo/events.js</code> with the following:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { sql } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../services/core.js&quot;</span>;
 
@@ -120,7 +127,8 @@ database connection used in tests. Add the following to <code>src/services/core.
   <span class="hljs-keyword">const</span> [result] = <span class="hljs-keyword">await</span> sql<span class="hljs-string">`select COUNT(*) as sum from &quot;myTable&quot;`</span>;
 
   <span class="hljs-keyword">return</span> result.sum;
-}</code></pre>
+}
+</code></pre>
 <p>Notice that we don&#39;t have <code>myTable</code> yet, but we can still write a test for it.
 Create <code>src/todo/events.test.js</code> and add the following contents:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { test, mainTestFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/cli&quot;</span>;
@@ -154,7 +162,8 @@ test(<span class="hljs-string">&quot;todo/events&quot;</span>, <span class="hljs
     <span class="hljs-comment">// Make sure to reset the &#x27;sql&#x27; variable</span>
     setSql(<span class="hljs-literal">undefined</span>);
   });
-});</code></pre>
+});
+</code></pre>
 <p>For these cases <code>@compas/store</code> exports the function
 <code>createTestPostgresDatabase</code> and <code>cleanupTestPostgresDatabase</code>. This creates a
 structural copy of your database, truncating all tables and returns the
