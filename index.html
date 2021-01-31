@@ -28,102 +28,126 @@
 <hr>
 <h2 id="features">Features</h2>
 <ul>
-<li>Minimal project boilerplate</li>
-<li>Script runner, can watch &amp; reload almost anything</li>
-<li>Test and benchmark runner</li>
-<li>Flexible code generators supporting routers, validators, api clients, CRUD
-queries and more in the future.</li>
-<li>Opinionated structured logging</li>
-<li>Common Koa middleware wrapped in a single function</li>
-<li>Various utilities like loading .env files, executing other processes and a
-basic string templating system</li>
+<li>Script and test runner with built-in watcher</li>
+<li>Flexible code generators supporting routers, validators, api clients and
+Postgres queries</li>
+<li>Structured logger</li>
+<li>Common utilities like session handling, job queue, file storage and loading
+&#39;.env&#39; files</li>
 </ul>
 <h2 id="requirements">Requirements</h2>
 <ul>
 <li>Node.js &gt;= 14</li>
 <li>Yarn 1.x.x</li>
 </ul>
+<h2 id="sneak-peak">Sneak peak</h2>
+<p>A small peak in how what the code generators can help you with:</p>
+<h3 id="validators">Validators</h3>
+<p>A quick showcase of the TypeCreator and how the resulting functions can be used</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { App, TypeCreator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/code-gen&quot;</span>;
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> App();
+
+app.add(
+  T.object(<span class="hljs-string">&quot;user&quot;</span>).keys({
+    <span class="hljs-attr">name</span>: T.string().min(<span class="hljs-number">3</span>),
+    <span class="hljs-attr">height</span>: T.number()
+      .float()
+      .max(<span class="hljs-number">2.2</span>)
+      .docs(<span class="hljs-string">&quot;Height in meters, we don&#x27;t support giants&quot;</span>),
+    <span class="hljs-attr">wantsSpamEmail</span>: T.bool().default(<span class="hljs-literal">false</span>),
+  }),
+);
+
+app.generate({
+  <span class="hljs-attr">outputDirectory</span>: <span class="hljs-string">&quot;./generated/validators&quot;</span>,
+  <span class="hljs-attr">enabledGenerators</span>: [<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;validator&quot;</span>],
+});
+</code></pre>
+<p>And some examples of how to use the generated code:</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { uuid } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
+<span class="hljs-keyword">import</span> { validateAppTodo } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./generated/validators/index.js&quot;</span>;
+
+<span class="hljs-comment">// Throws AppError: validator.string.undefined at $.name</span>
+validateAppTodo({});
+
+<span class="hljs-comment">// Throws AppError: validator.string.min at $.name, min: 3</span>
+validateAppTodo({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Ab&quot;</span>,
+});
+
+<span class="hljs-keyword">const</span> user = validateAppTodo({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Dirk&quot;</span>,
+  <span class="hljs-attr">height</span>: <span class="hljs-number">1.88</span>,
+});
+<span class="hljs-comment">// user.wantsSpamEmail === false</span>
+</code></pre>
+<h3 id="router-and-api-clients">Router and api clients</h3>
+<p>Showing the api client and react-query based hooks as generated for an api
+consumer. Backend structure:</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { App, TypeCreator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/code-gen&quot;</span>;
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> App();
+<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator(<span class="hljs-string">&quot;todo&quot;</span>);
+<span class="hljs-keyword">const</span> R = T.router(<span class="hljs-string">&quot;/todo&quot;</span>);
+
+<span class="hljs-keyword">const</span> todo = T.object(<span class="hljs-string">&quot;item&quot;</span>).keys({
+  <span class="hljs-attr">id</span>: T.uuid(),
+  <span class="hljs-attr">value</span>: T.string(),
+  <span class="hljs-attr">done</span>: T.bool(),
+});
+
+app.add(
+  R.get(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-string">&quot;list&quot;</span>).response({
+    <span class="hljs-attr">list</span>: [todo],
+  }),
+
+  R.get(<span class="hljs-string">&quot;/:todoId&quot;</span>, <span class="hljs-string">&quot;single&quot;</span>)
+    .params({
+      <span class="hljs-attr">todoId</span>: T.uuid(),
+    })
+    .response({
+      todo,
+    }),
+
+  R.post(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-string">&quot;create&quot;</span>)
+    .body({
+      <span class="hljs-attr">value</span>: T.string(),
+    })
+    .response({
+      todo,
+    }),
+
+  R.post(<span class="hljs-string">&quot;/:todoId/complete&quot;</span>, <span class="hljs-string">&quot;markComplete&quot;</span>).response({
+    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
+  }),
+);
+
+<span class="hljs-comment">// ... app.generate</span>
+</code></pre>
+<p>Once the frontend is generated, see the <a href="TODO">client-setup</a>, it can be used as
+follows:</p>
+<pre><code class="language-tsx">function renderTodo({ todoId }: TodoSingleParams) {
+  // Generated react-query hook with typed results
+  const { data } = useTodoSingle({ todoId });
+  // data.id, data.value, data.done
+
+  return &lt;div&gt;{/*...*/}&lt;/div&gt;;
+}
+
+function renderTodoList() {
+  // Typed api client
+  const api = useApi();
+  const markTodoComplete = (todoId: string) =&gt;
+    api.todo.markComplete({ todoId });
+
+  return &lt;div&gt;{/*...*/}&lt;/div&gt;;
+}
+</code></pre>
 <h2 id="why">Why</h2>
 <p>My work involved doing many small projects. I had a hard time backporting
 incremental fixes to existing projects. To facilitate my needs more and to stop
 copying and pasting things around, this project was born.</p>
-<h2 id="features-breakdown">Features breakdown</h2>
-<p><strong>@compas/cli</strong>:</p>
-<ul>
-<li>Run user scripts (in watch mode)</li>
-<li>Run the linter</li>
-<li>A Compas based boilerplate</li>
-<li>Test runner</li>
-<li>Benchmark runner</li>
-<li>Necessary Docker container management</li>
-<li>Visualise the known database structure of @compas/code-gen</li>
-</ul>
-<p><strong>@compas/lint-config</strong>:</p>
-<ul>
-<li>All necessary ESLint and Prettier dependencies</li>
-<li>Default configuration for ESLint and Prettier</li>
-</ul>
-<p><strong>@compas/insight</strong>:</p>
-<ul>
-<li>A structured logger<ul>
-<li>Writing newline delimited JSON in production</li>
-<li>Pretty printing for development</li>
-</ul>
-</li>
-<li>Various utilities to get insight in the running process</li>
-<li>A manual event system</li>
-</ul>
-<p><strong>@compas/stdlib</strong>:</p>
-<ul>
-<li>Various lodash inspired utilities (isNil, isPlainObject, ...)</li>
-<li>Wrappers for child_process execution and spawning</li>
-<li>A <code>mainFn</code> wrapper that reads <code>.env</code> and calls the provided function if the
-file is the process entrypoint</li>
-<li>Replacements for CommonJS <code>__dirname</code> and <code>__filename</code></li>
-</ul>
-<p><strong>@compas/server</strong>:</p>
-<ul>
-<li>Wrapper around Koa instance creation</li>
-<li>404 en error handling</li>
-<li>Handle CORS</li>
-<li>Send file helper</li>
-<li>Session support with safe, browser readable cookies</li>
-</ul>
-<p><strong>@compas/store</strong>:</p>
-<ul>
-<li>Wrapper around the Minio S3 client</li>
-<li>Wrapper around Postgres connection</li>
-<li>Utilities for providing temporary databases in a test environment</li>
-<li>Postgres migrations</li>
-<li>Postgres and S3 combined for file storage</li>
-<li>Caching files from S3 in memory or on local disk</li>
-<li>Postgres powered queue implementation<ul>
-<li>Supports priority, scheduling, multiple async workers and recurring jobs</li>
-</ul>
-</li>
-<li>koa-session compatible SessionStore backed by Postgres</li>
-</ul>
-<p><strong>@compas/code-gen</strong>:</p>
-<ul>
-<li>Code generators for the following:<ul>
-<li>router, with wildcard and path parameter support</li>
-<li>validators, pure JavaScript implementation</li>
-<li>sql, CRUD Postgres queries and nested result support</li>
-<li>Axios based api client</li>
-<li>TypeScript or JSDoc types</li>
-<li>react-query hooks</li>
-</ul>
-</li>
-<li>An extendable set of types:<ul>
-<li>boolean, number, string;</li>
-<li>object, array, any;</li>
-<li>date, uuid;</li>
-<li>generic, anyOf, reference;</li>
-</ul>
-</li>
-<li>Remote structure loader</li>
-<li>OpenAPI to Compas structure converter</li>
-</ul>
 <h2 id="docs-and-development">Docs and development</h2>
 <p>See <a href="https://compasjs.com">the website</a> for the changelog, all available APIs
 and various guides.</p>
