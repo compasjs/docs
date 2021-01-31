@@ -14,96 +14,143 @@ Unified backend tooling
 
 ## Features
 
-- Minimal project boilerplate
-- Script runner, can watch & reload almost anything
-- Test and benchmark runner
-- Flexible code generators supporting routers, validators, api clients, CRUD
-  queries and more in the future.
-- Opinionated structured logging
-- Common Koa middleware wrapped in a single function
-- Various utilities like loading .env files, executing other processes and a
-  basic string templating system
+- Script and test runner with built-in watcher
+- Flexible code generators supporting routers, validators, api clients and
+  Postgres queries
+- Structured logger
+- Common utilities like session handling, job queue, file storage and loading
+  '.env' files
 
 ## Requirements
 
 - Node.js >= 14
 - Yarn 1.x.x
 
+## Sneak peak
+
+A small peak in how what the code generators can help you with:
+
+### Validators
+
+A quick showcase of the TypeCreator and how the resulting functions can be used
+
+```js
+import { App, TypeCreator } from "@compas/code-gen";
+
+const app = new App();
+
+app.add(
+  T.object("user").keys({
+    name: T.string().min(3),
+    height: T.number()
+      .float()
+      .max(2.2)
+      .docs("Height in meters, we don't support giants"),
+    wantsSpamEmail: T.bool().default(false),
+  }),
+);
+
+app.generate({
+  outputDirectory: "./generated/validators",
+  enabledGenerators: ["type", "validator"],
+});
+```
+
+And some examples of how to use the generated code:
+
+```js
+import { uuid } from "@compas/stdlib";
+import { validateAppTodo } from "./generated/validators/index.js";
+
+// Throws AppError: validator.string.undefined at $.name
+validateAppTodo({});
+
+// Throws AppError: validator.string.min at $.name, min: 3
+validateAppTodo({
+  name: "Ab",
+});
+
+const user = validateAppTodo({
+  name: "Dirk",
+  height: 1.88,
+});
+// user.wantsSpamEmail === false
+```
+
+### Router and api clients
+
+Showing the api client and react-query based hooks as generated for an api
+consumer. Backend structure:
+
+```js
+import { App, TypeCreator } from "@compas/code-gen";
+
+const app = new App();
+const T = new TypeCreator("todo");
+const R = T.router("/todo");
+
+const todo = T.object("item").keys({
+  id: T.uuid(),
+  value: T.string(),
+  done: T.bool(),
+});
+
+app.add(
+  R.get("/", "list").response({
+    list: [todo],
+  }),
+
+  R.get("/:todoId", "single")
+    .params({
+      todoId: T.uuid(),
+    })
+    .response({
+      todo,
+    }),
+
+  R.post("/", "create")
+    .body({
+      value: T.string(),
+    })
+    .response({
+      todo,
+    }),
+
+  R.post("/:todoId/complete", "markComplete").response({
+    success: true,
+  }),
+);
+
+// ... app.generate
+```
+
+Once the frontend is generated, see the [client-setup](TODO), it can be used as
+follows:
+
+```tsx
+function renderTodo({ todoId }: TodoSingleParams) {
+  // Generated react-query hook with typed results
+  const { data } = useTodoSingle({ todoId });
+  // data.id, data.value, data.done
+
+  return <div>{/*...*/}</div>;
+}
+
+function renderTodoList() {
+  // Typed api client
+  const api = useApi();
+  const markTodoComplete = (todoId: string) =>
+    api.todo.markComplete({ todoId });
+
+  return <div>{/*...*/}</div>;
+}
+```
+
 ## Why
 
 My work involved doing many small projects. I had a hard time backporting
 incremental fixes to existing projects. To facilitate my needs more and to stop
 copying and pasting things around, this project was born.
-
-## Features breakdown
-
-**@compas/cli**:
-
-- Run user scripts (in watch mode)
-- Run the linter
-- A Compas based boilerplate
-- Test runner
-- Benchmark runner
-- Necessary Docker container management
-- Visualise the known database structure of @compas/code-gen
-
-**@compas/lint-config**:
-
-- All necessary ESLint and Prettier dependencies
-- Default configuration for ESLint and Prettier
-
-**@compas/insight**:
-
-- A structured logger
-  - Writing newline delimited JSON in production
-  - Pretty printing for development
-- Various utilities to get insight in the running process
-- A manual event system
-
-**@compas/stdlib**:
-
-- Various lodash inspired utilities (isNil, isPlainObject, ...)
-- Wrappers for child_process execution and spawning
-- A `mainFn` wrapper that reads `.env` and calls the provided function if the
-  file is the process entrypoint
-- Replacements for CommonJS `__dirname` and `__filename`
-
-**@compas/server**:
-
-- Wrapper around Koa instance creation
-- 404 en error handling
-- Handle CORS
-- Send file helper
-- Session support with safe, browser readable cookies
-
-**@compas/store**:
-
-- Wrapper around the Minio S3 client
-- Wrapper around Postgres connection
-- Utilities for providing temporary databases in a test environment
-- Postgres migrations
-- Postgres and S3 combined for file storage
-- Caching files from S3 in memory or on local disk
-- Postgres powered queue implementation
-  - Supports priority, scheduling, multiple async workers and recurring jobs
-- koa-session compatible SessionStore backed by Postgres
-
-**@compas/code-gen**:
-
-- Code generators for the following:
-  - router, with wildcard and path parameter support
-  - validators, pure JavaScript implementation
-  - sql, CRUD Postgres queries and nested result support
-  - Axios based api client
-  - TypeScript or JSDoc types
-  - react-query hooks
-- An extendable set of types:
-  - boolean, number, string;
-  - object, array, any;
-  - date, uuid;
-  - generic, anyOf, reference;
-- Remote structure loader
-- OpenAPI to Compas structure converter
 
 ## Docs and development
 
