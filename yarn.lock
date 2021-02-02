@@ -98,36 +98,36 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@compas/cli@0.0.113":
-  version "0.0.113"
-  resolved "https://registry.yarnpkg.com/@compas/cli/-/cli-0.0.113.tgz#a4380f8b0426ed97c1ce693e2e6d7021e3336e54"
-  integrity sha512-SyyFyI0nSd4UKI4hII4xhDLVqx6+QG+no91FeUbc4uZZiEyDl4ihtMvFFEkMj8SsAjQTTsL31tZ2twneMx8XLw==
+"@compas/cli@0.0.114":
+  version "0.0.114"
+  resolved "https://registry.yarnpkg.com/@compas/cli/-/cli-0.0.114.tgz#e551c6961fac46205ec662de917e713483045edd"
+  integrity sha512-0YzjbslHXeXJ70SVW2T5fSbalZMiQGfjiENIehe+J9oSyaS9VRKKWsDmJVkxJ21GAwttPQNLa7gHXHpoylLDtA==
   dependencies:
-    "@compas/insight" "0.0.113"
-    "@compas/stdlib" "0.0.113"
-    c8 "7.4.0"
+    "@compas/insight" "0.0.114"
+    "@compas/stdlib" "0.0.114"
+    c8 "7.5.0"
     chokidar "3.5.1"
     http-proxy "1.18.1"
     tree-kill "1.2.2"
 
-"@compas/code-gen@0.0.113":
-  version "0.0.113"
-  resolved "https://registry.yarnpkg.com/@compas/code-gen/-/code-gen-0.0.113.tgz#bf07681e4103e9bc977f4d93178595d5df6df8a8"
-  integrity sha512-Y17RqiM5yDQ0a8QZ/VX47KQ5vHJJWkXSKTN4rlFcjDd/Q5j+yQZwgX93XtCrlqz4zWxbdXRjG0ipgdOVUJNHvQ==
+"@compas/code-gen@0.0.114":
+  version "0.0.114"
+  resolved "https://registry.yarnpkg.com/@compas/code-gen/-/code-gen-0.0.114.tgz#18350123dc3a6029016e67558d1ef4a72f013718"
+  integrity sha512-7KpwPDRmE7sbjp4+gnUwMQwfV1B84O+UpbP9hRbx6UPYgL2KUX72Aog2Dg/ucUuEOxVTJOKnv2BwCZ5Xs2klTg==
   dependencies:
-    "@compas/cli" "0.0.113"
-    "@compas/insight" "0.0.113"
-    "@compas/stdlib" "0.0.113"
+    "@compas/cli" "0.0.114"
+    "@compas/insight" "0.0.114"
+    "@compas/stdlib" "0.0.114"
 
-"@compas/insight@0.0.113":
-  version "0.0.113"
-  resolved "https://registry.yarnpkg.com/@compas/insight/-/insight-0.0.113.tgz#741fc0c9e97f0ee4eac2443b94e6e567c892977d"
-  integrity sha512-QYO6Q8AleUSwmqFjdSan6avNClBVdXB8bXNw1E6EepBVIFqy7AZ9EOYS+LH6hIuKmCpeQjHKTm+d5x4+siNobg==
+"@compas/insight@0.0.114":
+  version "0.0.114"
+  resolved "https://registry.yarnpkg.com/@compas/insight/-/insight-0.0.114.tgz#0784a4dddeb5fb3e6ff7126003c69918640c0dd9"
+  integrity sha512-TaE0u6YVeQhUBo5BokRrEvPehhvQrx1DRQAa63AEuoxCEOb1O+UEAojncvqyQRNjBMH6bQfoL8F9m0LXXlItpg==
 
-"@compas/lint-config@0.0.113":
-  version "0.0.113"
-  resolved "https://registry.yarnpkg.com/@compas/lint-config/-/lint-config-0.0.113.tgz#98bb63a2468d2188d0e08434564084d5395817e4"
-  integrity sha512-i1dhthV12RkJaT9cKCPCd+ZIO2shfBsA4aSwHXxoQRK4G2kQlxz1e+2WCbAVjjVNhwewjlAhjR48nvBVxYLYag==
+"@compas/lint-config@0.0.114":
+  version "0.0.114"
+  resolved "https://registry.yarnpkg.com/@compas/lint-config/-/lint-config-0.0.114.tgz#5e5483ace4b6d4490abc0d7dbc9d03ffb35ac2eb"
+  integrity sha512-kzc0KJkrlFkQpuFUQv8TY8JL3aCH+MDTH8PyqfxCwEEl29XaxjWHLneIHzKcpofGleXPyul1cmOeFeQsNvhqtg==
   dependencies:
     babel-eslint "10.1.0"
     eslint "7.19.0"
@@ -135,36 +135,36 @@
     eslint-plugin-import "2.22.1"
     prettier "2.2.1"
 
-"@compas/server@0.0.113":
-  version "0.0.113"
-  resolved "https://registry.yarnpkg.com/@compas/server/-/server-0.0.113.tgz#ef51ecbb6d870192615eb41e6bb49524b12d161a"
-  integrity sha512-Unp51hJN2aV5ADfmN1FQVJsDDXIU/fM8GULZV+ikio4pLdEdQHu85Lbh9LAjGUHX/SfLZyfY9Jcqx4IsKzgsMA==
+"@compas/server@0.0.114":
+  version "0.0.114"
+  resolved "https://registry.yarnpkg.com/@compas/server/-/server-0.0.114.tgz#d810de23d291ae5e89dbfb43377a9613e37f4470"
+  integrity sha512-blHF8NOSIlXKkVe+qUevpJBc3CJAUSLPDlCvyRzTa2wOQCsCKs1Q9GiH58gqlGPGEn9cco6sHOpTeaZAJ8N4TA==
   dependencies:
-    "@compas/insight" "0.0.113"
-    "@compas/stdlib" "0.0.113"
+    "@compas/insight" "0.0.114"
+    "@compas/stdlib" "0.0.114"
     formidable "2.0.0-canary.20200504.1"
     keygrip "1.1.0"
     koa "2.13.1"
     koa-body "4.2.0"
     koa-session "6.1.0"
 
-"@compas/stdlib@0.0.113":
-  version "0.0.113"
-  resolved "https://registry.yarnpkg.com/@compas/stdlib/-/stdlib-0.0.113.tgz#785fd83580314d64bae0caf6326c62ce3c82f1d5"
-  integrity sha512-Bhn9IErqRGgLxPHPsCN5RC6cTvvDjpjQxymKpmxrNIORikBidzvrjGZS0p+fUCmILyoyP+QNV8UxSiLbXZJU8g==
+"@compas/stdlib@0.0.114":
+  version "0.0.114"
+  resolved "https://registry.yarnpkg.com/@compas/stdlib/-/stdlib-0.0.114.tgz#885d497c1e5e9c79dddcae074f17a83732604822"
+  integrity sha512-+Dch073kpdJgA1zUq+l969ZBlDGaG+ywEIla5hsR/IJcXj+Se5iO2OFK/28eOqBHfGKp/+thdFOUbBcb01v0QA==
   dependencies:
-    "@compas/insight" "0.0.113"
+    "@compas/insight" "0.0.114"
     "@types/node" "14.14.22"
     dotenv "8.2.0"
     lodash.merge "4.6.2"
 
-"@compas/store@0.0.113":
-  version "0.0.113"
-  resolved "https://registry.yarnpkg.com/@compas/store/-/store-0.0.113.tgz#13632c935fb93f449fd8796430f3b66f1dabd4b6"
-  integrity sha512-XIY78dXbzHu2tp0W8lIt87tBSsIX12G946awvCfHT7LE3i3br+2Oh2XURsGF+/z6veKTdjZRjhj4GDl3eb31uA==
+"@compas/store@0.0.114":
+  version "0.0.114"
+  resolved "https://registry.yarnpkg.com/@compas/store/-/store-0.0.114.tgz#21d0e8feb7ef2aefb0bee81d11108fa8447f5777"
+  integrity sha512-XeI8jmEhQwrHS5Nr3qcq82kdh4SLH6UAO+gDfHCL3NQGRSGe8GiFnQEEIVep4d+cMvFORq5ONGJfo7tddb6YYQ==
   dependencies:
-    "@compas/insight" "0.0.113"
-    "@compas/stdlib" "0.0.113"
+    "@compas/insight" "0.0.114"
+    "@compas/stdlib" "0.0.114"
     "@types/minio" "7.0.7"
     mime-types "2.1.28"
     minio "7.0.18"
@@ -405,10 +405,10 @@ bytes@3.1.0:
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
   integrity sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
 
-c8@7.4.0:
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/c8/-/c8-7.4.0.tgz#098ba30ba4a58de9e080645116ba8ae3d545fd5c"
-  integrity sha512-K8I7MEe2i4L91YBX3HtV10kKpU5uqGeyjtsdGS2FxfT0pk15d9jthujjR1ORRLrCJ4tXuDK9PSH2vChzRDoAZw==
+c8@7.5.0:
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/c8/-/c8-7.5.0.tgz#a69439ab82848f344a74bb25dc5dd4e867764481"
+  integrity sha512-GSkLsbvDr+FIwjNSJ8OwzWAyuznEYGTAd1pzb/Kr0FMLuV4vqYJTyjboDTwmlUNAG6jAU3PFWzqIdKrOt1D8tw==
   dependencies:
     "@bcoe/v8-coverage" "^0.2.3"
     "@istanbuljs/schema" "^0.1.2"
