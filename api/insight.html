@@ -1,0 +1,104 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>@compas/insight</title>
+        <meta name="description" content="Public API of @compas/insight"/>
+        <link rel="canonical" href="https://compasjs.com/api/insight.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://compasjs.com/index.html">Compas</a> > <a href="https://compasjs.com/api/index.html">API Documentation</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="compasinsight">
+  @compas/insight
+  
+</h1>
+<h2 id="newlogger">
+  newLogger
+  <a name="newlogger" class="anchor" href="#newlogger">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function newLogger(options?): Logger</em><br><p>Create a new logger instance</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>options <code>LoggerOptions?</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/logger/logger.js#L13">source</a></em><br><h2 id="newevent">
+  newEvent
+  <a name="newevent" class="anchor" href="#newevent">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function newEvent(logger): Event</em><br><p>Create a new event from a logger</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>logger <code>Logger</code>: Logger should have a context, like the default <code>ctx.log</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L11">source</a></em><br><h2 id="neweventfromevent">
+  newEventFromEvent
+  <a name="neweventfromevent" class="anchor" href="#neweventfromevent">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function newEventFromEvent(event): Event</em><br><p>Create a &#39;child&#39; event, reuses the logger, adds callstack to the passed event</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>event <code>Event</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L28">source</a></em><br><h2 id="eventstart">
+  eventStart
+  <a name="eventstart" class="anchor" href="#eventstart">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function eventStart(event, name): undefined</em><br><p>Track event start times</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>event <code>Event</code></li>
+<li>name <code>string</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L48">source</a></em><br><h2 id="eventstop">
+  eventStop
+  <a name="eventstop" class="anchor" href="#eventstop">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function eventStop(event): undefined</em><br><p>Track event end times and log if necessary</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>event <code>Event</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L80">source</a></em><br><h2 id="bytestohumanreadable">
+  bytesToHumanReadable
+  <a name="bytestohumanreadable" class="anchor" href="#bytestohumanreadable">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function bytesToHumanReadable(bytes?): string</em><br><p>Convert bytes to a human readable value</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>bytes <code>number?</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/memory.js#L11">source</a></em><br><h2 id="printprocessmemoryusage">
+  printProcessMemoryUsage
+  <a name="printprocessmemoryusage" class="anchor" href="#printprocessmemoryusage">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function printProcessMemoryUsage(logger): undefined</em><br><p>Print memory usage of this Node.js process</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>logger <code>Logger</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/memory.js#L38">source</a></em><br>
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://compasjs.com/index.html">Compas</a> > <a href="https://compasjs.com/api/index.html">API Documentation</a></nav>
+    </footer>
+    </body>
+</html>
+  

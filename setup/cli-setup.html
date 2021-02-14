@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,7 +24,10 @@
     </header>
     <main>
     <article>
-        <h1 id="setting-up-the-cli-and-linting">Setting up the CLI and linting</h1>
+        <h1 id="setting-up-the-cli-and-linting">
+  Setting up the CLI and linting
+  
+</h1>
 <p>Of course a project needs linting and Compas provides a 2-step approach:</p>
 <ul>
 <li>Lint configuration via <code>@compas/lint-config</code></li>
@@ -32,7 +36,10 @@
 <p>Start with installing the dependencies:</p>
 <pre><code class="language-shell">yarn add @compas/lint-config @compas/cli --exact --dev
 </code></pre>
-<h2 id="configuration">Configuration</h2>
+<h2 id="configuration">
+  Configuration
+  <a name="configuration" class="anchor" href="#configuration">#</a>
+</h2>
 <p>The <code>@compas/lint-config</code> package provides a Prettier config and ESLint
 configuration. To get the configuration in your project, create the following
 three files:</p>
@@ -62,7 +69,10 @@ By following the respective guides / configuration options:</p>
 <li><a href="https://github.com/benmosher/eslint-plugin-import/">eslint-plugin-import</a></li>
 </ul>
 <p>Now is also a good time to set up your IDE to use your local configuration.</p>
-<h2 id="running-the-linter">Running the linter</h2>
+<h2 id="running-the-linter">
+  Running the linter
+  <a name="running-the-linter" class="anchor" href="#running-the-linter">#</a>
+</h2>
 <p>At the moment we have only configured the underlying tools but have not run
 anything yet. This is where <code>@compas/cli</code> comes in. This package also has a
 range of features, but for now we focus on two of them. Let&#39;s start with running
@@ -82,7 +92,10 @@ yarn compas lint
 unset CI
 </code></pre>
 <p>This environment variable is also document in <a href="TODO">Environment variables</a></p>
-<h2 id="running-scripts">Running scripts</h2>
+<h2 id="running-scripts">
+  Running scripts
+  <a name="running-scripts" class="anchor" href="#running-scripts">#</a>
+</h2>
 <p>The <code>@compas/cli</code> package also comes with more features. Some of these will be
 explored in later parts of this setup guide. For now, we will take a look at the
 script runner.</p>

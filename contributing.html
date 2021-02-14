@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,8 +24,14 @@
     </header>
     <main>
     <article>
-        <h1 id="contributing">CONTRIBUTING</h1>
-<h3 id="development--scripts">Development &amp; scripts</h3>
+        <h1 id="contributing">
+  CONTRIBUTING
+  
+</h1>
+<h3 id="development--scripts">
+  Development &amp; scripts
+  <a name="development--scripts" class="anchor" href="#development--scripts">#</a>
+</h3>
 <p>Development should be pretty straight forward. Run <code>yarn compas test --watch</code> to
 run the test suite. Before making a commit, make sure to run <code>yarn compas lint</code>.
 Note that this automatically will try to fix most issues that popup. All
@@ -53,7 +60,10 @@ yarn compas generate
 # Generate for @compas/ packages
 yarn compas internal_generate
 </code></pre>
-<h3 id="improving-test-coverage">Improving test coverage</h3>
+<h3 id="improving-test-coverage">
+  Improving test coverage
+  <a name="improving-test-coverage" class="anchor" href="#improving-test-coverage">#</a>
+</h3>
 <p>There are a bunch of things not covered by tests, there are a few ways to
 improve coverage, but let&#39;s start by running <code>yarn compas coverage</code> and opening
 <code>file:///path/to/repo/coverage/lcov-report/index.html</code> in your browser.</p>
@@ -64,10 +74,16 @@ the same for the yet untested function. For new cases related to code
 generation, add the missing case in <code>gen/testing.js</code> and regenerate with
 <code>yarn compas gen &amp;&amp; yarn compas lint</code>. Then run <code>yarn compas coverage</code> again to
 see that the new case is not yet covered by tests.</p>
-<h3 id="debugging-tests">Debugging tests</h3>
+<h3 id="debugging-tests">
+  Debugging tests
+  <a name="debugging-tests" class="anchor" href="#debugging-tests">#</a>
+</h3>
 <p>Debug that file as if you debug whatever other Node.js script. E.g in Webstorm:
 (right-mouse click -&gt; Debug <code>file.test.js</code>)</p>
-<h3 id="publishing">Publishing</h3>
+<h3 id="publishing">
+  Publishing
+  <a name="publishing" class="anchor" href="#publishing">#</a>
+</h3>
 <ul>
 <li>Ensure you are logged in to npm with <code>npm whoami</code>, when logged out;
 <code>npm login</code></li>
@@ -87,7 +103,10 @@ see that the new case is not yet covered by tests.</p>
 </ul>
 </li>
 </ul>
-<h3 id="webstorm">WebStorm</h3>
+<h3 id="webstorm">
+  WebStorm
+  <a name="webstorm" class="anchor" href="#webstorm">#</a>
+</h3>
 <ul>
 <li><code>Help</code> &gt; <code>Edit Custom Properties...</code> &gt;
 <code>idea.javascript.max.evaluation.complexity=80</code></li>

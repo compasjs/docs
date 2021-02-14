@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,8 +24,14 @@
     </header>
     <main>
     <article>
-        <h1 id="code-generation">Code generation</h1>
-<h2 id="the-basics">The basics</h2>
+        <h1 id="code-generation">
+  Code generation
+  
+</h1>
+<h2 id="the-basics">
+  The basics
+  <a name="the-basics" class="anchor" href="#the-basics">#</a>
+</h2>
 <p>The code generators is build using a few different items:</p>
 <ul>
 <li>TypeBuilder: The base for all types. Contains various utilities like
@@ -43,7 +50,10 @@ of the TypeCreator, while instantiating a TypeBuilder.</p>
 app.add(T.bool(<span class="hljs-string">&quot;completed&quot;</span>)); <span class="hljs-comment">// Fully qualified name of `TodoCompleted`</span>
 app.add(T.bool()); <span class="hljs-comment">// Error: no name provided</span>
 </code></pre>
-<h2 id="the-app">The App</h2>
+<h2 id="the-app">
+  The App
+  <a name="the-app" class="anchor" href="#the-app">#</a>
+</h2>
 <p>The app is constructed with <code>await App.new()</code> and after that ready to generate
 any number of times. It provides a few methods for adding types and doing
 generation. Normal types can be added with <code>app.add()</code>. This accepts any number
@@ -68,7 +78,10 @@ call to <code>app.generate</code> looks something like the following:</p>
   <span class="hljs-attr">outputDirectory</span>: <span class="hljs-string">&quot;./relative/path/from/root&quot;</span>,
 });
 </code></pre>
-<h2 id="the-generators">The generators</h2>
+<h2 id="the-generators">
+  The generators
+  <a name="the-generators" class="anchor" href="#the-generators">#</a>
+</h2>
 <p>There are various generators provided by the base code-gen package. Some do
 generate for all available types, others have specific calls that need to be
 done. See further in this file for a more extensive information.</p>
@@ -89,7 +102,10 @@ more information.</p>
 and <code>Delete</code> statements.</p>
 </li>
 </ul>
-<h2 id="the-types">The Types</h2>
+<h2 id="the-types">
+  The Types
+  <a name="the-types" class="anchor" href="#the-types">#</a>
+</h2>
 <p>The code-gen package comes with a number of default types. Below a list of them
 with a short description, some extra functionality provided by a generator, and
 how you can create it via the TypeCreator (<code>T</code>).</p>
@@ -174,7 +190,10 @@ Containers reference to reference-&gt;key1. May dangle</li>
 Contains reference to reference-&gt;key1. May dangle. Other side automatically
 filled in</li>
 </ul>
-<h2 id="inferred-types">Inferred types</h2>
+<h2 id="inferred-types">
+  Inferred types
+  <a name="inferred-types" class="anchor" href="#inferred-types">#</a>
+</h2>
 <p>Some types can be inferred and don&#39;t need the full method chain like
 <code>T.object().keys()</code>. Inferred types can only be used with &#39;non-named&#39; types.</p>
 <p>Some examples and their <code>T.xx</code> counter parts</p>
@@ -216,7 +235,10 @@ app.add(
   }),
 );
 </code></pre>
-<h3 id="generator-integrations">Generator integrations</h3>
+<h3 id="generator-integrations">
+  Generator integrations
+  <a name="generator-integrations" class="anchor" href="#generator-integrations">#</a>
+</h3>
 <p>Some generators work stand alone, some always require another generator to be
 enabled. The following is a complete integration list:</p>
 <ul>

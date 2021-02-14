@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,11 +24,20 @@
     </header>
     <main>
     <article>
-        <h1 id="test-runner">Test runner</h1>
+        <h1 id="test-runner">
+  Test runner
+  
+</h1>
 <p>This document describes the api of the test runner</p>
-<h2 id="api">API</h2>
+<h2 id="api">
+  API
+  <a name="api" class="anchor" href="#api">#</a>
+</h2>
 <p>Provided by <code>@compas/cli</code></p>
-<h3 id="maintestfn">mainTestFn()</h3>
+<h3 id="maintestfn">
+  mainTestFn()
+  <a name="maintestfn" class="anchor" href="#maintestfn">#</a>
+</h3>
 <p>This marks a file as a test file and starts the test runner when a file is
 executed directly as Node.js script. It is based on <code>mainFn</code> as explained in the
 <a href="/setup/project-setup.html">project setup</a> document.</p>
@@ -36,7 +46,10 @@ executed directly as Node.js script. It is based on <code>mainFn</code> as expla
 </code></pre>
 <p>This call may exists in all test files and does nothing when tests are executed
 via <code>yarn compas test</code>.</p>
-<h3 id="testname-callback">test(name, callback)</h3>
+<h3 id="testname-callback">
+  test(name, callback)
+  <a name="testname-callback" class="anchor" href="#testname-callback">#</a>
+</h3>
 <p>This is the only other directly exposed function of the test runner and is used
 to register tests, also often called a test suite. The callback <code>t</code> contains the
 functions and properties described below. The callback may be synchronous or
@@ -47,18 +60,30 @@ and results in a failed test.</p>
 <li><code>name</code> (string): The test suite name</li>
 <li><code>callback</code> (function): The test function</li>
 </ul>
-<h4 id="tlog">t.log</h4>
+<h4 id="tlog">
+  t.log
+  <a name="tlog" class="anchor" href="#tlog">#</a>
+</h4>
 <p>A logger instance provided by <code>@compas/insight</code>. See
 <a href="/features/logger.html">logger</a> for more details.</p>
-<h4 id="ttimeout">t.timeout</h4>
+<h4 id="ttimeout">
+  t.timeout
+  <a name="ttimeout" class="anchor" href="#ttimeout">#</a>
+</h4>
 <p>A setter to configure the timeout of subtests registered via <code>t.test</code>. To
 configure this value see <a href="#config">config</a></p>
-<h4 id="ttestname-callback">t.test(name, callback)</h4>
+<h4 id="ttestname-callback">
+  t.test(name, callback)
+  <a name="ttestname-callback" class="anchor" href="#ttestname-callback">#</a>
+</h4>
 <p>Subtests can be registered any number of levels deep with <code>t.test()</code>, the name
 and callback work exactly the same as <code>test</code>.</p>
 <p>All subtests are executed in the same order as they are registered and will
 never run in parallel.</p>
-<h4 id="assertions">Assertions</h4>
+<h4 id="assertions">
+  Assertions
+  <a name="assertions" class="anchor" href="#assertions">#</a>
+</h4>
 <p><strong>t.ok(value, msg?)</strong></p>
 <p>Assert that the value passed in is &#39;truthy&#39;. In JavaScript this is any value
 except <code>null</code>, <code>undefined</code>, <code>false</code>, <code>&quot;&quot;</code> and <code>0</code>.</p>
@@ -101,7 +126,10 @@ test(<span class="hljs-string">&quot;willThrow really throws&quot;</span>, <span
 <p><strong>t.deepEqual(value, expected, msg?)</strong></p>
 <p>Compare <code>value</code> and <code>expected</code> using the Node.js built-in
 <a href="https://nodejs.org/api/assert.html#assert_assert_deepstrictequal_actual_expected_message">deepStrictEqual</a>.</p>
-<h2 id="cli">CLI</h2>
+<h2 id="cli">
+  CLI
+  <a name="cli" class="anchor" href="#cli">#</a>
+</h2>
 <p>There are two ways to run tests:</p>
 <ul>
 <li><code>yarn compas test</code> runs all tests in files where the name ends with <code>.test.js</code></li>
@@ -118,7 +146,10 @@ test suite in a single process.</p>
 <p>The <code>--watch</code> feature can also be used, via <code>yarn compas test --watch</code> or
 <code>yarn compas --watch ./path/to/file.test.js</code>. The test runner will then restart
 when a JavaScript or json file is changed.</p>
-<h2 id="config">Config</h2>
+<h2 id="config">
+  Config
+  <a name="config" class="anchor" href="#config">#</a>
+</h2>
 <p>When tests are executed, a config file attempted to be loaded from
 <code>test/config.js</code>. This file can export the following three items:</p>
 <p><strong>timeout</strong></p>
@@ -137,7 +168,10 @@ are already resolved before this setup function will be called.</p>
 <p>A global teardown function, behaving the same as the previous mentioned setup
 function. This is called if available, when all test suites did run, regardless
 of the test result.</p>
-<h2 id="output">Output</h2>
+<h2 id="output">
+  Output
+  <a name="output" class="anchor" href="#output">#</a>
+</h2>
 <p>On successful runs, the test runner will only print the number of assertions as
 follows:</p>
 <pre><code class="language-text">12:30:38.640 info[test]
@@ -210,7 +244,10 @@ uncaught exception suite (0/0)
       + &#x27;actual&#x27;
       - &#x27;expected&#x27;
 </code></pre>
-<h2 id="nodejs-assertions">Node.js assertions</h2>
+<h2 id="nodejs-assertions">
+  Node.js assertions
+  <a name="nodejs-assertions" class="anchor" href="#nodejs-assertions">#</a>
+</h2>
 <p>As noted above <code>t.deepStrictEqual({}, {})</code> uses a Node.js built-in for the
 assertion. All other assertion functions from the
 <a href="https://nodejs.org/api/assert.html">assert</a> module can be used. The only
@@ -219,7 +256,10 @@ will not run, unlike the assertions provided by Compas. Other assertion
 libraries that are able to throw
 <a href="https://nodejs.org/api/assert.html#assert_new_assert_assertionerror_options">Node.js AssertionErrors</a>
 should be compatible as well, but are not tested.</p>
-<h2 id="randomize-rounds">Randomize rounds</h2>
+<h2 id="randomize-rounds">
+  Randomize rounds
+  <a name="randomize-rounds" class="anchor" href="#randomize-rounds">#</a>
+</h2>
 <p>Another feature of the test runner is to run the tests multiple times, changing
 the order of file loading. This feature can be enabled by using
 <code>yarn compas test --randomize-rounds=n</code> where <code>n</code> is any integer, for example
@@ -232,7 +272,10 @@ with a new global setup and teardown call, etc... If any of the runs fail, only
 the failed result will be printed. When all rounds are successful, the total
 number of assertions will be printed. This does not work in combination with
 <code>--serial</code>.</p>
-<h2 id="coverage">Coverage</h2>
+<h2 id="coverage">
+  Coverage
+  <a name="coverage" class="anchor" href="#coverage">#</a>
+</h2>
 <p>A test runner isn&#39;t complete without a coverage checker. So we utilize
 <a href="https://www.npmjs.com/package/c8">c8</a> for that. By running
 <code>yarn compas coverage</code> the tests will automatically run in with <code>--serial</code>.</p>

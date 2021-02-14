@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,10 +24,16 @@
     </header>
     <main>
     <article>
-        <h1 id="release-notes-v0089">Release notes v0.0.89</h1>
+        <h1 id="release-notes-v0089">
+  Release notes v0.0.89
+  
+</h1>
 <p>Another release fixing up some small issues, adding some small features and over
 all polishing up.</p>
-<h3 id="insight">Insight</h3>
+<h3 id="insight">
+  Insight
+  <a name="insight" class="anchor" href="#insight">#</a>
+</h3>
 <p>Starting with insight where we saw some performance improvements in the last
 release, this release only contains a &#39;best practice&#39;. When you use &#39;type&#39;
 either in the context or in some log message it would be consistent to have it
@@ -34,7 +41,10 @@ always lower cased.</p>
 <p>This &#39;best practice&#39; is added to make the logs less shouting, and more relaxed
 :) This affected the event callstack logging and the server error logger in the
 lbu packages.</p>
-<h3 id="store">Store</h3>
+<h3 id="store">
+  Store
+  <a name="store" class="anchor" href="#store">#</a>
+</h3>
 <p>The store package got it&#39;s much necessary polish. We now floor the average time
 to job completion, before returning the value in milliseconds. This is the
 average time between the &#39;scheduledAt&#39; and &#39;updatedAt&#39;.</p>
@@ -45,14 +55,23 @@ well. If the &#39;scheduledAt&#39; + interval is still in the past, we add the i
 to the current timestamp. This most likely won&#39;t have impact on bigger
 intervals, however on small intervals and a swamped worker, this may save the
 day.</p>
-<h3 id="cli">Cli</h3>
+<h3 id="cli">
+  Cli
+  <a name="cli" class="anchor" href="#cli">#</a>
+</h3>
 <p>The cli by default debounced file changes before restarting your process in
 watch mode. This debounce effect was also active when doing a manual restart
 when typing <code>rs&lt;enter&gt;</code>. The latter is removed.</p>
-<h3 id="code-gen">Code gen</h3>
+<h3 id="code-gen">
+  Code gen
+  <a name="code-gen" class="anchor" href="#code-gen">#</a>
+</h3>
 <p>A small polishing touch to the type generator makes sure to print the docs of
 types if they exists.</p>
-<h3 id="in-closing">In closing</h3>
+<h3 id="in-closing">
+  In closing
+  <a name="in-closing" class="anchor" href="#in-closing">#</a>
+</h3>
 <p>Another small release with small fixes. As we just started another big project
 based on LBU you discover new things. It is clear to me that you&#39;d need both
 maturing projects to see potential &#39;DX scaling&#39; issues, but also new projects

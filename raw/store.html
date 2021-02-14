@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,21 +24,33 @@
     </header>
     <main>
     <article>
-        <h1 id="store">Store</h1>
+        <h1 id="store">
+  Store
+  
+</h1>
 <p>The store package provides various wrappers that combine Postgres and Minio, for
 persisting data.</p>
-<h2 id="postgres">Postgres</h2>
+<h2 id="postgres">
+  Postgres
+  <a name="postgres" class="anchor" href="#postgres">#</a>
+</h2>
 <p>The main entrypoint for setting up a postgres connection is by using
 <code>newPostgresConnection</code>. This will use environment variables as specified in
 <a href="/env.md">environment</a>, and return a new postgres connection based on the
 <a href="https://npmjs.com/packages/postgres">postgres</a> package.</p>
-<h3 id="testing">Testing</h3>
+<h3 id="testing">
+  Testing
+  <a name="testing" class="anchor" href="#testing">#</a>
+</h3>
 <p>For integration testing purposes the package exports
 <code>createTestPostgresDatabase</code> and <code>cleanupTestPostgresDatabase</code>. While creating a
 test database, all connections to the default database are dropped, a copy is
 made and then all data is truncated. This ensures a clean slate for every test
 suite.</p>
-<h2 id="minio">Minio</h2>
+<h2 id="minio">
+  Minio
+  <a name="minio" class="anchor" href="#minio">#</a>
+</h2>
 <p>The minio connector can be used to persist files easily. This starts with
 calling <code>newMinioClient</code> to initialize the client. After that <code>ensureBucket</code> can
 be used to create a bucket if not exists. <code>removeBucket</code> and
@@ -45,7 +58,10 @@ be used to create a bucket if not exists. <code>removeBucket</code> and
 will also forcefully remove any object left in the bucket. To get insight
 <code>listObjects</code> is available and will collect all objects and return them as an
 array.</p>
-<h2 id="migrations">Migrations</h2>
+<h2 id="migrations">
+  Migrations
+  <a name="migrations" class="anchor" href="#migrations">#</a>
+</h2>
 <p>This is a forward only, repeatable supported migration tool. In other words, no
 &#39;down&#39; scripts, and repeatable migrations will run when they are changed.</p>
 <p>To achieve that the following structure is expected:</p>
@@ -63,7 +79,10 @@ array.</p>
 </ul>
 </li>
 </ul>
-<h3 id="usage">Usage</h3>
+<h3 id="usage">
+  Usage
+  <a name="usage" class="anchor" href="#usage">#</a>
+</h3>
 <p>The following script taken from this repository and provided in the template
 should be all that you need. Run <code>yarn lbu migrate</code> and the thing should run,
 provided that you already had a working database connection in this project.</p>
@@ -87,7 +106,10 @@ mainFn(<span class="hljs-keyword">import</span>.meta, main);
   <span class="hljs-keyword">await</span> sql.end();
 }
 </code></pre>
-<h3 id="general-notes">General notes</h3>
+<h3 id="general-notes">
+  General notes
+  <a name="general-notes" class="anchor" href="#general-notes">#</a>
+</h3>
 <p>To calculate if a repeatable migration needs to run again, a sha1 is calculated
 and stored in the database.</p>
 <p>Migration namespaces shouldn&#39;t resolve in a graph. For example in the following
@@ -108,7 +130,10 @@ A
 you delete previous migrations nothing should fail.</p>
 <p>All migrations run in a transaction. To escape from that put
 <code>-- disable auto transaction</code> in the file.</p>
-<h2 id="files">Files</h2>
+<h2 id="files">
+  Files
+  <a name="files" class="anchor" href="#files">#</a>
+</h2>
 <p>@lbu/store also provides a way to store files in S3 and keeping a reference to
 the file in Postgres. This is not designed to be strict about things. The user
 should do checks if the user may access or not.</p>
@@ -120,9 +145,18 @@ should do checks if the user may access or not.</p>
 <li>Delete files</li>
 <li>Sync deleted files to the s3 bucket</li>
 </ul>
-<h2 id="filecache">FileCache</h2>
-<h2 id="sessionstore">SessionStore</h2>
-<h2 id="jobqueue">JobQueue</h2>
+<h2 id="filecache">
+  FileCache
+  <a name="filecache" class="anchor" href="#filecache">#</a>
+</h2>
+<h2 id="sessionstore">
+  SessionStore
+  <a name="sessionstore" class="anchor" href="#sessionstore">#</a>
+</h2>
+<h2 id="jobqueue">
+  JobQueue
+  <a name="jobqueue" class="anchor" href="#jobqueue">#</a>
+</h2>
 <p>@lbu/store also comes with a Postgres backed queue implementation. The queue
 supports the following:</p>
 <ul>
@@ -194,7 +228,10 @@ supports the following:</p>
   <span class="hljs-keyword">const</span> average = <span class="hljs-keyword">await</span> queueWorker.averageTimeToCompletion(start, end);
 }
 </code></pre>
-<h2 id="code-gen-and-structure">Code-gen and structure</h2>
+<h2 id="code-gen-and-structure">
+  Code-gen and structure
+  <a name="code-gen-and-structure" class="anchor" href="#code-gen-and-structure">#</a>
+</h2>
 <p>To reference to any of the postgres tables, or use any of the provided types,
 this package exports its structure used for code generation with
 <a href="/code-gen.md">@lbu/code-gen</a>.</p>

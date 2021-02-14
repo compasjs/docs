@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,11 +24,17 @@
     </header>
     <main>
     <article>
-        <h1 id="how-to">How to</h1>
+        <h1 id="how-to">
+  How to
+  
+</h1>
 <p>A number of examples of how to utilise the functionalities provided by <code>@lbu/*</code>.
 The How To&#39;s mention default arguments, ready to run examples and some possible
 edge cases.</p>
-<h2 id="asserting-on-throws">Asserting on throws</h2>
+<h2 id="asserting-on-throws">
+  Asserting on throws
+  <a name="asserting-on-throws" class="anchor" href="#asserting-on-throws">#</a>
+</h2>
 <p>Asserting on throws is another overlooked part of some test runners. This test
 runner does not provide any fancy util like <code>t.throws(functionThatThrows)</code>, but
 expects the user to use normal control flow like try / catch.</p>
@@ -58,7 +65,10 @@ test(<span class="hljs-string">&quot;Throws vs not throws&quot;</span>, <span cl
   }
 });
 </code></pre>
-<h2 id="execute-process">Execute Process</h2>
+<h2 id="execute-process">
+  Execute Process
+  <a name="execute-process" class="anchor" href="#execute-process">#</a>
+</h2>
 <p>There are two ways to execute a program or <code>child_process</code> provided by
 <code>@lbu/stdlib</code>:</p>
 <ul>

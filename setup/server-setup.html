@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,11 +24,17 @@
     </header>
     <main>
     <article>
-        <h1 id="server-setup">Server setup</h1>
+        <h1 id="server-setup">
+  Server setup
+  
+</h1>
 <p>Compas also provides some utilities for constructing an HTTP server. This is
 based on <a href="https://koajs.com/">Koa</a>. The server consist of built-in error
 handling, a logger and security headers.</p>
-<h2 id="default-server">Default server</h2>
+<h2 id="default-server">
+  Default server
+  <a name="default-server" class="anchor" href="#default-server">#</a>
+</h2>
 <p>Create a file at <code>scripts/api.js</code> with the following contents:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { getApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/server&quot;</span>;
 <span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
@@ -73,7 +80,10 @@ purposes.</li>
 <p>Notes that all logs also contain a <code>requestId</code>. This is automatically added when
 you use the logger provided by <code>ctx.log</code>. To read more about the event
 callstack, check the <a href="TODO">event docs</a>.</p>
-<h2 id="other-middleware">Other middleware</h2>
+<h2 id="other-middleware">
+  Other middleware
+  <a name="other-middleware" class="anchor" href="#other-middleware">#</a>
+</h2>
 <ul>
 <li><code>createBodyParsers</code> can be used to create a json body parser, and a separate
 multipart body parser.</li>
@@ -84,13 +94,19 @@ when for example sending a video.</li>
 <li><code>session</code> is a cookie based session handling, ties together with the
 <code>SessionStore</code> provided by <a href="TODO">@compas/store</a></li>
 </ul>
-<h2 id="testing">Testing</h2>
+<h2 id="testing">
+  Testing
+  <a name="testing" class="anchor" href="#testing">#</a>
+</h2>
 <p>Testing an api is of coure also necessary. The @compas/server package exports
 some utilities for that as well:</p>
 <p><code>createTestAppAndClient</code> can be used in combination with an App and Axios
 instance to listen to a random port and set the correct <code>baseURL</code> in Axios. The
 listening app can than be stopped by passing it to <code>closeTestApp</code>.</p>
-<h2 id="setup-as-a-service">Setup as a service</h2>
+<h2 id="setup-as-a-service">
+  Setup as a service
+  <a name="setup-as-a-service" class="anchor" href="#setup-as-a-service">#</a>
+</h2>
 <p>As we have seen previously in the <a href="/setup/services-setup">services setup</a>, we
 can set variables &#39;globally&#39; while still being testable. Since you may need to
 add various middleware or maybe to construct some middleware like <code>session</code>. It

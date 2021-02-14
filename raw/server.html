@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,10 +24,16 @@
     </header>
     <main>
     <article>
-        <h1 id="server">Server</h1>
+        <h1 id="server">
+  Server
+  
+</h1>
 <p>The server contains various Koa middleware and an easy way to instantiate a new
 app.</p>
-<h2 id="get-app">Get App</h2>
+<h2 id="get-app">
+  Get App
+  <a name="get-app" class="anchor" href="#get-app">#</a>
+</h2>
 <p>The main export of this package is <code>getApp</code> this is a utility function that sets
 up various middleware to provide a ready to go experience. The below list
 explains the default settings, see
@@ -48,7 +55,10 @@ mentioned logging middleware to log all errors.</li>
 <li>A basic CORS handler powered by <code>process.env.CORS_URL</code>. See
 <a href="/env.md">environment</a> for more information.</li>
 </ul>
-<h2 id="other-middleware">Other middleware</h2>
+<h2 id="other-middleware">
+  Other middleware
+  <a name="other-middleware" class="anchor" href="#other-middleware">#</a>
+</h2>
 <ul>
 <li><code>createBodyParsers</code> can be used to create a json body parser and a separate
 multipart body parser.</li>
@@ -59,7 +69,10 @@ when for example sending a video.</li>
 <li><code>session</code> is a cookie based session handling, ties together with the
 <code>SessionStore</code> provided by <a href="/store.md">@lbu/store</a></li>
 </ul>
-<h2 id="testing">Testing</h2>
+<h2 id="testing">
+  Testing
+  <a name="testing" class="anchor" href="#testing">#</a>
+</h2>
 <p>This package also provides some utilities for testing your api.</p>
 <p><code>createTestAppAndClient</code> can be used in combination with an App and Axios
 instance to listen to a random port and set the correct <code>baseURL</code> in Axios. The

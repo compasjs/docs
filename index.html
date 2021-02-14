@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,10 +24,16 @@
     </header>
     <main>
     <article>
-        <h1 id="compas">Compas</h1>
+        <h1 id="compas">
+  Compas
+  
+</h1>
 <p>Unified backend tooling</p>
 <hr>
-<h2 id="features">Features</h2>
+<h2 id="features">
+  Features
+  <a name="features" class="anchor" href="#features">#</a>
+</h2>
 <ul>
 <li>Script and test runner with built-in watcher</li>
 <li>Flexible code generators supporting routers, validators, api clients and
@@ -35,14 +42,23 @@ Postgres queries</li>
 <li>Common utilities like session handling, job queue, file storage and loading
 &#39;.env&#39; files</li>
 </ul>
-<h2 id="requirements">Requirements</h2>
+<h2 id="requirements">
+  Requirements
+  <a name="requirements" class="anchor" href="#requirements">#</a>
+</h2>
 <ul>
 <li>Node.js &gt;= 14</li>
 <li>Yarn 1.x.x</li>
 </ul>
-<h2 id="sneak-peak">Sneak peak</h2>
+<h2 id="sneak-peak">
+  Sneak peak
+  <a name="sneak-peak" class="anchor" href="#sneak-peak">#</a>
+</h2>
 <p>A small peak in how what the code generators can help you with:</p>
-<h3 id="validators">Validators</h3>
+<h3 id="validators">
+  Validators
+  <a name="validators" class="anchor" href="#validators">#</a>
+</h3>
 <p>A quick showcase of the TypeCreator and how the resulting functions can be used</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { App, TypeCreator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/code-gen&quot;</span>;
 
@@ -82,7 +98,10 @@ validateAppTodo({
 });
 <span class="hljs-comment">// user.wantsSpamEmail === false</span>
 </code></pre>
-<h3 id="router-and-api-clients">Router and api clients</h3>
+<h3 id="router-and-api-clients">
+  Router and api clients
+  <a name="router-and-api-clients" class="anchor" href="#router-and-api-clients">#</a>
+</h3>
 <p>Showing the api client and react-query based hooks as generated for an api
 consumer. Backend structure:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { App, TypeCreator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/code-gen&quot;</span>;
@@ -144,15 +163,24 @@ function renderTodoList() {
   return &lt;div&gt;{/*...*/}&lt;/div&gt;;
 }
 </code></pre>
-<h2 id="why">Why</h2>
+<h2 id="why">
+  Why
+  <a name="why" class="anchor" href="#why">#</a>
+</h2>
 <p>My work involved doing many small projects. I had a hard time backporting
 incremental fixes to existing projects. To facilitate my needs more and to stop
 copying and pasting things around, this project was born.</p>
-<h2 id="docs-and-development">Docs and development</h2>
+<h2 id="docs-and-development">
+  Docs and development
+  <a name="docs-and-development" class="anchor" href="#docs-and-development">#</a>
+</h2>
 <p>See <a href="https://compasjs.com">the website</a> for the changelog, all available APIs
 and various guides.</p>
 <p>For contributing see <a href="https://compasjs.com/contributing">contributing.md</a>.</p>
-<h2 id="new-features">New features</h2>
+<h2 id="new-features">
+  New features
+  <a name="new-features" class="anchor" href="#new-features">#</a>
+</h2>
 <p>New features added should fall under the following categories:</p>
 <ul>
 <li>It improves the interface between api and client in some way. An example may
@@ -167,7 +195,7 @@ experience, useful abstractions around the basics, and a stable backend &lt;-&gt
 client interface.</p>
 
     </article>
-    <article><ul><li><a href="https://compasjs.com/setup/index.html">Project setup</a></li><li><a href="https://compasjs.com/features/index.html">Features</a></li><li><a href="https://compasjs.com/changelog.html">Changelog</a></li><li><a href="https://compasjs.com/releases/index.html">Releases</a></li><li><a href="https://compasjs.com/contributing.html">Contributing</a></li><li><a href="https://compasjs.com/raw/index.html">Old docs</a></li></ul></article>
+    <hr><article><ul><li><a href="https://compasjs.com/setup/index.html">Project setup</a></li><li><a href="https://compasjs.com/features/index.html">Features</a></li><li><a href="https://compasjs.com/api/index.html">API Documentation</a></li><li><a href="https://compasjs.com/changelog.html">Changelog</a></li><li><a href="https://compasjs.com/releases/index.html">Releases</a></li><li><a href="https://compasjs.com/contributing.html">Contributing</a></li><li><a href="https://compasjs.com/raw/index.html">Old docs</a></li></ul></article>
     </main>
     <footer>
         <nav></nav>

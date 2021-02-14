@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,19 +24,28 @@
     </header>
     <main>
     <article>
-        <h1 id="release-notes-v0079">Release notes v0.0.79</h1>
+        <h1 id="release-notes-v0079">
+  Release notes v0.0.79
+  
+</h1>
 <p>The first time we actually have release notes. I guess it is a start in making
 LBU a bit more mature. Remember when you had to search through all PR&#39;s cause
 something was broken in a new release? Yea, I do ;P Let&#39;s get to the juicy
 details.</p>
-<h3 id="chores">Chores</h3>
+<h3 id="chores">
+  Chores
+  <a name="chores" class="anchor" href="#chores">#</a>
+</h3>
 <p>We have updated Postgres twice to a new minor versions of <code>2.0.0-beta</code>. Although
 the package doesn&#39;t have clear goal for what the <code>2.0.0</code> release should contain,
 we don&#39;t have to step up there or look for alternatives yet. Other than that,
 some minor things like automatically linking these release notes in the
 generated changelog, switching the default branch to <code>main</code> and fixing up the
 dependabot config.</p>
-<h3 id="cli">Cli</h3>
+<h3 id="cli">
+  Cli
+  <a name="cli" class="anchor" href="#cli">#</a>
+</h3>
 <p>In our test runner we now warn when a subtest uses an assertion on the parent
 <code>t</code>. This prevents confusion when a failing assertion is printed under the
 parent, instead of the subtest.</p>
@@ -53,7 +63,10 @@ test(<span class="hljs-string">&quot;My test&quot;</span>, <span class="hljs-fun
 <p>This caught a single usage in the lbu codebase
 <a href="https://github.com/compasjs/compas/blob/fba1ffe00a9f6dc43ed75c521f62eb9a9fb2c985/packages/stdlib/src/lodash.test.js#L112">here</a>
 .</p>
-<h3 id="code-gen">Code gen</h3>
+<h3 id="code-gen">
+  Code gen
+  <a name="code-gen" class="anchor" href="#code-gen">#</a>
+</h3>
 <p>Since we actively used the open-api importer for the first time,
 <a href="https://github.com/tjonger">@tjonger</a> found and fixed various bugs in there.
 Notably, resolving references in path and query parameters and creating a name
@@ -133,7 +146,10 @@ app.add(
 DDL, enabled by <code>app.generate({ ..., dumpPostgres: true })</code> does not yet
 interact with <code>withSoftDeletes</code>. For an example of how to use it manually see
 the open <a href="https://github.com/compasjs/compas/issues/342">issue</a></p>
-<h3 id="store">Store</h3>
+<h3 id="store">
+  Store
+  <a name="store" class="anchor" href="#store">#</a>
+</h3>
 <p>This package seems to have the most breaking changes. We renamed all table names
 to use singular nouns:</p>
 <ul>
@@ -149,7 +165,10 @@ We also renamed <code>file#filename</code> to <code>file#name</code>.</p>
 return a list of migrations that have changed since they are applied to the
 database. This allows you to communicate to other developers that some
 migrations have changed and that they may need to do a full database reset.</p>
-<h5 id="in-closing">In closing</h5>
+<h5 id="in-closing">
+  In closing
+  <a name="in-closing" class="anchor" href="#in-closing">#</a>
+</h5>
 <p>As it is the first time doing this, I did not expect it to take this much time.
 Any constructive feedback to the writing style, background information provided
 or other questions are welcome.</p>

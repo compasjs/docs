@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,11 +24,17 @@
     </header>
     <main>
     <article>
-        <h1 id="release-notes-v0084">Release notes v0.0.84</h1>
+        <h1 id="release-notes-v0084">
+  Release notes v0.0.84
+  
+</h1>
 <p>This release contains some small fixes and features compared to the previous
 release. We also enabled tests and benchmarks in CI for the newly released
 Node.js 15!</p>
-<h3 id="code-gen">Code gen</h3>
+<h3 id="code-gen">
+  Code gen
+  <a name="code-gen" class="anchor" href="#code-gen">#</a>
+</h3>
 <p>In preparation for structure stability we do loose validation of the structure
 to generate for. This enables us to add new fields in releases without breaking
 the generators of previous releases.</p>
@@ -74,10 +81,16 @@ app.addRelations(
   T.oneToMany(<span class="hljs-string">&quot;entities&quot;</span>, T.reference(<span class="hljs-string">&quot;app&quot;</span>, <span class="hljs-string">&quot;myEntity&quot;</span>)),
 );
 </code></pre>
-<h3 id="server">Server</h3>
+<h3 id="server">
+  Server
+  <a name="server" class="anchor" href="#server">#</a>
+</h3>
 <p>We don&#39;t log the event call stack anymore for &#39;OPTIONS&#39; requests. This is done
 to keep the logs a bit cleaner.</p>
-<h3 id="in-closing">In closing</h3>
+<h3 id="in-closing">
+  In closing
+  <a name="in-closing" class="anchor" href="#in-closing">#</a>
+</h3>
 <p>That&#39;s all for now. Have fun!</p>
 
     </article>

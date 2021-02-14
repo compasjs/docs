@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,10 +24,16 @@
     </header>
     <main>
     <article>
-        <h1 id="postgres-setup">Postgres setup</h1>
+        <h1 id="postgres-setup">
+  Postgres setup
+  
+</h1>
 <p>Most projects also require some way of persisting data. Compas aides in
 providing a PostgreSQL client and some utilities around setting up a database.</p>
-<h2 id="starting-postgresql">Starting PostgreSQL</h2>
+<h2 id="starting-postgresql">
+  Starting PostgreSQL
+  <a name="starting-postgresql" class="anchor" href="#starting-postgresql">#</a>
+</h2>
 <p>First that we need to make sure we have a running PostgreSQL instance. Compas
 helps here, by managing a Docker based PostgreSQL server. Previously you have
 already installed <code>@compas/cli</code>, which contains the necessary commands.</p>
@@ -41,7 +48,10 @@ yarn compas docker down
 <span class="hljs-meta">#</span><span class="bash"> Remove all created Docker containers and volumes</span>
 yarn compas docker clean
 </code></pre>
-<h2 id="setup-compasstore">Setup @compas/store</h2>
+<h2 id="setup-compasstore">
+  Setup @compas/store
+  <a name="setup-compasstore" class="anchor" href="#setup-compasstore">#</a>
+</h2>
 <p>The <code>@compas/store</code> packages provides a few abstractions over PostgreSQL and
 Minio:</p>
 <ul>
@@ -74,7 +84,10 @@ and the same for Minio.</p>
 <p>And lastly we need to install <code>@compas/store</code>:</p>
 <pre><code class="language-shell">yarn add @compas/store --exact
 </code></pre>
-<h2 id="connecting">Connecting</h2>
+<h2 id="connecting">
+  Connecting
+  <a name="connecting" class="anchor" href="#connecting">#</a>
+</h2>
 <p>Now that we have everything setup, let&#39;s see if we can make a connection to
 PostgreSQL. Create a file at <code>scripts/database.js</code> with the following contents:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
@@ -103,7 +116,10 @@ let&#39;s run it:</p>
 <span class="hljs-meta">#</span><span class="bash"> or</span>
 node ./scripts/database.js
 </code></pre>
-<h2 id="services-and-testing">Services and testing</h2>
+<h2 id="services-and-testing">
+  Services and testing
+  <a name="services-and-testing" class="anchor" href="#services-and-testing">#</a>
+</h2>
 <p>The database connection is most likely the best example where ES Module live
 bindings shine. By setting the connection as such, we can quickly swap out the
 database connection used in tests. Add the following to <code>src/services/core.js</code></p>

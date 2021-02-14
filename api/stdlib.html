@@ -1,0 +1,236 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>@compas/stdlib</title>
+        <meta name="description" content="Public API of @compas/stdlib"/>
+        <link rel="canonical" href="https://compasjs.com/api/stdlib.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://compasjs.com/index.html">Compas</a> > <a href="https://compasjs.com/api/index.html">API Documentation</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="compasstdlib">
+  @compas/stdlib
+  
+</h1>
+<h2 id="mainfn">
+  mainFn
+  <a name="mainfn" class="anchor" href="#mainfn">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function mainFn(meta, cb): undefined</em><br><p>Process entrypoint executor</p>
+<p>Checks if the provided import.meta source is used as the project entrypoint. If
+so, reads the .env file, prepares the environmentCache, adds some handlers for
+uncaught exceptions, and calls the provided callback</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>meta <code>ImportMeta</code></li>
+<li>cb <code>MainFnCallback</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L69">source</a></em><br><h2 id="filenameformodule">
+  filenameForModule
+  <a name="filenameformodule" class="anchor" href="#filenameformodule">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function filenameForModule(meta): string</em><br><p>ES module compatibility counterpart of the CommonJS __filename</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>meta <code>ImportMeta</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L128">source</a></em><br><h2 id="dirnameformodule">
+  dirnameForModule
+  <a name="dirnameformodule" class="anchor" href="#dirnameformodule">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function dirnameForModule(meta): string</em><br><p>ES module compatibility counterpart of the CommonJS __dirname</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>meta <code>ImportMeta</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L140">source</a></em><br><h2 id="isproduction">
+  isProduction
+  <a name="isproduction" class="anchor" href="#isproduction">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function isProduction(): boolean</em><br><p>Returns true when the <code>NODE_ENV</code> variable is not set, or when it does not equal
+to <code>development</code>. This allows for a &#39;safe by default&#39; experience.</p>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/env.js#L42">source</a></em><br><h2 id="isstaging">
+  isStaging
+  <a name="isstaging" class="anchor" href="#isstaging">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function isStaging(): boolean</em><br><p>Returns true when <code>NODE_ENV</code> is explicitly set to &#39;development&#39; or when the
+environment variable <code>IS_STAGING</code> is explicitly set to &#39;true&#39;.</p>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/env.js#L54">source</a></em><br><h2 id="refreshenvironmentcache">
+  refreshEnvironmentCache
+  <a name="refreshenvironmentcache" class="anchor" href="#refreshenvironmentcache">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function refreshEnvironmentCache(): undefined</em><br><p>Repopulate the cached environment copy.</p>
+<p>This should only be necessary when you or a package mutates the environment
+variables. The <code>mainFn</code> / <code>mainTestFn</code> / <code>mainBenchFn</code> / ... will call this
+function by default after loading your <code>.env</code> file. Accessing an environment
+variable via <code>process.env.XXXX</code> is relatively slow compared to direct property
+access. The following benchmark result of a plain object property access and
+accessing process.env.NODE_ENV: <br>
+<code>txt property access 500000000 iterations 0 ns/op </code> <br>
+<code>txt process.env access 5000000 iterations 246 ns/op </code> <br> See this thread:
+<a href="https://github.com/nodejs/node/issues/3104">https://github.com/nodejs/node/issues/3104</a> for more information.</p>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/env.js#L30">source</a></em><br><h2 id="isnil">
+  isNil
+  <a name="isnil" class="anchor" href="#isnil">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function isNil(item?): boolean</em><br><p>Check if a value is <code>null</code> or <code>undefined</code></p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>item <code>*?</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/lodash.js#L11">source</a></em><br><h2 id="isplainobject">
+  isPlainObject
+  <a name="isplainobject" class="anchor" href="#isplainobject">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function isPlainObject(item?): boolean</em><br><p>Check if a value is a plain JavaScript object.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>item <code>*?</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/lodash.js#L23">source</a></em><br><h2 id="uuid">
+  uuid
+  <a name="uuid" class="anchor" href="#uuid">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function uuid(): string</em><br><p>Returns a new uuid v4</p>
+<p>Vendor uuid v4 generator from uuidjs/uuid. If we are on Node.js 15 or above, we
+use the built-in import(&quot;crypto&quot;).randomUUID. This variant is a bit faster and
+allows us to drop the vendor code. This function also has an <code>uuid.isValid</code>
+function, which returns a boolean depending on if the passed in string is a
+valid uuid.</p>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/datatypes.js#L17">source</a></em><br><h2 id="noop">
+  noop
+  <a name="noop" class="anchor" href="#noop">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function noop(): undefined</em><br><p>A function that returns &#39;undefined&#39;.</p>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L30">source</a></em><br><h2 id="merge">
+  merge
+  <a name="merge" class="anchor" href="#merge">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function merge(target, sources?): object</em><br><p>Deep merge source objects on to &#39;target&#39;. Mutates &#39;target&#39; in place.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>target <code>object</code>: The destination object.</li>
+<li>sources <code>...object?</code>: The source objects.</li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/lodash.js#L42">source</a></em><br><h2 id="streamtobuffer">
+  streamToBuffer
+  <a name="streamtobuffer" class="anchor" href="#streamtobuffer">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function streamToBuffer(stream): Promise<Buffer></em><br><p>Read a readable stream completely, and return as Buffer</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>stream <code>NodeJS.ReadableStream</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/node.js#L81">source</a></em><br><h2 id="pathjoin">
+  pathJoin
+  <a name="pathjoin" class="anchor" href="#pathjoin">#</a>
+</h2>
+<em>Available since undefined</em><br><em>function pathJoin(paths): string</em><br><p>Join all arguments together and normalize the resulting path. Arguments must be
+strings. Using Node.js built-in path.posix.join(). Which forces use of Posix
+path separators, &#39;/&#39;.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>paths <code>...string</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/node.js#L17">source</a></em><br><h2 id="exec">
+  exec
+  <a name="exec" class="anchor" href="#exec">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function exec(command, opts?): Promise&lt;{stdout: string, stderr: string,
+exitCode: number}&gt;</em><br><p>Wrap around Node.js child_process#exec. Resolving when the sub process has
+exited. The resulting object contains the &#39;exitCode&#39; of the sub process.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>command <code>string</code></li>
+<li>opts <code>ExecOptions={}</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/node.js#L31">source</a></em><br><h2 id="spawn">
+  spawn
+  <a name="spawn" class="anchor" href="#spawn">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function spawn(command, {string[]} args, opts?): Promise&lt;{exitCode: number}&gt;</em><br><p>Wrap around Node.js child_process#spawn. Resolving when the sub process has
+exited. The resulting object contains the &#39;exitCode&#39; of the sub process. By
+default &#39;stdio&#39; is inherited from the current process.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>command <code>string</code></li>
+<li>{string[]} args <code>{string[]} args</code>: {string[]} args</li>
+<li>opts <code>object={}</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/node.js#L62">source</a></em><br><h2 id="processdirectoryrecursive">
+  processDirectoryRecursive
+  <a name="processdirectoryrecursive" class="anchor" href="#processdirectoryrecursive">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function processDirectoryRecursive(dir, cb, opts?): void</em><br><p>Recursively act on all files in a directory, awaiting on callback calls.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>dir <code>string</code></li>
+<li>cb <code>Function</code></li>
+<li>opts <code>ProcessDirectoryOptions?</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/node.js#L110">source</a></em><br><h2 id="processdirectoryrecursivesync">
+  processDirectoryRecursiveSync
+  <a name="processdirectoryrecursivesync" class="anchor" href="#processdirectoryrecursivesync">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function processDirectoryRecursiveSync(dir, cb, opts?, opts.skipNodeModules?,
+opts.skipDotFiles?): void</em><br><p>Sync version of processDirectoryRecursive</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>dir <code>string</code></li>
+<li>cb <code>Function</code></li>
+<li>opts <code>object={}</code></li>
+<li>opts.skipNodeModules <code>boolean=true</code></li>
+<li>opts.skipDotFiles <code>boolean=true</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/node.js#L147">source</a></em><br><h2 id="flatten">
+  flatten
+  <a name="flatten" class="anchor" href="#flatten">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function flatten(data, result?, path?): object.&lt;string,&gt;</em><br><p>Flatten nested objects in to a new object where the keys represent the original
+access path. Only goes through plain JavaScript objects and ignores arrays.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>data <code>object</code>: The object to serialize</li>
+<li>result <code>*?</code></li>
+<li>path <code>string?</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/lodash.js#L55">source</a></em><br><h2 id="unflatten">
+  unFlatten
+  <a name="unflatten" class="anchor" href="#unflatten">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function unFlatten(data): object</em><br><p>The opposite of &#39;flatten&#39;.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>data <code>object</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/lodash.js#L81">source</a></em><br><h2 id="getsecondssinceepoch">
+  getSecondsSinceEpoch
+  <a name="getsecondssinceepoch" class="anchor" href="#getsecondssinceepoch">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function getSecondsSinceEpoch(): number</em><br><p>Get the number of seconds since Unix epoch (1-1-1970).</p>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L19">source</a></em><br>
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://compasjs.com/index.html">Compas</a> > <a href="https://compasjs.com/api/index.html">API Documentation</a></nav>
+    </footer>
+    </body>
+</html>
+  

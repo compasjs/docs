@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,10 +24,16 @@
     </header>
     <main>
     <article>
-        <h1 id="release-notes-v00115">Release notes v0.0.115</h1>
+        <h1 id="release-notes-v00115">
+  Release notes v0.0.115
+  
+</h1>
 <p>This release is not that big, but still worth for proper release notes. We go
 over the changes package by package.</p>
-<h2 id="code-gen">Code gen</h2>
+<h2 id="code-gen">
+  Code gen
+  <a name="code-gen" class="anchor" href="#code-gen">#</a>
+</h2>
 <p>It does not feel like a proper Compas release without some fixes or features
 added to the code generators, as is the case this time. The table traverser is a
 relative new feature added in Compas v0.0.103. At that point we did not have a
@@ -92,7 +99,10 @@ most useful cases.</p>
 <p>In this release we solve these cases. We now generate an <code>INTERSECT</code> query from
 all <code>viaXxx</code> calls and if necessary combine it with an existing <code>idIn</code> array.
 <code>INTERSECT</code> gives us the same <code>AND</code> guarantees as normal <code>where</code> filters.</p>
-<h2 id="store">Store</h2>
+<h2 id="store">
+  Store
+  <a name="store" class="anchor" href="#store">#</a>
+</h2>
 <p>The <code>JobQueueWorker</code> got two upgrades as well, breaking existing behaviour.</p>
 <p><strong>Managed retries</strong>:</p>
 <p>The worker now won&#39;t leak any errors that are thrown by job handler invocations.
@@ -111,7 +121,10 @@ results in an increased <code>retryCount</code>. Note that this won&#39;t work c
 job does only synchronous processing.</p>
 <p>The timeout can be configured via the constructor options under <code>handlerTimeout</code>
 in milliseconds, and defaults to 30 seconds.</p>
-<h2 id="in-closing">In closing</h2>
+<h2 id="in-closing">
+  In closing
+  <a name="in-closing" class="anchor" href="#in-closing">#</a>
+</h2>
 <p>Some other chores are being done as well, like writing docs (A). The Compas repo
 will now require use of conventional-commit like specifiers in the commit title,
 like <code>feat</code>, <code>fix</code>, etc. This was decided after some feedback to get a quicker

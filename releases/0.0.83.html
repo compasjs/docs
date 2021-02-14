@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,7 +24,10 @@
     </header>
     <main>
     <article>
-        <h1 id="release-notes-v0083">Release notes v0.0.83</h1>
+        <h1 id="release-notes-v0083">
+  Release notes v0.0.83
+  
+</h1>
 <p>As I already apologized in advance in the previous release notes, let&#39;s get
 started! Since we have some breaking changes to the structure format you should
 update in the following order:</p>
@@ -34,7 +38,10 @@ update in the following order:</p>
 </ul>
 <p>Note that some parts of this document can be a bit hard to read through, but
 take it as a reference to explore the newly generated features.</p>
-<h3 id="code-gen">Code gen</h3>
+<h3 id="code-gen">
+  Code gen
+  <a name="code-gen" class="anchor" href="#code-gen">#</a>
+</h3>
 <p>The code generators got a complete refactor. We did this to allow some planned
 features, make types more correct, and all in all just give it a nice cleanup.
 This allowed us to make the validators more tree shakeable and have a more
@@ -43,7 +50,10 @@ plugins and type plugins. Instead, we are going to aim for structure stability
 so that anyone can generate whatever they want, in whatever language they want.</p>
 <p>This all probably breaks your code, so below a list of situations and how to
 migrate them over.</p>
-<h5 id="generated-clients">Generated clients</h5>
+<h5 id="generated-clients">
+  Generated clients
+  <a name="generated-clients" class="anchor" href="#generated-clients">#</a>
+</h5>
 <p>It is not necessary anymore to pass in <code>collectValidatorErrors</code> to
 <code>app.generate()</code> calls. We now always collect all errors. In the near future we
 are planning to
@@ -59,7 +69,10 @@ correctly.</p>
 file, ( eg <code>./generated/my-group/validators.ts</code>). This will hopefully allow
 Webpack to strip out any unused validators.</p>
 <p>The generated api client and react-query based hooks should still work the same.</p>
-<h5 id="packages">Packages</h5>
+<h5 id="packages">
+  Packages
+  <a name="packages" class="anchor" href="#packages">#</a>
+</h5>
 <p>Packages that use queries should allow overriding the generated queries. This
 can be archived with something like the following in <code>src/generated.js</code>:</p>
 <pre><code class="language-js"><span class="hljs-comment">// An example taken from @lbu/store</span>
@@ -80,7 +93,10 @@ can be archived with something like the following in <code>src/generated.js</cod
 necessary. The package should then use
 <code>import { queries } from &quot;./generated.js&quot;;</code> instead of
 <code>import { xxxQueries } from &quot;./generated/queries.js&quot;;</code></p>
-<h5 id="backends">Backends</h5>
+<h5 id="backends">
+  Backends
+  <a name="backends" class="anchor" href="#backends">#</a>
+</h5>
 <p>The generated router &amp; validators work practically the same as the previous
 generated versions. The most notably change here is that the exports go via
 <code>./generated/index.js</code>.</p>
@@ -170,7 +186,10 @@ example to help you with migrations.</p>
 <p>The last lovely feature that is added, is stable fields output. This makes sure
 the date fields added by <code>withDates</code> and <code>withSoftDeletes</code> are always last, and
 the (injected) primary key is always first.</p>
-<h3 id="store">Store</h3>
+<h3 id="store">
+  Store
+  <a name="store" class="anchor" href="#store">#</a>
+</h3>
 <p>The store got some features added. We migrated to the new generated queries
 without any breaking changes.</p>
 <p>We now export a <code>query</code> function this is a tagged template function, and thus
@@ -232,7 +251,10 @@ app.add(
 <p>When migrating from existing implementations of grouping, it is advisable to
 change all relations to point to <code>T.reference(&quot;store&quot;, &quot;file&quot;)</code> and places that
 need a group to <code>T.reference(&quot;store&quot;, &quot;fileGroup&quot;)</code>.</p>
-<h3 id="in-closing">In closing</h3>
+<h3 id="in-closing">
+  In closing
+  <a name="in-closing" class="anchor" href="#in-closing">#</a>
+</h3>
 <p>This release contains probably the most breaking changes till now. We are aiming
 for structure stability and a first beta on <code>0.1.0</code> in the upcoming weeks. Till
 then, expect some new query capabilities like

@@ -14,6 +14,7 @@
             code {margin-left: 2px; margin-right: 2px; }
             a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
             a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
             .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
         </style>
     </head>
@@ -23,7 +24,10 @@
     </header>
     <main>
     <article>
-        <h1 id="services-setup">Services setup</h1>
+        <h1 id="services-setup">
+  Services setup
+  
+</h1>
 <p>A lot of the time you have variables that need a setup, and are then long-lived
 while your server is running. A pattern that was often used is to use
 singletons, or directly exported values.</p>
@@ -31,7 +35,10 @@ singletons, or directly exported values.</p>
 anymore. Because all places use it directly. It also introduces some mental
 gymnastics, because primitives like a number behaved differently when required,
 than an object.</p>
-<h2 id="es-module-live-bindings">ES Module live bindings</h2>
+<h2 id="es-module-live-bindings">
+  ES Module live bindings
+  <a name="es-module-live-bindings" class="anchor" href="#es-module-live-bindings">#</a>
+</h2>
 <p>Enter ES Module live bindings. ES Module live bindings allow you to export a
 variable and in the same file replace it. Let&#39;s look at an example.</p>
 <p>Create the following file in <code>src/services/counter.js</code></p>
