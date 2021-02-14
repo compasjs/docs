@@ -1,6 +1,7 @@
 import { existsSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
-import { mainFn, pathJoin } from "@compas/stdlib";
+import { mainFn, pathJoin, spawn } from "@compas/stdlib";
+import { syncJSDocFromRepo } from "../src/doc-parser/index.js";
 
 const compasDirectory = pathJoin(process.cwd(), "../compas/");
 const targetDirectory = pathJoin(process.cwd(), "./content");
@@ -18,6 +19,10 @@ async function main(logger) {
   checkCompasDirectoryExists(logger);
   await copyFile(logger, "contributing.md");
   await copyFile(logger, "changelog.md");
+
+  await syncJSDocFromRepo(logger);
+
+  await spawn("yarn", ["compas", "lint"]);
 }
 
 function checkCompasDirectoryExists(logger) {

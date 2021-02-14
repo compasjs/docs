@@ -3,7 +3,7 @@ type: page
 title: Releases
 description: Compas release notes
 tags: []
-order: 4
+order: 5
 ---
 
 # Releases
