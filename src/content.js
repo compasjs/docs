@@ -78,4 +78,42 @@ export function setMarkedOptions() {
       return hljs.highlight(validLanguage, code).value;
     },
   });
+
+  marked.use({
+    renderer: {
+      // Add anchor (#) links to headings.
+      // This makes it easier to point someone to a specific thing in the
+      // docs. We skip h1, since we should only use that for page titles.
+      heading(text, level, raw, slugger) {
+        const escapedId = slugger.slug(raw);
+        const anchor =
+          level === 1
+            ? ""
+            : `<a name="${escapedId}" class="anchor" href="#${escapedId}">#</a>`;
+
+        return `<h${level} id="${escapedId}">
+  ${text}
+  ${anchor}
+</h${level}>\n`;
+      },
+
+      // Conditionally wrap things in paragraphs, not sure if it is the
+      // best idea, but may work okay for now.
+      paragraph(text) {
+        const tags = [["<em", "em>"], ["<img"]];
+
+        if (!text) {
+          return "";
+        }
+
+        for (const [start, end] of tags) {
+          if (start && text.startsWith(start) && (!end || text.endsWith(end))) {
+            return `${text}<br>`;
+          }
+        }
+
+        return `<p>${text}</p>\n`;
+      },
+    },
+  });
 }
