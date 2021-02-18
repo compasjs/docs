@@ -45,4 +45,11 @@ The public compas API, a work in progress.
 - [unFlatten](/api/stdlib.html#unflatten)
 - [getSecondsSinceEpoch](/api/stdlib.html#getsecondssinceepoch)
 
+## @compas/cli
+
+- [test](/api/cli.html#test)
+- [mainTestFn](/api/cli.html#maintestfn)
+- [bench](/api/cli.html#bench)
+- [mainBenchFn](/api/cli.html#mainbenchfn)
+
 <!-- marker -->

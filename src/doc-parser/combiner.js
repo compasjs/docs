@@ -64,6 +64,8 @@ export function combineCommentsWithDeclarations(
           symbol = declaration.declaration?.declarations?.[0]?.id?.name;
         } else if (declaration.declaration?.type === "ClassDeclaration") {
           // TODO: implement
+        } else if (declaration.declaration === null) {
+          continue;
         } else {
           console.dir(declaration, {
             colors: true,

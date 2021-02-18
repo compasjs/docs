@@ -18,8 +18,8 @@ import { parseModule } from "meriyah";
 export const packages = [
   "insight",
   "stdlib",
+  "cli",
 
-  // "cli",
   // "code-gen",
   // "store",
   // "server",
@@ -62,6 +62,8 @@ export const symbols = {
     "unFlatten",
     "getSecondsSinceEpoch",
   ],
+
+  cli: ["test", "mainTestFn", "bench", "mainBenchFn"],
 };
 
 /**
