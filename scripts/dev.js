@@ -31,14 +31,20 @@ async function main(logger) {
   setMarkedOptions();
 
   app.use(async (ctx, next) => {
-    if (!ctx.path.endsWith(".html") && !ctx.path.endsWith(".xml")) {
+    let path = ctx.path;
+    if (path === "" || path === "/") {
+      path = "/index.html";
+    }
+
+    if (!path.endsWith(".html") && !path.endsWith(".xml")) {
       ctx.status = 404;
       ctx.body = "";
       return next();
     }
 
     // Strip prefixed / and trailing .html
-    const path = ctx.path.substring(1, ctx.path.length - 5);
+    path = path.substring(1, path.length - 5);
+
     const structure = await getContentStructure(newEventFromEvent(ctx.event));
 
     for (const item of structure) {
@@ -55,6 +61,8 @@ async function main(logger) {
       }
     }
 
+    // We already stripped too many characters from the 'path' variable so use the
+    // original one
     if (ctx.path === "/sitemap.xml") {
       ctx.body = await renderSitemap(
         newEventFromEvent(ctx.event),
