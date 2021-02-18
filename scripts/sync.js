@@ -2,6 +2,7 @@ import { existsSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
 import { mainFn, pathJoin, spawn } from "@compas/stdlib";
 import { syncJSDocFromRepo } from "../src/doc-parser/index.js";
+import { syncJSDocBasedToc } from "../src/doc-parser/toc.js";
 
 const compasDirectory = pathJoin(process.cwd(), "../compas/");
 const targetDirectory = pathJoin(process.cwd(), "./content");
@@ -21,6 +22,7 @@ async function main(logger) {
   await copyFile(logger, "changelog.md");
 
   await syncJSDocFromRepo(logger);
+  await syncJSDocBasedToc();
 
   await spawn("yarn", ["compas", "lint"]);
 }
