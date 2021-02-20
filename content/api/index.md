@@ -52,4 +52,14 @@ The public compas API, a work in progress.
 - [bench](/api/cli.html#bench)
 - [mainBenchFn](/api/cli.html#mainbenchfn)
 
+## @compas/server
+
+- [getApp](/api/server.html#getapp)
+- [sendFile](/api/server.html#sendfile)
+- [createBodyParsers](/api/server.html#createbodyparsers)
+- [session](/api/server.html#session)
+- [compose](/api/server.html#compose)
+- [createTestAppAndClient](/api/server.html#createtestappandclient)
+- [closeTestApp](/api/server.html#closetestapp)
+
 <!-- marker -->

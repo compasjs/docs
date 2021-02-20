@@ -22,7 +22,7 @@ export const packages = [
 
   // "code-gen",
   // "store",
-  // "server",
+  "server",
 ];
 
 /**
@@ -64,6 +64,16 @@ export const symbols = {
   ],
 
   cli: ["test", "mainTestFn", "bench", "mainBenchFn"],
+
+  server: [
+    "getApp",
+    "sendFile",
+    "createBodyParsers",
+    "session",
+    "compose",
+    "createTestAppAndClient",
+    "closeTestApp",
+  ],
 };
 
 /**
