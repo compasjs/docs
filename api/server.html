@@ -1,0 +1,121 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>@compas/server</title>
+        <meta name="description" content="Public API of @compas/server"/>
+        <link rel="canonical" href="https://compasjs.com/api/server.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://compasjs.com/index.html">Compas</a> > <a href="https://compasjs.com/api/index.html">API Documentation</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="compasserver">
+  @compas/server
+  
+</h1>
+<h2 id="getapp">
+  getApp
+  <a name="getapp" class="anchor" href="#getapp">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function getApp(opts?): Application</em><br><p>Create a new Koa instance with default middleware applied.</p>
+<p>Create a new Koa instance with default middleware applied. Adds the following: -
+Health check route on <code>/_health</code> <br> - Log middleware to add the Logger from
+@compas/insight on <code>ctx.log</code> <br> - Error handler to catch any errors thrown by
+route handlers <br> - A 404 handler when no response is set by other middleware
+<br> - Default headers to respond to things like CORS requests</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>opts <code>GetAppOptions={}</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/server/src/app.js#L31">source</a></em><br><h2 id="sendfile">
+  sendFile
+  <a name="sendfile" class="anchor" href="#sendfile">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function sendFile(ctx, file, getStreamFn): Promise<undefined></em><br><p>Send a <code>StoreFile</code> instance from @compas/store as a <code>ctx</code> response. Handles byte
+range requests as well. May need some improvements to set some better cache
+headers.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>ctx <code>Context</code></li>
+<li>file <code>SendFileItem</code></li>
+<li>getStreamFn <code>GetStreamFn</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/server/src/middleware/sendFile.js#L15">source</a></em><br><h2 id="createbodyparsers">
+  createBodyParsers
+  <a name="createbodyparsers" class="anchor" href="#createbodyparsers">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function createBodyParsers(bodyOpts?, multipartBodyOpts?): BodyParserPair</em><br><p>Creates a body parser and a body parser with multipart enabled. Note that
+koa-body parses url-encoded, form data, json and text by default.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>bodyOpts <code>IKoaBodyOptions={}</code>: Options that will be passed to koa-body</li>
+<li>multipartBodyOpts <code>IFormidableBodyOptions={}</code>: Options that will be passed to
+formidable</li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/server/src/middleware/body.js#L16">source</a></em><br><h2 id="session">
+  session
+  <a name="session" class="anchor" href="#session">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function session(app, opts): Middleware</em><br><p>Session middleware. Requires process.env.APP_KEYS to be set. To generate a key
+use something like:
+<code>node -e &quot;console.log(require(&#39;crypto&#39;).randomBytes(32).toString(&#39;base64&#39;))&quot;</code>.
+This also accepts the session store as provided by <code>@compas/store</code>.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>app <code>Application</code></li>
+<li>opts <code>SessionOptions</code>: KoaSession options</li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/server/src/middleware/session.js#L17">source</a></em><br><h2 id="compose">
+  compose
+  <a name="compose" class="anchor" href="#compose">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function compose(middleware): Middleware</em><br><p>Compose <code>middleware</code> returning of all those which are passed.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>middleware <code>Array</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/server/src/middleware/compose.js#L16">source</a></em><br><h2 id="createtestappandclient">
+  createTestAppAndClient
+  <a name="createtestappandclient" class="anchor" href="#createtestappandclient">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function createTestAppAndClient(app, axios): Promise<undefined></em><br><p>Open the provided Koa app on a random port, and use the port to set the
+&#39;baseURL&#39; on the provided Axios instance.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>app <code>Application</code></li>
+<li>axios <code>AxiosInstance</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/server/src/testing.js#L11">source</a></em><br><h2 id="closetestapp">
+  closeTestApp
+  <a name="closetestapp" class="anchor" href="#closetestapp">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function closeTestApp(app): Promise<undefined></em><br><p>Close the test app as created by <code>createTestAppAndClient</code>.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>app <code>Application</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/server/src/testing.js#L40">source</a></em><br>
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://compasjs.com/index.html">Compas</a> > <a href="https://compasjs.com/api/index.html">API Documentation</a></nav>
+    </footer>
+    </body>
+</html>
+  
