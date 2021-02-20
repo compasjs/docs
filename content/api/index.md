@@ -52,6 +52,34 @@ The public compas API, a work in progress.
 - [bench](/api/cli.html#bench)
 - [mainBenchFn](/api/cli.html#mainbenchfn)
 
+## @compas/store
+
+- [newPostgresConnection](/api/store.html#newpostgresconnection)
+- [setStoreQueries](/api/store.html#setstorequeries)
+- [query](/api/store.html#query)
+- [isQueryPart](/api/store.html#isquerypart)
+- [stringifyQueryPart](/api/store.html#stringifyquerypart)
+- [explainAnalyzeQuery](/api/store.html#explainanalyzequery)
+- [newMigrateContext](/api/store.html#newmigratecontext)
+- [getMigrationsToBeApplied](/api/store.html#getmigrationstobeapplied)
+- [runMigrations](/api/store.html#runmigrations)
+- [addJobToQueue](/api/store.html#addjobtoqueue)
+- [addRecurringJobToQueue](/api/store.html#addrecurringjobtoqueue)
+- [newSessionStore](/api/store.html#newsessionstore)
+- [newMinioClient](/api/store.html#newminioclient)
+- [ensureBucket](/api/store.html#ensurebucket)
+- [removeBucket](/api/store.html#removebucket)
+- [listObjects](/api/store.html#listobjects)
+- [removeBucketAndObjectsInBucket](/api/store.html#removebucketandobjectsinbucket)
+- [createOrUpdateFile](/api/store.html#createorupdatefile)
+- [copyFile](/api/store.html#copyfile)
+- [getFileStream](/api/store.html#getfilestream)
+- [syncDeletedFiles](/api/store.html#syncdeletedfiles)
+- [hostChildrenToParent](/api/store.html#hostchildrentoparent)
+- [updateFileGroupOrder](/api/store.html#updatefilegrouporder)
+- [createTestPostgresDatabase](/api/store.html#createtestpostgresdatabase)
+- [cleanupTestPostgresDatabase](/api/store.html#cleanuptestpostgresdatabase)
+
 ## @compas/server
 
 - [getApp](/api/server.html#getapp)

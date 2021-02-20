@@ -3,7 +3,7 @@ type: page
 title: "@compas/server"
 description: Public API of @compas/server
 tags: []
-order: 4
+order: 5
 ---
 
 # @compas/server

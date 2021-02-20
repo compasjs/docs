@@ -19,9 +19,8 @@ export const packages = [
   "insight",
   "stdlib",
   "cli",
-
   // "code-gen",
-  // "store",
+  "store",
   "server",
 ];
 
@@ -64,6 +63,34 @@ export const symbols = {
   ],
 
   cli: ["test", "mainTestFn", "bench", "mainBenchFn"],
+
+  store: [
+    "newPostgresConnection",
+    "setStoreQueries",
+    "query",
+    "isQueryPart",
+    "stringifyQueryPart",
+    "explainAnalyzeQuery",
+    "newMigrateContext",
+    "getMigrationsToBeApplied",
+    "runMigrations",
+    "addJobToQueue",
+    "addRecurringJobToQueue",
+    "newSessionStore",
+    "newMinioClient",
+    "ensureBucket",
+    "removeBucket",
+    "listObjects",
+    "removeBucketAndObjectsInBucket",
+    "createOrUpdateFile",
+    "copyFile",
+    "getFileStream",
+    "syncDeletedFiles",
+    "hostChildrenToParent",
+    "updateFileGroupOrder",
+    "createTestPostgresDatabase",
+    "cleanupTestPostgresDatabase",
+  ],
 
   server: [
     "getApp",
