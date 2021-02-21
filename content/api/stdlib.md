@@ -12,7 +12,7 @@ order: 2
 
 _Available since 0.1.0_
 
-_function mainFn(meta, cb): undefined_
+_function mainFn(meta, cb): void_
 
 Process entrypoint executor
 
@@ -81,7 +81,7 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/env.j
 
 _Available since 0.1.0_
 
-_function refreshEnvironmentCache(): undefined_
+_function refreshEnvironmentCache(): void_
 
 Repopulate the cached environment copy.
 
@@ -145,7 +145,7 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/datat
 
 _Available since 0.1.0_
 
-_function noop(): undefined_
+_function noop(): void_
 
 A function that returns 'undefined'.
 

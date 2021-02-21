@@ -30,7 +30,7 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/store/src/postgr
 _Available since 0.1.0_
 
 _function setStoreQueries({typeof import("./generated/index.js").queries} q):
-undefined_
+void_
 
 Overwrite used generated queries. This is needed when you want cascading soft
 deletes to any of the exposed types. It is mandatory to be called if 'files',
@@ -181,7 +181,7 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.
 
 _Available since 0.1.0_
 
-_function addRecurringJobToQueue(sql, name, priority?, interval): Promise<void>_
+_function addRecurringJobToQueue(sql, job): Promise<void>_
 
 Add a recurring job, if no existing job with the same name is scheduled. Does
 not throw when a job is already pending with the same name. If exists will
@@ -190,11 +190,10 @@ update the interval.
 **Parameters**:
 
 - sql `Postgres`
-- name `string`
-- priority `number?`
-- interval `StoreJobInterval`
+- job
+  `{ name: string, priority?: number|undefined, interval: StoreJobInterval }`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L361)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L359)_
 
 ## newSessionStore
 
@@ -328,14 +327,13 @@ id, into the provided bucket.
 - id `string`
 - targetBucket `string=bucketName`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L118)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L117)_
 
 ## getFileStream
 
 _Available since 0.1.0_
 
-_function getFileStream(minio, bucketName, id, start?, end?):
-Promise<ReadableStream>_
+_function getFileStream(minio, bucketName, id, seek?): Promise<ReadableStream>_
 
 Get a file stream based on the 'id'. It is expected that an object exists with
 the 'id'. A 'start' and 'end' value can optionally be specified.
@@ -345,10 +343,9 @@ the 'id'. A 'start' and 'end' value can optionally be specified.
 - minio `minio.Client`
 - bucketName `string`
 - id `string`
-- start `number?`
-- end `number?`
+- seek `{ start?: number|undefined, end?: number|undefined }={}`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L90)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L89)_
 
 ## syncDeletedFiles
 
@@ -366,7 +363,7 @@ the S3 bucket.
 - minio `minio.Client`
 - bucketName `string`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L154)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L153)_
 
 ## updateFileGroupOrder
 
@@ -401,7 +398,7 @@ a connection to the new database.
 - verboseSql `boolean=false`: If true, creates a new logger and prints all
   queries.
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L73)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L74)_
 
 ## cleanupTestPostgresDatabase
 
@@ -415,4 +412,4 @@ Remove a created test database
 
 - sql `Postgres`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L153)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L154)_

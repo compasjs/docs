@@ -12,7 +12,7 @@ order: 3
 
 _Available since 0.1.0_
 
-_function test(name, callback): undefined_
+_function test(name, callback): void_
 
 Register top-level tests. The main entry point of the test runner
 
@@ -28,7 +28,7 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/cli/src/testing/
 
 _Available since 0.1.0_
 
-_function mainTestFn(meta): undefined_
+_function mainTestFn(meta): void_
 
 Wraps `mainFn` and starts the test runner if not already started. By calling
 this in your test files, it allows the test file to be directly executed via
@@ -45,7 +45,7 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/cli/src/testing/
 
 _Available since 0.1.0_
 
-_function bench(name, callback): undefined_
+_function bench(name, callback): void_
 
 Benchmark entry point. The benchmark runner will wait a bit till now new
 benchmarks are registered and then start execution.
@@ -61,7 +61,7 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/cli/src/benchmar
 
 _Available since 0.1.0_
 
-_function mainBenchFn(meta): undefined_
+_function mainBenchFn(meta): void_
 
 Wraps `mainFn` and starts the benchmark runner if not already started. By
 calling this in your bench files, it allows the benchmark file to be directly

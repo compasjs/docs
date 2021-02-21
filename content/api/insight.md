@@ -54,7 +54,7 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/even
 
 _Available since 0.1.0_
 
-_function eventStart(event, name): undefined_
+_function eventStart(event, name): void_
 
 Track event start times
 
@@ -69,7 +69,7 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/even
 
 _Available since 0.1.0_
 
-_function eventStop(event): undefined_
+_function eventStop(event): void_
 
 Track event end times and log if necessary
 
@@ -97,7 +97,7 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/memo
 
 _Available since 0.1.0_
 
-_function printProcessMemoryUsage(logger): undefined_
+_function printProcessMemoryUsage(logger): void_
 
 Print memory usage of this Node.js process
 

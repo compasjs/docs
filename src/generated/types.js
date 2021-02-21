@@ -13,7 +13,7 @@ export const __generated__ = true;
  * @typedef {import("@compas/code-gen").RouteCreator} RouteCreator
  */
 /**
- * @typedef {{"filePath": string, "contentPath": string, "metadata"?: {"type": "blog"|"page", "title": string, "date"?: Date, "description": string, "order": number, "tags": (string)[], }, "htmlContent"?: string, }} ContentItem
+ * @typedef {{"filePath": string, "contentPath": string, "metadata"?: undefined|{"type": "blog"|"page", "title": string, "date"?: undefined|Date, "description": string, "order": number, "tags": (string)[], }, "htmlContent"?: undefined|string, }} ContentItem
  */
 /**
  * @typedef {DocParserUnknownBlock|DocParserFunctionDeclarationBlock} DocParserBlock
@@ -22,13 +22,13 @@ export const __generated__ = true;
  * @typedef {{"type": "unknown", "raw": string, "range": DocParserRange, }} DocParserUnknownBlock
  */
 /**
- * @typedef {{"start": number, "end": number, "pkg": DocParserPackage, "file": string, "line"?: string, }} DocParserRange
+ * @typedef {{"start": number, "end": number, "pkg": DocParserPackage, "file": string, "line"?: undefined|string, }} DocParserRange
  */
 /**
- * @typedef {"insight"|"stdlib"} DocParserPackage
+ * @typedef {"insight"|"stdlib"|"cli"|"store"|"server"} DocParserPackage
  */
 /**
- * @typedef {{"type": "functionDeclaration", "name"?: string, "summary"?: string, "description"?: string, "availableSince"?: string, "isVariable": boolean, "parsedType": DocParserFunctionType, "range": DocParserRange, }} DocParserFunctionDeclarationBlock
+ * @typedef {{"type": "functionDeclaration", "name"?: undefined|string, "summary"?: undefined|string, "description"?: undefined|string, "availableSince"?: undefined|string, "isVariable": boolean, "parsedType": DocParserFunctionType, "range": DocParserRange, }} DocParserFunctionDeclarationBlock
  */
 /**
  * @typedef {{"type": "function", "params": ({"name": string, "description": string, "type": DocParserType, })[], "returnType": DocParserType, }} DocParserFunctionType
@@ -37,7 +37,7 @@ export const __generated__ = true;
  * @typedef {DocParserLiteralType|DocParserFunctionType} DocParserType
  */
 /**
- * @typedef {{"type": "literal", "value": string, "isOptional"?: boolean, "defaultValue"?: string, "isDocBlockReference"?: boolean, }} DocParserLiteralType
+ * @typedef {{"type": "literal", "value": string, "isOptional"?: undefined|boolean, "defaultValue"?: undefined|string, "isDocBlockReference"?: undefined|boolean, }} DocParserLiteralType
  */
 /**
  * @typedef {{"type": "MultiLine"|"SingleLine", "value": string, "range": DocParserRange, }} DocParserJSComment
