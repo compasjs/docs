@@ -32,7 +32,7 @@
   test
   <a name="test" class="anchor" href="#test">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function test(name, callback): undefined</em><br><p>Register top-level tests. The main entry point of the test runner</p>
+<em>Available since 0.1.0</em><br><em>function test(name, callback): void</em><br><p>Register top-level tests. The main entry point of the test runner</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li>name <code>string</code>: The test name</li>
@@ -43,7 +43,7 @@ This can do async setup, register child tests and run assertions</li>
   mainTestFn
   <a name="maintestfn" class="anchor" href="#maintestfn">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function mainTestFn(meta): undefined</em><br><p>Wraps <code>mainFn</code> and starts the test runner if not already started. By calling
+<em>Available since 0.1.0</em><br><em>function mainTestFn(meta): void</em><br><p>Wraps <code>mainFn</code> and starts the test runner if not already started. By calling
 this in your test files, it allows the test file to be directly executed via
 <code>node file.test.js</code>. When the runner is already active, this function will be a
 no op.</p>
@@ -55,7 +55,7 @@ no op.</p>
   bench
   <a name="bench" class="anchor" href="#bench">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function bench(name, callback): undefined</em><br><p>Benchmark entry point. The benchmark runner will wait a bit till now new
+<em>Available since 0.1.0</em><br><em>function bench(name, callback): void</em><br><p>Benchmark entry point. The benchmark runner will wait a bit till now new
 benchmarks are registered and then start execution.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -66,7 +66,7 @@ benchmarks are registered and then start execution.</p>
   mainBenchFn
   <a name="mainbenchfn" class="anchor" href="#mainbenchfn">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function mainBenchFn(meta): undefined</em><br><p>Wraps <code>mainFn</code> and starts the benchmark runner if not already started. By
+<em>Available since 0.1.0</em><br><em>function mainBenchFn(meta): void</em><br><p>Wraps <code>mainFn</code> and starts the benchmark runner if not already started. By
 calling this in your bench files, it allows the benchmark file to be directly
 executed via <code>node file.bench.js</code>. When the runner is already active, this
 function will be a no op.</p>

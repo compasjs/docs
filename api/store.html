@@ -45,7 +45,7 @@ database may be created using the provided credentials.</p>
   <a name="setstorequeries" class="anchor" href="#setstorequeries">#</a>
 </h2>
 <em>Available since 0.1.0</em><br><em>function setStoreQueries({typeof import(&quot;./generated/index.js&quot;).queries} q):
-undefined</em><br><p>Overwrite used generated queries. This is needed when you want cascading soft
+void</em><br><p>Overwrite used generated queries. This is needed when you want cascading soft
 deletes to any of the exposed types. It is mandatory to be called if &#39;files&#39;,
 &#39;session&#39; or &#39;jobs&#39; are used. If you don&#39;t use the generators, you can use
 <code>storeQueries</code> as exported by <code>@compas/store</code>.</p>
@@ -151,17 +151,16 @@ migration state.</p>
   addRecurringJobToQueue
   <a name="addrecurringjobtoqueue" class="anchor" href="#addrecurringjobtoqueue">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function addRecurringJobToQueue(sql, name, priority?, interval): Promise<void></em><br><p>Add a recurring job, if no existing job with the same name is scheduled. Does
+<em>Available since 0.1.0</em><br><em>function addRecurringJobToQueue(sql, job): Promise<void></em><br><p>Add a recurring job, if no existing job with the same name is scheduled. Does
 not throw when a job is already pending with the same name. If exists will
 update the interval.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li>sql <code>Postgres</code></li>
-<li>name <code>string</code></li>
-<li>priority <code>number?</code></li>
-<li>interval <code>StoreJobInterval</code></li>
+<li>job
+<code>{ name: string, priority?: number|undefined, interval: StoreJobInterval }</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L361">source</a></em><br><h2 id="newsessionstore">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L359">source</a></em><br><h2 id="newsessionstore">
   newSessionStore
   <a name="newsessionstore" class="anchor" href="#newsessionstore">#</a>
 </h2>
@@ -255,22 +254,20 @@ id, into the provided bucket.</p>
 <li>id <code>string</code></li>
 <li>targetBucket <code>string=bucketName</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L118">source</a></em><br><h2 id="getfilestream">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L117">source</a></em><br><h2 id="getfilestream">
   getFileStream
   <a name="getfilestream" class="anchor" href="#getfilestream">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function getFileStream(minio, bucketName, id, start?, end?):
-Promise<ReadableStream></em><br><p>Get a file stream based on the &#39;id&#39;. It is expected that an object exists with
+<em>Available since 0.1.0</em><br><em>function getFileStream(minio, bucketName, id, seek?): Promise<ReadableStream></em><br><p>Get a file stream based on the &#39;id&#39;. It is expected that an object exists with
 the &#39;id&#39;. A &#39;start&#39; and &#39;end&#39; value can optionally be specified.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li>minio <code>minio.Client</code></li>
 <li>bucketName <code>string</code></li>
 <li>id <code>string</code></li>
-<li>start <code>number?</code></li>
-<li>end <code>number?</code></li>
+<li>seek <code>{ start?: number|undefined, end?: number|undefined }={}</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L90">source</a></em><br><h2 id="syncdeletedfiles">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L89">source</a></em><br><h2 id="syncdeletedfiles">
   syncDeletedFiles
   <a name="syncdeletedfiles" class="anchor" href="#syncdeletedfiles">#</a>
 </h2>
@@ -283,7 +280,7 @@ the S3 bucket.</p>
 <li>minio <code>minio.Client</code></li>
 <li>bucketName <code>string</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L154">source</a></em><br><h2 id="updatefilegrouporder">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L153">source</a></em><br><h2 id="updatefilegrouporder">
   updateFileGroupOrder
   <a name="updatefilegrouporder" class="anchor" href="#updatefilegrouporder">#</a>
 </h2>
@@ -308,7 +305,7 @@ a connection to the new database.</p>
 <li>verboseSql <code>boolean=false</code>: If true, creates a new logger and prints all
 queries.</li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L73">source</a></em><br><h2 id="cleanuptestpostgresdatabase">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L74">source</a></em><br><h2 id="cleanuptestpostgresdatabase">
   cleanupTestPostgresDatabase
   <a name="cleanuptestpostgresdatabase" class="anchor" href="#cleanuptestpostgresdatabase">#</a>
 </h2>
@@ -317,7 +314,7 @@ queries.</li>
 <ul>
 <li>sql <code>Postgres</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L153">source</a></em><br>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L154">source</a></em><br>
     </article>
     
     </main>

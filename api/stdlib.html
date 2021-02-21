@@ -32,7 +32,7 @@
   mainFn
   <a name="mainfn" class="anchor" href="#mainfn">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function mainFn(meta, cb): undefined</em><br><p>Process entrypoint executor</p>
+<em>Available since 0.1.0</em><br><em>function mainFn(meta, cb): void</em><br><p>Process entrypoint executor</p>
 <p>Checks if the provided import.meta source is used as the project entrypoint. If
 so, reads the .env file, prepares the environmentCache, adds some handlers for
 uncaught exceptions, and calls the provided callback</p>
@@ -75,7 +75,7 @@ environment variable <code>IS_STAGING</code> is explicitly set to &#39;true&#39;
   refreshEnvironmentCache
   <a name="refreshenvironmentcache" class="anchor" href="#refreshenvironmentcache">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function refreshEnvironmentCache(): undefined</em><br><p>Repopulate the cached environment copy.</p>
+<em>Available since 0.1.0</em><br><em>function refreshEnvironmentCache(): void</em><br><p>Repopulate the cached environment copy.</p>
 <p>This should only be necessary when you or a package mutates the environment
 variables. The <code>mainFn</code> / <code>mainTestFn</code> / <code>mainBenchFn</code> / ... will call this
 function by default after loading your <code>.env</code> file. Accessing an environment
@@ -117,7 +117,7 @@ valid uuid.</p>
   noop
   <a name="noop" class="anchor" href="#noop">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function noop(): undefined</em><br><p>A function that returns &#39;undefined&#39;.</p>
+<em>Available since 0.1.0</em><br><em>function noop(): void</em><br><p>A function that returns &#39;undefined&#39;.</p>
 <em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L30">source</a></em><br><h2 id="merge">
   merge
   <a name="merge" class="anchor" href="#merge">#</a>

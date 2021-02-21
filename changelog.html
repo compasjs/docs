@@ -28,6 +28,40 @@
   CHANGELOG
   
 </h1>
+<h3 id="v00117">
+  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.117">v0.0.117</a>
+  <a name="v00117" class="anchor" href="#v00117">#</a>
+</h3>
+<ul>
+<li>build(deps): bump @types/node from 14.14.27 to 14.14.31
+(<a href="https://github.com/compasjs/compas/pull/689">#689</a>,
+<a href="https://github.com/compasjs/compas/pull/698">#698</a>,
+<a href="https://github.com/compasjs/compas/pull/705">#705</a>)</li>
+<li>build(deps): bump c8 from 7.5.0 to 7.6.0
+(<a href="https://github.com/compasjs/compas/pull/695">#695</a>)</li>
+<li>build(deps): bump mime-types from 2.1.28 to 2.1.29
+(<a href="https://github.com/compasjs/compas/pull/693">#693</a>)</li>
+<li>chore(changelog): skip dev-deps updates in the changelog generator</li>
+<li>ci: add benchmarks as a requirement for dependabot auto merge</li>
+<li>docs(cli): expand exported function documentation for the cli
+(<a href="https://github.com/compasjs/compas/pull/696">#696</a>)</li>
+<li>docs(server): expand exported function documentation</li>
+<li>docs(store): expand exported function documentation</li>
+<li>feat(code-gen): expose query key functions for generated hooks
+(<a href="https://github.com/compasjs/compas/pull/702">#702</a>)</li>
+<li>feat(lint-config): add support for JSDoc linting
+(<a href="https://github.com/compasjs/compas/pull/707">#707</a>)</li>
+<li>fix(code-gen): date validator should support special string cases
+(<a href="https://github.com/compasjs/compas/pull/706">#706</a>)</li>
+<li>fix(code-gen): fix missing relation type in sub query builder
+(<a href="https://github.com/compasjs/compas/pull/700">#700</a>)</li>
+<li>fix(stdlib): handle &#39;undefined&#39; in AppError#format
+(<a href="https://github.com/compasjs/compas/pull/701">#701</a>)</li>
+</ul>
+<p>It is expected that react-query generator consumers move to the generated
+<code>queryKey</code> functions in this release, as the next release may break the query
+keys. For JSDoc linting it currenlty is only enabled when the env variable <code>CI</code>
+is set to <code>true</code>, so <code>CI=true yarn compas lint</code>.</p>
 <h3 id="v00116">
   <a href="https://github.com/compasjs/compas/releases/tag/v0.0.116">v0.0.116</a>
   <a name="v00116" class="anchor" href="#v00116">#</a>
