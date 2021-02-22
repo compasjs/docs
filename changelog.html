@@ -28,6 +28,27 @@
   CHANGELOG
   
 </h1>
+<h3 id="v00118">
+  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.118">v0.0.118</a>
+  <a name="v00118" class="anchor" href="#v00118">#</a>
+</h3>
+<ul>
+<li>build(deps): bump eslint-config-prettier from 7.2.0 to 8.0.0
+(<a href="https://github.com/compasjs/compas/pull/708">#708</a>)</li>
+<li>chore(ci): improve CI for external contributors
+(<a href="https://github.com/compasjs/compas/pull/712">#712</a>)</li>
+<li>chore(ci): remove test and lint dependency for benchmark and coverage jobs</li>
+<li>feat(cli): support <code>--jsdoc</code> flag on <code>compas lint</code>
+(<a href="https://github.com/compasjs/compas/pull/713">#713</a>)</li>
+<li>feat(code-gen): expose baseKeys for generated hooks
+(<a href="https://github.com/compasjs/compas/pull/709">#709</a>)</li>
+<li>feat(code-gen): make <code>queryKey()</code> generation consistent with <code>baseKey()</code>
+(<a href="https://github.com/compasjs/compas/pull/714">#714</a>)</li>
+<li>fix(code-gen): ensure a jsdoc stable output without jsdoc linter
+(<a href="https://github.com/compasjs/compas/pull/711">#711</a>)</li>
+</ul>
+<p>Thanks to <a href="https://github.com/rodymolenaar">@rodymolenaar</a> for the baseKey
+generation!</p>
 <h3 id="v00117">
   <a href="https://github.com/compasjs/compas/releases/tag/v0.0.117">v0.0.117</a>
   <a name="v00117" class="anchor" href="#v00117">#</a>
@@ -61,7 +82,8 @@
 <p>It is expected that react-query generator consumers move to the generated
 <code>queryKey</code> functions in this release, as the next release may break the query
 keys. For JSDoc linting it currenlty is only enabled when the env variable <code>CI</code>
-is set to <code>true</code>, so <code>CI=true yarn compas lint</code>.</p>
+is set to <code>true</code>, so <code>CI=true yarn compas lint</code>. Thanks to
+<a href="https://github.com/tjonger">@tjonger</a> for the query builder fix!</p>
 <h3 id="v00116">
   <a href="https://github.com/compasjs/compas/releases/tag/v0.0.116">v0.0.116</a>
   <a name="v00116" class="anchor" href="#v00116">#</a>
