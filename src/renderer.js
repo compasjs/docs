@@ -14,7 +14,7 @@ import {
  * @param {string} cname
  * @param {ContentItem[]} structure
  * @param {ContentItem} page
- * @return {Promise<string>}
+ * @returns {Promise<string>}
  */
 export async function renderPage(event, cname, structure, page) {
   eventStart(event, "renderer.renderPage");
@@ -90,7 +90,7 @@ export async function renderPage(event, cname, structure, page) {
  * @param {string} cname
  * @param {ContentItem[]} structure
  * @param {ContentItem} page
- * @return Promise<string>
+ * @returns Promise<string>
  */
 async function renderIndexNavigation(event, cname, structure, page) {
   if (!page.contentPath.endsWith("index")) {

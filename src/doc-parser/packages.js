@@ -26,6 +26,7 @@ export const packages = [
 
 /**
  * The public symbols of a package
+ *
  * @type {Object<DocParserPackage, string[]>}
  */
 export const symbols = {

@@ -2,10 +2,11 @@ import { eventStart, eventStop } from "@compas/insight";
 
 /**
  * Render a sitemap, ignoring 'raw' folder
+ *
  * @param {Event} event
  * @param {string} cname
  * @param {ContentItem[]} structure
- * @return {string}
+ * @returns {string}
  */
 export function renderSitemap(event, cname, structure) {
   eventStart(event, "sitemap.render");

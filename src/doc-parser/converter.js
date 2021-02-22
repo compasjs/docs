@@ -49,6 +49,7 @@ order: ${i++}
 
 /**
  * Format a function declaration block
+ *
  * @param {DocParserFunctionDeclarationBlock} block
  * @returns {string}
  */
