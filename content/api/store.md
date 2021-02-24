@@ -380,7 +380,7 @@ getFileGroupParents for that.
 - sql `Postgres`
 - {string[]} ids `{string[]} ids`: {string[]} ids
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/file-group.js#L135)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/file-group.js#L62)_
 
 ## createTestPostgresDatabase
 
