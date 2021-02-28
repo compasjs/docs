@@ -3,7 +3,7 @@ import { packages, symbols } from "./packages.js";
 
 /**
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @param {DocParserCombinedBlocks} declarationsByPackage
  * @returns {Map<DocParserPackage, string>}
  */

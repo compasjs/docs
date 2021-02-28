@@ -175,7 +175,7 @@ Add a new item to the job queue.
 - sql `Postgres`
 - job `JobInput`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L340)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L343)_
 
 ## addRecurringJobToQueue
 
@@ -193,7 +193,7 @@ update the interval.
 - job
   `{ name: string, priority?: number|undefined, interval: StoreJobInterval }`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L359)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L362)_
 
 ## newSessionStore
 

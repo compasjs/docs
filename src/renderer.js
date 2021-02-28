@@ -10,7 +10,7 @@ import {
 /**
  * Render a page
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @param {string} cname
  * @param {ContentItem[]} structure
  * @param {ContentItem} page
@@ -86,7 +86,7 @@ export async function renderPage(event, cname, structure, page) {
 /**
  * Render all pages of a directory if this page is an 'index' page
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @param {string} cname
  * @param {ContentItem[]} structure
  * @param {ContentItem} page
@@ -135,7 +135,7 @@ async function renderIndexNavigation(event, cname, structure, page) {
 /**
  * Format header and footer with breadcrumbs and post date
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @param {ContentItem} page
  * @param {string} cname
  * @param {ContentItem[]} breadcrumbPages

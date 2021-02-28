@@ -26,29 +26,30 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/logg
 
 _Available since 0.1.0_
 
-_function newEvent(logger): Event_
+_function newEvent(logger, signal?): InsightEvent_
 
 Create a new event from a logger
 
 **Parameters**:
 
 - logger `Logger`: Logger should have a context, like the default `ctx.log`
+- signal `AbortSignal|undefined?`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L11)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L39)_
 
 ## newEventFromEvent
 
 _Available since 0.1.0_
 
-_function newEventFromEvent(event): Event_
+_function newEventFromEvent(event): InsightEvent_
 
 Create a 'child' event, reuses the logger, adds callstack to the passed event
 
 **Parameters**:
 
-- event `Event`
+- event `InsightEvent`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L28)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L57)_
 
 ## eventStart
 
@@ -60,10 +61,10 @@ Track event start times
 
 **Parameters**:
 
-- event `Event`
+- event `InsightEvent`
 - name `string`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L48)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L83)_
 
 ## eventStop
 
@@ -75,9 +76,9 @@ Track event end times and log if necessary
 
 **Parameters**:
 
-- event `Event`
+- event `InsightEvent`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L80)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L123)_
 
 ## bytesToHumanReadable
 

@@ -49,6 +49,7 @@ The public compas API, a work in progress.
 
 - [test](/api/cli.html#test)
 - [mainTestFn](/api/cli.html#maintestfn)
+- [newTestEvent](/api/cli.html#newtestevent)
 - [bench](/api/cli.html#bench)
 - [mainBenchFn](/api/cli.html#mainbenchfn)
 

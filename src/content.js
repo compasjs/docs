@@ -12,7 +12,7 @@ const contentDirectory = pathJoin(process.cwd(), "content");
 /**
  * Create a list of markdown files with their content paths
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @returns {Promise<ContentItem[]>}
  */
 export async function getContentStructure(event) {
@@ -43,7 +43,7 @@ export async function getContentStructure(event) {
 /**
  * Set metadata and htmlContent for a ContentItem
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @param {ContentItem} item
  * @returns {Promise<void>}
  */

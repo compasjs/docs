@@ -63,7 +63,7 @@ export const symbols = {
     "getSecondsSinceEpoch",
   ],
 
-  cli: ["test", "mainTestFn", "bench", "mainBenchFn"],
+  cli: ["test", "mainTestFn", "newTestEvent", "bench", "mainBenchFn"],
 
   store: [
     "newPostgresConnection",
@@ -108,7 +108,7 @@ export const symbols = {
  * Recursively goes through the compas directories and returns all JS files.
  * Contains some hardcoded filters for things like test files.
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @returns {Promise<DocParserCollectedFiles>}
  */
 export async function packageListFiles(event) {
@@ -156,7 +156,7 @@ export async function packageListFiles(event) {
 /**
  * Throw the list of files through the JS Parser
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @param {DocParserCollectedFiles} collectedFiles
  * @returns {Promise<DocParserParsedFileCollection>}
  */

@@ -11,7 +11,7 @@ import { packages, symbols } from "./packages.js";
 
 /**
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @param {DocParserCollectedFiles} filesByPackage
  * @param {DocParserParsedFileCollection} parsedByFile
  * @param {DocParserBlocksByPackage} comments

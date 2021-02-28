@@ -8,7 +8,7 @@ import { packages } from "./packages.js";
 
 /**
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @param {DocParserCollectedFiles} filesByPackage
  * @param {DocParserParsedFileCollection} parsedByFile
  * @returns {DocParserBlocksByPackage}

@@ -41,6 +41,21 @@ no op.
 
 _[source](https://github.com/compasjs/compas/blob/main/packages/cli/src/testing/utils.js#L25)_
 
+## newTestEvent
+
+_Available since 0.1.0_
+
+_function newTestEvent(t, options?): InsightEvent_
+
+Create a new test event
+
+**Parameters**:
+
+- t `TestRunner`
+- options `{ enableLogs?: boolean }={}`
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/cli/src/testing/events.js#L10)_
+
 ## bench
 
 _Available since 0.1.0_

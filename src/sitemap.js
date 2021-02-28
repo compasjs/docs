@@ -3,7 +3,7 @@ import { eventStart, eventStop } from "@compas/insight";
 /**
  * Render a sitemap, ignoring 'raw' folder
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @param {string} cname
  * @param {ContentItem[]} structure
  * @returns {string}
