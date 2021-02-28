@@ -41,40 +41,41 @@
   newEvent
   <a name="newevent" class="anchor" href="#newevent">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function newEvent(logger): Event</em><br><p>Create a new event from a logger</p>
+<em>Available since 0.1.0</em><br><em>function newEvent(logger, signal?): InsightEvent</em><br><p>Create a new event from a logger</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li>logger <code>Logger</code>: Logger should have a context, like the default <code>ctx.log</code></li>
+<li>signal <code>AbortSignal|undefined?</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L11">source</a></em><br><h2 id="neweventfromevent">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L39">source</a></em><br><h2 id="neweventfromevent">
   newEventFromEvent
   <a name="neweventfromevent" class="anchor" href="#neweventfromevent">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function newEventFromEvent(event): Event</em><br><p>Create a &#39;child&#39; event, reuses the logger, adds callstack to the passed event</p>
+<em>Available since 0.1.0</em><br><em>function newEventFromEvent(event): InsightEvent</em><br><p>Create a &#39;child&#39; event, reuses the logger, adds callstack to the passed event</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li>event <code>Event</code></li>
+<li>event <code>InsightEvent</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L28">source</a></em><br><h2 id="eventstart">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L57">source</a></em><br><h2 id="eventstart">
   eventStart
   <a name="eventstart" class="anchor" href="#eventstart">#</a>
 </h2>
 <em>Available since 0.1.0</em><br><em>function eventStart(event, name): void</em><br><p>Track event start times</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li>event <code>Event</code></li>
+<li>event <code>InsightEvent</code></li>
 <li>name <code>string</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L48">source</a></em><br><h2 id="eventstop">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L83">source</a></em><br><h2 id="eventstop">
   eventStop
   <a name="eventstop" class="anchor" href="#eventstop">#</a>
 </h2>
 <em>Available since 0.1.0</em><br><em>function eventStop(event): void</em><br><p>Track event end times and log if necessary</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li>event <code>Event</code></li>
+<li>event <code>InsightEvent</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L80">source</a></em><br><h2 id="bytestohumanreadable">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/insight/src/events.js#L123">source</a></em><br><h2 id="bytestohumanreadable">
   bytesToHumanReadable
   <a name="bytestohumanreadable" class="anchor" href="#bytestohumanreadable">#</a>
 </h2>
