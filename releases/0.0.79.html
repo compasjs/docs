@@ -83,24 +83,24 @@ provided to <code>useQuery</code>. If provided, the <code>cancelToken#token</cod
 to the generated api client function, and the <code>cancelToken#cancel</code> function is
 added to the returned Promise. This is behaviour is mostly in line with
 <a href="https://react-query.tanstack.com/docs/guides/query-cancellation#using-axios">react-query documentation</a>.</p>
-<pre><code class="language-tsx">import { CancelToken, CancelTokenSource } from &quot;axios&quot;;
+<pre><code class="language-tsx"><span class="hljs-keyword">import</span> { CancelToken, CancelTokenSource } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;axios&quot;</span>;
 
-export const MyComponent = () =&gt; {
-  const [count, setCount] = useState(0);
-  // I don&#x27;t know React, please provide better sample :S
-  const cancelToken = useMemo(() =&gt; CancelToken.source(), [count]);
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> MyComponent = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> [count, setCount] = useState(<span class="hljs-number">0</span>);
+  <span class="hljs-comment">// I don&#x27;t know React, please provide better sample :S</span>
+  <span class="hljs-keyword">const</span> cancelToken = useMemo(<span class="hljs-function">() =&gt;</span> CancelToken.source(), [count]);
 
-  // Expensive operation
-  const { data: imageBlob } = useAppConvertCountToImage(
+  <span class="hljs-comment">// Expensive operation</span>
+  <span class="hljs-keyword">const</span> { <span class="hljs-attr">data</span>: imageBlob } = useAppConvertCountToImage(
     { count },
     { cancelToken },
   );
 
-  return (
-    &lt;div&gt;
-      &lt;Button onClick={() =&gt; setCount(count + 1)} /&gt;
-      &lt;img src={URL.createObjectURL(imageBlob)} /&gt;
-    &lt;/div&gt;
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setCount(count + 1)} /&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">{URL.createObjectURL(imageBlob)}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 };
 </code></pre>

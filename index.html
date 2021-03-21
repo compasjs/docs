@@ -146,21 +146,21 @@ app.add(
 </code></pre>
 <p>Once the frontend is generated, see the <a href="TODO">client-setup</a>, it can be used as
 follows:</p>
-<pre><code class="language-tsx">function renderTodo({ todoId }: TodoSingleParams) {
-  // Generated react-query hook with typed results
-  const { data } = useTodoSingle({ todoId });
-  // data.id, data.value, data.done
+<pre><code class="language-tsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renderTodo</span>(<span class="hljs-params">{ todoId }: TodoSingleParams</span>) </span>{
+  <span class="hljs-comment">// Generated react-query hook with typed results</span>
+  <span class="hljs-keyword">const</span> { data } = useTodoSingle({ todoId });
+  <span class="hljs-comment">// data.id, data.value, data.done</span>
 
-  return &lt;div&gt;{/*...*/}&lt;/div&gt;;
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{/*...*/}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
 }
 
-function renderTodoList() {
-  // Typed api client
-  const api = useApi();
-  const markTodoComplete = (todoId: string) =&gt;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renderTodoList</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// Typed api client</span>
+  <span class="hljs-keyword">const</span> api = useApi();
+  <span class="hljs-keyword">const</span> markTodoComplete = <span class="hljs-function">(<span class="hljs-params">todoId: <span class="hljs-built_in">string</span></span>) =&gt;</span>
     api.todo.markComplete({ todoId });
 
-  return &lt;div&gt;{/*...*/}&lt;/div&gt;;
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{/*...*/}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
 }
 </code></pre>
 <h2 id="why">

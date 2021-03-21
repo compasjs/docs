@@ -44,16 +44,16 @@ database may be created using the provided credentials.</p>
   setStoreQueries
   <a name="setstorequeries" class="anchor" href="#setstorequeries">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function setStoreQueries({typeof import(&quot;./generated/index.js&quot;).queries} q):
-void</em><br><p>Overwrite used generated queries. This is needed when you want cascading soft
+<em>Available since 0.1.0</em><br><em>function setStoreQueries({typeof
+import(&quot;./generated/database/index.js&quot;).queries} q): void</em><br><p>Overwrite used generated queries. This is needed when you want cascading soft
 deletes to any of the exposed types. It is mandatory to be called if &#39;files&#39;,
 &#39;session&#39; or &#39;jobs&#39; are used. If you don&#39;t use the generators, you can use
 <code>storeQueries</code> as exported by <code>@compas/store</code>.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li>{typeof import(&quot;./generated/index.js&quot;).queries} q
-<code>{typeof import(&quot;./generated/index.js&quot;).queries} q</code>: {typeof
-import(&quot;./generated/index.js&quot;).queries} q</li>
+<li>{typeof import(&quot;./generated/database/index.js&quot;).queries} q
+<code>{typeof import(&quot;./generated/database/index.js&quot;).queries} q</code>: {typeof
+import(&quot;./generated/database/index.js&quot;).queries} q</li>
 </ul>
 <em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/generated.js#L15">source</a></em><br><h2 id="query">
   query
@@ -258,7 +258,8 @@ id, into the provided bucket.</p>
   getFileStream
   <a name="getfilestream" class="anchor" href="#getfilestream">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function getFileStream(minio, bucketName, id, seek?): Promise<ReadableStream></em><br><p>Get a file stream based on the &#39;id&#39;. It is expected that an object exists with
+<em>Available since 0.1.0</em><br><em>function getFileStream(minio, bucketName, id, seek?):
+Promise&lt;NodeJS.ReadableStream&gt;</em><br><p>Get a file stream based on the &#39;id&#39;. It is expected that an object exists with
 the &#39;id&#39;. A &#39;start&#39; and &#39;end&#39; value can optionally be specified.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
