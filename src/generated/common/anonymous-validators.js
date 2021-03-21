@@ -152,29 +152,32 @@ export function anonymousValidator1988053796(
   if (isNil(value)) {
     return value;
   }
-  if (typeof value === "string") {
-    value = anonymousValidator852571656(value, propertyPath, errors, "date");
-    if (!value) {
-      return value;
-    }
-  }
-  try {
-    const date = new Date(value);
-    if (!isNaN(date.getTime())) {
-      return date;
-    }
-  } catch {
+  if (
+    typeof value !== "string" &&
+    typeof value !== "number" &&
+    !(value instanceof Date)
+  ) {
     errors.push({
       key: `validator.${parentType}.invalid`,
       info: { propertyPath },
     });
     return undefined;
   }
-  errors.push({
-    key: `validator.${parentType}.invalid`,
-    info: { propertyPath },
-  });
-  return undefined;
+  if (typeof value === "string") {
+    value = anonymousValidator852571656(value, propertyPath, errors, "date");
+    if (!value) {
+      return value;
+    }
+  }
+  const date = new Date(value);
+  if (isNaN(date.getTime())) {
+    errors.push({
+      key: `validator.${parentType}.invalid`,
+      info: { propertyPath },
+    });
+    return undefined;
+  }
+  return date;
 }
 /**
  * @param {*} value

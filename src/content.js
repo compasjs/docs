@@ -5,7 +5,7 @@ import { pathJoin, processDirectoryRecursive } from "@compas/stdlib";
 import frontMatter from "front-matter";
 import hljs from "highlight.js";
 import marked from "marked";
-import { validateContentItem } from "./generated/validators.js";
+import { validateContentItem } from "./generated/content/validators.js";
 
 const contentDirectory = pathJoin(process.cwd(), "content");
 
@@ -75,7 +75,7 @@ export function setMarkedOptions() {
     renderer: new marked.Renderer(),
     highlight: function (code, language) {
       const validLanguage = hljs.getLanguage(language) ? language : "plaintext";
-      return hljs.highlight(validLanguage, code).value;
+      return hljs.highlight(code, { language: validLanguage }).value;
     },
   });
 

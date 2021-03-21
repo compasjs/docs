@@ -22,7 +22,7 @@ Register top-level tests. The main entry point of the test runner
 - callback `TestCallback`: The function that is executed by the test runner.
   This can do async setup, register child tests and run assertions
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/cli/src/testing/runner.js#L84)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/cli/src/testing/runner.js#L97)_
 
 ## mainTestFn
 

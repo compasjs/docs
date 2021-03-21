@@ -23,7 +23,7 @@ export const cliWatchOptions = {
  * @param {Logger} logger
  * @returns {Promise<void>}
  */
-async function main(logger) {
+function main(logger) {
   const app = getApp({});
   const port = environment.PORT || 3000;
   const devServerCname = `http://localhost:${port}`;

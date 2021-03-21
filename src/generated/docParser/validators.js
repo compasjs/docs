@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 
 import {
-  anonymousValidator1278404364,
   anonymousValidator1282872738,
   anonymousValidator1407080209,
   anonymousValidator1831335775,
@@ -12,23 +11,7 @@ import {
   anonymousValidator781728730,
   anonymousValidator796176522,
   anonymousValidator835333298,
-} from "./anonymous-validators.js";
-/**
- * @param {undefined|*} value
- * @param {string|undefined} [propertyPath]
- * @returns {{ data: ContentItem | undefined, errors: ({ key: string, info: any }[])|undefined}}
- */
-export function validateContentItem(value, propertyPath = "$") {
-  const errors = [];
-  const data = anonymousValidator1278404364(value, propertyPath, errors);
-  if (errors.length > 0) {
-    return { data: undefined, errors };
-  }
-  return {
-    data,
-    errors: undefined,
-  };
-}
+} from "../common/anonymous-validators.js";
 /**
  * @param {undefined|*} value
  * @param {string|undefined} [propertyPath]

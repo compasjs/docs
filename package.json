@@ -6,17 +6,17 @@
   "scripts": {},
   "dependencies": {},
   "devDependencies": {
-    "@compas/cli": "0.0.122",
-    "@compas/code-gen": "0.0.122",
-    "@compas/insight": "0.0.122",
-    "@compas/lint-config": "0.0.122",
-    "@compas/server": "0.0.122",
-    "@compas/stdlib": "0.0.122",
-    "@compas/store": "0.0.122",
+    "@compas/cli": "0.0.124",
+    "@compas/code-gen": "0.0.124",
+    "@compas/insight": "0.0.124",
+    "@compas/lint-config": "0.0.124",
+    "@compas/server": "0.0.124",
+    "@compas/stdlib": "0.0.124",
+    "@compas/store": "0.0.124",
     "front-matter": "4.0.2",
-    "highlight.js": "10.6.0",
+    "highlight.js": "10.7.1",
     "marked": "2.0.1",
-    "meriyah": "4.1.4"
+    "meriyah": "4.1.5"
   },
   "engines": {
     "node": ">=15"

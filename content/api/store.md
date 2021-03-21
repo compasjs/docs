@@ -29,8 +29,8 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/store/src/postgr
 
 _Available since 0.1.0_
 
-_function setStoreQueries({typeof import("./generated/index.js").queries} q):
-void_
+_function setStoreQueries({typeof
+import("./generated/database/index.js").queries} q): void_
 
 Overwrite used generated queries. This is needed when you want cascading soft
 deletes to any of the exposed types. It is mandatory to be called if 'files',
@@ -39,9 +39,9 @@ deletes to any of the exposed types. It is mandatory to be called if 'files',
 
 **Parameters**:
 
-- {typeof import("./generated/index.js").queries} q
-  `{typeof import("./generated/index.js").queries} q`: {typeof
-  import("./generated/index.js").queries} q
+- {typeof import("./generated/database/index.js").queries} q
+  `{typeof import("./generated/database/index.js").queries} q`: {typeof
+  import("./generated/database/index.js").queries} q
 
 _[source](https://github.com/compasjs/compas/blob/main/packages/store/src/generated.js#L15)_
 
@@ -333,7 +333,8 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.
 
 _Available since 0.1.0_
 
-_function getFileStream(minio, bucketName, id, seek?): Promise<ReadableStream>_
+_function getFileStream(minio, bucketName, id, seek?):
+Promise<NodeJS.ReadableStream>_
 
 Get a file stream based on the 'id'. It is expected that an object exists with
 the 'id'. A 'start' and 'end' value can optionally be specified.
