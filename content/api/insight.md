@@ -18,9 +18,9 @@ Create a new logger instance
 
 **Parameters**:
 
-- options `LoggerOptions?`
+- options `LoggerOptions|undefined?`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/logger/logger.js#L13)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/insight/src/logger/logger.js#L41)_
 
 ## newEvent
 

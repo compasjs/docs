@@ -39,7 +39,7 @@ ES module compatibility counterpart of the CommonJS \_\_filename
 
 - meta `ImportMeta`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L128)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L127)_
 
 ## dirnameForModule
 
@@ -53,7 +53,7 @@ ES module compatibility counterpart of the CommonJS \_\_dirname
 
 - meta `ImportMeta`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L140)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L139)_
 
 ## isProduction
 
