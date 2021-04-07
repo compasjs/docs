@@ -7,7 +7,7 @@ const objectKeys1278404364 = new Set([
   "metadata",
   "htmlContent",
 ]);
-const objectKeys675969221 = new Set([
+const objectKeys48529790 = new Set([
   "type",
   "title",
   "date",
@@ -186,7 +186,7 @@ export function anonymousValidator1988053796(
  * @param {string} parentType
  * @returns {number|undefined}
  */
-export function anonymousValidator840286224(
+export function anonymousValidator1483765921(
   value,
   propertyPath,
   errors = [],
@@ -213,6 +213,22 @@ export function anonymousValidator840286224(
     errors.push({
       key: `validator.${parentType}.integer`,
       info: { propertyPath },
+    });
+    return undefined;
+  }
+  if (value < -2147483647) {
+    const min = -2147483647;
+    errors.push({
+      key: `validator.${parentType}.min`,
+      info: { propertyPath, min },
+    });
+    return undefined;
+  }
+  if (value > 2147483647) {
+    const max = 2147483647;
+    errors.push({
+      key: `validator.${parentType}.max`,
+      info: { propertyPath, max },
     });
     return undefined;
   }
@@ -262,7 +278,7 @@ export function anonymousValidator1898391521(
  * @param {string} parentType
  * @returns {undefined|{"type": "blog"|"page", "title": string, "date"?: undefined|Date, "description": string, "order": number, "tags": (string)[], }|undefined}
  */
-export function anonymousValidator675969221(
+export function anonymousValidator48529790(
   value,
   propertyPath,
   errors = [],
@@ -280,7 +296,7 @@ export function anonymousValidator675969221(
   }
   const result = Object.create(null);
   for (const key of Object.keys(value)) {
-    if (!objectKeys675969221.has(key)) {
+    if (!objectKeys48529790.has(key)) {
       errors.push({
         key: `validator.${parentType}.strict`,
         info: { propertyPath, extraKey: key },
@@ -312,7 +328,7 @@ export function anonymousValidator675969221(
     `${propertyPath}.description`,
     errors,
   );
-  result["order"] = anonymousValidator840286224(
+  result["order"] = anonymousValidator1483765921(
     value["order"],
     `${propertyPath}.order`,
     errors,
@@ -407,7 +423,7 @@ export function anonymousValidator1278404364(
     `${propertyPath}.contentPath`,
     errors,
   );
-  result["metadata"] = anonymousValidator675969221(
+  result["metadata"] = anonymousValidator48529790(
     value["metadata"],
     `${propertyPath}.metadata`,
     errors,
@@ -426,7 +442,7 @@ export function anonymousValidator1278404364(
  * @param {string} parentType
  * @returns {number|undefined}
  */
-export function anonymousValidator105524495(
+export function anonymousValidator293751998(
   value,
   propertyPath,
   errors = [],
@@ -450,6 +466,22 @@ export function anonymousValidator105524495(
     errors.push({
       key: `validator.${parentType}.integer`,
       info: { propertyPath },
+    });
+    return undefined;
+  }
+  if (value < -2147483647) {
+    const min = -2147483647;
+    errors.push({
+      key: `validator.${parentType}.min`,
+      info: { propertyPath, min },
+    });
+    return undefined;
+  }
+  if (value > 2147483647) {
+    const max = 2147483647;
+    errors.push({
+      key: `validator.${parentType}.max`,
+      info: { propertyPath, max },
     });
     return undefined;
   }
@@ -492,12 +524,12 @@ export function anonymousValidator781728730(
       return undefined;
     }
   }
-  result["start"] = anonymousValidator105524495(
+  result["start"] = anonymousValidator293751998(
     value["start"],
     `${propertyPath}.start`,
     errors,
   );
-  result["end"] = anonymousValidator105524495(
+  result["end"] = anonymousValidator293751998(
     value["end"],
     `${propertyPath}.end`,
     errors,
