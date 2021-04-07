@@ -170,7 +170,27 @@ default &#39;stdio&#39; is inherited from the current process.</p>
 <li>{string[]} args <code>{string[]} args</code>: {string[]} args</li>
 <li>opts <code>object={}</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/node.js#L62">source</a></em><br><h2 id="processdirectoryrecursive">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/node.js#L62">source</a></em><br><h2 id="calculatecookieurlfromappurl">
+  calculateCookieUrlFromAppUrl
+  <a name="calculatecookieurlfromappurl" class="anchor" href="#calculatecookieurlfromappurl">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function calculateCookieUrlFromAppUrl(): void</em><br><p>Try to calculate the COOKIE_URL environment variable from the APP_URL
+environment variable. Assumes the APP_URL is in the following format:
+http(s)://api.xxx.xx.com and generates the following COOKIE_URL value:
+xxx.xx.com. If the APP_URL host only contains xxx.com the CORS_URL value will be
+equivalent. Refreshing the environment cache via <code>refreshEnvironmentCache</code> is
+not necessary.</p>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/env.js#L101">source</a></em><br><h2 id="calculatecorsurlfromappurl">
+  calculateCorsUrlFromAppUrl
+  <a name="calculatecorsurlfromappurl" class="anchor" href="#calculatecorsurlfromappurl">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function calculateCorsUrlFromAppUrl(): void</em><br><p>Try to calculate the CORS_URL environment variable from the APP_URL environment
+variable. Assumes the APP_URL is in the following format:
+http(s)://api.xxx.xx.com and generates the following CORS_URL value:
+http(s)://xxx.xx.com. If the APP_URL host only contains xxx.com the CORS_URL
+value will be equivalent. Refreshing the environment cache via
+<code>refreshEnvironmentCache</code> is not necessary.</p>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/env.js#L72">source</a></em><br><h2 id="processdirectoryrecursive">
   processDirectoryRecursive
   <a name="processdirectoryrecursive" class="anchor" href="#processdirectoryrecursive">#</a>
 </h2>
