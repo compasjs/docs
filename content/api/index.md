@@ -39,6 +39,8 @@ The public compas API, a work in progress.
 - [pathJoin](/api/stdlib.html#pathjoin)
 - [exec](/api/stdlib.html#exec)
 - [spawn](/api/stdlib.html#spawn)
+- [calculateCookieUrlFromAppUrl](/api/stdlib.html#calculatecookieurlfromappurl)
+- [calculateCorsUrlFromAppUrl](/api/stdlib.html#calculatecorsurlfromappurl)
 - [processDirectoryRecursive](/api/stdlib.html#processdirectoryrecursive)
 - [processDirectoryRecursiveSync](/api/stdlib.html#processdirectoryrecursivesync)
 - [flatten](/api/stdlib.html#flatten)

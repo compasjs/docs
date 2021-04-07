@@ -228,6 +228,36 @@ default 'stdio' is inherited from the current process.
 
 _[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/node.js#L62)_
 
+## calculateCookieUrlFromAppUrl
+
+_Available since 0.1.0_
+
+_function calculateCookieUrlFromAppUrl(): void_
+
+Try to calculate the COOKIE_URL environment variable from the APP_URL
+environment variable. Assumes the APP_URL is in the following format:
+http(s)://api.xxx.xx.com and generates the following COOKIE_URL value:
+xxx.xx.com. If the APP_URL host only contains xxx.com the CORS_URL value will be
+equivalent. Refreshing the environment cache via `refreshEnvironmentCache` is
+not necessary.
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/env.js#L101)_
+
+## calculateCorsUrlFromAppUrl
+
+_Available since 0.1.0_
+
+_function calculateCorsUrlFromAppUrl(): void_
+
+Try to calculate the CORS_URL environment variable from the APP_URL environment
+variable. Assumes the APP_URL is in the following format:
+http(s)://api.xxx.xx.com and generates the following CORS_URL value:
+http(s)://xxx.xx.com. If the APP_URL host only contains xxx.com the CORS_URL
+value will be equivalent. Refreshing the environment cache via
+`refreshEnvironmentCache` is not necessary.
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/env.js#L72)_
+
 ## processDirectoryRecursive
 
 _Available since 0.1.0_

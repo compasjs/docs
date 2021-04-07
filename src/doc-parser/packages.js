@@ -56,6 +56,8 @@ export const symbols = {
     "pathJoin",
     "exec",
     "spawn",
+    "calculateCookieUrlFromAppUrl",
+    "calculateCorsUrlFromAppUrl",
     "processDirectoryRecursive",
     "processDirectoryRecursiveSync",
     "flatten",
