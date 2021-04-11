@@ -23,128 +23,163 @@ Unified backend tooling
 
 ## Requirements
 
-- Node.js >= 14
+- Node.js >= 15
 - Yarn 1.x.x
 
-## Sneak peak
+## I'm a...
 
-A small peak in how what the code generators can help you with:
+- [Backend developer](/#backenddeveloper)
+- [Frontend developer](/#backenddeveloper)
+- [Manager](/todo.md)
 
-### Validators
+### Backend developer
 
-A quick showcase of the TypeCreator and how the resulting functions can be used
-
-```js
-import { App, TypeCreator } from "@compas/code-gen";
-
-const app = new App();
-
-app.add(
-  T.object("user").keys({
-    name: T.string().min(3),
-    height: T.number()
-      .float()
-      .max(2.2)
-      .docs("Height in meters, we don't support giants"),
-    wantsSpamEmail: T.bool().default(false),
-  }),
-);
-
-app.generate({
-  outputDirectory: "./generated/validators",
-  enabledGenerators: ["type", "validator"],
-});
-```
-
-And some examples of how to use the generated code:
+Provide the HTTP api structure:
 
 ```js
-import { uuid } from "@compas/stdlib";
-import { validateAppTodo } from "./generated/validators/index.js";
-
-// Throws AppError: validator.string.undefined at $.name
-validateAppTodo({});
-
-// Throws AppError: validator.string.min at $.name, min: 3
-validateAppTodo({
-  name: "Ab",
-});
-
-const user = validateAppTodo({
-  name: "Dirk",
-  height: 1.88,
-});
-// user.wantsSpamEmail === false
-```
-
-### Router and api clients
-
-Showing the api client and react-query based hooks as generated for an api
-consumer. Backend structure:
-
-```js
-import { App, TypeCreator } from "@compas/code-gen";
-
-const app = new App();
 const T = new TypeCreator("todo");
 const R = T.router("/todo");
 
-const todo = T.object("item").keys({
-  id: T.uuid(),
-  value: T.string(),
-  done: T.bool(),
+R.get("/list", "list").response({
+  todos: [
+    {
+      id: T.uuid(),
+      todo: T.string(),
+      completed: T.boolean(),
+    },
+  ],
 });
-
-app.add(
-  R.get("/", "list").response({
-    list: [todo],
-  }),
-
-  R.get("/:todoId", "single")
-    .params({
-      todoId: T.uuid(),
-    })
-    .response({
-      todo,
-    }),
-
-  R.post("/", "create")
-    .body({
-      value: T.string(),
-    })
-    .response({
-      todo,
-    }),
-
-  R.post("/:todoId/complete", "markComplete").response({
-    success: true,
-  }),
-);
-
-// ... app.generate
 ```
 
-Once the frontend is generated, see the [client-setup](TODO), it can be used as
-follows:
+Add an implementation:
+
+```js
+todoHandlers.list = async (ctx, next) => {
+  ctx.body = {
+    todo: [
+      {
+        id: uuid(),
+        todo: "Explore compas",
+      },
+    ],
+  };
+
+  return next();
+};
+```
+
+Create a test:
+
+```js
+test("todo/controller", async (t) => {
+  const apiClient = Axios.create({});
+  await createTestAppAndClient(app, apiClient);
+
+  t.test("list conforms to response structure", async (t) => {
+    await todoApi.list();
+    // Throws: validator.response.todo.list.boolean.type -> Missing boolean value at '$.todo[0].completed'
+  });
+});
+```
+
+And some icing on the cake, by generating some PostgreSQL queries:
+
+```js
+const T = new TypeCreator("database");
+
+T.object("user")
+  .keys({
+    email: T.string().searchable(),
+    name: T.string(),
+  })
+  .enableQueries({
+    withDates: true,
+  })
+  .relations(T.oneToMany("posts", T.reference("database", "post")));
+
+T.object("post")
+  .keys({
+    title: T.string(),
+    body: T.string(),
+  })
+  .enableQueries({
+    withSoftDeletes: true,
+  })
+  .relations(T.manyToOne("author", T.reference("database", "user"), "posts"));
+```
+
+With queries like the following:
+
+```js
+const [user] = await queryUser({ where: { email: "foo@bar.com" } }).exec(sql);
+const usersWithPosts = await queryUser({ posts: {} }).exec(sql);
+
+const postsForAuthor = await queryPost({ where: { author: user.id } }).exe(sql);
+const [authorOfPost] = await queryUser({
+  viaPosts: { where: { id: postsForAuthor[0].id } },
+}).exec(sql);
+// postsForAuthor[0].author == authorOfPost.id
+
+await queries.userInsert(sql, { email: "bar@foo.com", name: "Compas " });
+
+// soft delete
+await queries.postDelete(sql, { id: "c532ac2a-4489-4b50-a061-12b2aa9a5df2" });
+// Search include soft deleted posts
+await queryPost({ where: { deletedAtIncludeNotNull: true } });
+// permanent delete
+await queries.postDeletePermanent(sql, {
+  id: "c532ac2a-4489-4b50-a061-12b2aa9a5df2",
+});
+```
+
+### Frontend developer
+
+Either import from a Compas server:
+
+```js
+const app = new App();
+app.extend(await loadFromRemote(Axios, "https://api.my-domain.com"));
+app.generate({
+  outputDirectory: "./src/generated",
+  isBrowser: true,
+});
+```
+
+Or import from an OpenAPI spec (alpha-quality :S):
+
+```js
+const app = new App();
+app.extendWithOpenApi("todo", getAnOpenAPISpecAsPlainJavascriptObject());
+app.generate({
+  outputDirectory: "./src/generated",
+  isBrowser: true,
+});
+```
+
+And use the typed api client:
+
+```ts
+const todos: TodoListResponse = await apiTodoList();
+```
+
+Or use the generated react-query hooks:
 
 ```tsx
 function renderTodo({ todoId }: TodoSingleParams) {
   // Generated react-query hook with typed results
   const { data } = useTodoSingle({ todoId });
-  // data.id, data.value, data.done
-
-  return <div>{/*...*/}</div>;
-}
-
-function renderTodoList() {
-  // Typed api client
-  const api = useApi();
-  const markTodoComplete = (todoId: string) =>
-    api.todo.markComplete({ todoId });
 
   return <div>{/*...*/}</div>;
 }
 ```
+
+## How it works
+
+Most of the above is achieved by a custom specification, a few code generators
+and a bunch of time tweaking results to achieve a stable way of working. Which
+benefits backend developers with less copy-pasting, easy 'interface'-testing and
+less manual doc writing, and frontend developers with explorable and ready to
+consume api's.
 
 ## Why
 
@@ -154,10 +189,11 @@ copying and pasting things around, this project was born.
 
 ## Docs and development
 
-See [the website](https://compasjs.com) for the changelog, all available APIs
-and various guides.
+See [the website](https://compasjs.com) for the
+[changelog](https://compasjs.com/changelog.html), all available APIs and various
+guides.
 
-For contributing see [contributing.md](https://compasjs.com/contributing).
+For contributing see [contributing](https://compasjs.com/contributing.html).
 
 ## New features
 
