@@ -28,8 +28,8 @@ Unified backend tooling
 
 ## I'm a...
 
-- [Backend developer](/#backenddeveloper)
-- [Frontend developer](/#backenddeveloper)
+- [Backend developer](/#backend-developer)
+- [Frontend developer](/#frontend-developer)
 - [Manager](/todo.md)
 
 ### Backend developer
