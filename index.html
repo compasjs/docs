@@ -47,122 +47,145 @@ Postgres queries</li>
   <a name="requirements" class="anchor" href="#requirements">#</a>
 </h2>
 <ul>
-<li>Node.js &gt;= 14</li>
+<li>Node.js &gt;= 15</li>
 <li>Yarn 1.x.x</li>
 </ul>
-<h2 id="sneak-peak">
-  Sneak peak
-  <a name="sneak-peak" class="anchor" href="#sneak-peak">#</a>
+<h2 id="im-a">
+  I&#39;m a...
+  <a name="im-a" class="anchor" href="#im-a">#</a>
 </h2>
-<p>A small peak in how what the code generators can help you with:</p>
-<h3 id="validators">
-  Validators
-  <a name="validators" class="anchor" href="#validators">#</a>
+<ul>
+<li><a href="/#backenddeveloper">Backend developer</a></li>
+<li><a href="/#backenddeveloper">Frontend developer</a></li>
+<li><a href="/todo.md">Manager</a></li>
+</ul>
+<h3 id="backend-developer">
+  Backend developer
+  <a name="backend-developer" class="anchor" href="#backend-developer">#</a>
 </h3>
-<p>A quick showcase of the TypeCreator and how the resulting functions can be used</p>
-<pre><code class="language-js"><span class="hljs-keyword">import</span> { App, TypeCreator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/code-gen&quot;</span>;
-
-<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> App();
-
-app.add(
-  T.object(<span class="hljs-string">&quot;user&quot;</span>).keys({
-    <span class="hljs-attr">name</span>: T.string().min(<span class="hljs-number">3</span>),
-    <span class="hljs-attr">height</span>: T.number()
-      .float()
-      .max(<span class="hljs-number">2.2</span>)
-      .docs(<span class="hljs-string">&quot;Height in meters, we don&#x27;t support giants&quot;</span>),
-    <span class="hljs-attr">wantsSpamEmail</span>: T.bool().default(<span class="hljs-literal">false</span>),
-  }),
-);
-
-app.generate({
-  <span class="hljs-attr">outputDirectory</span>: <span class="hljs-string">&quot;./generated/validators&quot;</span>,
-  <span class="hljs-attr">enabledGenerators</span>: [<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;validator&quot;</span>],
-});
-</code></pre>
-<p>And some examples of how to use the generated code:</p>
-<pre><code class="language-js"><span class="hljs-keyword">import</span> { uuid } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
-<span class="hljs-keyword">import</span> { validateAppTodo } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./generated/validators/index.js&quot;</span>;
-
-<span class="hljs-comment">// Throws AppError: validator.string.undefined at $.name</span>
-validateAppTodo({});
-
-<span class="hljs-comment">// Throws AppError: validator.string.min at $.name, min: 3</span>
-validateAppTodo({
-  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Ab&quot;</span>,
-});
-
-<span class="hljs-keyword">const</span> user = validateAppTodo({
-  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Dirk&quot;</span>,
-  <span class="hljs-attr">height</span>: <span class="hljs-number">1.88</span>,
-});
-<span class="hljs-comment">// user.wantsSpamEmail === false</span>
-</code></pre>
-<h3 id="router-and-api-clients">
-  Router and api clients
-  <a name="router-and-api-clients" class="anchor" href="#router-and-api-clients">#</a>
-</h3>
-<p>Showing the api client and react-query based hooks as generated for an api
-consumer. Backend structure:</p>
-<pre><code class="language-js"><span class="hljs-keyword">import</span> { App, TypeCreator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/code-gen&quot;</span>;
-
-<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> App();
-<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator(<span class="hljs-string">&quot;todo&quot;</span>);
+<p>Provide the HTTP api structure:</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator(<span class="hljs-string">&quot;todo&quot;</span>);
 <span class="hljs-keyword">const</span> R = T.router(<span class="hljs-string">&quot;/todo&quot;</span>);
 
-<span class="hljs-keyword">const</span> todo = T.object(<span class="hljs-string">&quot;item&quot;</span>).keys({
-  <span class="hljs-attr">id</span>: T.uuid(),
-  <span class="hljs-attr">value</span>: T.string(),
-  <span class="hljs-attr">done</span>: T.bool(),
+R.get(<span class="hljs-string">&quot;/list&quot;</span>, <span class="hljs-string">&quot;list&quot;</span>).response({
+  <span class="hljs-attr">todos</span>: [
+    {
+      <span class="hljs-attr">id</span>: T.uuid(),
+      <span class="hljs-attr">todo</span>: T.string(),
+      <span class="hljs-attr">completed</span>: T.boolean(),
+    },
+  ],
 });
-
-app.add(
-  R.get(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-string">&quot;list&quot;</span>).response({
-    <span class="hljs-attr">list</span>: [todo],
-  }),
-
-  R.get(<span class="hljs-string">&quot;/:todoId&quot;</span>, <span class="hljs-string">&quot;single&quot;</span>)
-    .params({
-      <span class="hljs-attr">todoId</span>: T.uuid(),
-    })
-    .response({
-      todo,
-    }),
-
-  R.post(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-string">&quot;create&quot;</span>)
-    .body({
-      <span class="hljs-attr">value</span>: T.string(),
-    })
-    .response({
-      todo,
-    }),
-
-  R.post(<span class="hljs-string">&quot;/:todoId/complete&quot;</span>, <span class="hljs-string">&quot;markComplete&quot;</span>).response({
-    <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
-  }),
-);
-
-<span class="hljs-comment">// ... app.generate</span>
 </code></pre>
-<p>Once the frontend is generated, see the <a href="TODO">client-setup</a>, it can be used as
-follows:</p>
+<p>Add an implementation:</p>
+<pre><code class="language-js">todoHandlers.list = <span class="hljs-keyword">async</span> (ctx, next) =&gt; {
+  ctx.body = {
+    <span class="hljs-attr">todo</span>: [
+      {
+        <span class="hljs-attr">id</span>: uuid(),
+        <span class="hljs-attr">todo</span>: <span class="hljs-string">&quot;Explore compas&quot;</span>,
+      },
+    ],
+  };
+
+  <span class="hljs-keyword">return</span> next();
+};
+</code></pre>
+<p>Create a test:</p>
+<pre><code class="language-js">test(<span class="hljs-string">&quot;todo/controller&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
+  <span class="hljs-keyword">const</span> apiClient = Axios.create({});
+  <span class="hljs-keyword">await</span> createTestAppAndClient(app, apiClient);
+
+  t.test(<span class="hljs-string">&quot;list conforms to response structure&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
+    <span class="hljs-keyword">await</span> todoApi.list();
+    <span class="hljs-comment">// Throws: validator.response.todo.list.boolean.type -&gt; Missing boolean value at &#x27;$.todo[0].completed&#x27;</span>
+  });
+});
+</code></pre>
+<p>And some icing on the cake, by generating some PostgreSQL queries:</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator(<span class="hljs-string">&quot;database&quot;</span>);
+
+T.object(<span class="hljs-string">&quot;user&quot;</span>)
+  .keys({
+    <span class="hljs-attr">email</span>: T.string().searchable(),
+    <span class="hljs-attr">name</span>: T.string(),
+  })
+  .enableQueries({
+    <span class="hljs-attr">withDates</span>: <span class="hljs-literal">true</span>,
+  })
+  .relations(T.oneToMany(<span class="hljs-string">&quot;posts&quot;</span>, T.reference(<span class="hljs-string">&quot;database&quot;</span>, <span class="hljs-string">&quot;post&quot;</span>)));
+
+T.object(<span class="hljs-string">&quot;post&quot;</span>)
+  .keys({
+    <span class="hljs-attr">title</span>: T.string(),
+    <span class="hljs-attr">body</span>: T.string(),
+  })
+  .enableQueries({
+    <span class="hljs-attr">withSoftDeletes</span>: <span class="hljs-literal">true</span>,
+  })
+  .relations(T.manyToOne(<span class="hljs-string">&quot;author&quot;</span>, T.reference(<span class="hljs-string">&quot;database&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>), <span class="hljs-string">&quot;posts&quot;</span>));
+</code></pre>
+<p>With queries like the following:</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> [user] = <span class="hljs-keyword">await</span> queryUser({ <span class="hljs-attr">where</span>: { <span class="hljs-attr">email</span>: <span class="hljs-string">&quot;foo@bar.com&quot;</span> } }).exec(sql);
+<span class="hljs-keyword">const</span> usersWithPosts = <span class="hljs-keyword">await</span> queryUser({ <span class="hljs-attr">posts</span>: {} }).exec(sql);
+
+<span class="hljs-keyword">const</span> postsForAuthor = <span class="hljs-keyword">await</span> queryPost({ <span class="hljs-attr">where</span>: { <span class="hljs-attr">author</span>: user.id } }).exe(sql);
+<span class="hljs-keyword">const</span> [authorOfPost] = <span class="hljs-keyword">await</span> queryUser({
+  <span class="hljs-attr">viaPosts</span>: { <span class="hljs-attr">where</span>: { <span class="hljs-attr">id</span>: postsForAuthor[<span class="hljs-number">0</span>].id } },
+}).exec(sql);
+<span class="hljs-comment">// postsForAuthor[0].author == authorOfPost.id</span>
+
+<span class="hljs-keyword">await</span> queries.userInsert(sql, { <span class="hljs-attr">email</span>: <span class="hljs-string">&quot;bar@foo.com&quot;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Compas &quot;</span> });
+
+<span class="hljs-comment">// soft delete</span>
+<span class="hljs-keyword">await</span> queries.postDelete(sql, { <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;c532ac2a-4489-4b50-a061-12b2aa9a5df2&quot;</span> });
+<span class="hljs-comment">// Search include soft deleted posts</span>
+<span class="hljs-keyword">await</span> queryPost({ <span class="hljs-attr">where</span>: { <span class="hljs-attr">deletedAtIncludeNotNull</span>: <span class="hljs-literal">true</span> } });
+<span class="hljs-comment">// permanent delete</span>
+<span class="hljs-keyword">await</span> queries.postDeletePermanent(sql, {
+  <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;c532ac2a-4489-4b50-a061-12b2aa9a5df2&quot;</span>,
+});
+</code></pre>
+<h3 id="frontend-developer">
+  Frontend developer
+  <a name="frontend-developer" class="anchor" href="#frontend-developer">#</a>
+</h3>
+<p>Either import from a Compas server:</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> App();
+app.extend(<span class="hljs-keyword">await</span> loadFromRemote(Axios, <span class="hljs-string">&quot;https://api.my-domain.com&quot;</span>));
+app.generate({
+  <span class="hljs-attr">outputDirectory</span>: <span class="hljs-string">&quot;./src/generated&quot;</span>,
+  <span class="hljs-attr">isBrowser</span>: <span class="hljs-literal">true</span>,
+});
+</code></pre>
+<p>Or import from an OpenAPI spec (alpha-quality :S):</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> App();
+app.extendWithOpenApi(<span class="hljs-string">&quot;todo&quot;</span>, getAnOpenAPISpecAsPlainJavascriptObject());
+app.generate({
+  <span class="hljs-attr">outputDirectory</span>: <span class="hljs-string">&quot;./src/generated&quot;</span>,
+  <span class="hljs-attr">isBrowser</span>: <span class="hljs-literal">true</span>,
+});
+</code></pre>
+<p>And use the typed api client:</p>
+<pre><code class="language-ts"><span class="hljs-keyword">const</span> todos: TodoListResponse = <span class="hljs-keyword">await</span> apiTodoList();
+</code></pre>
+<p>Or use the generated react-query hooks:</p>
 <pre><code class="language-tsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renderTodo</span>(<span class="hljs-params">{ todoId }: TodoSingleParams</span>) </span>{
   <span class="hljs-comment">// Generated react-query hook with typed results</span>
   <span class="hljs-keyword">const</span> { data } = useTodoSingle({ todoId });
-  <span class="hljs-comment">// data.id, data.value, data.done</span>
-
-  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{/*...*/}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
-}
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renderTodoList</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-comment">// Typed api client</span>
-  <span class="hljs-keyword">const</span> api = useApi();
-  <span class="hljs-keyword">const</span> markTodoComplete = <span class="hljs-function">(<span class="hljs-params">todoId: <span class="hljs-built_in">string</span></span>) =&gt;</span>
-    api.todo.markComplete({ todoId });
 
   <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{/*...*/}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
 }
 </code></pre>
+<h2 id="how-it-works">
+  How it works
+  <a name="how-it-works" class="anchor" href="#how-it-works">#</a>
+</h2>
+<p>Most of the above is achieved by a custom specification, a few code generators
+and a bunch of time tweaking results to achieve a stable way of working. Which
+benefits backend developers with less copy-pasting, easy &#39;interface&#39;-testing and
+less manual doc writing, and frontend developers with explorable and ready to
+consume api&#39;s.</p>
 <h2 id="why">
   Why
   <a name="why" class="anchor" href="#why">#</a>
@@ -174,9 +197,10 @@ copying and pasting things around, this project was born.</p>
   Docs and development
   <a name="docs-and-development" class="anchor" href="#docs-and-development">#</a>
 </h2>
-<p>See <a href="https://compasjs.com">the website</a> for the changelog, all available APIs
-and various guides.</p>
-<p>For contributing see <a href="https://compasjs.com/contributing">contributing.md</a>.</p>
+<p>See <a href="https://compasjs.com">the website</a> for the
+<a href="https://compasjs.com/changelog.html">changelog</a>, all available APIs and various
+guides.</p>
+<p>For contributing see <a href="https://compasjs.com/contributing.html">contributing</a>.</p>
 <h2 id="new-features">
   New features
   <a name="new-features" class="anchor" href="#new-features">#</a>
