@@ -57,11 +57,11 @@ koa-body parses url-encoded, form data, json and text by default.
 
 **Parameters**:
 
-- bodyOpts `IKoaBodyOptions={}`: Options that will be passed to koa-body
+- bodyOpts `KoaBodyOptions={}`: Options that will be passed to koa-body
 - multipartBodyOpts `IFormidableBodyOptions={}`: Options that will be passed to
   formidable
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/server/src/middleware/body.js#L16)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/server/src/middleware/body.js#L37)_
 
 ## session
 

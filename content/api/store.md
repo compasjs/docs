@@ -162,20 +162,40 @@ Run the migrations currently pending in the migration context.
 
 _[source](https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L134)_
 
+## addEventToQueue
+
+_Available since 0.1.0_
+
+_function addEventToQueue(sql, eventName, data): Promise<number>_
+
+Add an event to the job queue. Use this if the default priority is important,
+like sending the user an email to verify their email. Runs with priority '2',
+the only higher priority values are priority '0' and '1'. Custom timeouts can't
+be described via this mechanism.
+
+**Parameters**:
+
+- sql `Postgres`
+- eventName `string`
+- data `object`
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L413)_
+
 ## addJobToQueue
 
 _Available since 0.1.0_
 
 _function addJobToQueue(sql, job): Promise<number>_
 
-Add a new item to the job queue.
+Add a new job to the queue. Use this for normal jobs or to customize the job
+priority. The default priority is '5'.
 
 **Parameters**:
 
 - sql `Postgres`
 - job `JobInput`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L343)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L434)_
 
 ## addRecurringJobToQueue
 
@@ -185,7 +205,8 @@ _function addRecurringJobToQueue(sql, job): Promise<void>_
 
 Add a recurring job, if no existing job with the same name is scheduled. Does
 not throw when a job is already pending with the same name. If exists will
-update the interval.
+update the interval. The default priority is '4', which is a bit more important
+than other jobs.
 
 **Parameters**:
 
@@ -193,7 +214,41 @@ update the interval.
 - job
   `{ name: string, priority?: number|undefined, interval: StoreJobInterval }`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L362)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L502)_
+
+## addJobWithCustomTimeoutToQueue
+
+_Available since 0.1.0_
+
+_function addJobWithCustomTimeoutToQueue(sql, job, timeout): Promise<number>_
+
+Add a new job to the queue. Use this for normal jobs or to customize the job
+priority. The default priority is '5'. The timeout value must be an integer
+higher than 10. The timeout value represents the number of milliseconds the
+handler may run, before the 'InsightEvent' is aborted.
+
+**Parameters**:
+
+- sql `Postgres`
+- job `JobInput`
+- timeout `number`
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L465)_
+
+## getUncompletedJobsByName
+
+_Available since undefined_
+
+_function getUncompletedJobsByName(sql): {Promise<Object<string,
+QueryResultStoreJob[]>>}_
+
+Get all uncompleted jobs from the queue. Useful for testing if jobs are created.
+
+**Parameters**:
+
+- sql `Postgres`
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L663)_
 
 ## newSessionStore
 

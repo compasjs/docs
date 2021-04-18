@@ -725,12 +725,14 @@ export function anonymousValidator2103344335(
   }
   subErrors.splice(errorCount + 1, subErrors.length - errorCount);
   errorCount = subErrors.length;
+  delete subErrors[errorCount - 1].stack;
   result = anonymousValidator1865996329(value, propertyPath, subErrors);
   if (subErrors.length === errorCount) {
     return result;
   }
   subErrors.splice(errorCount + 1, subErrors.length - errorCount);
   errorCount = subErrors.length;
+  delete subErrors[errorCount - 1].stack;
   errors.push({
     key: `validator.${parentType}.type`,
     info: { propertyPath, errors: subErrors },
@@ -1001,12 +1003,14 @@ export function anonymousValidator796176522(
   }
   subErrors.splice(errorCount + 1, subErrors.length - errorCount);
   errorCount = subErrors.length;
+  delete subErrors[errorCount - 1].stack;
   result = anonymousValidator1282872738(value, propertyPath, subErrors);
   if (subErrors.length === errorCount) {
     return result;
   }
   subErrors.splice(errorCount + 1, subErrors.length - errorCount);
   errorCount = subErrors.length;
+  delete subErrors[errorCount - 1].stack;
   errors.push({
     key: `validator.${parentType}.type`,
     info: { propertyPath, errors: subErrors },
