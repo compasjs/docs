@@ -8,12 +8,59 @@ order: 7
 
 # Background jobs
 
-Compas comes with a background job system backed by Postgres. Jobs may be
-scheduled, have a priority and can be recurring.
+The queue system is based on 'static' units of work to be done in the
+background. It supports the following:
+
+- Job priority's. Lower value means higher priority.
+- Scheduling jobs at a set time
+- Customizable handler timeouts
+- Recurring job handling
+- Concurrent workers pulling from the same queue
+- Specific workers for a specific job
+
+When to use which function of adding a job:
+
+- `addEventToQueue`: use the queue as an 'external' message bus to do things
+  based on user flows, like sending an verification email on when registering.
+  Jobs created will have a priority of '2'.
+- `addJobToQueue`: use the queue as background processing of defined units. Like
+  converting a file to different formats, sending async or scheduled
+  notifications. Jobs created will have a priority of '5'.
+- `addRecurringJobToQueue`: use the queue for recurring background processing,
+  like cleaning up sessions, generating daily reports. The interval can be as
+  low as a second. Jobs created will have a priority of '4'. This means the
+  recurring jobs are by default more important than normal jobs. However there
+  are no guarantees that jobs are running exactly on the time they are
+  scheduled.
+- `addJobWithCustomTimeoutToQueue`: when the unit of work is hard to define
+  statically for the job. For example an external api that needs all information
+  in a single call, but the amount of information is of value N. And N doesn't
+  have any bounds and is only known when the job is created. However, this sort
+  of still enforces that the unit of work is related to some other property to
+  consistently calculate a custom timeout. These jobs have a priority of '5' by
+  default.
+
+The handler can be passed in, in 2 ways;
+
+- A single handler dispatching over the different jobs in application code
+- A plain JS object containing job names as strings, and handler with optional
+  timeout as value.
+
+The timeout of a created job overwrites the specific job timeout which
+overwrites the 'handlerTimeout' option.
+
+Note that a lower priority value means a higher priority.
 
 ## API
 
 Provided by `@compas/store`.
+
+See also:
+
+- [`addEventToQueue`](https://compasjs.com/api/store.html#addeventtoqueue)
+- [`addJobToQueue`](https://compasjs.com/api/store.html#addjobtoqueue)
+- [`addRecurringJobToQueue`](https://compasjs.com/api/store.html#addrecurringjobtoqueue)
+- [`addJobWithCustomTimeoutToQueue`](https://compasjs.com/api/store.html#addjobwithcustomtimeouttoqueue)
 
 ### JobQueueWorker
 
@@ -31,19 +78,39 @@ Parameters:
 - `name` (string): Optional name that this JobQueueWorker will filter the jobs
   on. If not necessary, argument can be skipped.
 - `options`:
+
   - `pollInterval` (number): Interval in milliseconds that the worker should
     look for new jobs. Is only used if no job is found directly after completing
     a job. Defaults to 1500 milliseconds
   - `parallelCount` (number): The number of parallel jobs to take on. This
     number should not be higher than the amount of connections your sql instance
     may create. Defaults to 1.
-  - `handler` (function): The callback that is called on new jobs. If a job
-    throws, the job is not marked as complete and retried most likely
-    immediately. The handler is called with the following parameters:
+  - `handlerTimeout` (number): The number of milliseconds the handler may run
+    before it should be aborted. Note that only `newEventFromEvent` and
+    `eventStart` check if an event is aborted by default. Defaults to 30
+    seconds.
+  - `handler` (function|object): The callback that is called on new jobs. If a
+    job throws, the job is not marked as complete and retried most likely
+    immediately. If an object is passed in it acts as a lookup table based on
+    the job name. If no handler is found, the job will automatically pass. The
+    object values may be just an handler or the following object:
+
+    ```js
+    const specifcHandlerSpecification = {
+      handler: async (event, sql, job) => {},
+      timout: 1400, // 1.4 seconds
+    };
+    ```
+
+    The handler is called with the following parameters:
+
+    - `event`: An @compas/insight event, which is aborted after the specified
+      timeout. The event is already started and will be stopped by the job
+      worker.
     - `sql`: A Postgres connection already in transaction. If the transaction is
       aborted, the job is not marked complete.
-    - `job`: The job, containing `name`, `data`, `priority`, `scheduledAt` and
-      `createdAt` properties.
+    - `job`: The job, containing `name`, `data`, `priority`, `scheduledAt`,
+      `handlerTimeout`, `retryCount` and `createdAt` properties.
 
 Returns a new `JobQueueWorker` instance that is not started yet.
 
@@ -122,90 +189,4 @@ async function main(logger) {
   });
   worker.stop();
 }
-```
-
-### addJobToQueue
-
-Inserts a new job in to the queue. This job can be completely empty and will
-then default to an immediate job with the highest priority.
-
-Parameters:
-
-- `sql`: A Postgres connection, used to insert the job.
-- `job`:
-  - `name` (string): A job name, which would be used for dispatching the job in
-    a generic JobQueueWorker, or can be filtered on in a specific JobQueueWorker
-    instance
-  - `scheduledAt` (Date): When this job should be executed, defaults to now
-  - `priority` (number): Priority of this job. A higher number results in a
-    lower priority. Defaults to `1`.
-
-Returns a promise that is fulfilled with the `id` of the created job.
-
-Examples:
-
-```js
-import { addJobToQueue } from "@compas/store";
-
-await addJobToQueue(sql, {
-  name: "myJob",
-});
-await addJobToQueue(sql, {
-  name: "unimportantJob",
-  priority: 10,
-});
-await addJobToQueue(sql, {
-  name: "jobWithPayload",
-  data: {
-    my: "payload",
-  },
-});
-```
-
-### addRecurringJobToQueue
-
-Wraps the passed in job specification in a built-in recurring job. The built-in
-recurring job handles rescheduling of the job. When a recurring job is already
-scheduled with the same name, all parameters are overwritten. The reschedule
-mechanism will try to reschedule based on the previous `scheduledAt`. If the
-newly calculated date is in the past, the calculation will happen with the
-current timestamp.
-
-Parameters:
-
-- `sql`: A postgres connection, used to insert or upsert the job
-- `options`:
-  - `name` (string): The job name, dispatched via the normal job handler
-  - `priority` (number): Priority that the scheduler should get, the scheduled
-    job is always on a lower priority. Defaults to `1`
-  - `interval` (object): Interval specification. At least a single key should
-    exist.
-    - years
-    - months
-    - days
-    - hours
-    - minutes
-    - seconds
-
-Returns a promise that is fulfilled once the insert or update has happened
-
-Examples:
-
-```js
-import { addRecurringJobToQueue } from "@compas/store";
-
-await addRecurringJobToQueue(sql, {
-  name: "recurringJob",
-  interval: {
-    hours: 1,
-  },
-});
-// Oops, override priority. This job is not important
-await addRecurringJobToQueue(sql, {
-  name: "recurringJob",
-  priority: 5,
-  interval: {
-    hours: 1,
-  },
-});
 ```
