@@ -28,13 +28,59 @@
   Background jobs
   
 </h1>
-<p>Compas comes with a background job system backed by Postgres. Jobs may be
-scheduled, have a priority and can be recurring.</p>
+<p>The queue system is based on &#39;static&#39; units of work to be done in the
+background. It supports the following:</p>
+<ul>
+<li>Job priority&#39;s. Lower value means higher priority.</li>
+<li>Scheduling jobs at a set time</li>
+<li>Customizable handler timeouts</li>
+<li>Recurring job handling</li>
+<li>Concurrent workers pulling from the same queue</li>
+<li>Specific workers for a specific job</li>
+</ul>
+<p>When to use which function of adding a job:</p>
+<ul>
+<li><code>addEventToQueue</code>: use the queue as an &#39;external&#39; message bus to do things
+based on user flows, like sending an verification email on when registering.
+Jobs created will have a priority of &#39;2&#39;.</li>
+<li><code>addJobToQueue</code>: use the queue as background processing of defined units. Like
+converting a file to different formats, sending async or scheduled
+notifications. Jobs created will have a priority of &#39;5&#39;.</li>
+<li><code>addRecurringJobToQueue</code>: use the queue for recurring background processing,
+like cleaning up sessions, generating daily reports. The interval can be as
+low as a second. Jobs created will have a priority of &#39;4&#39;. This means the
+recurring jobs are by default more important than normal jobs. However there
+are no guarantees that jobs are running exactly on the time they are
+scheduled.</li>
+<li><code>addJobWithCustomTimeoutToQueue</code>: when the unit of work is hard to define
+statically for the job. For example an external api that needs all information
+in a single call, but the amount of information is of value N. And N doesn&#39;t
+have any bounds and is only known when the job is created. However, this sort
+of still enforces that the unit of work is related to some other property to
+consistently calculate a custom timeout. These jobs have a priority of &#39;5&#39; by
+default.</li>
+</ul>
+<p>The handler can be passed in, in 2 ways;</p>
+<ul>
+<li>A single handler dispatching over the different jobs in application code</li>
+<li>A plain JS object containing job names as strings, and handler with optional
+timeout as value.</li>
+</ul>
+<p>The timeout of a created job overwrites the specific job timeout which
+overwrites the &#39;handlerTimeout&#39; option.</p>
+<p>Note that a lower priority value means a higher priority.</p>
 <h2 id="api">
   API
   <a name="api" class="anchor" href="#api">#</a>
 </h2>
 <p>Provided by <code>@compas/store</code>.</p>
+<p>See also:</p>
+<ul>
+<li><a href="https://compasjs.com/api/store.html#addeventtoqueue"><code>addEventToQueue</code></a></li>
+<li><a href="https://compasjs.com/api/store.html#addjobtoqueue"><code>addJobToQueue</code></a></li>
+<li><a href="https://compasjs.com/api/store.html#addrecurringjobtoqueue"><code>addRecurringJobToQueue</code></a></li>
+<li><a href="https://compasjs.com/api/store.html#addjobwithcustomtimeouttoqueue"><code>addJobWithCustomTimeoutToQueue</code></a></li>
+</ul>
 <h3 id="jobqueueworker">
   JobQueueWorker
   <a name="jobqueueworker" class="anchor" href="#jobqueueworker">#</a>
@@ -45,24 +91,46 @@ however it is possible to have a specific worker for jobs with specific names.</
 <p>Create a new JobQueueWorker instance.</p>
 <p>Parameters:</p>
 <ul>
-<li><code>sql</code>: A Postgres connection. The connection should not be in a transaction
-already.</li>
-<li><code>name</code> (string): Optional name that this JobQueueWorker will filter the jobs
-on. If not necessary, argument can be skipped.</li>
-<li><code>options</code>:<ul>
-<li><code>pollInterval</code> (number): Interval in milliseconds that the worker should
+<li><p><code>sql</code>: A Postgres connection. The connection should not be in a transaction
+already.</p>
+</li>
+<li><p><code>name</code> (string): Optional name that this JobQueueWorker will filter the jobs
+on. If not necessary, argument can be skipped.</p>
+</li>
+<li><p><code>options</code>:</p>
+<ul>
+<li><p><code>pollInterval</code> (number): Interval in milliseconds that the worker should
 look for new jobs. Is only used if no job is found directly after completing
-a job. Defaults to 1500 milliseconds</li>
-<li><code>parallelCount</code> (number): The number of parallel jobs to take on. This
+a job. Defaults to 1500 milliseconds</p>
+</li>
+<li><p><code>parallelCount</code> (number): The number of parallel jobs to take on. This
 number should not be higher than the amount of connections your sql instance
-may create. Defaults to 1.</li>
-<li><code>handler</code> (function): The callback that is called on new jobs. If a job
-throws, the job is not marked as complete and retried most likely
-immediately. The handler is called with the following parameters:<ul>
+may create. Defaults to 1.</p>
+</li>
+<li><p><code>handlerTimeout</code> (number): The number of milliseconds the handler may run
+before it should be aborted. Note that only <code>newEventFromEvent</code> and
+<code>eventStart</code> check if an event is aborted by default. Defaults to 30
+seconds.</p>
+</li>
+<li><p><code>handler</code> (function|object): The callback that is called on new jobs. If a
+job throws, the job is not marked as complete and retried most likely
+immediately. If an object is passed in it acts as a lookup table based on
+the job name. If no handler is found, the job will automatically pass. The
+object values may be just an handler or the following object:</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> specifcHandlerSpecification = {
+  <span class="hljs-attr">handler</span>: <span class="hljs-keyword">async</span> (event, sql, job) =&gt; {},
+  <span class="hljs-attr">timout</span>: <span class="hljs-number">1400</span>, <span class="hljs-comment">// 1.4 seconds</span>
+};
+</code></pre>
+<p>The handler is called with the following parameters:</p>
+<ul>
+<li><code>event</code>: An @compas/insight event, which is aborted after the specified
+timeout. The event is already started and will be stopped by the job
+worker.</li>
 <li><code>sql</code>: A Postgres connection already in transaction. If the transaction is
 aborted, the job is not marked complete.</li>
-<li><code>job</code>: The job, containing <code>name</code>, <code>data</code>, <code>priority</code>, <code>scheduledAt</code> and
-<code>createdAt</code> properties.</li>
+<li><code>job</code>: The job, containing <code>name</code>, <code>data</code>, <code>priority</code>, <code>scheduledAt</code>,
+<code>handlerTimeout</code>, <code>retryCount</code> and <code>createdAt</code> properties.</li>
 </ul>
 </li>
 </ul>
@@ -133,92 +201,6 @@ mainFn(<span class="hljs-keyword">import</span>.meta, main);
   });
   worker.stop();
 }
-</code></pre>
-<h3 id="addjobtoqueue">
-  addJobToQueue
-  <a name="addjobtoqueue" class="anchor" href="#addjobtoqueue">#</a>
-</h3>
-<p>Inserts a new job in to the queue. This job can be completely empty and will
-then default to an immediate job with the highest priority.</p>
-<p>Parameters:</p>
-<ul>
-<li><code>sql</code>: A Postgres connection, used to insert the job.</li>
-<li><code>job</code>:<ul>
-<li><code>name</code> (string): A job name, which would be used for dispatching the job in
-a generic JobQueueWorker, or can be filtered on in a specific JobQueueWorker
-instance</li>
-<li><code>scheduledAt</code> (Date): When this job should be executed, defaults to now</li>
-<li><code>priority</code> (number): Priority of this job. A higher number results in a
-lower priority. Defaults to <code>1</code>.</li>
-</ul>
-</li>
-</ul>
-<p>Returns a promise that is fulfilled with the <code>id</code> of the created job.</p>
-<p>Examples:</p>
-<pre><code class="language-js"><span class="hljs-keyword">import</span> { addJobToQueue } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/store&quot;</span>;
-
-<span class="hljs-keyword">await</span> addJobToQueue(sql, {
-  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;myJob&quot;</span>,
-});
-<span class="hljs-keyword">await</span> addJobToQueue(sql, {
-  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;unimportantJob&quot;</span>,
-  <span class="hljs-attr">priority</span>: <span class="hljs-number">10</span>,
-});
-<span class="hljs-keyword">await</span> addJobToQueue(sql, {
-  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;jobWithPayload&quot;</span>,
-  <span class="hljs-attr">data</span>: {
-    <span class="hljs-attr">my</span>: <span class="hljs-string">&quot;payload&quot;</span>,
-  },
-});
-</code></pre>
-<h3 id="addrecurringjobtoqueue">
-  addRecurringJobToQueue
-  <a name="addrecurringjobtoqueue" class="anchor" href="#addrecurringjobtoqueue">#</a>
-</h3>
-<p>Wraps the passed in job specification in a built-in recurring job. The built-in
-recurring job handles rescheduling of the job. When a recurring job is already
-scheduled with the same name, all parameters are overwritten. The reschedule
-mechanism will try to reschedule based on the previous <code>scheduledAt</code>. If the
-newly calculated date is in the past, the calculation will happen with the
-current timestamp.</p>
-<p>Parameters:</p>
-<ul>
-<li><code>sql</code>: A postgres connection, used to insert or upsert the job</li>
-<li><code>options</code>:<ul>
-<li><code>name</code> (string): The job name, dispatched via the normal job handler</li>
-<li><code>priority</code> (number): Priority that the scheduler should get, the scheduled
-job is always on a lower priority. Defaults to <code>1</code></li>
-<li><code>interval</code> (object): Interval specification. At least a single key should
-exist.<ul>
-<li>years</li>
-<li>months</li>
-<li>days</li>
-<li>hours</li>
-<li>minutes</li>
-<li>seconds</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>Returns a promise that is fulfilled once the insert or update has happened</p>
-<p>Examples:</p>
-<pre><code class="language-js"><span class="hljs-keyword">import</span> { addRecurringJobToQueue } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/store&quot;</span>;
-
-<span class="hljs-keyword">await</span> addRecurringJobToQueue(sql, {
-  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;recurringJob&quot;</span>,
-  <span class="hljs-attr">interval</span>: {
-    <span class="hljs-attr">hours</span>: <span class="hljs-number">1</span>,
-  },
-});
-<span class="hljs-comment">// Oops, override priority. This job is not important</span>
-<span class="hljs-keyword">await</span> addRecurringJobToQueue(sql, {
-  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;recurringJob&quot;</span>,
-  <span class="hljs-attr">priority</span>: <span class="hljs-number">5</span>,
-  <span class="hljs-attr">interval</span>: {
-    <span class="hljs-attr">hours</span>: <span class="hljs-number">1</span>,
-  },
-});
 </code></pre>
 
     </article>

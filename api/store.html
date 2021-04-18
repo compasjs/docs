@@ -137,30 +137,70 @@ migration state.</p>
 <ul>
 <li>mc <code>MigrateContext</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L134">source</a></em><br><h2 id="addjobtoqueue">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L134">source</a></em><br><h2 id="addeventtoqueue">
+  addEventToQueue
+  <a name="addeventtoqueue" class="anchor" href="#addeventtoqueue">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function addEventToQueue(sql, eventName, data): Promise<number></em><br><p>Add an event to the job queue. Use this if the default priority is important,
+like sending the user an email to verify their email. Runs with priority &#39;2&#39;,
+the only higher priority values are priority &#39;0&#39; and &#39;1&#39;. Custom timeouts can&#39;t
+be described via this mechanism.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>sql <code>Postgres</code></li>
+<li>eventName <code>string</code></li>
+<li>data <code>object</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L413">source</a></em><br><h2 id="addjobtoqueue">
   addJobToQueue
   <a name="addjobtoqueue" class="anchor" href="#addjobtoqueue">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function addJobToQueue(sql, job): Promise<number></em><br><p>Add a new item to the job queue.</p>
+<em>Available since 0.1.0</em><br><em>function addJobToQueue(sql, job): Promise<number></em><br><p>Add a new job to the queue. Use this for normal jobs or to customize the job
+priority. The default priority is &#39;5&#39;.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li>sql <code>Postgres</code></li>
 <li>job <code>JobInput</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L343">source</a></em><br><h2 id="addrecurringjobtoqueue">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L434">source</a></em><br><h2 id="addrecurringjobtoqueue">
   addRecurringJobToQueue
   <a name="addrecurringjobtoqueue" class="anchor" href="#addrecurringjobtoqueue">#</a>
 </h2>
 <em>Available since 0.1.0</em><br><em>function addRecurringJobToQueue(sql, job): Promise<void></em><br><p>Add a recurring job, if no existing job with the same name is scheduled. Does
 not throw when a job is already pending with the same name. If exists will
-update the interval.</p>
+update the interval. The default priority is &#39;4&#39;, which is a bit more important
+than other jobs.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li>sql <code>Postgres</code></li>
 <li>job
 <code>{ name: string, priority?: number|undefined, interval: StoreJobInterval }</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L362">source</a></em><br><h2 id="newsessionstore">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L502">source</a></em><br><h2 id="addjobwithcustomtimeouttoqueue">
+  addJobWithCustomTimeoutToQueue
+  <a name="addjobwithcustomtimeouttoqueue" class="anchor" href="#addjobwithcustomtimeouttoqueue">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function addJobWithCustomTimeoutToQueue(sql, job, timeout): Promise<number></em><br><p>Add a new job to the queue. Use this for normal jobs or to customize the job
+priority. The default priority is &#39;5&#39;. The timeout value must be an integer
+higher than 10. The timeout value represents the number of milliseconds the
+handler may run, before the &#39;InsightEvent&#39; is aborted.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>sql <code>Postgres</code></li>
+<li>job <code>JobInput</code></li>
+<li>timeout <code>number</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L465">source</a></em><br><h2 id="getuncompletedjobsbyname">
+  getUncompletedJobsByName
+  <a name="getuncompletedjobsbyname" class="anchor" href="#getuncompletedjobsbyname">#</a>
+</h2>
+<em>Available since undefined</em><br><em>function getUncompletedJobsByName(sql): {Promise&lt;Object&lt;string,
+QueryResultStoreJob[]&gt;&gt;}</em><br><p>Get all uncompleted jobs from the queue. Useful for testing if jobs are created.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>sql <code>Postgres</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L663">source</a></em><br><h2 id="newsessionstore">
   newSessionStore
   <a name="newsessionstore" class="anchor" href="#newsessionstore">#</a>
 </h2>
