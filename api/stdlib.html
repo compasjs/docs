@@ -41,25 +41,54 @@ uncaught exceptions, and calls the provided callback</p>
 <li>meta <code>ImportMeta</code></li>
 <li>cb <code>MainFnCallback</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L69">source</a></em><br><h2 id="filenameformodule">
-  filenameForModule
-  <a name="filenameformodule" class="anchor" href="#filenameformodule">#</a>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L69">source</a></em><br><h2 id="newlogger">
+  newLogger
+  <a name="newlogger" class="anchor" href="#newlogger">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function filenameForModule(meta): string</em><br><p>ES module compatibility counterpart of the CommonJS __filename</p>
+<em>Available since 0.1.0</em><br><em>function newLogger(options?): Logger</em><br><p>Create a new logger instance</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li>meta <code>ImportMeta</code></li>
+<li>options <code>LoggerOptions|undefined?</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L127">source</a></em><br><h2 id="dirnameformodule">
-  dirnameForModule
-  <a name="dirnameformodule" class="anchor" href="#dirnameformodule">#</a>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/logger/logger.js#L39">source</a></em><br><h2 id="newevent">
+  newEvent
+  <a name="newevent" class="anchor" href="#newevent">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function dirnameForModule(meta): string</em><br><p>ES module compatibility counterpart of the CommonJS __dirname</p>
+<em>Available since 0.1.0</em><br><em>function newEvent(logger, signal?): InsightEvent</em><br><p>Create a new event from a logger</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li>meta <code>ImportMeta</code></li>
+<li>logger <code>Logger</code>: Logger should have a context, like the default <code>ctx.log</code></li>
+<li>signal <code>AbortSignal|undefined?</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L139">source</a></em><br><h2 id="isproduction">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L39">source</a></em><br><h2 id="neweventfromevent">
+  newEventFromEvent
+  <a name="neweventfromevent" class="anchor" href="#neweventfromevent">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function newEventFromEvent(event): InsightEvent</em><br><p>Create a &#39;child&#39; event, reuses the logger, adds callstack to the passed event</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>event <code>InsightEvent</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L57">source</a></em><br><h2 id="eventstart">
+  eventStart
+  <a name="eventstart" class="anchor" href="#eventstart">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function eventStart(event, name): void</em><br><p>Track event start times</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>event <code>InsightEvent</code></li>
+<li>name <code>string</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L83">source</a></em><br><h2 id="eventstop">
+  eventStop
+  <a name="eventstop" class="anchor" href="#eventstop">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function eventStop(event): void</em><br><p>Track event end times and log if necessary</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>event <code>InsightEvent</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L123">source</a></em><br><h2 id="isproduction">
   isProduction
   <a name="isproduction" class="anchor" href="#isproduction">#</a>
 </h2>
@@ -85,7 +114,25 @@ accessing process.env.NODE_ENV: <br>
 <code>txt property access 500000000 iterations 0 ns/op </code> <br>
 <code>txt process.env access 5000000 iterations 246 ns/op </code> <br> See this thread:
 <a href="https://github.com/nodejs/node/issues/3104">https://github.com/nodejs/node/issues/3104</a> for more information.</p>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/env.js#L30">source</a></em><br><h2 id="isnil">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/env.js#L30">source</a></em><br><h2 id="filenameformodule">
+  filenameForModule
+  <a name="filenameformodule" class="anchor" href="#filenameformodule">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function filenameForModule(meta): string</em><br><p>ES module compatibility counterpart of the CommonJS __filename</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>meta <code>ImportMeta</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L127">source</a></em><br><h2 id="dirnameformodule">
+  dirnameForModule
+  <a name="dirnameformodule" class="anchor" href="#dirnameformodule">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function dirnameForModule(meta): string</em><br><p>ES module compatibility counterpart of the CommonJS __dirname</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>meta <code>ImportMeta</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L139">source</a></em><br><h2 id="isnil">
   isNil
   <a name="isnil" class="anchor" href="#isnil">#</a>
 </h2>
@@ -241,7 +288,25 @@ access path. Only goes through plain JavaScript objects and ignores arrays.</p>
   <a name="getsecondssinceepoch" class="anchor" href="#getsecondssinceepoch">#</a>
 </h2>
 <em>Available since 0.1.0</em><br><em>function getSecondsSinceEpoch(): number</em><br><p>Get the number of seconds since Unix epoch (1-1-1970).</p>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L19">source</a></em><br>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L19">source</a></em><br><h2 id="bytestohumanreadable">
+  bytesToHumanReadable
+  <a name="bytestohumanreadable" class="anchor" href="#bytestohumanreadable">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function bytesToHumanReadable(bytes?): string</em><br><p>Convert bytes to a human readable value</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>bytes <code>number?</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/memory.js#L13">source</a></em><br><h2 id="printprocessmemoryusage">
+  printProcessMemoryUsage
+  <a name="printprocessmemoryusage" class="anchor" href="#printprocessmemoryusage">#</a>
+</h2>
+<em>Available since 0.1.0</em><br><em>function printProcessMemoryUsage(logger): void</em><br><p>Print memory usage of this Node.js process</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>logger <code>Logger</code></li>
+</ul>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/stdlib/src/memory.js#L40">source</a></em><br>
     </article>
     
     </main>
