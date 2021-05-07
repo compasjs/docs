@@ -4,8 +4,8 @@ import {
   eventStop,
   newEvent,
   newEventFromEvent,
-} from "@compas/insight";
-import { pathJoin } from "@compas/stdlib";
+  pathJoin,
+} from "@compas/stdlib";
 import { hasCompasDirectoryAvailable } from "./checks.js";
 import { combineCommentsWithDeclarations } from "./combiner.js";
 import { convertDeclarationsToMarkdown } from "./converter.js";

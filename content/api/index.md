@@ -12,24 +12,19 @@ The public compas API, a work in progress.
 
 <!-- marker -->
 
-## @compas/insight
-
-- [newLogger](/api/insight.html#newlogger)
-- [newEvent](/api/insight.html#newevent)
-- [newEventFromEvent](/api/insight.html#neweventfromevent)
-- [eventStart](/api/insight.html#eventstart)
-- [eventStop](/api/insight.html#eventstop)
-- [bytesToHumanReadable](/api/insight.html#bytestohumanreadable)
-- [printProcessMemoryUsage](/api/insight.html#printprocessmemoryusage)
-
 ## @compas/stdlib
 
 - [mainFn](/api/stdlib.html#mainfn)
-- [filenameForModule](/api/stdlib.html#filenameformodule)
-- [dirnameForModule](/api/stdlib.html#dirnameformodule)
+- [newLogger](/api/stdlib.html#newlogger)
+- [newEvent](/api/stdlib.html#newevent)
+- [newEventFromEvent](/api/stdlib.html#neweventfromevent)
+- [eventStart](/api/stdlib.html#eventstart)
+- [eventStop](/api/stdlib.html#eventstop)
 - [isProduction](/api/stdlib.html#isproduction)
 - [isStaging](/api/stdlib.html#isstaging)
 - [refreshEnvironmentCache](/api/stdlib.html#refreshenvironmentcache)
+- [filenameForModule](/api/stdlib.html#filenameformodule)
+- [dirnameForModule](/api/stdlib.html#dirnameformodule)
 - [isNil](/api/stdlib.html#isnil)
 - [isPlainObject](/api/stdlib.html#isplainobject)
 - [uuid](/api/stdlib.html#uuid)
@@ -46,6 +41,8 @@ The public compas API, a work in progress.
 - [flatten](/api/stdlib.html#flatten)
 - [unFlatten](/api/stdlib.html#unflatten)
 - [getSecondsSinceEpoch](/api/stdlib.html#getsecondssinceepoch)
+- [bytesToHumanReadable](/api/stdlib.html#bytestohumanreadable)
+- [printProcessMemoryUsage](/api/stdlib.html#printprocessmemoryusage)
 
 ## @compas/cli
 

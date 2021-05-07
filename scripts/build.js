@@ -5,8 +5,9 @@ import {
   eventStop,
   newEvent,
   newEventFromEvent,
-} from "@compas/insight";
-import { mainFn, pathJoin } from "@compas/stdlib";
+  mainFn,
+  pathJoin,
+} from "@compas/stdlib";
 import {
   annotateItemWithContents,
   getContentStructure,
@@ -56,7 +57,7 @@ async function main(logger) {
 /**
  * Read the CNAME file
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @returns {Promise<string>}
  */
 async function readCnameFile(event) {
@@ -73,7 +74,7 @@ async function readCnameFile(event) {
 /**
  * Clear old files, create CNAME and .nojekyll files
  *
- * @param {Event} event
+ * @param {InsightEvent} event
  * @returns {Promise<void>}
  */
 async function prepareOutputDirectory(event) {

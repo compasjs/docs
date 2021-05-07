@@ -1,6 +1,11 @@
-import { newEventFromEvent } from "@compas/insight";
 import { getApp } from "@compas/server";
-import { environment, isProduction, isStaging, mainFn } from "@compas/stdlib";
+import {
+  newEventFromEvent,
+  environment,
+  isProduction,
+  isStaging,
+  mainFn,
+} from "@compas/stdlib";
 import {
   annotateItemWithContents,
   getContentStructure,

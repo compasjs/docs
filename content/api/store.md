@@ -3,7 +3,7 @@ type: page
 title: "@compas/store"
 description: Public API of @compas/store
 tags: []
-order: 4
+order: 3
 ---
 
 # @compas/store
@@ -179,7 +179,7 @@ be described via this mechanism.
 - eventName `string`
 - data `object`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L413)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L416)_
 
 ## addJobToQueue
 
@@ -195,7 +195,7 @@ priority. The default priority is '5'.
 - sql `Postgres`
 - job `JobInput`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L434)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L437)_
 
 ## addRecurringJobToQueue
 
@@ -214,7 +214,7 @@ than other jobs.
 - job
   `{ name: string, priority?: number|undefined, interval: StoreJobInterval }`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L502)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L505)_
 
 ## addJobWithCustomTimeoutToQueue
 
@@ -233,7 +233,7 @@ handler may run, before the 'InsightEvent' is aborted.
 - job `JobInput`
 - timeout `number`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L465)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L468)_
 
 ## getUncompletedJobsByName
 
@@ -248,7 +248,7 @@ Get all uncompleted jobs from the queue. Useful for testing if jobs are created.
 
 - sql `Postgres`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L663)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L666)_
 
 ## newSessionStore
 
@@ -454,7 +454,7 @@ a connection to the new database.
 - verboseSql `boolean=false`: If true, creates a new logger and prints all
   queries.
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L74)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L73)_
 
 ## cleanupTestPostgresDatabase
 
@@ -468,4 +468,4 @@ Remove a created test database
 
 - sql `Postgres`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L154)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L153)_

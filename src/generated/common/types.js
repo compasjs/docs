@@ -25,7 +25,7 @@ export const __generated__ = true;
  * @typedef {{"start": number, "end": number, "pkg": DocParserPackage, "file": string, "line"?: undefined|string, }} DocParserRange
  */
 /**
- * @typedef {"insight"|"stdlib"|"cli"|"store"|"server"} DocParserPackage
+ * @typedef {"stdlib"|"cli"|"store"|"server"} DocParserPackage
  */
 /**
  * @typedef {{"type": "functionDeclaration", "name"?: undefined|string, "summary"?: undefined|string, "description"?: undefined|string, "availableSince"?: undefined|string, "isVariable": boolean, "parsedType": DocParserFunctionType, "range": DocParserRange, }} DocParserFunctionDeclarationBlock

@@ -1,5 +1,4 @@
-import { eventStart, eventStop } from "@compas/insight";
-import { AppError, isNil } from "@compas/stdlib";
+import { eventStart, eventStop, AppError, isNil } from "@compas/stdlib";
 import { packages } from "./packages.js";
 
 /**

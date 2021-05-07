@@ -1,5 +1,4 @@
-import { newEvent, newEventFromEvent } from "@compas/insight";
-import { mainFn } from "@compas/stdlib";
+import { newEvent, newEventFromEvent, mainFn } from "@compas/stdlib";
 import {
   annotateItemWithContents,
   getContentStructure,

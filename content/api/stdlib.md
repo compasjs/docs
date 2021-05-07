@@ -3,7 +3,7 @@ type: page
 title: "@compas/stdlib"
 description: Public API of @compas/stdlib
 tags: []
-order: 2
+order: 1
 ---
 
 # @compas/stdlib
@@ -27,33 +27,77 @@ uncaught exceptions, and calls the provided callback
 
 _[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L69)_
 
-## filenameForModule
+## newLogger
 
 _Available since 0.1.0_
 
-_function filenameForModule(meta): string_
+_function newLogger(options?): Logger_
 
-ES module compatibility counterpart of the CommonJS \_\_filename
+Create a new logger instance
 
 **Parameters**:
 
-- meta `ImportMeta`
+- options `LoggerOptions|undefined?`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L127)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/logger/logger.js#L39)_
 
-## dirnameForModule
+## newEvent
 
 _Available since 0.1.0_
 
-_function dirnameForModule(meta): string_
+_function newEvent(logger, signal?): InsightEvent_
 
-ES module compatibility counterpart of the CommonJS \_\_dirname
+Create a new event from a logger
 
 **Parameters**:
 
-- meta `ImportMeta`
+- logger `Logger`: Logger should have a context, like the default `ctx.log`
+- signal `AbortSignal|undefined?`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L139)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L39)_
+
+## newEventFromEvent
+
+_Available since 0.1.0_
+
+_function newEventFromEvent(event): InsightEvent_
+
+Create a 'child' event, reuses the logger, adds callstack to the passed event
+
+**Parameters**:
+
+- event `InsightEvent`
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L57)_
+
+## eventStart
+
+_Available since 0.1.0_
+
+_function eventStart(event, name): void_
+
+Track event start times
+
+**Parameters**:
+
+- event `InsightEvent`
+- name `string`
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L83)_
+
+## eventStop
+
+_Available since 0.1.0_
+
+_function eventStop(event): void_
+
+Track event end times and log if necessary
+
+**Parameters**:
+
+- event `InsightEvent`
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L123)_
 
 ## isProduction
 
@@ -96,6 +140,34 @@ accessing process.env.NODE_ENV: <br>
 https://github.com/nodejs/node/issues/3104 for more information.
 
 _[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/env.js#L30)_
+
+## filenameForModule
+
+_Available since 0.1.0_
+
+_function filenameForModule(meta): string_
+
+ES module compatibility counterpart of the CommonJS \_\_filename
+
+**Parameters**:
+
+- meta `ImportMeta`
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L127)_
+
+## dirnameForModule
+
+_Available since 0.1.0_
+
+_function dirnameForModule(meta): string_
+
+ES module compatibility counterpart of the CommonJS \_\_dirname
+
+**Parameters**:
+
+- meta `ImportMeta`
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L139)_
 
 ## isNil
 
@@ -333,3 +405,31 @@ _function getSecondsSinceEpoch(): number_
 Get the number of seconds since Unix epoch (1-1-1970).
 
 _[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L19)_
+
+## bytesToHumanReadable
+
+_Available since 0.1.0_
+
+_function bytesToHumanReadable(bytes?): string_
+
+Convert bytes to a human readable value
+
+**Parameters**:
+
+- bytes `number?`
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/memory.js#L13)_
+
+## printProcessMemoryUsage
+
+_Available since 0.1.0_
+
+_function printProcessMemoryUsage(logger): void_
+
+Print memory usage of this Node.js process
+
+**Parameters**:
+
+- logger `Logger`
+
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/memory.js#L40)_

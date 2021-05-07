@@ -1,4 +1,4 @@
-import { eventStart, eventStop } from "@compas/insight";
+import { eventStart, eventStop } from "@compas/stdlib";
 
 /**
  * Render a sitemap, ignoring 'raw' folder

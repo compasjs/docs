@@ -3,7 +3,7 @@ type: page
 title: "@compas/server"
 description: Public API of @compas/server
 tags: []
-order: 5
+order: 4
 ---
 
 # @compas/server
@@ -18,7 +18,7 @@ Create a new Koa instance with default middleware applied.
 
 Create a new Koa instance with default middleware applied. Adds the following: -
 Health check route on `/_health` <br> - Log middleware to add the Logger from
-@compas/insight on `ctx.log` <br> - Error handler to catch any errors thrown by
+@compas/stdlib on `ctx.log` <br> - Error handler to catch any errors thrown by
 route handlers <br> - A 404 handler when no response is set by other middleware
 <br> - Default headers to respond to things like CORS requests
 

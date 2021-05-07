@@ -1,4 +1,4 @@
-import { eventStart, eventStop } from "@compas/insight";
+import { eventStart, eventStop } from "@compas/stdlib";
 import { packages, symbols } from "./packages.js";
 
 /**

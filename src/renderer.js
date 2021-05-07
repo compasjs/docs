@@ -1,5 +1,9 @@
-import { eventStart, eventStop, newEventFromEvent } from "@compas/insight";
-import { isNil } from "@compas/stdlib";
+import {
+  eventStart,
+  eventStop,
+  newEventFromEvent,
+  isNil,
+} from "@compas/stdlib";
 import { annotateItemWithContents } from "./content.js";
 import {
   getBreadcrumbsForContentPath,

@@ -535,14 +535,13 @@ export function anonymousValidator781728730(
     errors,
   );
   if (
-    value["pkg"] !== "insight" &&
     value["pkg"] !== "stdlib" &&
     value["pkg"] !== "cli" &&
     value["pkg"] !== "store" &&
     value["pkg"] !== "server"
   ) {
     const parentType = "string";
-    const oneOf = ["insight", "stdlib", "cli", "store", "server"];
+    const oneOf = ["stdlib", "cli", "store", "server"];
     errors.push({
       key: `validator.${parentType}.oneOf`,
       info: { propertyPath: `${propertyPath}.pkg`, oneOf },
@@ -1080,7 +1079,7 @@ export function anonymousValidator1831335775(
  * @param {string} propertyPath
  * @param {{ key: string, info: any }[]} errors
  * @param {string} parentType
- * @returns {"insight"|"stdlib"|"cli"|"store"|"server"|undefined}
+ * @returns {"stdlib"|"cli"|"store"|"server"|undefined}
  */
 export function anonymousValidator1407080209(
   value,
@@ -1111,13 +1110,12 @@ export function anonymousValidator1407080209(
     return undefined;
   }
   if (
-    value !== "insight" &&
     value !== "stdlib" &&
     value !== "cli" &&
     value !== "store" &&
     value !== "server"
   ) {
-    const oneOf = ["insight", "stdlib", "cli", "store", "server"];
+    const oneOf = ["stdlib", "cli", "store", "server"];
     errors.push({
       key: `validator.${parentType}.oneOf`,
       info: { propertyPath, oneOf },

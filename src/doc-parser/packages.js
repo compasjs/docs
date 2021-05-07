@@ -1,6 +1,10 @@
 import { readFile } from "fs/promises";
-import { eventStart, eventStop } from "@compas/insight";
-import { pathJoin, processDirectoryRecursive } from "@compas/stdlib";
+import {
+  eventStart,
+  eventStop,
+  pathJoin,
+  processDirectoryRecursive,
+} from "@compas/stdlib";
 import { parseModule } from "meriyah";
 
 /**
@@ -16,7 +20,6 @@ import { parseModule } from "meriyah";
 
 /** @type {DocParserPackage[]} */
 export const packages = [
-  "insight",
   "stdlib",
   "cli",
   // "code-gen",
@@ -30,23 +33,18 @@ export const packages = [
  * @type {Object<DocParserPackage, string[]>}
  */
 export const symbols = {
-  insight: [
+  stdlib: [
+    "mainFn",
     "newLogger",
     "newEvent",
     "newEventFromEvent",
     "eventStart",
     "eventStop",
-    "bytesToHumanReadable",
-    "printProcessMemoryUsage",
-  ],
-
-  stdlib: [
-    "mainFn",
-    "filenameForModule",
-    "dirnameForModule",
     "isProduction",
     "isStaging",
     "refreshEnvironmentCache",
+    "filenameForModule",
+    "dirnameForModule",
     "isNil",
     "isPlainObject",
     "uuid",
@@ -63,6 +61,8 @@ export const symbols = {
     "flatten",
     "unFlatten",
     "getSecondsSinceEpoch",
+    "bytesToHumanReadable",
+    "printProcessMemoryUsage",
   ],
 
   cli: ["test", "mainTestFn", "newTestEvent", "bench", "mainBenchFn"],

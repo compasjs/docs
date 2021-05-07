@@ -1,7 +1,11 @@
 import { readFile } from "fs/promises";
 import * as path from "path";
-import { eventStart, eventStop } from "@compas/insight";
-import { pathJoin, processDirectoryRecursive } from "@compas/stdlib";
+import {
+  eventStart,
+  eventStop,
+  pathJoin,
+  processDirectoryRecursive,
+} from "@compas/stdlib";
 import frontMatter from "front-matter";
 import hljs from "highlight.js";
 import marked from "marked";

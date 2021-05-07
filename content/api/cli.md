@@ -3,7 +3,7 @@ type: page
 title: "@compas/cli"
 description: Public API of @compas/cli
 tags: []
-order: 3
+order: 2
 ---
 
 # @compas/cli
