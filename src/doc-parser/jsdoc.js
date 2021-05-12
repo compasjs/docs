@@ -201,13 +201,8 @@ function extractFunctionDeclaration(description, rawTags) {
 
   for (const tag of rawTags) {
     if (tag.tag === "param") {
-      const {
-        name,
-        description,
-        typeLiteral,
-        isOptional,
-        defaultValue,
-      } = extractTypeTagValue(tag.value);
+      const { name, description, typeLiteral, isOptional, defaultValue } =
+        extractTypeTagValue(tag.value);
       result.parsedType.params.push({
         name: name,
         description,
