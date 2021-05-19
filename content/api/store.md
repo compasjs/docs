@@ -146,7 +146,7 @@ Get the migrations to be applied from the provided migration context. Note that
 
 - mc `MigrateContext`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L98)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L95)_
 
 ## runMigrations
 
@@ -160,7 +160,7 @@ Run the migrations currently pending in the migration context.
 
 - mc `MigrateContext`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L134)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L131)_
 
 ## addEventToQueue
 
