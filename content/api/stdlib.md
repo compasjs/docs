@@ -25,7 +25,7 @@ uncaught exceptions, and calls the provided callback
 - meta `ImportMeta`
 - cb `MainFnCallback`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L71)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L69)_
 
 ## newLogger
 
@@ -153,7 +153,7 @@ ES module compatibility counterpart of the CommonJS \_\_filename
 
 - meta `ImportMeta`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L138)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L130)_
 
 ## dirnameForModule
 
@@ -167,7 +167,7 @@ ES module compatibility counterpart of the CommonJS \_\_dirname
 
 - meta `ImportMeta`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L150)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L142)_
 
 ## isNil
 
@@ -218,7 +218,7 @@ _function noop(): void_
 
 A function that returns 'undefined'.
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L32)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L30)_
 
 ## merge
 
@@ -404,7 +404,7 @@ _function getSecondsSinceEpoch(): number_
 
 Get the number of seconds since Unix epoch (1-1-1970).
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L21)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/utils.js#L19)_
 
 ## bytesToHumanReadable
 

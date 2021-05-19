@@ -332,29 +332,29 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@compas/cli@0.0.135":
-  version "0.0.135"
-  resolved "https://registry.yarnpkg.com/@compas/cli/-/cli-0.0.135.tgz#73bce17355b1307f46b32994ea260eb36f798278"
-  integrity sha512-jfAPGvZh8evyQvZJTPuAePFGFvtRVgYMld1uqZ9c/a43MrAmrCeD7WapEQh/VNPvyABbzLM2U06Vw3IujtxX2A==
+"@compas/cli@0.0.136":
+  version "0.0.136"
+  resolved "https://registry.yarnpkg.com/@compas/cli/-/cli-0.0.136.tgz#1c5022561030f1b5b14b9c12a542ac5e9a531657"
+  integrity sha512-c0bFhwvICU1JbDzEX2iH2FR+8zZw6e+usLGY+iMnlTUQGJE/tTwqO5xoEkXSrW3OKE4k17L8tWb9sYnNMb4x3A==
   dependencies:
-    "@compas/stdlib" "0.0.135"
+    "@compas/stdlib" "0.0.136"
     c8 "7.7.2"
     chokidar "3.5.1"
     http-proxy "1.18.1"
     tree-kill "1.2.2"
 
-"@compas/code-gen@0.0.135":
-  version "0.0.135"
-  resolved "https://registry.yarnpkg.com/@compas/code-gen/-/code-gen-0.0.135.tgz#f695763a342c5a217dee062d5b4e8e72d0e77e8b"
-  integrity sha512-7yPfnN+tjpV4nAJNvIZSjFddA3Cdd9KCKyaRPfKdANFakLvGCUVHbgaaj8w79IXGq+Q4Wos2G9r3BX9N7ns/7w==
+"@compas/code-gen@0.0.136":
+  version "0.0.136"
+  resolved "https://registry.yarnpkg.com/@compas/code-gen/-/code-gen-0.0.136.tgz#d372bdade586281d18138557b4903b0e701f7e7c"
+  integrity sha512-UZtnFO891jajug7iuxBd9Mj+Pj3S+2BD5OvEW7jop9Yo2xw1Yjs/3Ph0TuQwoZIF7SmlcwqrWAPBFlBrhRpk1A==
   dependencies:
-    "@compas/cli" "0.0.135"
-    "@compas/stdlib" "0.0.135"
+    "@compas/cli" "0.0.136"
+    "@compas/stdlib" "0.0.136"
 
-"@compas/lint-config@0.0.135":
-  version "0.0.135"
-  resolved "https://registry.yarnpkg.com/@compas/lint-config/-/lint-config-0.0.135.tgz#91b96662f3202ed63f9fc38251b6d4545bd0fe2d"
-  integrity sha512-CjMe+3Gmeg1Dk3Q/N6xdfrhd0tMfTAgkftpsBJsYlJCD0Chu+cPRygT0jbt6r75pj3wmEXFaUVItvcua+5fYIA==
+"@compas/lint-config@0.0.136":
+  version "0.0.136"
+  resolved "https://registry.yarnpkg.com/@compas/lint-config/-/lint-config-0.0.136.tgz#7091b0231a69d07453f25b48c9e5bb6da52b3b10"
+  integrity sha512-6XbD8q2dukom2Vt70BIg0CB/7JcS/4ujUCTqiH1C5R7pRpibcdgT/cbfPaYCGBZs3mtKgEI1WLZuQS/LKBIdXQ==
   dependencies:
     "@babel/core" "7.14.3"
     "@babel/eslint-parser" "7.14.3"
@@ -362,36 +362,36 @@
     eslint "7.26.0"
     eslint-config-prettier "8.3.0"
     eslint-plugin-import "2.23.2"
-    eslint-plugin-jsdoc "34.8.0"
+    eslint-plugin-jsdoc "34.8.1"
     prettier "2.3.0"
 
-"@compas/server@0.0.135":
-  version "0.0.135"
-  resolved "https://registry.yarnpkg.com/@compas/server/-/server-0.0.135.tgz#7ee07eb7878bde7a5698ebd5a8f3c406120a801c"
-  integrity sha512-Q4UFVvjzG8qa2gEPqQL9ZMODbHY4BHA7xK6yi1rKftjd4+0rJu7OnWhRumEWt3oNY+YpJfd6tMIyypfoFGNClg==
+"@compas/server@0.0.136":
+  version "0.0.136"
+  resolved "https://registry.yarnpkg.com/@compas/server/-/server-0.0.136.tgz#6ebb63185cfbb1456fec2c2772884281f4bb31cc"
+  integrity sha512-hgKCJuo2Aw+TlR2HyxdFmPQv/wEnqaSLWqFzeUoYzEaLFBC7KsNP5ZX0WuTtpAlV6XzTdEeYZQ9DDvMrl4mAmA==
   dependencies:
-    "@compas/stdlib" "0.0.135"
+    "@compas/stdlib" "0.0.136"
     co-body "6.1.0"
     formidable "2.0.0-canary.20200504.1"
     keygrip "1.1.0"
     koa "2.13.1"
     koa-session "6.2.0"
 
-"@compas/stdlib@0.0.135":
-  version "0.0.135"
-  resolved "https://registry.yarnpkg.com/@compas/stdlib/-/stdlib-0.0.135.tgz#7d3150a40797ea4fbaec197516757aa340b0275b"
-  integrity sha512-dCioFDqkbRU1LecFofG20dCi5s0CRQbYhNTkjqWmUYq4qlViUb6nK6Ud3rY496+symJ4X+NSjd0n3Fy4VNozWQ==
+"@compas/stdlib@0.0.136":
+  version "0.0.136"
+  resolved "https://registry.yarnpkg.com/@compas/stdlib/-/stdlib-0.0.136.tgz#7839fe1c3c393392985d116f26b7c1c52833a848"
+  integrity sha512-NNnA7Ngql5reftWWfs99oVY0Frad2tZSFeLn0LITfYeXPMWawmdrF5VdQJz6IpQX7fFsFm41DHP838IbUHJd3w==
   dependencies:
     "@types/node" "15.3.0"
     dotenv "9.0.2"
     lodash.merge "4.6.2"
 
-"@compas/store@0.0.135":
-  version "0.0.135"
-  resolved "https://registry.yarnpkg.com/@compas/store/-/store-0.0.135.tgz#9ac707d82d7605a43acc62b9f38ac47717830b5c"
-  integrity sha512-UlYJxs0Ffx+TSRfH6ZckbmFDYeXpdi3q+qN3uAQU1NuAuJexA69ul1n4YhrDxXnjcuS7cEA6SFovWK7wlhtN1w==
+"@compas/store@0.0.136":
+  version "0.0.136"
+  resolved "https://registry.yarnpkg.com/@compas/store/-/store-0.0.136.tgz#5b630ec563cd8f26ce8b863c6548eae7a2c24faa"
+  integrity sha512-1Tf0SKVkjh//t8knkrAw/Q7GAd6fYBa76C5cb9Vzz8Zz21lNW32sZDz2hYVKtFC1/HT4LNFwFrMMKvTpsxnOJA==
   dependencies:
-    "@compas/stdlib" "0.0.135"
+    "@compas/stdlib" "0.0.136"
     "@types/minio" "7.0.7"
     mime-types "2.1.30"
     minio "7.0.18"
@@ -1062,10 +1062,10 @@ eslint-plugin-import@2.23.2:
     resolve "^1.20.0"
     tsconfig-paths "^3.9.0"
 
-eslint-plugin-jsdoc@34.8.0:
-  version "34.8.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-34.8.0.tgz#a343d240724b78a86bf1e8da8b5de8b68a87b4c0"
-  integrity sha512-hM4pFLqb+lnGvOxZyo2sQSt7S+gs9qD6Ah0x3qmxH+NyhdemTj/OR/L3sjnkNn2AgFVgl9YR7BjJpaDgDaX3iQ==
+eslint-plugin-jsdoc@34.8.1:
+  version "34.8.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-34.8.1.tgz#d617663136d65cccbbd398be4bb87dc22f584d25"
+  integrity sha512-OLLq1UfzHr4Z+Y07R/t8x4eF5FS5yxWeUwaLaRv6DgX7pJEEl/3PzwDZfnYWFy2HQSanGmZnBhUQoHe6kPxN4g==
   dependencies:
     "@es-joy/jsdoccomment" "^0.6.0"
     comment-parser "1.1.5"
