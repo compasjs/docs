@@ -1,0 +1,186 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <title>Migrations</title>
+        <meta name="description" content="Compas migrations"/>
+        <link rel="canonical" href="https://compasjs.com/features/migrations.html"/>
+        <style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            pre, code {background: white;}
+            pre {padding-left: 2px; line-height: 1.2; }
+            code {margin-left: 2px; margin-right: 2px; }
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+            a.anchor { float: right; text-decoration: none; padding: 1px 3px; border-bottom: none; }
+            .hljs{display:block;overflow-x:auto;padding:.5em;background:#f0f0f0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#bc6060}.hljs-literal{color:#78a960}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+        </style>
+    </head>
+    <body>
+    <header>
+        <nav><a href="https://compasjs.com/index.html">Compas</a> > <a href="https://compasjs.com/features/index.html">Features</a></nav>
+    </header>
+    <main>
+    <article>
+        <h1 id="migrations">
+  Migrations
+  
+</h1>
+<p>Compas cli comes with a migration runner built-in. This is based on various
+migration functions exported from @compas/store. The migration system supports
+two types of migrations:</p>
+<ul>
+<li>Forward migrations</li>
+<li>Repeatable migrations</li>
+</ul>
+<p>Forward migrations are a way of only advancing the schema state. So when you
+need to rollback a change, a new forward migration needs to be created.</p>
+<p>Repeatable migrations can be used in combination with <code>CREATE OR REPLACE</code> with
+for example views. If the hash of the current repeatable migration is not equal
+to the last execution stored in the database, the migration is executed.</p>
+<p>Every migration file gets a new transaction by default. To skip transaction
+creation, add <code>-- disable auto transaction</code> in your file.</p>
+<p>The migrations files are expected to live in <code>$project/migrations</code> directory.
+The file names should be in the following format: <code>001-name.sql</code> or
+<code>002-r-long-name.sql</code> for repeatable migrations.</p>
+<p>To start using the migration system, see
+<a href="#built-in-migration-requirements">Built-in migration requirements</a></p>
+<h2 id="synopsis-of-compascli">
+  Synopsis of @compas/cli
+  <a name="synopsis-of-compascli" class="anchor" href="#synopsis-of-compascli">#</a>
+</h2>
+<p><code>compas docker migrate [rebuild|info] [--keep-alive]</code></p>
+<h3 id="compas-docker-migrate">
+  <code>compas docker migrate</code>
+  <a name="compas-docker-migrate" class="anchor" href="#compas-docker-migrate">#</a>
+</h3>
+<p>Read the <code>$project/migrations</code> directory, print out migration information, see
+<code>compas docker migrate info</code>, and execute the pending migrations. The process
+exits afterwards.</p>
+<h3 id="compas-docker-migrate-info">
+  <code>compas docker migrate info</code>
+  <a name="compas-docker-migrate-info" class="anchor" href="#compas-docker-migrate-info">#</a>
+</h3>
+<p>Print information about the migration state and exit. The information consists
+of migrations that are not applied yet, and migrations that have &#39;hashChanges&#39;,
+basically saying that the file on disk is out of sync with the migration that
+was applied in the past.</p>
+<h3 id="compas-docker-migrate-rebuild">
+  <code>compas docker migrate rebuild</code>
+  <a name="compas-docker-migrate-rebuild" class="anchor" href="#compas-docker-migrate-rebuild">#</a>
+</h3>
+<p>Rebuild migration table with current file state. This allows for reordering
+migrations, squashing migrations and other things that alter the migration
+files, but do not affect the schema in any way. Note that Compas can&#39;t enforce
+any consistency between the migration files and the current schema state. So use
+with caution.</p>
+<h3 id="compas-docker-migrate---keep-alive">
+  <code>compas docker migrate --keep-alive</code>
+  <a name="compas-docker-migrate---keep-alive" class="anchor" href="#compas-docker-migrate---keep-alive">#</a>
+</h3>
+<p>Same as <code>compas docker migrate</code>, except keeping the Postgres connection running.
+This is useful when your deploy solution doesn&#39;t allow for one of commands, but
+allows private services that consume some sporadic resources.</p>
+<h2 id="built-in-migration-requirements">
+  Built-in migration requirements
+  <a name="built-in-migration-requirements" class="anchor" href="#built-in-migration-requirements">#</a>
+</h2>
+<p>Since @compas/store also uses Postgres it also includes a migration. When you
+start using @compas/store you should copy the current &#39;final&#39; definition from
+below. When Compas is bumped you&#39;d need to check if the release notes contain a
+migration that needs to be executed.</p>
+<p>It is expected that the below migration is your first migration
+(<code>001-compas-store-init.sql</code>) since it includes the &#39;migration&#39; table.</p>
+<pre><code class="language-sql"><span class="hljs-comment">-- Initial @compas/store migration for version vx.x.x</span>
+<span class="hljs-keyword">CREATE</span> EXTENSION IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> &quot;uuid-ossp&quot;;
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> migration
+(
+  &quot;namespace&quot; <span class="hljs-type">varchar</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;number&quot;    <span class="hljs-type">int</span>,
+  &quot;name&quot;      <span class="hljs-type">varchar</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;createdAt&quot; timestamptz <span class="hljs-keyword">DEFAULT</span> now(),
+  &quot;hash&quot;      <span class="hljs-type">varchar</span>
+);
+
+<span class="hljs-keyword">CREATE</span> INDEX migration_namespace_number_idx <span class="hljs-keyword">ON</span> &quot;migration&quot; (&quot;namespace&quot;, &quot;number&quot;);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> &quot;file&quot;
+(
+  &quot;id&quot;            uuid <span class="hljs-keyword">PRIMARY</span> KEY <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> uuid_generate_v4(),
+  &quot;contentLength&quot; <span class="hljs-type">int</span>              <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;bucketName&quot;    <span class="hljs-type">varchar</span>          <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;contentType&quot;   <span class="hljs-type">varchar</span>          <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;name&quot;          <span class="hljs-type">varchar</span>          <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;meta&quot;          jsonb            <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;createdAt&quot;     timestamptz      <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> now(),
+  &quot;updatedAt&quot;     timestamptz      <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> now(),
+  &quot;deletedAt&quot;     timestamptz      <span class="hljs-keyword">NULL</span>
+);
+
+<span class="hljs-keyword">CREATE</span> INDEX &quot;fileBucketNameIdx&quot; <span class="hljs-keyword">ON</span> &quot;file&quot; (&quot;bucketName&quot;);
+<span class="hljs-keyword">CREATE</span> INDEX &quot;fileDeletedAtIdx&quot; <span class="hljs-keyword">ON</span> &quot;file&quot; (&quot;deletedAt&quot;);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> &quot;session&quot;
+(
+  &quot;id&quot;        uuid <span class="hljs-keyword">PRIMARY</span> KEY <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> uuid_generate_v4(),
+  &quot;expires&quot;   timestamptz      <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;data&quot;      jsonb            <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;createdAt&quot; timestamptz      <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> now(),
+  &quot;updatedAt&quot; timestamptz      <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> now()
+);
+
+<span class="hljs-keyword">CREATE</span> INDEX &quot;sessionExpiresIdx&quot; <span class="hljs-keyword">ON</span> &quot;session&quot; (&quot;expires&quot;);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> &quot;job&quot;
+(
+  &quot;id&quot;             bigserial <span class="hljs-keyword">PRIMARY</span> KEY <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;isComplete&quot;     <span class="hljs-type">boolean</span>               <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;priority&quot;       <span class="hljs-type">int</span>                   <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;retryCount&quot;     <span class="hljs-type">int</span>                   <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span>,
+  &quot;name&quot;           <span class="hljs-type">varchar</span>               <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;scheduledAt&quot;    timestamptz           <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> now(),
+  &quot;data&quot;           jsonb                 <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;handlerTimeout&quot; <span class="hljs-type">int</span>                   <span class="hljs-keyword">NULL</span>,
+  &quot;createdAt&quot;      timestamptz           <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> now(),
+  &quot;updatedAt&quot;      timestamptz           <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> now()
+);
+
+<span class="hljs-keyword">CREATE</span> INDEX &quot;jobIsCompleteScheduledAtIdx&quot; <span class="hljs-keyword">ON</span> &quot;job&quot; (&quot;isComplete&quot;, &quot;scheduledAt&quot;);
+<span class="hljs-keyword">CREATE</span> INDEX &quot;jobNameIdx&quot; <span class="hljs-keyword">ON</span> &quot;job&quot; (&quot;name&quot;);
+<span class="hljs-keyword">CREATE</span> INDEX &quot;jobScheduledAtIdx&quot; <span class="hljs-keyword">ON</span> &quot;job&quot; (&quot;scheduledAt&quot;);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> &quot;fileGroup&quot;
+(
+  &quot;id&quot;        uuid <span class="hljs-keyword">PRIMARY</span> KEY <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> uuid_generate_v4(),
+  &quot;order&quot;     <span class="hljs-type">int</span>              <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;file&quot;      uuid             <span class="hljs-keyword">NULL</span>,
+  &quot;parent&quot;    uuid             <span class="hljs-keyword">NULL</span>,
+  &quot;name&quot;      <span class="hljs-type">varchar</span>          <span class="hljs-keyword">NULL</span>,
+  &quot;meta&quot;      jsonb            <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  &quot;createdAt&quot; timestamptz      <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> now(),
+  &quot;updatedAt&quot; timestamptz      <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> now(),
+  &quot;deletedAt&quot; timestamptz      <span class="hljs-keyword">NULL</span>,
+  <span class="hljs-comment">-- Both file and parent fields are optional, since we expect either one of them to exists</span>
+  <span class="hljs-comment">-- However we still want to cascade hard deletes</span>
+  <span class="hljs-keyword">CONSTRAINT</span> &quot;fileGroupFileFk&quot; <span class="hljs-keyword">FOREIGN</span> KEY (&quot;file&quot;) <span class="hljs-keyword">REFERENCES</span> &quot;file&quot; (&quot;id&quot;) <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> CASCADE,
+  <span class="hljs-keyword">CONSTRAINT</span> &quot;fileGroupParentFk&quot; <span class="hljs-keyword">FOREIGN</span> KEY (&quot;parent&quot;) <span class="hljs-keyword">REFERENCES</span> &quot;fileGroup&quot; (&quot;id&quot;) <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> CASCADE
+);
+
+<span class="hljs-keyword">CREATE</span> INDEX &quot;fileGroupFileIdx&quot; <span class="hljs-keyword">ON</span> &quot;fileGroup&quot; (&quot;file&quot;);
+<span class="hljs-keyword">CREATE</span> INDEX &quot;fileGroupParentIdx&quot; <span class="hljs-keyword">ON</span> &quot;fileGroup&quot; (&quot;parent&quot;);
+<span class="hljs-keyword">CREATE</span> INDEX &quot;fileGroupDeletedAtIdx&quot; <span class="hljs-keyword">ON</span> &quot;fileGroup&quot; (&quot;deletedAt&quot;);
+<span class="hljs-keyword">CREATE</span> INDEX &quot;fileGroupOrderIdx&quot; <span class="hljs-keyword">ON</span> &quot;fileGroup&quot; (&quot;order&quot;);
+</code></pre>
+
+    </article>
+    
+    </main>
+    <footer>
+        <nav><a href="https://compasjs.com/index.html">Compas</a> > <a href="https://compasjs.com/features/index.html">Features</a></nav>
+    </footer>
+    </body>
+</html>
+  
