@@ -129,14 +129,14 @@ migration state.
 - sql `Postgres`
 - migrationDirectory `string`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L22)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L27)_
 
 ## getMigrationsToBeApplied
 
 _Available since 0.1.0_
 
-_function getMigrationsToBeApplied(mc):
-{{    migrationQueue: ({ namespace: string, name: string, number: number, repeatable:    boolean}[]), hashChanges: { name: string, number: number, namespace: string }[]  }}_
+_function getMigrationsToBeApplied(mc): { migrationQueue: { name: string,
+number: number, repeatable: boolean _
 
 Get the migrations to be applied from the provided migration context. Note that
 'repeatable' migrations are always in both the `migrationQueue` and
@@ -146,7 +146,7 @@ Get the migrations to be applied from the provided migration context. Note that
 
 - mc `MigrateContext`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L95)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L96)_
 
 ## runMigrations
 
@@ -160,7 +160,7 @@ Run the migrations currently pending in the migration context.
 
 - mc `MigrateContext`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L131)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L127)_
 
 ## addEventToQueue
 
