@@ -116,19 +116,20 @@ migration state.</p>
 <li>sql <code>Postgres</code></li>
 <li>migrationDirectory <code>string</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L22">source</a></em><br><h2 id="getmigrationstobeapplied">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L27">source</a></em><br><h2 id="getmigrationstobeapplied">
   getMigrationsToBeApplied
   <a name="getmigrationstobeapplied" class="anchor" href="#getmigrationstobeapplied">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function getMigrationsToBeApplied(mc):
-{{    migrationQueue: ({ namespace: string, name: string, number: number, repeatable:    boolean}[]), hashChanges: { name: string, number: number, namespace: string }[]  }}</em><br><p>Get the migrations to be applied from the provided migration context. Note that
+<em>Available since 0.1.0</em><br><p>_function getMigrationsToBeApplied(mc): { migrationQueue: { name: string,
+number: number, repeatable: boolean _</p>
+<p>Get the migrations to be applied from the provided migration context. Note that
 &#39;repeatable&#39; migrations are always in both the <code>migrationQueue</code> and
 <code>hashChanges</code>.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li>mc <code>MigrateContext</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L95">source</a></em><br><h2 id="runmigrations">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L96">source</a></em><br><h2 id="runmigrations">
   runMigrations
   <a name="runmigrations" class="anchor" href="#runmigrations">#</a>
 </h2>
@@ -137,7 +138,7 @@ migration state.</p>
 <ul>
 <li>mc <code>MigrateContext</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L131">source</a></em><br><h2 id="addeventtoqueue">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/migrations.js#L127">source</a></em><br><h2 id="addeventtoqueue">
   addEventToQueue
   <a name="addeventtoqueue" class="anchor" href="#addeventtoqueue">#</a>
 </h2>
