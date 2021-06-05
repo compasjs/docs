@@ -28,13 +28,13 @@
   Logger
   
 </h1>
-<p>Although the insight package exports more than just a logger, this document will
+<p>Although the stdlib package exports more than just a logger, this document will
 focus on the logger.</p>
 <h2 id="api">
   API
   <a name="api" class="anchor" href="#api">#</a>
 </h2>
-<p>Provided by <code>@compas/insight</code></p>
+<p>Provided by <code>@compas/stdlib</code></p>
 <h3 id="newlogger">
   newLogger
   <a name="newlogger" class="anchor" href="#newlogger">#</a>
@@ -44,13 +44,17 @@ pretty printing when asked.</p>
 <p>Parameters:</p>
 <ul>
 <li><code>options</code>:<ul>
-<li><code>pretty</code> (boolean): Use the pretty printer. Defaults to true when
-<code>process.env.NODE_ENV</code> is <code>development</code>.</li>
+<li><code>disableInfoLogger</code> (boolean): Replaces log.info with a &#39;noop&#39;. Defaults to
+&#39;false&#39;.</li>
+<li><code>disableErrorLogger</code> (boolean): Replaces log.error with a &#39;noop&#39;. Defaults
+to &#39;false&#39;.</li>
+<li><code>printer</code> (<code>&quot;pretty&quot;|&quot;ndjson&quot;|&quot;github-actions&quot;|undefined</code>): The log printer
+to use. Automatically inferred from the env variables.</li>
 <li><code>stream</code> (Stream): The stream to write to, defaults to <code>process.stdout</code>.
 This is the intended use case. Although streams to files may work, this is
 not supported.</li>
-<li><code>ctx</code> (object): Any context to add to log lines. This value is immediately
-copied on logger creation, so changes made via a reference, will not be
+<li><code>ctx</code> (object): Any context to add to log lines. This value is copied
+immediately on logger creation, so changes made via a reference, will not be
 reflected.</li>
 </ul>
 </li>
@@ -59,19 +63,14 @@ reflected.</li>
 <p><strong>info</strong> and <strong>error</strong>:</p>
 <p>The info and error function accept a single argument that is logged. This
 happens in a single <code>write</code> call when pretty printing or not.</p>
-<p><strong>isProduction</strong></p>
-<p>Check if the logger is pretty printing or not. This may be useful to add some
-formatting to values. For example when loggin a file size, you may want the
-number of bytes in production, but when developing want to see <code>8 kB</code>.</p>
 <h2 id="on-log-levels-and-processing">
   On log levels and processing
   <a name="on-log-levels-and-processing" class="anchor" href="#on-log-levels-and-processing">#</a>
 </h2>
-<p>Log levels are often used to get some ranking based on importance in your log
-lines. Compas only knows 2 log levels: info and error. A log line is either
-important enough to warn you, or it is not. By simplifying this decision, you
-can spend a bit more time deciding if you really need to log that information or
-not.</p>
+<p>Log levels are used to get some ranking based on importance in your log lines.
+Compas only knows 2 log levels: info and error. A log line is either important
+enough to warn you, or it is not. By simplifying this decision, you can spend a
+bit more time deciding if you really need to log that information or not.</p>
 <p>There is much more information in logs than just the contrasting error- and
 info-&#39;level&#39;, however this always requires further processing. Compas prefers
 that this happens outside the current process. That is why by default we write

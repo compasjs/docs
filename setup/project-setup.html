@@ -34,7 +34,7 @@ backends.</p>
 new directory and open a terminal in that directory. Compas projects use
 <a href="https://nodejs.org/dist/latest-v15.x/docs/api/esm.html#esm_introduction">ES modules</a>.
 This results in projects created on top of Compas, to also use ES modules.</p>
-<p>To enable this, make sure to use Node.js 14 or higher and create the following
+<p>To enable this, make sure to use Node.js 16 or higher and create the following
 package.json file:</p>
 <pre><code class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;compas-todo&quot;</span><span class="hljs-punctuation">,</span>
@@ -65,14 +65,14 @@ things:</p>
 <li>Only runs if the file that you call <code>mainFn</code> in, is the &#39;main&#39; file</li>
 <li>Reads the <code>.env</code> file if exists</li>
 <li>Calls the provided callback, and handles uncaught exceptions.</li>
-<li>Create a logger from <a href="TODO">@compas/insight</a></li>
+<li>Create a logger from <a href="TODO">@compas/stdlib</a></li>
 </ul>
 <p>Let&#39;s create two files. Both exporting a constant and calling <code>mainFn</code>:</p>
 <pre><code class="language-js"><span class="hljs-comment">// src/a.js</span>
 <span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
 <span class="hljs-keyword">import</span> { b } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./b.js&quot;</span>;
 
-<span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, <span class="hljs-function">(<span class="hljs-params">logger</span>) =&gt;</span> logger.<span class="hljs-title function_">info</span>(<span class="hljs-string">&quot;Hello from a.js. B is&quot;</span>, b));
+<span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, <span class="hljs-function">(<span class="hljs-params">logger</span>) =&gt;</span> logger.<span class="hljs-title function_">info</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&quot;Hello from a.js&quot;</span>, b }));
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> a = <span class="hljs-literal">true</span>;
 
@@ -80,17 +80,25 @@ things:</p>
 <span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
 <span class="hljs-keyword">import</span> { a } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./a.js&quot;</span>;
 
-<span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, <span class="hljs-function">(<span class="hljs-params">logger</span>) =&gt;</span> logger.<span class="hljs-title function_">info</span>(<span class="hljs-string">&quot;Hello from b.js. A is&quot;</span>, a));
+<span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, <span class="hljs-function">(<span class="hljs-params">logger</span>) =&gt;</span>
+  logger.<span class="hljs-title function_">info</span>({ <span class="hljs-attr">message</span>: <span class="hljs-string">&quot;Hello from b.js.&quot;</span>, a }),
+);
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> b = <span class="hljs-literal">false</span>;
 </code></pre>
 <p>Now if we run <code>src/a.js</code>, we see the following:</p>
 <pre><code class="language-txt">$ node ./src/a.js
-Hello from a.js. B is false
+{
+  message: &quot;Hello from a.js.&quot;,
+  b: false,
+}
 </code></pre>
 <p>When running <code>src/b.js</code>:</p>
 <pre><code class="language-txt">$ node ./src/b.js
-Hello from b.js. A is true
+{
+  message: &quot;Hello from b.js.&quot;,
+  a: true,
+}
 </code></pre>
 <p>As you can see in the output, only a single callback passed to <code>mainFn</code> is
 called. This callback in <code>src/a.js</code> only being called when it is the starting
