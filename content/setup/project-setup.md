@@ -16,7 +16,7 @@ new directory and open a terminal in that directory. Compas projects use
 [ES modules](https://nodejs.org/dist/latest-v15.x/docs/api/esm.html#esm_introduction).
 This results in projects created on top of Compas, to also use ES modules.
 
-To enable this, make sure to use Node.js 14 or higher and create the following
+To enable this, make sure to use Node.js 16 or higher and create the following
 package.json file:
 
 ```json
@@ -55,7 +55,7 @@ things:
 - Only runs if the file that you call `mainFn` in, is the 'main' file
 - Reads the `.env` file if exists
 - Calls the provided callback, and handles uncaught exceptions.
-- Create a logger from [@compas/insight](TODO)
+- Create a logger from [@compas/stdlib](TODO)
 
 Let's create two files. Both exporting a constant and calling `mainFn`:
 
@@ -64,7 +64,7 @@ Let's create two files. Both exporting a constant and calling `mainFn`:
 import { mainFn } from "@compas/stdlib";
 import { b } from "./b.js";
 
-mainFn(import.meta, (logger) => logger.info("Hello from a.js. B is", b));
+mainFn(import.meta, (logger) => logger.info({ message: "Hello from a.js", b }));
 
 export const a = true;
 
@@ -72,7 +72,9 @@ export const a = true;
 import { mainFn } from "@compas/stdlib";
 import { a } from "./a.js";
 
-mainFn(import.meta, (logger) => logger.info("Hello from b.js. A is", a));
+mainFn(import.meta, (logger) =>
+  logger.info({ message: "Hello from b.js.", a }),
+);
 
 export const b = false;
 ```
@@ -81,14 +83,20 @@ Now if we run `src/a.js`, we see the following:
 
 ```txt
 $ node ./src/a.js
-Hello from a.js. B is false
+{
+  message: "Hello from a.js.",
+  b: false,
+}
 ```
 
 When running `src/b.js`:
 
 ```txt
 $ node ./src/b.js
-Hello from b.js. A is true
+{
+  message: "Hello from b.js.",
+  a: true,
+}
 ```
 
 As you can see in the output, only a single callback passed to `mainFn` is

@@ -104,7 +104,7 @@ Parameters:
 
     The handler is called with the following parameters:
 
-    - `event`: An @compas/insight event, which is aborted after the specified
+    - `event`: An @compas/stdlib event, which is aborted after the specified
       timeout. The event is already started and will be stopped by the job
       worker.
     - `sql`: A Postgres connection already in transaction. If the transaction is

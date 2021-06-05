@@ -107,7 +107,7 @@ test("Throws vs not throws", async (t) => {
   } catch (e) {
     t.fail(`The 'doesNotThrow' function did throw.`);
 
-    // A logger from @compas/insight is available
+    // A logger from @compas/stdlib is available
     t.log.error(e);
   }
 });

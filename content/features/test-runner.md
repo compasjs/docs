@@ -44,7 +44,7 @@ Parameters:
 
 #### t.log
 
-A logger instance provided by `@compas/insight`. See
+A logger instance provided by `@compas/stdlib`. See
 [logger](/features/logger.html) for more details.
 
 #### t.timeout
