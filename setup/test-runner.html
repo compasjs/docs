@@ -136,6 +136,9 @@ the defaults is below:</p>
 <pre><code class="language-js"><span class="hljs-comment">// Individual test timeout, i.e. the function provided to `test` and `t.test`</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> timeout = <span class="hljs-number">2500</span>;
 
+<span class="hljs-comment">// Enforce that every test has at least a single subtest (i.e. t.test()) or an assertion (t.pass())</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> enforceSingleAssertion = <span class="hljs-literal">false</span>;
+
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">setup</span>(<span class="hljs-params"></span>) {
   <span class="hljs-comment">// Global setup function</span>
 }

@@ -105,7 +105,7 @@ t.<span class="hljs-title function_">equal</span>({}, {}); <span class="hljs-com
 <p>Signal to the test runner that an implicit assertion passed. This is often used
 when testing control flow, like checking that a <code>catch</code> block is executed.</p>
 <p><strong>t.fail(msg?)</strong></p>
-<p>Signal to the test runne that an implicit assertion failed. This is also often
+<p>Signal to the test runner that an implicit assertion failed. This is also often
 used when testing control flow. For example in the following example where the
 function <code>willThrow</code> should really throw an error.</p>
 <pre><code class="language-js"><span class="hljs-title function_">mainTestFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>);
@@ -123,6 +123,26 @@ function <code>willThrow</code> should really throw an error.</p>
   }
 });
 </code></pre>
+<p>When <code>enforceSingleAssertion</code> is set to <code>true</code> in the config, the above is more
+idiomatically written as:</p>
+<pre><code class="language-js"><span class="hljs-title function_">mainTestFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>);
+
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">willThrow</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Really did throw&quot;</span>);
+};
+
+<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;willThrow really throws&quot;</span>, <span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-title function_">willThrow</span>();
+  } <span class="hljs-keyword">catch</span> {
+    t.<span class="hljs-title function_">pass</span>(<span class="hljs-string">&quot;willThrow, did indeed throw an error.&quot;</span>);
+  }
+});
+</code></pre>
+<p>In this case when the <code>willThrow()</code> function doesn&#39;t throw, the test runners
+throws an error that <code>willThrow really throws</code> didn&#39;t execute a single
+assertion. Because the &#39;catch&#39; block did not executed and consecutively the
+<code>t.pass()</code> not called.</p>
 <p><strong>t.deepEqual(value, expected, msg?)</strong></p>
 <p>Compare <code>value</code> and <code>expected</code> using the Node.js built-in
 <a href="https://nodejs.org/api/assert.html#assert_assert_deepstrictequal_actual_expected_message">deepStrictEqual</a>.</p>
@@ -155,6 +175,9 @@ when a JavaScript or json file is changed.</p>
 <p><strong>timeout</strong></p>
 <p>A configurable timeout in milliseconds. This is enforced for every callback
 provided to <code>test</code> or <code>t.test</code>. Defaults to 2.5 seconds.</p>
+<p><strong>enforceSingleAssertion</strong></p>
+<p>The runner enforces that every <code>test()</code> and <code>t.test()</code> call does at least a
+single assertion or creates at least a single subtest.</p>
 <p><strong>setup</strong></p>
 <p>A function that is called before any test file is imported. Executed both for
 single file tests and when running all tests via <code>yarn compas test</code>. When
