@@ -36,11 +36,11 @@ new directory and open a terminal in that directory. Compas projects use
 This results in projects created on top of Compas, to also use ES modules.</p>
 <p>To enable this, make sure to use Node.js 14 or higher and create the following
 package.json file:</p>
-<pre><code class="language-json">{
-  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;compas-todo&quot;</span>,
-  <span class="hljs-attr">&quot;private&quot;</span>: <span class="hljs-literal">true</span>,
-  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;module&quot;</span>
-}
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;compas-todo&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;private&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;module&quot;</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <p>Another useful file to create now, is a <code>.env</code> file with the following contents:</p>
 <pre><code class="language-dotenv">NODE_ENV=development
@@ -72,7 +72,7 @@ things:</p>
 <span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
 <span class="hljs-keyword">import</span> { b } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./b.js&quot;</span>;
 
-mainFn(<span class="hljs-keyword">import</span>.meta, <span class="hljs-function">(<span class="hljs-params">logger</span>) =&gt;</span> logger.info(<span class="hljs-string">&quot;Hello from a.js. B is&quot;</span>, b));
+<span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, <span class="hljs-function">(<span class="hljs-params">logger</span>) =&gt;</span> logger.<span class="hljs-title function_">info</span>(<span class="hljs-string">&quot;Hello from a.js. B is&quot;</span>, b));
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> a = <span class="hljs-literal">true</span>;
 
@@ -80,7 +80,7 @@ mainFn(<span class="hljs-keyword">import</span>.meta, <span class="hljs-function
 <span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
 <span class="hljs-keyword">import</span> { a } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./a.js&quot;</span>;
 
-mainFn(<span class="hljs-keyword">import</span>.meta, <span class="hljs-function">(<span class="hljs-params">logger</span>) =&gt;</span> logger.info(<span class="hljs-string">&quot;Hello from b.js. A is&quot;</span>, a));
+<span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, <span class="hljs-function">(<span class="hljs-params">logger</span>) =&gt;</span> logger.<span class="hljs-title function_">info</span>(<span class="hljs-string">&quot;Hello from b.js. A is&quot;</span>, a));
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> b = <span class="hljs-literal">false</span>;
 </code></pre>

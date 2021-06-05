@@ -41,27 +41,27 @@ expects the user to use normal control flow like try / catch.</p>
 <!-- howto-test-pass-fail -->
 
 <pre><code class="language-js"><span class="hljs-keyword">const</span> throws = <span class="hljs-keyword">async</span> () =&gt; {
-  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Oops!&quot;</span>);
+  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Oops!&quot;</span>);
 };
 
-<span class="hljs-keyword">const</span> doesNotThrow = <span class="hljs-function">() =&gt;</span> {};
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">doesNotThrow</span> = (<span class="hljs-params"></span>) =&gt; {};
 
-test(<span class="hljs-string">&quot;Throws vs not throws&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
+<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Throws vs not throws&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
   <span class="hljs-keyword">try</span> {
-    <span class="hljs-keyword">await</span> throws();
-    t.fail(<span class="hljs-string">`The &#x27;throws&#x27; function should have thrown.`</span>);
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">throws</span>();
+    t.<span class="hljs-title function_">fail</span>(<span class="hljs-string">`The &#x27;throws&#x27; function should have thrown.`</span>);
   } <span class="hljs-keyword">catch</span> (e) {
-    t.equal(e.message, <span class="hljs-string">&quot;Oops!&quot;</span>);
+    t.<span class="hljs-title function_">equal</span>(e.<span class="hljs-property">message</span>, <span class="hljs-string">&quot;Oops!&quot;</span>);
   }
 
   <span class="hljs-keyword">try</span> {
-    doesNotThrow();
-    t.pass(<span class="hljs-string">&quot;The function did not throw!&quot;</span>);
+    <span class="hljs-title function_">doesNotThrow</span>();
+    t.<span class="hljs-title function_">pass</span>(<span class="hljs-string">&quot;The function did not throw!&quot;</span>);
   } <span class="hljs-keyword">catch</span> (e) {
-    t.fail(<span class="hljs-string">`The &#x27;doesNotThrow&#x27; function did throw.`</span>);
+    t.<span class="hljs-title function_">fail</span>(<span class="hljs-string">`The &#x27;doesNotThrow&#x27; function did throw.`</span>);
 
     <span class="hljs-comment">// A logger from @lbu/insight is available</span>
-    t.log.error(e);
+    t.<span class="hljs-property">log</span>.<span class="hljs-title function_">error</span>(e);
   }
 });
 </code></pre>
@@ -77,7 +77,7 @@ test(<span class="hljs-string">&quot;Throws vs not throws&quot;</span>, <span cl
 </ul>
 <!-- howto-exec -->
 
-<pre><code class="language-js"><span class="hljs-keyword">const</span> { stdout, stderr, exitCode } = <span class="hljs-keyword">await</span> exec(<span class="hljs-string">&quot;echo &#x27;foo&#x27;&quot;</span>);
+<pre><code class="language-js"><span class="hljs-keyword">const</span> { stdout, stderr, exitCode } = <span class="hljs-keyword">await</span> <span class="hljs-title function_">exec</span>(<span class="hljs-string">&quot;echo &#x27;foo&#x27;&quot;</span>);
 <span class="hljs-comment">// stdout =&gt; &quot;foo\n&quot;</span>
 <span class="hljs-comment">// stderr =&gt; &quot;&quot;</span>
 <span class="hljs-comment">// exitCode =&gt; 0</span>
@@ -90,7 +90,7 @@ test(<span class="hljs-string">&quot;Throws vs not throws&quot;</span>, <span cl
 </ul>
 <!-- howto-spawn -->
 
-<pre><code class="language-js"><span class="hljs-keyword">const</span> { exitCode } = <span class="hljs-keyword">await</span> spawn(<span class="hljs-string">&quot;echo&quot;</span>, [<span class="hljs-string">&quot;bar&quot;</span>]);
+<pre><code class="language-js"><span class="hljs-keyword">const</span> { exitCode } = <span class="hljs-keyword">await</span> <span class="hljs-title function_">spawn</span>(<span class="hljs-string">&quot;echo&quot;</span>, [<span class="hljs-string">&quot;bar&quot;</span>]);
 <span class="hljs-comment">// Outputs &quot;bar\n&quot; on stdout</span>
 <span class="hljs-comment">// exitCode =&gt; 0</span>
 </code></pre>

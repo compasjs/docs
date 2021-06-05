@@ -94,16 +94,16 @@ provided that you already had a working database connection in this project.</p>
   runMigrations,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/store&quot;</span>;
 
-mainFn(<span class="hljs-keyword">import</span>.meta, main);
+<span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, main);
 
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params">logger</span>) </span>{
-  <span class="hljs-keyword">const</span> sql = newPostgresConnection({});
-  <span class="hljs-keyword">const</span> mc = <span class="hljs-keyword">await</span> newMigrateContext(sql);
-  logger.info(getMigrationsToBeApplied(mc) || <span class="hljs-string">&quot;No migrations to be applied.&quot;</span>);
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">logger</span>) {
+  <span class="hljs-keyword">const</span> sql = <span class="hljs-title function_">newPostgresConnection</span>({});
+  <span class="hljs-keyword">const</span> mc = <span class="hljs-keyword">await</span> <span class="hljs-title function_">newMigrateContext</span>(sql);
+  logger.<span class="hljs-title function_">info</span>(<span class="hljs-title function_">getMigrationsToBeApplied</span>(mc) || <span class="hljs-string">&quot;No migrations to be applied.&quot;</span>);
 
-  <span class="hljs-keyword">await</span> runMigrations(mc);
+  <span class="hljs-keyword">await</span> <span class="hljs-title function_">runMigrations</span>(mc);
 
-  <span class="hljs-keyword">await</span> sql.end();
+  <span class="hljs-keyword">await</span> sql.<span class="hljs-title function_">end</span>();
 }
 </code></pre>
 <h3 id="general-notes">
@@ -166,66 +166,66 @@ supports the following:</p>
 <li>Run workers for specific jobs</li>
 </ul>
 <p>Example usage:</p>
-<pre><code class="language-javascript">mainFn(<span class="hljs-keyword">import</span>.meta, main);
+<pre><code class="language-javascript"><span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, main);
 
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> sql = <span class="hljs-keyword">await</span> newPostgresConnection();
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> sql = <span class="hljs-keyword">await</span> <span class="hljs-title function_">newPostgresConnection</span>();
 
   <span class="hljs-keyword">const</span> jobHandler = <span class="hljs-keyword">async</span> (sql, data) =&gt; {
-    <span class="hljs-built_in">console</span>.log(data.name); <span class="hljs-comment">// &quot;myJob&quot;</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data.<span class="hljs-property">name</span>); <span class="hljs-comment">// &quot;myJob&quot;</span>
 
     <span class="hljs-comment">// simulate work</span>
-    <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">r</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(r, <span class="hljs-number">100</span>));
+    <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">r</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(r, <span class="hljs-number">100</span>));
   };
 
   <span class="hljs-comment">// parallelCount shouldn&#x27;t be higher than Postgres pool size</span>
-  <span class="hljs-keyword">const</span> queueWorker = <span class="hljs-keyword">new</span> JobQueueWorker(sql, <span class="hljs-string">&quot;myJob&quot;</span>, {
+  <span class="hljs-keyword">const</span> queueWorker = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JobQueueWorker</span>(sql, <span class="hljs-string">&quot;myJob&quot;</span>, {
     <span class="hljs-attr">parallelCount</span>: <span class="hljs-number">5</span>,
     <span class="hljs-attr">pollInterval</span>: <span class="hljs-number">1500</span>,
     <span class="hljs-attr">handler</span>: jobHandler,
   });
 
   <span class="hljs-comment">// Start queue</span>
-  queueWorker.start();
+  queueWorker.<span class="hljs-title function_">start</span>();
 
   <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> {
     <span class="hljs-comment">// Get current queue size</span>
-    queueWorker.pendingQueueSize().then(<span class="hljs-function">(<span class="hljs-params">{ pendingCount, scheduledCount }</span>) =&gt;</span> {
-      log.info({ pendingCount, scheduledCount });
+    queueWorker.<span class="hljs-title function_">pendingQueueSize</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">{ pendingCount, scheduledCount }</span>) =&gt;</span> {
+      log.<span class="hljs-title function_">info</span>({ pendingCount, scheduledCount });
     });
   }, <span class="hljs-number">1500</span>);
 
   <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
     <span class="hljs-comment">// running jobs are not cancelled</span>
     <span class="hljs-comment">// but no new job is started</span>
-    queueWorker.stop();
+    queueWorker.<span class="hljs-title function_">stop</span>();
   }, <span class="hljs-number">5000</span>);
 
   <span class="hljs-comment">// By default uses &quot;myJob&quot; as name</span>
-  <span class="hljs-keyword">await</span> queueWorker.addJob({ <span class="hljs-attr">data</span>: {} });
+  <span class="hljs-keyword">await</span> queueWorker.<span class="hljs-title function_">addJob</span>({ <span class="hljs-attr">data</span>: {} });
 
   <span class="hljs-comment">// Items with a lower priority value are prioritized, defaults to 0</span>
-  <span class="hljs-keyword">await</span> queueWorker.addJob({ <span class="hljs-attr">priority</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">data</span>: {} });
+  <span class="hljs-keyword">await</span> queueWorker.<span class="hljs-title function_">addJob</span>({ <span class="hljs-attr">priority</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">data</span>: {} });
 
   <span class="hljs-comment">// Add job with a different name</span>
-  <span class="hljs-keyword">await</span> queueWorker.addJob({ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;otherJob&quot;</span>, <span class="hljs-attr">data</span>: {} });
+  <span class="hljs-keyword">await</span> queueWorker.<span class="hljs-title function_">addJob</span>({ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;otherJob&quot;</span>, <span class="hljs-attr">data</span>: {} });
 
   <span class="hljs-comment">// Add job with scheduled time to run, defaults to immediately</span>
-  <span class="hljs-keyword">const</span> scheduledAt = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
-  scheduledAt.setDate(scheduledAt.getDate() + <span class="hljs-number">1</span>); <span class="hljs-comment">// Tomorrow</span>
-  <span class="hljs-keyword">await</span> queueWorker.addJob({ scheduledAt, <span class="hljs-attr">data</span>: {} });
+  <span class="hljs-keyword">const</span> scheduledAt = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();
+  scheduledAt.<span class="hljs-title function_">setDate</span>(scheduledAt.<span class="hljs-title function_">getDate</span>() + <span class="hljs-number">1</span>); <span class="hljs-comment">// Tomorrow</span>
+  <span class="hljs-keyword">await</span> queueWorker.<span class="hljs-title function_">addJob</span>({ scheduledAt, <span class="hljs-attr">data</span>: {} });
 
   <span class="hljs-comment">// Returns a job id, so you can use it as a tracking id / use it as a foreign key</span>
-  <span class="hljs-keyword">const</span> jobId = <span class="hljs-keyword">await</span> queueWorker.addJob({ <span class="hljs-attr">data</span>: {} });
+  <span class="hljs-keyword">const</span> jobId = <span class="hljs-keyword">await</span> queueWorker.<span class="hljs-title function_">addJob</span>({ <span class="hljs-attr">data</span>: {} });
 
   <span class="hljs-comment">// The same api is available in separate exported function, so you don&#x27;t have to pass the queueWorker around</span>
-  <span class="hljs-keyword">const</span> otherJobId = <span class="hljs-keyword">await</span> addJobToQueue(sql, { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;myJob&quot;</span>, <span class="hljs-attr">data</span>: {} });
+  <span class="hljs-keyword">const</span> otherJobId = <span class="hljs-keyword">await</span> <span class="hljs-title function_">addJobToQueue</span>(sql, { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;myJob&quot;</span>, <span class="hljs-attr">data</span>: {} });
 
   <span class="hljs-comment">// Get the average time to completion for jobs</span>
-  <span class="hljs-keyword">const</span> start = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
-  start.setDate(start.getDate() - <span class="hljs-number">1</span>);
-  <span class="hljs-keyword">const</span> end = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
-  <span class="hljs-keyword">const</span> average = <span class="hljs-keyword">await</span> queueWorker.averageTimeToCompletion(start, end);
+  <span class="hljs-keyword">const</span> start = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();
+  start.<span class="hljs-title function_">setDate</span>(start.<span class="hljs-title function_">getDate</span>() - <span class="hljs-number">1</span>);
+  <span class="hljs-keyword">const</span> end = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();
+  <span class="hljs-keyword">const</span> average = <span class="hljs-keyword">await</span> queueWorker.<span class="hljs-title function_">averageTimeToCompletion</span>(start, end);
 }
 </code></pre>
 <h2 id="code-gen-and-structure">
@@ -239,7 +239,7 @@ this package exports its structure used for code generation with
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { storeStructure } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/store&quot;</span>;
 
 <span class="hljs-comment">// setup app</span>
-app.extend(storeStructure);
+app.<span class="hljs-title function_">extend</span>(storeStructure);
 
 <span class="hljs-comment">// Use group &quot;store&quot; if you want all of it,</span>
 <span class="hljs-comment">// Else use references like `T.reference(&quot;store&quot;, &quot;file)` so the generator will only include that type.</span>

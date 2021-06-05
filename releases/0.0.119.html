@@ -46,7 +46,7 @@ xxxIn&#39; array should result in zero rows updated, deleted or selected.</p>
 accepting an array of columns you want to sort on, and an optional order
 specification. Using it would look something like the following:</p>
 <pre><code class="language-js"><span class="hljs-comment">// Get users sorted by their age, ascending</span>
-<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> query<span class="hljs-string">`SELECT * FROM &quot;user&quot; u <span class="hljs-subst">${userOrderBy([<span class="hljs-string">&quot;age&quot;</span>])}</span>`</span>.exec(
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> query<span class="hljs-string">`SELECT * FROM &quot;user&quot; u <span class="hljs-subst">${userOrderBy([<span class="hljs-string">&quot;age&quot;</span>])}</span>`</span>.<span class="hljs-title function_">exec</span>(
   sql,
 );
 
@@ -58,12 +58,12 @@ specification. Using it would look something like the following:</p>
     age: <span class="hljs-string">&quot;DESC&quot;</span>,
     name: <span class="hljs-string">&quot;ASC NULLS FIRST&quot;</span>,
   },
-)}</span>`</span>.exec(sql);
+)}</span>`</span>.<span class="hljs-title function_">exec</span>(sql);
 </code></pre>
 <p>The values that can be put in the &#39;orderBy&#39; and &#39;orderBySpec&#39; arguments, should
 be marked as <code>.searchable()</code> in the spec. Of course the query builder also
 supports these fields:</p>
-<pre><code class="language-js"><span class="hljs-keyword">const</span> [newestUser] = <span class="hljs-keyword">await</span> queryUser({
+<pre><code class="language-js"><span class="hljs-keyword">const</span> [newestUser] = <span class="hljs-keyword">await</span> <span class="hljs-title function_">queryUser</span>({
   <span class="hljs-attr">orderBy</span>: [<span class="hljs-string">&quot;createdAt&quot;</span>],
   <span class="hljs-attr">orderBySpec</span>: [<span class="hljs-string">&quot;DESC&quot;</span>],
   <span class="hljs-attr">posts</span>: {
@@ -71,7 +71,7 @@ supports these fields:</p>
     <span class="hljs-attr">orderBy</span>: [<span class="hljs-string">&quot;likedCount&quot;</span>],
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">1</span>,
-}).exec(sql);
+}).<span class="hljs-title function_">exec</span>(sql);
 </code></pre>
 <p>The above would get the &#39;newest&#39; user, with a single post that has the least
 likes. The default behaviour is still the same,
@@ -86,10 +86,10 @@ same options and more. The only limit is that the new call doesn&#39;t return th
 full group depth, but instead you always specify the levels you need.</p>
 <p>The following examples illustrate equal behaviour:</p>
 <pre><code class="language-js"><span class="hljs-comment">// Old</span>
-<span class="hljs-keyword">await</span> getNestedFileGroup(sql, { <span class="hljs-attr">excludeFiles</span>: <span class="hljs-literal">true</span> });
+<span class="hljs-keyword">await</span> <span class="hljs-title function_">getNestedFileGroup</span>(sql, { <span class="hljs-attr">excludeFiles</span>: <span class="hljs-literal">true</span> });
 
 <span class="hljs-comment">// New, get 2 levels of children for all roots, correctly ordered.</span>
-<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> queryFileGroup({
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> <span class="hljs-title function_">queryFileGroup</span>({
   <span class="hljs-attr">orderBy</span>: [<span class="hljs-string">&quot;order&quot;</span>],
   <span class="hljs-attr">children</span>: {
     <span class="hljs-attr">orderBy</span>: [<span class="hljs-string">&quot;order&quot;</span>],
@@ -100,14 +100,14 @@ full group depth, but instead you always specify the levels you need.</p>
   <span class="hljs-attr">where</span>: {
     <span class="hljs-attr">parentIsNull</span>: <span class="hljs-literal">true</span>,
   },
-}).exec(sql);
+}).<span class="hljs-title function_">exec</span>(sql);
 </code></pre>
 <pre><code class="language-js"><span class="hljs-comment">// Old</span>
-<span class="hljs-keyword">await</span> getNestedFileGroup(sql, { <span class="hljs-attr">rootId</span>: myFileGroupId });
+<span class="hljs-keyword">await</span> <span class="hljs-title function_">getNestedFileGroup</span>(sql, { <span class="hljs-attr">rootId</span>: myFileGroupId });
 
 <span class="hljs-comment">// New, get 1 level of children for the specified &#x27;root&#x27;</span>
 <span class="hljs-comment">// and include the file, correctly ordered.</span>
-<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> queryFileGroup({
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> <span class="hljs-title function_">queryFileGroup</span>({
   <span class="hljs-attr">orderBy</span>: [<span class="hljs-string">&quot;order&quot;</span>],
   <span class="hljs-attr">children</span>: {
     <span class="hljs-attr">orderBy</span>: [<span class="hljs-string">&quot;order&quot;</span>],
@@ -116,7 +116,7 @@ full group depth, but instead you always specify the levels you need.</p>
   <span class="hljs-attr">where</span>: {
     <span class="hljs-attr">id</span>: myFileGroupId,
   },
-}).exec(sql);
+}).<span class="hljs-title function_">exec</span>(sql);
 </code></pre>
 <h2 id="in-closing">
   In closing

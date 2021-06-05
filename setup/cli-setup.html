@@ -46,7 +46,7 @@ three files:</p>
 <p><strong>/.eslintrc.cjs</strong></p>
 <pre><code class="language-js"><span class="hljs-comment">/* eslint-disable import/no-commonjs */</span>
 
-<span class="hljs-built_in">module</span>.exports = {
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
   <span class="hljs-attr">extends</span>: [<span class="hljs-string">&quot;./node_modules/@compas/lint-config&quot;</span>],
   <span class="hljs-attr">root</span>: <span class="hljs-literal">true</span>,
 };
@@ -54,8 +54,8 @@ three files:</p>
 <p><strong>/.prettierrc.cjs</strong></p>
 <pre><code class="language-js"><span class="hljs-comment">/* eslint-disable import/no-commonjs */</span>
 
-<span class="hljs-built_in">module</span>.exports = {
-  ...require(<span class="hljs-string">&quot;@compas/lint-config/prettierrc.js&quot;</span>),
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  ...<span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@compas/lint-config/prettierrc.js&quot;</span>),
 };
 </code></pre>
 <p><strong>/.prettierignore</strong></p>
@@ -102,23 +102,23 @@ script runner.</p>
 <p>The script runner at its base starts your scripts the same way as you would with
 Node.js.</p>
 <pre><code class="language-shell">yarn compas ./src/a.js
-<span class="hljs-meta">#</span><span class="bash"> Is the same as `node ./src/a.js`</span>
+<span class="hljs-meta"># </span><span class="language-bash">Is the same as `node ./src/a.js`</span>
 </code></pre>
 <p>However, it can also run named scripts. It will look for scripts defined in your
 <code>package.json</code> and in the <code>scripts</code> directory at the root of your project.
 Create a file in <code>scripts/hello.js</code> with the following contents:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
 
-mainFn(<span class="hljs-keyword">import</span>.meta, main);
+<span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, main);
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params">logger</span>) </span>{
-  logger.info(<span class="hljs-string">&quot;Hello!&quot;</span>);
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">logger</span>) {
+  logger.<span class="hljs-title function_">info</span>(<span class="hljs-string">&quot;Hello!&quot;</span>);
 }
 </code></pre>
 <p>When running <code>yarn compas help</code> it should list <code>hello</code> under the available
 script names. Let&#39;s run it:</p>
 <pre><code class="language-shell">yarn compas hello
-<span class="hljs-meta">#</span><span class="bash"> Is the same as</span>
+<span class="hljs-meta"># </span><span class="language-bash">Is the same as</span>
 yarn compas run hello
 </code></pre>
 <p>As you may have seen in the output from <code>yarn compas help</code>, there is also a

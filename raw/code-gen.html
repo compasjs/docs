@@ -46,9 +46,9 @@ directly registered to the app should all have a name. The group is managed when
 constructing a TypeCreator, while the names are passed to the different methods
 of the TypeCreator, while instantiating a TypeBuilder.</p>
 <p>A small example:</p>
-<pre><code class="language-javascript"><span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeBuilder(<span class="hljs-string">&quot;todo&quot;</span>);
-app.add(T.bool(<span class="hljs-string">&quot;completed&quot;</span>)); <span class="hljs-comment">// Fully qualified name of `TodoCompleted`</span>
-app.add(T.bool()); <span class="hljs-comment">// Error: no name provided</span>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeBuilder</span>(<span class="hljs-string">&quot;todo&quot;</span>);
+app.<span class="hljs-title function_">add</span>(T.<span class="hljs-title function_">bool</span>(<span class="hljs-string">&quot;completed&quot;</span>)); <span class="hljs-comment">// Fully qualified name of `TodoCompleted`</span>
+app.<span class="hljs-title function_">add</span>(T.<span class="hljs-title function_">bool</span>()); <span class="hljs-comment">// Error: no name provided</span>
 </code></pre>
 <h2 id="the-app">
   The App
@@ -68,7 +68,7 @@ the OpenAPI importer (<code>convertOpenAPISpec</code>)</li>
 </ul>
 <p>When all needed types are added, multiple calls can be done to <code>app.generate</code>. A
 call to <code>app.generate</code> looks something like the following:</p>
-<pre><code class="language-javascript">app.generate({
+<pre><code class="language-javascript">app.<span class="hljs-title function_">generate</span>({
   <span class="hljs-attr">dumpStructure</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// Enable when developing the backend</span>
   <span class="hljs-attr">enabledGenerators</span>: [<span class="hljs-string">&quot;types&quot;</span>, <span class="hljs-string">&quot;validator&quot;</span>, <span class="hljs-string">&quot;router&quot;</span>], <span class="hljs-comment">// or &quot;apiClient&quot;, &quot;reactQuery&quot;, &quot;sql&quot;</span>
   <span class="hljs-comment">// When groups are not provided they are all enabled.</span>
@@ -198,38 +198,38 @@ filled in</li>
 <code>T.object().keys()</code>. Inferred types can only be used with &#39;non-named&#39; types.</p>
 <p>Some examples and their <code>T.xx</code> counter parts</p>
 <p>Booleans:</p>
-<pre><code class="language-javascript">app.add(<span class="hljs-literal">true</span>); <span class="hljs-comment">// T.bool().oneOf(true)</span>
-app.add(<span class="hljs-literal">false</span>); <span class="hljs-comment">// T.bool().oneOf(false)</span>
+<pre><code class="language-javascript">app.<span class="hljs-title function_">add</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// T.bool().oneOf(true)</span>
+app.<span class="hljs-title function_">add</span>(<span class="hljs-literal">false</span>); <span class="hljs-comment">// T.bool().oneOf(false)</span>
 </code></pre>
 <p>Numbers:</p>
-<pre><code class="language-javascript">app.add(<span class="hljs-number">5</span>); <span class="hljs-comment">// T.number().oneOf(5)</span>
+<pre><code class="language-javascript">app.<span class="hljs-title function_">add</span>(<span class="hljs-number">5</span>); <span class="hljs-comment">// T.number().oneOf(5)</span>
 </code></pre>
 <p>Strings:</p>
-<pre><code class="language-javascript">app.add(<span class="hljs-string">&quot;various&quot;</span>); <span class="hljs-comment">// T.string().oneOf(&quot;various&quot;)</span>
+<pre><code class="language-javascript">app.<span class="hljs-title function_">add</span>(<span class="hljs-string">&quot;various&quot;</span>); <span class="hljs-comment">// T.string().oneOf(&quot;various&quot;)</span>
 </code></pre>
 <p>Objects:</p>
 <pre><code class="language-javascript"><span class="hljs-comment">// The following won&#x27;t work, as top level calls should be named</span>
-app.add({ <span class="hljs-attr">foo</span>: T.bool() }); <span class="hljs-comment">// Error</span>
-app.add(
-  T.object(<span class="hljs-string">&quot;nested&quot;</span>).keys({
+app.<span class="hljs-title function_">add</span>({ <span class="hljs-attr">foo</span>: T.<span class="hljs-title function_">bool</span>() }); <span class="hljs-comment">// Error</span>
+app.<span class="hljs-title function_">add</span>(
+  T.<span class="hljs-title function_">object</span>(<span class="hljs-string">&quot;nested&quot;</span>).<span class="hljs-title function_">keys</span>({
     <span class="hljs-comment">// inferring works recursive and almost everywhere a TypeBuilder should be provided</span>
     <span class="hljs-attr">myString</span>: <span class="hljs-string">&quot;various&quot;</span>,
     <span class="hljs-attr">nestedObject</span>: {
-      <span class="hljs-attr">qualified</span>: T.bool(),
+      <span class="hljs-attr">qualified</span>: T.<span class="hljs-title function_">bool</span>(),
       <span class="hljs-attr">staticAmount</span>: <span class="hljs-number">5</span>,
     },
   }),
 );
 </code></pre>
 <p>Arrays:</p>
-<pre><code class="language-javascript">app.add([T.string()]); <span class="hljs-comment">// Error, top level types should be named</span>
-app.add(
-  T.object(<span class="hljs-string">&quot;name&quot;</span>).keys({
-    <span class="hljs-attr">numberArray</span>: [T.number()], <span class="hljs-comment">// T.array().values(T.number().integer())</span>
+<pre><code class="language-javascript">app.<span class="hljs-title function_">add</span>([T.<span class="hljs-title function_">string</span>()]); <span class="hljs-comment">// Error, top level types should be named</span>
+app.<span class="hljs-title function_">add</span>(
+  T.<span class="hljs-title function_">object</span>(<span class="hljs-string">&quot;name&quot;</span>).<span class="hljs-title function_">keys</span>({
+    <span class="hljs-attr">numberArray</span>: [T.<span class="hljs-title function_">number</span>()], <span class="hljs-comment">// T.array().values(T.number().integer())</span>
     <span class="hljs-attr">objectArray</span>: [
       {
         <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;bar&quot;</span>,
-        <span class="hljs-attr">value</span>: T.bool(),
+        <span class="hljs-attr">value</span>: T.<span class="hljs-title function_">bool</span>(),
       },
     ],
   }),

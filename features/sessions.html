@@ -40,64 +40,64 @@ function calls away. Start by creating a session store:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { newSessionStore } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/store&quot;</span>;
 
 <span class="hljs-comment">// Pass in a sql connection</span>
-<span class="hljs-keyword">const</span> sessionsStore = newSessionStore(sql);
+<span class="hljs-keyword">const</span> sessionsStore = <span class="hljs-title function_">newSessionStore</span>(sql);
 </code></pre>
 <p>The session handler has a number of defaults which we handle later in this
 document, for now let&#39;s create a Koa middleware to handle the sessions:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { session, getApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/server&quot;</span>;
 
-<span class="hljs-keyword">const</span> app = getApp();
-<span class="hljs-keyword">const</span> sessionMiddlewre = session(app, {
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">getApp</span>();
+<span class="hljs-keyword">const</span> sessionMiddlewre = <span class="hljs-title function_">session</span>(app, {
   <span class="hljs-attr">store</span>: sessionStore,
 });
 </code></pre>
 <p>And now where ever we need sessions we can add the <code>sessionMiddleware</code> in to our
 chain.</p>
-<pre><code class="language-js">counterHandlers.init = [
+<pre><code class="language-js">counterHandlers.<span class="hljs-property">init</span> = [
   sessionMiddleware,
   <span class="hljs-keyword">async</span> (ctx, next) =&gt; {
-    ctx.session = {
+    ctx.<span class="hljs-property">session</span> = {
       <span class="hljs-attr">counter</span>: <span class="hljs-number">0</span>,
     };
 
-    ctx.body = {
-      <span class="hljs-attr">value</span>: ctx.session.counter,
+    ctx.<span class="hljs-property">body</span> = {
+      <span class="hljs-attr">value</span>: ctx.<span class="hljs-property">session</span>.<span class="hljs-property">counter</span>,
     };
 
-    <span class="hljs-keyword">return</span> next();
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">next</span>();
   },
 ];
 
-counterHandlers.increment = [
+counterHandlers.<span class="hljs-property">increment</span> = [
   sessionMiddleware,
   <span class="hljs-keyword">async</span> (ctx, next) =&gt; {
     <span class="hljs-comment">// Check if a session is new</span>
-    <span class="hljs-keyword">if</span> (ctx.session.isNew) {
-      <span class="hljs-keyword">throw</span> AppError.validationError(<span class="hljs-string">&quot;error.sessionNotInitialized&quot;</span>, {
+    <span class="hljs-keyword">if</span> (ctx.<span class="hljs-property">session</span>.<span class="hljs-property">isNew</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-title class_">AppError</span>.<span class="hljs-title function_">validationError</span>(<span class="hljs-string">&quot;error.sessionNotInitialized&quot;</span>, {
         <span class="hljs-attr">message</span>: <span class="hljs-string">&quot;Please call counterHandlers.init first&quot;</span>,
       });
     }
 
     <span class="hljs-comment">// Session is our object, so increment the value</span>
-    ctx.session.counter++;
+    ctx.<span class="hljs-property">session</span>.<span class="hljs-property">counter</span>++;
 
-    ctx.body = {
-      <span class="hljs-attr">value</span>: ctx.session.counter,
+    ctx.<span class="hljs-property">body</span> = {
+      <span class="hljs-attr">value</span>: ctx.<span class="hljs-property">session</span>.<span class="hljs-property">counter</span>,
     };
 
-    <span class="hljs-keyword">return</span> next();
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">next</span>();
   },
 ];
 
-counterHandlers.destroy = [
+counterHandlers.<span class="hljs-property">destroy</span> = [
   sessionMiddleware,
   <span class="hljs-keyword">async</span> (ctx, next) =&gt; {
     <span class="hljs-comment">// Destroy the session</span>
-    ctx.session = <span class="hljs-literal">null</span>;
+    ctx.<span class="hljs-property">session</span> = <span class="hljs-literal">null</span>;
 
-    ctx.body = { <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span> };
+    ctx.<span class="hljs-property">body</span> = { <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span> };
 
-    <span class="hljs-keyword">return</span> next();
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">next</span>();
   },
 ];
 </code></pre>

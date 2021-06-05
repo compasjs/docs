@@ -42,7 +42,7 @@
 executed directly as Node.js script. It is based on <code>mainFn</code> as explained in the
 <a href="/setup/project-setup.html">project setup</a> document.</p>
 <p>There is only a single way to call this function, always:</p>
-<pre><code class="language-js">mainTestFn(<span class="hljs-keyword">import</span>.meta);
+<pre><code class="language-js"><span class="hljs-title function_">mainTestFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>);
 </code></pre>
 <p>This call may exists in all test files and does nothing when tests are executed
 via <code>yarn compas test</code>.</p>
@@ -93,11 +93,11 @@ the following values: <code>null</code>, <code>undefined</code> , <code>false</c
 <p><strong>t.equal(value, expected, msg?)</strong></p>
 <p>Assert that <code>value</code> is strict equal to <code>expected</code>.</p>
 <p>Some examples:</p>
-<pre><code class="language-js">t.equal(<span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>); <span class="hljs-comment">// Pass</span>
-t.equal(<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;foo&quot;</span>); <span class="hljs-comment">// Pass</span>
+<pre><code class="language-js">t.<span class="hljs-title function_">equal</span>(<span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>); <span class="hljs-comment">// Pass</span>
+t.<span class="hljs-title function_">equal</span>(<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;foo&quot;</span>); <span class="hljs-comment">// Pass</span>
 
-t.equal(<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>); <span class="hljs-comment">// Fail</span>
-t.equal({}, {}); <span class="hljs-comment">// Fail</span>
+t.<span class="hljs-title function_">equal</span>(<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>); <span class="hljs-comment">// Fail</span>
+t.<span class="hljs-title function_">equal</span>({}, {}); <span class="hljs-comment">// Fail</span>
 </code></pre>
 <p><strong>t.notEqual(value, notExpected, msg?)</strong></p>
 <p>Assert that <code>value</code> is not strict equal to <code>expected</code>.</p>
@@ -108,18 +108,18 @@ when testing control flow, like checking that a <code>catch</code> block is exec
 <p>Signal to the test runne that an implicit assertion failed. This is also often
 used when testing control flow. For example in the following example where the
 function <code>willThrow</code> should really throw an error.</p>
-<pre><code class="language-js">mainTestFn(<span class="hljs-keyword">import</span>.meta);
+<pre><code class="language-js"><span class="hljs-title function_">mainTestFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>);
 
-<span class="hljs-keyword">const</span> willThrow = <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Really did throw&quot;</span>);
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">willThrow</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Really did throw&quot;</span>);
 };
 
-test(<span class="hljs-string">&quot;willThrow really throws&quot;</span>, <span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> {
+<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;willThrow really throws&quot;</span>, <span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> {
   <span class="hljs-keyword">try</span> {
-    willThrow();
-    t.fail(<span class="hljs-string">&quot;willThrow did not throw.&quot;</span>);
+    <span class="hljs-title function_">willThrow</span>();
+    t.<span class="hljs-title function_">fail</span>(<span class="hljs-string">&quot;willThrow did not throw.&quot;</span>);
   } <span class="hljs-keyword">catch</span> {
-    t.pass(<span class="hljs-string">&quot;willThrow, did indeed throw an error.&quot;</span>);
+    t.<span class="hljs-title function_">pass</span>(<span class="hljs-string">&quot;willThrow, did indeed throw an error.&quot;</span>);
   }
 });
 </code></pre>

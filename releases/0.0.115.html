@@ -40,7 +40,7 @@ relative new feature added in Compas v0.0.103. At that point we did not have a
 query builder, and generated a stand-alone table traverser that unlocked the
 following chains:</p>
 <pre><code class="language-js"><span class="hljs-comment">// Get all users that liked the specific post</span>
-<span class="hljs-keyword">const</span> users = queryUser().viaLikes().viaPosts({ <span class="hljs-attr">id</span>: postId });
+<span class="hljs-keyword">const</span> users = <span class="hljs-title function_">queryUser</span>().<span class="hljs-title function_">viaLikes</span>().<span class="hljs-title function_">viaPosts</span>({ <span class="hljs-attr">id</span>: postId });
 </code></pre>
 <p>This was straight forward to use, but limited in options. You could not use this
 to filter on two separate &#39; traverse&#39;-chains.</p>
@@ -65,29 +65,29 @@ Like:
 <p>We have <code>User</code>, <code>Post</code> and <code>Like</code> as our tables. The relation being that a
 <code>User</code> is the <code>writer</code> of many <code>Post</code>, and a <code>User</code> can <code>Like</code> many <code>Post</code>. To
 get all users that have written at least a single post, we can do the following:</p>
-<pre><code class="language-js"><span class="hljs-keyword">const</span> users = <span class="hljs-keyword">await</span> queryUser({
+<pre><code class="language-js"><span class="hljs-keyword">const</span> users = <span class="hljs-keyword">await</span> <span class="hljs-title function_">queryUser</span>({
   <span class="hljs-attr">where</span>: {},
   <span class="hljs-attr">viaPosts</span>: {},
-}).exec(sql);
+}).<span class="hljs-title function_">exec</span>(sql);
 </code></pre>
 <p>Internally, the <code>viaPosts</code> was converted to a <code>QueryPart</code> and thus allowed to be
 set on the <code>where</code>-object as the <code>idIn</code> field. The <code>QueryPart</code> was a query
 selecting the <code>writer</code> field from <code>Post</code>.</p>
 <p>If we do one of the following things you would get unexpected results:</p>
 <pre><code class="language-js"><span class="hljs-comment">// Get users that have written a post and that are in our selection in &#x27;idIn&#x27;.</span>
-<span class="hljs-keyword">const</span> users = <span class="hljs-keyword">await</span> queryUser({
+<span class="hljs-keyword">const</span> users = <span class="hljs-keyword">await</span> <span class="hljs-title function_">queryUser</span>({
   <span class="hljs-attr">where</span>: {
     <span class="hljs-attr">idIn</span>: [<span class="hljs-string">&quot;uuid-110&quot;</span>, <span class="hljs-string">&quot;uuid-120&quot;</span>, <span class="hljs-string">&quot;uuid-130&quot;</span>],
   },
   <span class="hljs-attr">viaPosts</span>: {},
-}).exec(sql);
+}).<span class="hljs-title function_">exec</span>(sql);
 
 <span class="hljs-comment">// Get users that have written a post and have liked an post</span>
-<span class="hljs-keyword">const</span> users = <span class="hljs-keyword">await</span> queryUser({
+<span class="hljs-keyword">const</span> users = <span class="hljs-keyword">await</span> <span class="hljs-title function_">queryUser</span>({
   <span class="hljs-attr">where</span>: {},
   <span class="hljs-attr">viaPosts</span>: {},
   <span class="hljs-attr">viaLikes</span>: {},
-}).exec(sql);
+}).<span class="hljs-title function_">exec</span>(sql);
 </code></pre>
 <p>We have a problem in both cases. In our first case we already set <code>idIn</code> however
 <code>viaPosts</code> will overwrite it. In the second case, since both <code>Like</code> and <code>Post</code>

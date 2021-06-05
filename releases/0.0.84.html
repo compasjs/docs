@@ -49,36 +49,36 @@ should use the correct sql types now, even when the field is an reference.</p>
 requires that both sides of a relation are registered, but that wasn&#39;t possible
 without a hack:</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { storeStructure } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./generated/index.js&quot;</span>;
-<span class="hljs-keyword">import</span> { App, TypeCreator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@lbu/code-gen&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">App</span>, <span class="hljs-title class_">TypeCreator</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@lbu/code-gen&quot;</span>;
 
-<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> App.new();
-<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator();
+<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> <span class="hljs-title class_">App</span>.<span class="hljs-title function_">new</span>();
+<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeCreator</span>();
 
-app.add(
-  T.object(<span class="hljs-string">&quot;myEntity&quot;</span>)
-    .keys({})
-    .relations(T.manyToOne(<span class="hljs-string">&quot;file&quot;</span>, T.reference(<span class="hljs-string">&quot;store&quot;</span>, <span class="hljs-string">&quot;file&quot;</span>), <span class="hljs-string">&quot;entities&quot;</span>)),
+app.<span class="hljs-title function_">add</span>(
+  T.<span class="hljs-title function_">object</span>(<span class="hljs-string">&quot;myEntity&quot;</span>)
+    .<span class="hljs-title function_">keys</span>({})
+    .<span class="hljs-title function_">relations</span>(T.<span class="hljs-title function_">manyToOne</span>(<span class="hljs-string">&quot;file&quot;</span>, T.<span class="hljs-title function_">reference</span>(<span class="hljs-string">&quot;store&quot;</span>, <span class="hljs-string">&quot;file&quot;</span>), <span class="hljs-string">&quot;entities&quot;</span>)),
 );
 
-storeStructure.store.file.relations.push(
-  T.oneToMany(<span class="hljs-string">&quot;entities&quot;</span>, T.reference(<span class="hljs-string">&quot;app&quot;</span>, <span class="hljs-string">&quot;myEntity&quot;</span>)),
+storeStructure.<span class="hljs-property">store</span>.<span class="hljs-property">file</span>.<span class="hljs-property">relations</span>.<span class="hljs-title function_">push</span>(
+  T.<span class="hljs-title function_">oneToMany</span>(<span class="hljs-string">&quot;entities&quot;</span>, T.<span class="hljs-title function_">reference</span>(<span class="hljs-string">&quot;app&quot;</span>, <span class="hljs-string">&quot;myEntity&quot;</span>)),
 );
 </code></pre>
 <p>While the new variant looks a bit cleaner:</p>
-<pre><code class="language-js"><span class="hljs-keyword">import</span> { App, TypeCreator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@lbu/code-gen&quot;</span>;
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">App</span>, <span class="hljs-title class_">TypeCreator</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@lbu/code-gen&quot;</span>;
 
-<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> App.new();
-<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator();
+<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> <span class="hljs-title class_">App</span>.<span class="hljs-title function_">new</span>();
+<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeCreator</span>();
 
-app.add(
-  T.object(<span class="hljs-string">&quot;myEntity&quot;</span>)
-    .keys({})
-    .relations(T.manyToOne(<span class="hljs-string">&quot;file&quot;</span>, T.reference(<span class="hljs-string">&quot;store&quot;</span>, <span class="hljs-string">&quot;file&quot;</span>), <span class="hljs-string">&quot;entities&quot;</span>)),
+app.<span class="hljs-title function_">add</span>(
+  T.<span class="hljs-title function_">object</span>(<span class="hljs-string">&quot;myEntity&quot;</span>)
+    .<span class="hljs-title function_">keys</span>({})
+    .<span class="hljs-title function_">relations</span>(T.<span class="hljs-title function_">manyToOne</span>(<span class="hljs-string">&quot;file&quot;</span>, T.<span class="hljs-title function_">reference</span>(<span class="hljs-string">&quot;store&quot;</span>, <span class="hljs-string">&quot;file&quot;</span>), <span class="hljs-string">&quot;entities&quot;</span>)),
 );
 
-app.addRelations(
-  T.reference(<span class="hljs-string">&quot;store&quot;</span>, <span class="hljs-string">&quot;file&quot;</span>),
-  T.oneToMany(<span class="hljs-string">&quot;entities&quot;</span>, T.reference(<span class="hljs-string">&quot;app&quot;</span>, <span class="hljs-string">&quot;myEntity&quot;</span>)),
+app.<span class="hljs-title function_">addRelations</span>(
+  T.<span class="hljs-title function_">reference</span>(<span class="hljs-string">&quot;store&quot;</span>, <span class="hljs-string">&quot;file&quot;</span>),
+  T.<span class="hljs-title function_">oneToMany</span>(<span class="hljs-string">&quot;entities&quot;</span>, T.<span class="hljs-title function_">reference</span>(<span class="hljs-string">&quot;app&quot;</span>, <span class="hljs-string">&quot;myEntity&quot;</span>)),
 );
 </code></pre>
 <h3 id="server">

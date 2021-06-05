@@ -72,9 +72,9 @@ return a boolean value, and don&#39;t have to worry about nullability. A simple
 example:</p>
 <pre><code class="language-js"><span class="hljs-comment">// generate.js</span>
 
-<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator();
-app.add(
-  T.any().raw(<span class="hljs-string">&quot;{ myType: true }&quot;</span>).validator(<span class="hljs-string">&quot;myValidator&quot;</span>, {
+<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeCreator</span>();
+app.<span class="hljs-title function_">add</span>(
+  T.<span class="hljs-title function_">any</span>().<span class="hljs-title function_">raw</span>(<span class="hljs-string">&quot;{ myType: true }&quot;</span>).<span class="hljs-title function_">validator</span>(<span class="hljs-string">&quot;myValidator&quot;</span>, {
     <span class="hljs-attr">javaScript</span>: <span class="hljs-string">&#x27;import { myValidator } from &quot;./dist/custom-validators.js&quot;;&#x27;</span>,
     <span class="hljs-attr">typeScript</span>: <span class="hljs-string">&#x27;import { myValidator } from &quot;./src/custom-validators.ts&quot;;&#x27;</span>,
   }),
@@ -82,10 +82,10 @@ app.add(
 </code></pre>
 <pre><code class="language-ts"><span class="hljs-comment">// src/custom-validator.js</span>
 
-<span class="hljs-keyword">type</span> MyType = { <span class="hljs-attr">myType</span>: <span class="hljs-literal">true</span> };
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">MyType</span> = { <span class="hljs-attr">myType</span>: <span class="hljs-literal">true</span> };
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isMyType</span>(<span class="hljs-params">value</span>): <span class="hljs-title">value</span> <span class="hljs-title">is</span> <span class="hljs-title">MyType</span> </span>{
-  <span class="hljs-keyword">return</span> value?.myType === <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">isMyType</span>(<span class="hljs-params">value</span>): value is <span class="hljs-title class_">MyType</span> {
+  <span class="hljs-keyword">return</span> value?.<span class="hljs-property">myType</span> === <span class="hljs-literal">true</span>;
 }
 </code></pre>
 <p>This way you can even reuse you custom validator as a TypeScript type-guard.</p>
@@ -190,7 +190,7 @@ script references. For imports, the following replace may work:</p>
 </ul>
 <p>There are no default generate settings for packages anymore. A good starting
 point is:</p>
-<pre><code class="language-js"><span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{GenerateOpts}</span> </span>*/</span>
+<pre><code class="language-js"><span class="hljs-comment">/** <span class="hljs-doctag">@type</span> {<span class="hljs-type">GenerateOpts</span>} */</span>
 <span class="hljs-keyword">const</span> generateOpts = {
   <span class="hljs-attr">enabledGroups</span>: [<span class="hljs-string">&quot;store&quot;</span>],
   <span class="hljs-attr">enabledGenerators</span>: [<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;sql&quot;</span>, <span class="hljs-string">&quot;validator&quot;</span>],

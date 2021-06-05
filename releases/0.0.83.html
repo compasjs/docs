@@ -83,9 +83,9 @@ can be archived with something like the following in <code>src/generated.js</cod
 <span class="hljs-comment">/**
  * Overwrite used generated queries.
  * This is needed when you want cascading soft deletes to any of the exposed types
- * <span class="hljs-doctag">@param <span class="hljs-type">{typeof defaultQueries}</span> <span class="hljs-variable">q</span></span>
+ * <span class="hljs-doctag">@param</span> {<span class="hljs-type">typeof defaultQueries</span>} <span class="hljs-variable">q</span>
  */</span>
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setStoreQueries</span>(<span class="hljs-params">q</span>) </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">setStoreQueries</span>(<span class="hljs-params">q</span>) {
   queries = q;
 }
 </code></pre>
@@ -198,9 +198,9 @@ supports to be called like the following:</p>
 
 <span class="hljs-comment">// Typeof myQuery = `QueryPart`, this is the same as returned by the &#x27;partial&#x27; generated queries</span>
 <span class="hljs-keyword">const</span> myQuery = query<span class="hljs-string">`SELECT <span class="hljs-subst">${fileFields()}</span> FROM &quot;file&quot; f WHERE f.&quot;bucketName&quot; = <span class="hljs-subst">${bucketName}</span>`</span>;
-myQuery.append(query<span class="hljs-string">`ORDER BY <span class="hljs-subst">${fileOrderBy()}</span>`</span>);
+myQuery.<span class="hljs-title function_">append</span>(query<span class="hljs-string">`ORDER BY <span class="hljs-subst">${fileOrderBy()}</span>`</span>);
 
-<span class="hljs-keyword">const</span> queryResult = <span class="hljs-keyword">await</span> myQuery.exec(sql);
+<span class="hljs-keyword">const</span> queryResult = <span class="hljs-keyword">await</span> myQuery.<span class="hljs-title function_">exec</span>(sql);
 </code></pre>
 <p>The <code>query</code> function is used by all newly generated queries, and allows
 injection safe query building. It also supports providing another <code>QueryPart</code> as
@@ -228,17 +228,17 @@ structure is also sorted.</li>
 </ul>
 <p>There is also support for an arbitrary meta field on any file and fileGroup like
 so:</p>
-<pre><code class="language-js"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> App.new();
-<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator(<span class="hljs-string">&quot;store&quot;</span>);
+<pre><code class="language-js"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> <span class="hljs-title class_">App</span>.<span class="hljs-title function_">new</span>();
+<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeCreator</span>(<span class="hljs-string">&quot;store&quot;</span>);
 
-app.add(
-  T.object(<span class="hljs-string">&quot;fileMeta&quot;</span>).keys({
+app.<span class="hljs-title function_">add</span>(
+  T.<span class="hljs-title function_">object</span>(<span class="hljs-string">&quot;fileMeta&quot;</span>).<span class="hljs-title function_">keys</span>({
     <span class="hljs-comment">// Put your custom meta data here</span>
   }),
 );
 
-app.add(
-  T.anyOf(<span class="hljs-string">&quot;fileGroupMeta&quot;</span>).values(
+app.<span class="hljs-title function_">add</span>(
+  T.<span class="hljs-title function_">anyOf</span>(<span class="hljs-string">&quot;fileGroupMeta&quot;</span>).<span class="hljs-title function_">values</span>(
     {
       <span class="hljs-comment">// Custom metadata</span>
     },

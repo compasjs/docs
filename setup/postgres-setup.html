@@ -43,9 +43,9 @@ already installed <code>@compas/cli</code>, which contains the necessary command
 container, but also a Minio container. Minio is a S3 compatible document store,
 which can be used for saving files.</p>
 <p>Some other docker commands provided by <code>@compas/cli</code>:</p>
-<pre><code class="language-shell"><span class="hljs-meta">#</span><span class="bash"> Stop the running containers</span>
+<pre><code class="language-shell"><span class="hljs-meta"># </span><span class="language-bash">Stop the running containers</span>
 yarn compas docker down
-<span class="hljs-meta">#</span><span class="bash"> Remove all created Docker containers and volumes</span>
+<span class="hljs-meta"># </span><span class="language-bash">Remove all created Docker containers and volumes</span>
 yarn compas docker clean
 </code></pre>
 <h2 id="setup-compasstore">
@@ -94,26 +94,26 @@ PostgreSQL. Create a file at <code>scripts/database.js</code> with the following
 <span class="hljs-keyword">import</span> { newPostgresConnection } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/store&quot;</span>;
 
 <span class="hljs-comment">// Remember, mainFn reads our `.env` file automatically</span>
-mainFn(<span class="hljs-keyword">import</span>.meta, main);
+<span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, main);
 
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params">logger</span>) </span>{
-  <span class="hljs-keyword">const</span> sql = <span class="hljs-keyword">await</span> newPostgresConnection({
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">logger</span>) {
+  <span class="hljs-keyword">const</span> sql = <span class="hljs-keyword">await</span> <span class="hljs-title function_">newPostgresConnection</span>({
     <span class="hljs-attr">createIfNotExists</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Create a new database if `compastodo` is not found</span>
   });
 
-  logger.info({
+  logger.<span class="hljs-title function_">info</span>({
     <span class="hljs-attr">result</span>: <span class="hljs-keyword">await</span> sql<span class="hljs-string">`SELECT 1 + 1 as &quot;sum&quot;`</span>,
   });
 
   <span class="hljs-comment">// Close the connection</span>
-  <span class="hljs-keyword">await</span> sql.end();
+  <span class="hljs-keyword">await</span> sql.<span class="hljs-title function_">end</span>();
 }
 </code></pre>
 <p>This ties in various parts of your local environment. We don&#39;t have any tables
 yet in our database, so we execute a &#39; simple&#39; sum query and log the result. So
 let&#39;s run it:</p>
 <pre><code class="language-shell">yarn compas database
-<span class="hljs-meta">#</span><span class="bash"> or</span>
+<span class="hljs-meta"># </span><span class="language-bash">or</span>
 node ./scripts/database.js
 </code></pre>
 <h2 id="services-and-testing">
@@ -125,9 +125,9 @@ bindings shine. By setting the connection as such, we can quickly swap out the
 database connection used in tests. Add the following to <code>src/services/core.js</code></p>
 <pre><code class="language-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> sql = <span class="hljs-literal">undefined</span>;
 
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setSql</span>(<span class="hljs-params">connection</span>) </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">setSql</span>(<span class="hljs-params">connection</span>) {
   <span class="hljs-keyword">if</span> (logger) {
-    logger.info(<span class="hljs-string">&quot;setting services-&gt;sql&quot;</span>);
+    logger.<span class="hljs-title function_">info</span>(<span class="hljs-string">&quot;setting services-&gt;sql&quot;</span>);
   }
   sql = connection;
 }
@@ -137,12 +137,12 @@ database connection used in tests. Add the following to <code>src/services/core.
 
 <span class="hljs-comment">/**
  * Count all rows in &quot;myTable&quot;
- * <span class="hljs-doctag">@returns <span class="hljs-type">{Promise&lt;number&gt;}</span></span>
+ * <span class="hljs-doctag">@returns</span> {<span class="hljs-type">Promise&lt;number&gt;</span>}
  */</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">todoCount</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">todoCount</span>(<span class="hljs-params"></span>) {
   <span class="hljs-keyword">const</span> [result] = <span class="hljs-keyword">await</span> sql<span class="hljs-string">`select COUNT(*) as sum from &quot;myTable&quot;`</span>;
 
-  <span class="hljs-keyword">return</span> result.sum;
+  <span class="hljs-keyword">return</span> result.<span class="hljs-property">sum</span>;
 }
 </code></pre>
 <p>Notice that we don&#39;t have <code>myTable</code> yet, but we can still write a test for it.
@@ -155,10 +155,10 @@ Create <code>src/todo/events.test.js</code> and add the following contents:</p>
 <span class="hljs-keyword">import</span> { sql, setSql } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../services/core.js&quot;</span>;
 <span class="hljs-keyword">import</span> { todoCount } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./events.js&quot;</span>;
 
-test(<span class="hljs-string">&quot;todo/events&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
-  t.test(<span class="hljs-string">&quot;setup&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;todo/events&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
+  t.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;setup&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
     <span class="hljs-comment">// A sub test doesn&#x27;t need to do any assertions</span>
-    setSql(<span class="hljs-keyword">await</span> createTestPostgresDatabase());
+    <span class="hljs-title function_">setSql</span>(<span class="hljs-keyword">await</span> <span class="hljs-title function_">createTestPostgresDatabase</span>());
 
     <span class="hljs-comment">// Create `myTable`</span>
     <span class="hljs-keyword">await</span> sql<span class="hljs-string">`CREATE TABLE &quot;myTable&quot; ( id SERIAL PRIMARY KEY );`</span>;
@@ -166,17 +166,17 @@ test(<span class="hljs-string">&quot;todo/events&quot;</span>, <span class="hljs
     <span class="hljs-keyword">await</span> sql<span class="hljs-string">`INSERT INTO &quot;myTable&quot; (&quot;id&quot;) VALUES (DEFAULT), (DEFAULT);`</span>;
   });
 
-  t.test(<span class="hljs-string">&quot;todoCount - return the correct number&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
+  t.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;todoCount - return the correct number&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
     <span class="hljs-comment">// This uses our test connection, created above.</span>
-    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> todoCount();
-    t.equal(result, <span class="hljs-number">2</span>);
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> <span class="hljs-title function_">todoCount</span>();
+    t.<span class="hljs-title function_">equal</span>(result, <span class="hljs-number">2</span>);
   });
 
-  t.test(<span class="hljs-string">&quot;teardown&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+  t.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;teardown&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
     <span class="hljs-comment">// Cleans up the created database</span>
-    <span class="hljs-keyword">await</span> cleanupTestPostgresDatabase(sql);
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">cleanupTestPostgresDatabase</span>(sql);
     <span class="hljs-comment">// Make sure to reset the &#x27;sql&#x27; variable</span>
-    setSql(<span class="hljs-literal">undefined</span>);
+    <span class="hljs-title function_">setSql</span>(<span class="hljs-literal">undefined</span>);
   });
 });
 </code></pre>

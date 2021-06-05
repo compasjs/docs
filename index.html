@@ -64,85 +64,85 @@ Postgres queries</li>
   <a name="backend-developer" class="anchor" href="#backend-developer">#</a>
 </h3>
 <p>Provide the HTTP api structure:</p>
-<pre><code class="language-js"><span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator(<span class="hljs-string">&quot;todo&quot;</span>);
-<span class="hljs-keyword">const</span> R = T.router(<span class="hljs-string">&quot;/todo&quot;</span>);
+<pre><code class="language-js"><span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeCreator</span>(<span class="hljs-string">&quot;todo&quot;</span>);
+<span class="hljs-keyword">const</span> R = T.<span class="hljs-title function_">router</span>(<span class="hljs-string">&quot;/todo&quot;</span>);
 
-R.get(<span class="hljs-string">&quot;/list&quot;</span>, <span class="hljs-string">&quot;list&quot;</span>).response({
+R.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/list&quot;</span>, <span class="hljs-string">&quot;list&quot;</span>).<span class="hljs-title function_">response</span>({
   <span class="hljs-attr">todos</span>: [
     {
-      <span class="hljs-attr">id</span>: T.uuid(),
-      <span class="hljs-attr">todo</span>: T.string(),
-      <span class="hljs-attr">completed</span>: T.boolean(),
+      <span class="hljs-attr">id</span>: T.<span class="hljs-title function_">uuid</span>(),
+      <span class="hljs-attr">todo</span>: T.<span class="hljs-title function_">string</span>(),
+      <span class="hljs-attr">completed</span>: T.<span class="hljs-title function_">boolean</span>(),
     },
   ],
 });
 </code></pre>
 <p>Add an implementation:</p>
-<pre><code class="language-js">todoHandlers.list = <span class="hljs-keyword">async</span> (ctx, next) =&gt; {
-  ctx.body = {
+<pre><code class="language-js">todoHandlers.<span class="hljs-property">list</span> = <span class="hljs-keyword">async</span> (ctx, next) =&gt; {
+  ctx.<span class="hljs-property">body</span> = {
     <span class="hljs-attr">todo</span>: [
       {
-        <span class="hljs-attr">id</span>: uuid(),
+        <span class="hljs-attr">id</span>: <span class="hljs-title function_">uuid</span>(),
         <span class="hljs-attr">todo</span>: <span class="hljs-string">&quot;Explore compas&quot;</span>,
       },
     ],
   };
 
-  <span class="hljs-keyword">return</span> next();
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">next</span>();
 };
 </code></pre>
 <p>Create a test:</p>
-<pre><code class="language-js">test(<span class="hljs-string">&quot;todo/controller&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
-  <span class="hljs-keyword">const</span> apiClient = Axios.create({});
-  <span class="hljs-keyword">await</span> createTestAppAndClient(app, apiClient);
+<pre><code class="language-js"><span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;todo/controller&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
+  <span class="hljs-keyword">const</span> apiClient = <span class="hljs-title class_">Axios</span>.<span class="hljs-title function_">create</span>({});
+  <span class="hljs-keyword">await</span> <span class="hljs-title function_">createTestAppAndClient</span>(app, apiClient);
 
-  t.test(<span class="hljs-string">&quot;list conforms to response structure&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
-    <span class="hljs-keyword">await</span> todoApi.list();
+  t.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;list conforms to response structure&quot;</span>, <span class="hljs-keyword">async</span> (t) =&gt; {
+    <span class="hljs-keyword">await</span> todoApi.<span class="hljs-title function_">list</span>();
     <span class="hljs-comment">// Throws: validator.response.todo.list.boolean.type -&gt; Missing boolean value at &#x27;$.todo[0].completed&#x27;</span>
   });
 });
 </code></pre>
 <p>And some icing on the cake, by generating some PostgreSQL queries:</p>
-<pre><code class="language-js"><span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator(<span class="hljs-string">&quot;database&quot;</span>);
+<pre><code class="language-js"><span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeCreator</span>(<span class="hljs-string">&quot;database&quot;</span>);
 
-T.object(<span class="hljs-string">&quot;user&quot;</span>)
-  .keys({
-    <span class="hljs-attr">email</span>: T.string().searchable(),
-    <span class="hljs-attr">name</span>: T.string(),
+T.<span class="hljs-title function_">object</span>(<span class="hljs-string">&quot;user&quot;</span>)
+  .<span class="hljs-title function_">keys</span>({
+    <span class="hljs-attr">email</span>: T.<span class="hljs-title function_">string</span>().<span class="hljs-title function_">searchable</span>(),
+    <span class="hljs-attr">name</span>: T.<span class="hljs-title function_">string</span>(),
   })
-  .enableQueries({
+  .<span class="hljs-title function_">enableQueries</span>({
     <span class="hljs-attr">withDates</span>: <span class="hljs-literal">true</span>,
   })
-  .relations(T.oneToMany(<span class="hljs-string">&quot;posts&quot;</span>, T.reference(<span class="hljs-string">&quot;database&quot;</span>, <span class="hljs-string">&quot;post&quot;</span>)));
+  .<span class="hljs-title function_">relations</span>(T.<span class="hljs-title function_">oneToMany</span>(<span class="hljs-string">&quot;posts&quot;</span>, T.<span class="hljs-title function_">reference</span>(<span class="hljs-string">&quot;database&quot;</span>, <span class="hljs-string">&quot;post&quot;</span>)));
 
-T.object(<span class="hljs-string">&quot;post&quot;</span>)
-  .keys({
-    <span class="hljs-attr">title</span>: T.string(),
-    <span class="hljs-attr">body</span>: T.string(),
+T.<span class="hljs-title function_">object</span>(<span class="hljs-string">&quot;post&quot;</span>)
+  .<span class="hljs-title function_">keys</span>({
+    <span class="hljs-attr">title</span>: T.<span class="hljs-title function_">string</span>(),
+    <span class="hljs-attr">body</span>: T.<span class="hljs-title function_">string</span>(),
   })
-  .enableQueries({
+  .<span class="hljs-title function_">enableQueries</span>({
     <span class="hljs-attr">withSoftDeletes</span>: <span class="hljs-literal">true</span>,
   })
-  .relations(T.manyToOne(<span class="hljs-string">&quot;author&quot;</span>, T.reference(<span class="hljs-string">&quot;database&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>), <span class="hljs-string">&quot;posts&quot;</span>));
+  .<span class="hljs-title function_">relations</span>(T.<span class="hljs-title function_">manyToOne</span>(<span class="hljs-string">&quot;author&quot;</span>, T.<span class="hljs-title function_">reference</span>(<span class="hljs-string">&quot;database&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>), <span class="hljs-string">&quot;posts&quot;</span>));
 </code></pre>
 <p>With queries like the following:</p>
-<pre><code class="language-js"><span class="hljs-keyword">const</span> [user] = <span class="hljs-keyword">await</span> queryUser({ <span class="hljs-attr">where</span>: { <span class="hljs-attr">email</span>: <span class="hljs-string">&quot;foo@bar.com&quot;</span> } }).exec(sql);
-<span class="hljs-keyword">const</span> usersWithPosts = <span class="hljs-keyword">await</span> queryUser({ <span class="hljs-attr">posts</span>: {} }).exec(sql);
+<pre><code class="language-js"><span class="hljs-keyword">const</span> [user] = <span class="hljs-keyword">await</span> <span class="hljs-title function_">queryUser</span>({ <span class="hljs-attr">where</span>: { <span class="hljs-attr">email</span>: <span class="hljs-string">&quot;foo@bar.com&quot;</span> } }).<span class="hljs-title function_">exec</span>(sql);
+<span class="hljs-keyword">const</span> usersWithPosts = <span class="hljs-keyword">await</span> <span class="hljs-title function_">queryUser</span>({ <span class="hljs-attr">posts</span>: {} }).<span class="hljs-title function_">exec</span>(sql);
 
-<span class="hljs-keyword">const</span> postsForAuthor = <span class="hljs-keyword">await</span> queryPost({ <span class="hljs-attr">where</span>: { <span class="hljs-attr">author</span>: user.id } }).exe(sql);
-<span class="hljs-keyword">const</span> [authorOfPost] = <span class="hljs-keyword">await</span> queryUser({
-  <span class="hljs-attr">viaPosts</span>: { <span class="hljs-attr">where</span>: { <span class="hljs-attr">id</span>: postsForAuthor[<span class="hljs-number">0</span>].id } },
-}).exec(sql);
+<span class="hljs-keyword">const</span> postsForAuthor = <span class="hljs-keyword">await</span> <span class="hljs-title function_">queryPost</span>({ <span class="hljs-attr">where</span>: { <span class="hljs-attr">author</span>: user.<span class="hljs-property">id</span> } }).<span class="hljs-title function_">exe</span>(sql);
+<span class="hljs-keyword">const</span> [authorOfPost] = <span class="hljs-keyword">await</span> <span class="hljs-title function_">queryUser</span>({
+  <span class="hljs-attr">viaPosts</span>: { <span class="hljs-attr">where</span>: { <span class="hljs-attr">id</span>: postsForAuthor[<span class="hljs-number">0</span>].<span class="hljs-property">id</span> } },
+}).<span class="hljs-title function_">exec</span>(sql);
 <span class="hljs-comment">// postsForAuthor[0].author == authorOfPost.id</span>
 
-<span class="hljs-keyword">await</span> queries.userInsert(sql, { <span class="hljs-attr">email</span>: <span class="hljs-string">&quot;bar@foo.com&quot;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Compas &quot;</span> });
+<span class="hljs-keyword">await</span> queries.<span class="hljs-title function_">userInsert</span>(sql, { <span class="hljs-attr">email</span>: <span class="hljs-string">&quot;bar@foo.com&quot;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Compas &quot;</span> });
 
 <span class="hljs-comment">// soft delete</span>
-<span class="hljs-keyword">await</span> queries.postDelete(sql, { <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;c532ac2a-4489-4b50-a061-12b2aa9a5df2&quot;</span> });
+<span class="hljs-keyword">await</span> queries.<span class="hljs-title function_">postDelete</span>(sql, { <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;c532ac2a-4489-4b50-a061-12b2aa9a5df2&quot;</span> });
 <span class="hljs-comment">// Search include soft deleted posts</span>
-<span class="hljs-keyword">await</span> queryPost({ <span class="hljs-attr">where</span>: { <span class="hljs-attr">deletedAtIncludeNotNull</span>: <span class="hljs-literal">true</span> } });
+<span class="hljs-keyword">await</span> <span class="hljs-title function_">queryPost</span>({ <span class="hljs-attr">where</span>: { <span class="hljs-attr">deletedAtIncludeNotNull</span>: <span class="hljs-literal">true</span> } });
 <span class="hljs-comment">// permanent delete</span>
-<span class="hljs-keyword">await</span> queries.postDeletePermanent(sql, {
+<span class="hljs-keyword">await</span> queries.<span class="hljs-title function_">postDeletePermanent</span>(sql, {
   <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;c532ac2a-4489-4b50-a061-12b2aa9a5df2&quot;</span>,
 });
 </code></pre>
@@ -151,30 +151,30 @@ T.object(<span class="hljs-string">&quot;post&quot;</span>)
   <a name="frontend-developer" class="anchor" href="#frontend-developer">#</a>
 </h3>
 <p>Either import from a Compas server:</p>
-<pre><code class="language-js"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> App();
-app.extend(<span class="hljs-keyword">await</span> loadFromRemote(Axios, <span class="hljs-string">&quot;https://api.my-domain.com&quot;</span>));
-app.generate({
+<pre><code class="language-js"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> <span class="hljs-title class_">App</span>();
+app.<span class="hljs-title function_">extend</span>(<span class="hljs-keyword">await</span> <span class="hljs-title function_">loadFromRemote</span>(<span class="hljs-title class_">Axios</span>, <span class="hljs-string">&quot;https://api.my-domain.com&quot;</span>));
+app.<span class="hljs-title function_">generate</span>({
   <span class="hljs-attr">outputDirectory</span>: <span class="hljs-string">&quot;./src/generated&quot;</span>,
   <span class="hljs-attr">isBrowser</span>: <span class="hljs-literal">true</span>,
 });
 </code></pre>
 <p>Or import from an OpenAPI spec (alpha-quality :S):</p>
-<pre><code class="language-js"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> App();
-app.extendWithOpenApi(<span class="hljs-string">&quot;todo&quot;</span>, getAnOpenAPISpecAsPlainJavascriptObject());
-app.generate({
+<pre><code class="language-js"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> <span class="hljs-title class_">App</span>();
+app.<span class="hljs-title function_">extendWithOpenApi</span>(<span class="hljs-string">&quot;todo&quot;</span>, <span class="hljs-title function_">getAnOpenAPISpecAsPlainJavascriptObject</span>());
+app.<span class="hljs-title function_">generate</span>({
   <span class="hljs-attr">outputDirectory</span>: <span class="hljs-string">&quot;./src/generated&quot;</span>,
   <span class="hljs-attr">isBrowser</span>: <span class="hljs-literal">true</span>,
 });
 </code></pre>
 <p>And use the typed api client:</p>
-<pre><code class="language-ts"><span class="hljs-keyword">const</span> todos: TodoListResponse = <span class="hljs-keyword">await</span> apiTodoList();
+<pre><code class="language-ts"><span class="hljs-keyword">const</span> <span class="hljs-attr">todos</span>: <span class="hljs-title class_">TodoListResponse</span> = <span class="hljs-keyword">await</span> <span class="hljs-title function_">apiTodoList</span>();
 </code></pre>
 <p>Or use the generated react-query hooks:</p>
-<pre><code class="language-tsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renderTodo</span>(<span class="hljs-params">{ todoId }: TodoSingleParams</span>) </span>{
+<pre><code class="language-tsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">renderTodo</span>(<span class="hljs-params">{ todoId }: TodoSingleParams</span>) {
   <span class="hljs-comment">// Generated react-query hook with typed results</span>
-  <span class="hljs-keyword">const</span> { data } = useTodoSingle({ todoId });
+  <span class="hljs-keyword">const</span> { data } = <span class="hljs-title function_">useTodoSingle</span>({ todoId });
 
-  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{/*...*/}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{/*...*/}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
 }
 </code></pre>
 <h2 id="how-it-works">

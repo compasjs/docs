@@ -39,17 +39,17 @@ handling, a logger and security headers.</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { getApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/server&quot;</span>;
 <span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
 
-mainFn(<span class="hljs-keyword">import</span>.meta, main);
+<span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, main);
 
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> app = getApp({});
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> app = <span class="hljs-title function_">getApp</span>({});
 
-  app.listen(<span class="hljs-number">3000</span>);
+  app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>);
 }
 </code></pre>
 <p>When we run this file we can already check out some default features.</p>
 <pre><code class="language-shell">yarn compas api
-<span class="hljs-meta">#</span><span class="bash"> Or</span>
+<span class="hljs-meta"># </span><span class="language-bash">Or</span>
 node ./scripts/api.js
 </code></pre>
 <p>We are going to do some GET requests, you can use your browser or another HTTP
@@ -117,14 +117,14 @@ setup, like our Koa app.</p>
 <pre><code class="language-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> logger = <span class="hljs-literal">undefined</span>;
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> app = <span class="hljs-literal">undefined</span>;
 
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setLogger</span>(<span class="hljs-params">newLogger</span>) </span>{
-  newLogger.info(<span class="hljs-string">&quot;setting services-&gt;logger&quot;</span>);
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">setLogger</span>(<span class="hljs-params">newLogger</span>) {
+  newLogger.<span class="hljs-title function_">info</span>(<span class="hljs-string">&quot;setting services-&gt;logger&quot;</span>);
   logger = newLogger;
 }
 
-<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setApp</span>(<span class="hljs-params">newApp</span>) </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">setApp</span>(<span class="hljs-params">newApp</span>) {
   <span class="hljs-keyword">if</span> (logger) {
-    logger.info(<span class="hljs-string">&quot;setting services-&gt;app&quot;</span>);
+    logger.<span class="hljs-title function_">info</span>(<span class="hljs-string">&quot;setting services-&gt;app&quot;</span>);
   }
   app = newApp;
 }
@@ -134,14 +134,14 @@ setup, like our Koa app.</p>
 <span class="hljs-keyword">import</span> { mainFn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/stdlib&quot;</span>;
 <span class="hljs-keyword">import</span> { app, setLogger, setApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../src/services/core.js&quot;</span>;
 
-mainFn(<span class="hljs-keyword">import</span>.meta, main);
+<span class="hljs-title function_">mainFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>, main);
 
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params">logger</span>) </span>{
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">logger</span>) {
   <span class="hljs-comment">// Making sure we have a logger setup</span>
-  setLogger(logger);
-  setApp(getApp({}));
+  <span class="hljs-title function_">setLogger</span>(logger);
+  <span class="hljs-title function_">setApp</span>(<span class="hljs-title function_">getApp</span>({}));
 
-  app.listen(<span class="hljs-number">3000</span>);
+  app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>);
 }
 </code></pre>
 

@@ -49,8 +49,8 @@
 connection and session store:</p>
 <pre><code class="language-javascript"><span class="hljs-keyword">import</span> { newPostgresConnection, newSessionStore } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/store&quot;</span>;
 
-<span class="hljs-keyword">const</span> sql = newPostgresConnection({});
-<span class="hljs-keyword">const</span> store = newSessionStore(sql, {});
+<span class="hljs-keyword">const</span> sql = <span class="hljs-title function_">newPostgresConnection</span>({});
+<span class="hljs-keyword">const</span> store = <span class="hljs-title function_">newSessionStore</span>(sql, {});
 </code></pre>
 <p>The second argument for <code>newSessionStore</code> allows you to tune the interval at
 which expired sessions will be cleaned up. By default, it will start the cleanup
@@ -58,11 +58,11 @@ task every 45 minutes. It is also possible to disable with <code>disableInterval
 <p>Next we will mount the session middleware:</p>
 <pre><code class="language-javascript"><span class="hljs-keyword">import</span> { getApp, session } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/server&quot;</span>;
 
-<span class="hljs-keyword">const</span> app = getApp({
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">getApp</span>({
   <span class="hljs-comment">/* ... */</span>
 });
-app.use(
-  session(app, {
+app.<span class="hljs-title function_">use</span>(
+  <span class="hljs-title function_">session</span>(app, {
     store,
     <span class="hljs-comment">// any other argument to koa-session</span>
   }),

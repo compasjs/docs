@@ -51,12 +51,12 @@ dependabot config.</p>
 parent, instead of the subtest.</p>
 <pre><code class="language-js"><span class="hljs-keyword">import</span> { mainTestFn, test } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@compas/cli&quot;</span>;
 
-mainTestFn(<span class="hljs-keyword">import</span>.meta);
+<span class="hljs-title function_">mainTestFn</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>);
 
-test(<span class="hljs-string">&quot;My test&quot;</span>, <span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> {
-  t.test(<span class="hljs-string">&quot;sub test&quot;</span>, <span class="hljs-function">() =&gt;</span> {
+<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;My test&quot;</span>, <span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> {
+  t.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;sub test&quot;</span>, <span class="hljs-function">() =&gt;</span> {
     <span class="hljs-comment">// warning: called &#x27;t.ok&#x27; on parent &#x27;t&#x27;. Accept &#x27;t&#x27; as argument in the callback of &#x27;t.test(msg, callback)&#x27;.</span>
-    t.ok(<span class="hljs-literal">true</span>);
+    t.<span class="hljs-title function_">ok</span>(<span class="hljs-literal">true</span>);
   });
 });
 </code></pre>
@@ -83,21 +83,21 @@ provided to <code>useQuery</code>. If provided, the <code>cancelToken#token</cod
 to the generated api client function, and the <code>cancelToken#cancel</code> function is
 added to the returned Promise. This is behaviour is mostly in line with
 <a href="https://react-query.tanstack.com/docs/guides/query-cancellation#using-axios">react-query documentation</a>.</p>
-<pre><code class="language-tsx"><span class="hljs-keyword">import</span> { CancelToken, CancelTokenSource } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;axios&quot;</span>;
+<pre><code class="language-tsx"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">CancelToken</span>, <span class="hljs-title class_">CancelTokenSource</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;axios&quot;</span>;
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> MyComponent = <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-keyword">const</span> [count, setCount] = useState(<span class="hljs-number">0</span>);
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">MyComponent</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">const</span> [count, setCount] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
   <span class="hljs-comment">// I don&#x27;t know React, please provide better sample :S</span>
-  <span class="hljs-keyword">const</span> cancelToken = useMemo(<span class="hljs-function">() =&gt;</span> CancelToken.source(), [count]);
+  <span class="hljs-keyword">const</span> cancelToken = <span class="hljs-title function_">useMemo</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">CancelToken</span>.<span class="hljs-title function_">source</span>(), [count]);
 
   <span class="hljs-comment">// Expensive operation</span>
-  <span class="hljs-keyword">const</span> { <span class="hljs-attr">data</span>: imageBlob } = useAppConvertCountToImage(
+  <span class="hljs-keyword">const</span> { <span class="hljs-attr">data</span>: imageBlob } = <span class="hljs-title function_">useAppConvertCountToImage</span>(
     { count },
     { cancelToken },
   );
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setCount(count + 1)} /&gt;
       <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">{URL.createObjectURL(imageBlob)}</span> /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
@@ -112,35 +112,35 @@ return &#39;deleted&#39; records. This can be enabled by providing
 <code>{ deletedAtInclude: true }</code>. To permanently delete a record,
 <code>groupQueries.tableDeletePermanent</code> is generated as well.</p>
 <pre><code class="language-js"><span class="hljs-comment">// In generate</span>
-<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> TypeCreator();
-app.add(
-  T.object(<span class="hljs-string">&quot;myValue&quot;</span>)
-    .keys({
-      <span class="hljs-attr">id</span>: T.uuid().primary(),
-      <span class="hljs-attr">count</span>: T.number(),
+<span class="hljs-keyword">const</span> T = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeCreator</span>();
+app.<span class="hljs-title function_">add</span>(
+  T.<span class="hljs-title function_">object</span>(<span class="hljs-string">&quot;myValue&quot;</span>)
+    .<span class="hljs-title function_">keys</span>({
+      <span class="hljs-attr">id</span>: T.<span class="hljs-title function_">uuid</span>().<span class="hljs-title function_">primary</span>(),
+      <span class="hljs-attr">count</span>: T.<span class="hljs-title function_">number</span>(),
     })
-    .enableQueries({ <span class="hljs-attr">withSoftDeletes</span>: <span class="hljs-literal">true</span> }),
+    .<span class="hljs-title function_">enableQueries</span>({ <span class="hljs-attr">withSoftDeletes</span>: <span class="hljs-literal">true</span> }),
 );
 
 <span class="hljs-comment">// Insert a record</span>
-<span class="hljs-keyword">const</span> [myValue] = <span class="hljs-keyword">await</span> appQueries.myValueInsert(sql, { <span class="hljs-attr">count</span>: <span class="hljs-number">5</span> });
+<span class="hljs-keyword">const</span> [myValue] = <span class="hljs-keyword">await</span> appQueries.<span class="hljs-title function_">myValueInsert</span>(sql, { <span class="hljs-attr">count</span>: <span class="hljs-number">5</span> });
 
-<span class="hljs-keyword">const</span> firstCount = <span class="hljs-keyword">await</span> appQueries.myValueCount(sql);
+<span class="hljs-keyword">const</span> firstCount = <span class="hljs-keyword">await</span> appQueries.<span class="hljs-title function_">myValueCount</span>(sql);
 <span class="hljs-comment">// firstCount === 1</span>
 
 <span class="hljs-comment">// Delete our `myValue`</span>
-<span class="hljs-keyword">await</span> appQueries.myValueDelete(sql, { <span class="hljs-attr">id</span>: myValue.id });
+<span class="hljs-keyword">await</span> appQueries.<span class="hljs-title function_">myValueDelete</span>(sql, { <span class="hljs-attr">id</span>: myValue.<span class="hljs-property">id</span> });
 
-<span class="hljs-keyword">const</span> secondCount = <span class="hljs-keyword">await</span> appQueries.myValueCount(sql);
+<span class="hljs-keyword">const</span> secondCount = <span class="hljs-keyword">await</span> appQueries.<span class="hljs-title function_">myValueCount</span>(sql);
 <span class="hljs-comment">// secondCount === 0, deleted records are not included</span>
 
-<span class="hljs-keyword">const</span> countWithDeleted = <span class="hljs-keyword">await</span> appQueries.myValueCount(sql, {
+<span class="hljs-keyword">const</span> countWithDeleted = <span class="hljs-keyword">await</span> appQueries.<span class="hljs-title function_">myValueCount</span>(sql, {
   <span class="hljs-attr">deletedAtInclude</span>: <span class="hljs-literal">true</span>,
 });
 <span class="hljs-comment">// countWithDeleted === 1</span>
 
 <span class="hljs-comment">// Remove record completely</span>
-<span class="hljs-keyword">await</span> appQueries.myValueDeletePermanent(sql, { <span class="hljs-attr">id</span>: myValue.id });
+<span class="hljs-keyword">await</span> appQueries.<span class="hljs-title function_">myValueDeletePermanent</span>(sql, { <span class="hljs-attr">id</span>: myValue.<span class="hljs-property">id</span> });
 </code></pre>
 <p>Note that cascading soft deletes is not included in this release. The generated
 DDL, enabled by <code>app.generate({ ..., dumpPostgres: true })</code> does not yet
