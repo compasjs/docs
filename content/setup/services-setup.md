@@ -45,4 +45,5 @@ console.log(counter); // 5
 As you can see, code can use the imported variable directly when doing read
 operations. When exporting a ' setXx'-function, you can replace the variable
 anytime; when your application is starting up, or replacing it with a mock when
-testing.
+testing. Some useful things to keep as services include a logger, postgres
+connection, s3 bucket names, s3 connection and constructed body parsers.
