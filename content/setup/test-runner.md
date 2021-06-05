@@ -122,6 +122,9 @@ the defaults is below:
 // Individual test timeout, i.e. the function provided to `test` and `t.test`
 export const timeout = 2500;
 
+// Enforce that every test has at least a single subtest (i.e. t.test()) or an assertion (t.pass())
+export const enforceSingleAssertion = false;
+
 export async function setup() {
   // Global setup function
 }

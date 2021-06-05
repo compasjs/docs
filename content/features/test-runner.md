@@ -97,7 +97,7 @@ when testing control flow, like checking that a `catch` block is executed.
 
 **t.fail(msg?)**
 
-Signal to the test runne that an implicit assertion failed. This is also often
+Signal to the test runner that an implicit assertion failed. This is also often
 used when testing control flow. For example in the following example where the
 function `willThrow` should really throw an error.
 
@@ -117,6 +117,30 @@ test("willThrow really throws", (t) => {
   }
 });
 ```
+
+When `enforceSingleAssertion` is set to `true` in the config, the above is more
+idiomatically written as:
+
+```js
+mainTestFn(import.meta);
+
+const willThrow = () => {
+  throw new Error("Really did throw");
+};
+
+test("willThrow really throws", (t) => {
+  try {
+    willThrow();
+  } catch {
+    t.pass("willThrow, did indeed throw an error.");
+  }
+});
+```
+
+In this case when the `willThrow()` function doesn't throw, the test runners
+throws an error that `willThrow really throws` didn't execute a single
+assertion. Because the 'catch' block did not executed and consecutively the
+`t.pass()` not called.
 
 **t.deepEqual(value, expected, msg?)**
 
@@ -152,6 +176,11 @@ When tests are executed, a config file attempted to be loaded from
 
 A configurable timeout in milliseconds. This is enforced for every callback
 provided to `test` or `t.test`. Defaults to 2.5 seconds.
+
+**enforceSingleAssertion**
+
+The runner enforces that every `test()` and `t.test()` call does at least a
+single assertion or creates at least a single subtest.
 
 **setup**
 
