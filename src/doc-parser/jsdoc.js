@@ -157,9 +157,16 @@ function extractTags(value, index) {
 
     // Quick filter of tags that we are not handling right at this moment
     if (
-      ["public", "private", "protected", "template", "return", "see"].indexOf(
-        matchResult[1],
-      ) === -1
+      [
+        "public",
+        "private",
+        "protected",
+        "template",
+        "return",
+        "see",
+        "class",
+        "constructor",
+      ].indexOf(matchResult[1]) === -1
     ) {
       result.push({
         tag: matchResult[1],
