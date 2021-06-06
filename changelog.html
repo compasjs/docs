@@ -28,6 +28,38 @@
   CHANGELOG
   
 </h1>
+<h3 id="v00140">
+  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.140">v0.0.140</a>
+  <a name="v00140" class="anchor" href="#v00140">#</a>
+</h3>
+<ul>
+<li>build(deps): bump @types/node from 15.6.1 to 15.12.0
+(<a href="https://github.com/compasjs/compas/pull/929">#929</a>,
+<a href="https://github.com/compasjs/compas/pull/933">#933</a>)</li>
+<li>build(deps): bump eslint-plugin-import from 2.23.3 to 2.23.4
+(<a href="https://github.com/compasjs/compas/pull/919">#919</a>)</li>
+<li>build(deps): bump eslint-plugin-jsdoc from 35.0.0 to 35.1.2
+(<a href="https://github.com/compasjs/compas/pull/920">#920</a>,
+<a href="https://github.com/compasjs/compas/pull/921">#921</a>)</li>
+<li>build(deps): bump mime-types from 2.1.30 to 2.1.31
+(<a href="https://github.com/compasjs/compas/pull/927">#927</a>)</li>
+<li>chore(store): remove unused mime-types dependency
+(<a href="https://github.com/compasjs/compas/pull/936">#936</a>)</li>
+<li>feat(cli): add code-mod command, prepare v0.0.140 code-mod
+(<a href="https://github.com/compasjs/compas/pull/940">#940</a>)</li>
+<li>feat(cli): add migrate --keep-alive-without-lock
+(<a href="https://github.com/compasjs/compas/pull/937">#937</a>)</li>
+<li>feat(code-gen): accept an object as argument in generated &#39;useQuery&#39; hooks
+(<a href="https://github.com/compasjs/compas/pull/941">#941</a>)</li>
+<li>feat(code-gen): throw nice error on optional route parameters
+(<a href="https://github.com/compasjs/compas/pull/938">#938</a>)</li>
+<li>feat(stdlib): always format stack when formatting errors
+(<a href="https://github.com/compasjs/compas/pull/939">#939</a>)</li>
+<li>fix(code-gen): Add additional query generics to support better data inferring
+(<a href="https://github.com/compasjs/compas/pull/922">#922</a>)</li>
+</ul>
+<p>Breaking change in the generated react-query hooks, please run the code-mod via
+<code>yarn compas code-mod exec v0.0.140 --verbose</code> before generating.</p>
 <h3 id="v00139">
   <a href="https://github.com/compasjs/compas/releases/tag/v0.0.139">v0.0.139</a>
   <a name="v00139" class="anchor" href="#v00139">#</a>
@@ -361,7 +393,7 @@ conversion (<a href="https://github.com/compasjs/compas/pull/767">#767</a>)</li>
 <li>build(deps): bump eslint-plugin-jsdoc from 32.2.0 to 32.3.0
 (<a href="https://github.com/compasjs/compas/pull/749">#749</a>)</li>
 <li>chore(ci): use custom token to comment on PR&#39;s</li>
-<li>chore: move to fastify/<a href="mailto:&#x67;&#105;&#116;&#x68;&#117;&#x62;&#x2d;&#x61;&#99;&#x74;&#105;&#111;&#110;&#45;&#109;&#101;&#x72;&#103;&#101;&#x2d;&#100;&#101;&#112;&#x65;&#x6e;&#x64;&#x61;&#98;&#x6f;&#116;&#x40;&#118;&#50;&#x2e;&#48;&#46;&#48;">&#x67;&#105;&#116;&#x68;&#117;&#x62;&#x2d;&#x61;&#99;&#x74;&#105;&#111;&#110;&#45;&#109;&#101;&#x72;&#103;&#101;&#x2d;&#100;&#101;&#112;&#x65;&#x6e;&#x64;&#x61;&#98;&#x6f;&#116;&#x40;&#118;&#50;&#x2e;&#48;&#46;&#48;</a></li>
+<li>chore: move to fastify/<a href="mailto:&#x67;&#105;&#x74;&#104;&#117;&#x62;&#45;&#x61;&#99;&#116;&#105;&#x6f;&#x6e;&#45;&#x6d;&#101;&#x72;&#x67;&#101;&#x2d;&#x64;&#x65;&#112;&#101;&#110;&#x64;&#x61;&#98;&#x6f;&#116;&#64;&#x76;&#50;&#46;&#48;&#x2e;&#x30;">&#x67;&#105;&#x74;&#104;&#117;&#x62;&#45;&#x61;&#99;&#116;&#105;&#x6f;&#x6e;&#45;&#x6d;&#101;&#x72;&#x67;&#101;&#x2d;&#x64;&#x65;&#112;&#101;&#110;&#x64;&#x61;&#98;&#x6f;&#116;&#64;&#x76;&#50;&#46;&#48;&#x2e;&#x30;</a></li>
 <li>feat(code-gen): generate a code splittable api client
 (<a href="https://github.com/compasjs/compas/pull/756">#756</a>)</li>
 <li>feat(code-gen): introduce common, split generator output per &#39;group&#39;
