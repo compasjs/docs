@@ -179,7 +179,7 @@ be described via this mechanism.
 - eventName `string`
 - data `object`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L416)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L418)_
 
 ## addJobToQueue
 
@@ -195,7 +195,7 @@ priority. The default priority is '5'.
 - sql `Postgres`
 - job `JobInput`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L437)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L440)_
 
 ## addRecurringJobToQueue
 
@@ -214,7 +214,7 @@ than other jobs.
 - job
   `{ name: string, priority?: number|undefined, interval: StoreJobInterval }`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L505)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L510)_
 
 ## addJobWithCustomTimeoutToQueue
 
@@ -233,7 +233,7 @@ handler may run, before the 'InsightEvent' is aborted.
 - job `JobInput`
 - timeout `number`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L468)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L472)_
 
 ## getUncompletedJobsByName
 
@@ -248,7 +248,7 @@ Get all uncompleted jobs from the queue. Useful for testing if jobs are created.
 
 - sql `Postgres`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L666)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L671)_
 
 ## newSessionStore
 
@@ -263,7 +263,7 @@ provided in `@compas/server`.
 
 - sql `Postgres`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/sessions.js#L42)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/sessions.js#L44)_
 
 ## newMinioClient
 
@@ -362,7 +362,7 @@ object.
 - props `StoreFileInsertPartial`
 - streamOrPath `ReadStream|string`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L36)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L37)_
 
 ## copyFile
 
@@ -382,7 +382,7 @@ id, into the provided bucket.
 - id `string`
 - targetBucket `string=bucketName`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L117)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L118)_
 
 ## getFileStream
 
@@ -401,7 +401,7 @@ the 'id'. A 'start' and 'end' value can optionally be specified.
 - id `string`
 - seek `{ start?: number|undefined, end?: number|undefined }={}`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L89)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L90)_
 
 ## syncDeletedFiles
 
@@ -419,7 +419,7 @@ the S3 bucket.
 - minio `minio.Client`
 - bucketName `string`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L153)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L156)_
 
 ## updateFileGroupOrder
 
