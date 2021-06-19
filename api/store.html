@@ -152,7 +152,7 @@ be described via this mechanism.</p>
 <li>eventName <code>string</code></li>
 <li>data <code>object</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L416">source</a></em><br><h2 id="addjobtoqueue">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L418">source</a></em><br><h2 id="addjobtoqueue">
   addJobToQueue
   <a name="addjobtoqueue" class="anchor" href="#addjobtoqueue">#</a>
 </h2>
@@ -163,7 +163,7 @@ priority. The default priority is &#39;5&#39;.</p>
 <li>sql <code>Postgres</code></li>
 <li>job <code>JobInput</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L437">source</a></em><br><h2 id="addrecurringjobtoqueue">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L440">source</a></em><br><h2 id="addrecurringjobtoqueue">
   addRecurringJobToQueue
   <a name="addrecurringjobtoqueue" class="anchor" href="#addrecurringjobtoqueue">#</a>
 </h2>
@@ -177,7 +177,7 @@ than other jobs.</p>
 <li>job
 <code>{ name: string, priority?: number|undefined, interval: StoreJobInterval }</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L505">source</a></em><br><h2 id="addjobwithcustomtimeouttoqueue">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L510">source</a></em><br><h2 id="addjobwithcustomtimeouttoqueue">
   addJobWithCustomTimeoutToQueue
   <a name="addjobwithcustomtimeouttoqueue" class="anchor" href="#addjobwithcustomtimeouttoqueue">#</a>
 </h2>
@@ -191,7 +191,7 @@ handler may run, before the &#39;InsightEvent&#39; is aborted.</p>
 <li>job <code>JobInput</code></li>
 <li>timeout <code>number</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L468">source</a></em><br><h2 id="getuncompletedjobsbyname">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L472">source</a></em><br><h2 id="getuncompletedjobsbyname">
   getUncompletedJobsByName
   <a name="getuncompletedjobsbyname" class="anchor" href="#getuncompletedjobsbyname">#</a>
 </h2>
@@ -201,7 +201,7 @@ QueryResultStoreJob[]&gt;&gt;}</em><br><p>Get all uncompleted jobs from the queu
 <ul>
 <li>sql <code>Postgres</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L666">source</a></em><br><h2 id="newsessionstore">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/queue.js#L671">source</a></em><br><h2 id="newsessionstore">
   newSessionStore
   <a name="newsessionstore" class="anchor" href="#newsessionstore">#</a>
 </h2>
@@ -211,7 +211,7 @@ provided in <code>@compas/server</code>.</p>
 <ul>
 <li>sql <code>Postgres</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/sessions.js#L42">source</a></em><br><h2 id="newminioclient">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/sessions.js#L44">source</a></em><br><h2 id="newminioclient">
   newMinioClient
   <a name="newminioclient" class="anchor" href="#newminioclient">#</a>
 </h2>
@@ -280,7 +280,7 @@ object.</p>
 <li>props <code>StoreFileInsertPartial</code></li>
 <li>streamOrPath <code>ReadStream|string</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L36">source</a></em><br><h2 id="copyfile">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L37">source</a></em><br><h2 id="copyfile">
   copyFile
   <a name="copyfile" class="anchor" href="#copyfile">#</a>
 </h2>
@@ -295,7 +295,7 @@ id, into the provided bucket.</p>
 <li>id <code>string</code></li>
 <li>targetBucket <code>string=bucketName</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L117">source</a></em><br><h2 id="getfilestream">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L118">source</a></em><br><h2 id="getfilestream">
   getFileStream
   <a name="getfilestream" class="anchor" href="#getfilestream">#</a>
 </h2>
@@ -309,7 +309,7 @@ the &#39;id&#39;. A &#39;start&#39; and &#39;end&#39; value can optionally be sp
 <li>id <code>string</code></li>
 <li>seek <code>{ start?: number|undefined, end?: number|undefined }={}</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L89">source</a></em><br><h2 id="syncdeletedfiles">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L90">source</a></em><br><h2 id="syncdeletedfiles">
   syncDeletedFiles
   <a name="syncdeletedfiles" class="anchor" href="#syncdeletedfiles">#</a>
 </h2>
@@ -322,7 +322,7 @@ the S3 bucket.</p>
 <li>minio <code>minio.Client</code></li>
 <li>bucketName <code>string</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L153">source</a></em><br><h2 id="updatefilegrouporder">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/files.js#L156">source</a></em><br><h2 id="updatefilegrouporder">
   updateFileGroupOrder
   <a name="updatefilegrouporder" class="anchor" href="#updatefilegrouporder">#</a>
 </h2>

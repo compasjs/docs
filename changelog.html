@@ -28,6 +28,31 @@
   CHANGELOG
   
 </h1>
+<h3 id="v00146">
+  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.146">v0.0.146</a>
+  <a name="v00146" class="anchor" href="#v00146">#</a>
+</h3>
+<ul>
+<li>build(deps): bump @types/node from 15.12.2 to 15.12.4
+(<a href="https://github.com/compasjs/compas/pull/987">#987</a>)</li>
+<li>build(deps): bump eslint from 7.28.0 to 7.29.0
+(<a href="https://github.com/compasjs/compas/pull/986">#986</a>)</li>
+<li>build(deps): bump eslint-plugin-jsdoc from 35.3.0 to 35.3.2
+(<a href="https://github.com/compasjs/compas/pull/985">#985</a>)</li>
+<li>feat(cli): add code-mod for v0.0.146
+(<a href="https://github.com/compasjs/compas/pull/983">#983</a>)</li>
+<li>feat(code-gen): remove entitySelect generation
+(<a href="https://github.com/compasjs/compas/pull/984">#984</a>)</li>
+<li>feat(stdlib): calculate event duration on abort or eventStop
+(<a href="https://github.com/compasjs/compas/pull/982">#982</a>)</li>
+<li>fix(code-gen): resolve primary key for correct type when adding fields for
+relations (<a href="https://github.com/compasjs/compas/pull/980">#980</a>)</li>
+<li>fix(store): fix return values of <code>addJobToQueue</code> and equivalents
+(<a href="https://github.com/compasjs/compas/pull/981">#981</a>)</li>
+</ul>
+<p>Breaking change where the generated select sql queries where removed. Use
+<code>yarn compas code-mod exec v0.0.146 --verbose</code>, before generating, to convert
+these to use the query builder.</p>
 <h3 id="v00145">
   <a href="https://github.com/compasjs/compas/releases/tag/v0.0.145">v0.0.145</a>
   <a name="v00145" class="anchor" href="#v00145">#</a>
@@ -469,7 +494,7 @@ conversion (<a href="https://github.com/compasjs/compas/pull/767">#767</a>)</li>
 <li>build(deps): bump eslint-plugin-jsdoc from 32.2.0 to 32.3.0
 (<a href="https://github.com/compasjs/compas/pull/749">#749</a>)</li>
 <li>chore(ci): use custom token to comment on PR&#39;s</li>
-<li>chore: move to fastify/<a href="mailto:&#x67;&#x69;&#116;&#x68;&#x75;&#98;&#x2d;&#97;&#x63;&#x74;&#105;&#111;&#110;&#x2d;&#x6d;&#x65;&#114;&#103;&#x65;&#45;&#x64;&#x65;&#x70;&#x65;&#x6e;&#100;&#x61;&#98;&#x6f;&#x74;&#64;&#x76;&#x32;&#x2e;&#x30;&#x2e;&#48;">&#x67;&#x69;&#116;&#x68;&#x75;&#98;&#x2d;&#97;&#x63;&#x74;&#105;&#111;&#110;&#x2d;&#x6d;&#x65;&#114;&#103;&#x65;&#45;&#x64;&#x65;&#x70;&#x65;&#x6e;&#100;&#x61;&#98;&#x6f;&#x74;&#64;&#x76;&#x32;&#x2e;&#x30;&#x2e;&#48;</a></li>
+<li>chore: move to fastify/<a href="mailto:&#103;&#105;&#x74;&#x68;&#x75;&#98;&#45;&#97;&#x63;&#116;&#105;&#111;&#x6e;&#45;&#109;&#101;&#x72;&#103;&#x65;&#x2d;&#100;&#x65;&#112;&#101;&#x6e;&#x64;&#97;&#98;&#111;&#116;&#64;&#x76;&#x32;&#x2e;&#48;&#46;&#x30;">&#103;&#105;&#x74;&#x68;&#x75;&#98;&#45;&#97;&#x63;&#116;&#105;&#111;&#x6e;&#45;&#109;&#101;&#x72;&#103;&#x65;&#x2d;&#100;&#x65;&#112;&#101;&#x6e;&#x64;&#97;&#98;&#111;&#116;&#64;&#x76;&#x32;&#x2e;&#48;&#46;&#x30;</a></li>
 <li>feat(code-gen): generate a code splittable api client
 (<a href="https://github.com/compasjs/compas/pull/756">#756</a>)</li>
 <li>feat(code-gen): introduce common, split generator output per &#39;group&#39;
