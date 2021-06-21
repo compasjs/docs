@@ -54,7 +54,7 @@ Create a new test event
 - t `TestRunner`
 - options `{ enableLogs?: boolean }={}`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/cli/src/testing/events.js#L10)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/cli/src/testing/events.js#L12)_
 
 ## bench
 
