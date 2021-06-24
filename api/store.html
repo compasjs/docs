@@ -338,7 +338,8 @@ getFileGroupParents for that.</p>
   createTestPostgresDatabase
   <a name="createtestpostgresdatabase" class="anchor" href="#createtestpostgresdatabase">#</a>
 </h2>
-<em>Available since 0.1.0</em><br><em>function createTestPostgresDatabase(verboseSql?): Promise<Postgres></em><br><p>Create a new test database, using the default database as it&#39;s template. The
+<em>Available since 0.1.0</em><br><em>function createTestPostgresDatabase(verboseSql?, connectionOptions?):
+Promise<Postgres></em><br><p>Create a new test database, using the default database as it&#39;s template. The
 copied database will be fully truncated, except for the &#39;migrations&#39; table. To
 do this, all connections to the default database are forcefully killed. Returns
 a connection to the new database.</p>
@@ -346,8 +347,9 @@ a connection to the new database.</p>
 <ul>
 <li>verboseSql <code>boolean=false</code>: If true, creates a new logger and prints all
 queries.</li>
+<li>connectionOptions <code>object?</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L73">source</a></em><br><h2 id="cleanuptestpostgresdatabase">
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L74">source</a></em><br><h2 id="cleanuptestpostgresdatabase">
   cleanupTestPostgresDatabase
   <a name="cleanuptestpostgresdatabase" class="anchor" href="#cleanuptestpostgresdatabase">#</a>
 </h2>
@@ -356,7 +358,7 @@ queries.</li>
 <ul>
 <li>sql <code>Postgres</code></li>
 </ul>
-<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L153">source</a></em><br>
+<em><a href="https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L163">source</a></em><br>
     </article>
     
     </main>
