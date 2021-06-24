@@ -442,7 +442,8 @@ _[source](https://github.com/compasjs/compas/blob/main/packages/store/src/file-g
 
 _Available since 0.1.0_
 
-_function createTestPostgresDatabase(verboseSql?): Promise<Postgres>_
+_function createTestPostgresDatabase(verboseSql?, connectionOptions?):
+Promise<Postgres>_
 
 Create a new test database, using the default database as it's template. The
 copied database will be fully truncated, except for the 'migrations' table. To
@@ -453,8 +454,9 @@ a connection to the new database.
 
 - verboseSql `boolean=false`: If true, creates a new logger and prints all
   queries.
+- connectionOptions `object?`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L73)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L74)_
 
 ## cleanupTestPostgresDatabase
 
@@ -468,4 +470,4 @@ Remove a created test database
 
 - sql `Postgres`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L153)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/store/src/testing.js#L163)_
