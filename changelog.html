@@ -28,6 +28,47 @@
   CHANGELOG
   
 </h1>
+<h3 id="v00149">
+  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.149">v0.0.149</a>
+  <a name="v00149" class="anchor" href="#v00149">#</a>
+</h3>
+<h5 id="changes">
+  Changes
+  <a name="changes" class="anchor" href="#changes">#</a>
+</h5>
+<ul>
+<li>build(deps): bump @types/node from 15.12.4 to 15.12.5
+(<a href="https://github.com/compasjs/compas/pull/998">#998</a>)<ul>
+<li><a href="https://github.com/DefinitelyTyped/DefinitelyTyped/releases">Release notes</a></li>
+</ul>
+</li>
+<li>build(deps): bump prettier from 2.3.1 to 2.3.2
+(<a href="https://github.com/compasjs/compas/pull/999">#999</a>)<ul>
+<li><a href="https://github.com/prettier/prettier/releases">Release notes</a></li>
+</ul>
+</li>
+<li>chore(changelog): improve changelog with breaking change handling
+(<a href="https://github.com/compasjs/compas/pull/1000">#1000</a>)</li>
+<li>feat(store): remove file group view
+(<a href="https://github.com/compasjs/compas/pull/1001">#1001</a>)<ul>
+<li>Closes <a href="https://github.com/compasjs/compas/pull/901">#901</a></li>
+</ul>
+</li>
+</ul>
+<h5 id="breaking-changes">
+  Breaking changes
+  <a name="breaking-changes" class="anchor" href="#breaking-changes">#</a>
+</h5>
+<ul>
+<li><strong>store</strong>: remove file group view<ul>
+<li>Removed usages and code generation of <code>fileGroupView</code>. Replace with
+<code>queryFileGroup</code> calls.</li>
+<li>Add the following migration:<pre><code class="language-sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">VIEW</span> IF <span class="hljs-keyword">EXISTS</span> &quot;fileGroupView&quot; CASCADE;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="v00148">
   <a href="https://github.com/compasjs/compas/releases/tag/v0.0.148">v0.0.148</a>
   <a name="v00148" class="anchor" href="#v00148">#</a>
@@ -518,7 +559,7 @@ conversion (<a href="https://github.com/compasjs/compas/pull/767">#767</a>)</li>
 <li>build(deps): bump eslint-plugin-jsdoc from 32.2.0 to 32.3.0
 (<a href="https://github.com/compasjs/compas/pull/749">#749</a>)</li>
 <li>chore(ci): use custom token to comment on PR&#39;s</li>
-<li>chore: move to fastify/<a href="mailto:&#x67;&#x69;&#x74;&#x68;&#117;&#x62;&#x2d;&#97;&#x63;&#116;&#x69;&#111;&#110;&#45;&#x6d;&#x65;&#114;&#x67;&#101;&#x2d;&#100;&#x65;&#112;&#x65;&#110;&#100;&#x61;&#98;&#x6f;&#x74;&#64;&#x76;&#x32;&#46;&#x30;&#x2e;&#x30;">&#x67;&#x69;&#x74;&#x68;&#117;&#x62;&#x2d;&#97;&#x63;&#116;&#x69;&#111;&#110;&#45;&#x6d;&#x65;&#114;&#x67;&#101;&#x2d;&#100;&#x65;&#112;&#x65;&#110;&#100;&#x61;&#98;&#x6f;&#x74;&#64;&#x76;&#x32;&#46;&#x30;&#x2e;&#x30;</a></li>
+<li>chore: move to fastify/<a href="mailto:&#x67;&#105;&#x74;&#x68;&#117;&#98;&#x2d;&#x61;&#x63;&#116;&#x69;&#111;&#x6e;&#45;&#109;&#101;&#114;&#x67;&#x65;&#45;&#100;&#101;&#112;&#101;&#110;&#100;&#x61;&#98;&#x6f;&#x74;&#64;&#118;&#x32;&#x2e;&#x30;&#x2e;&#48;">&#x67;&#105;&#x74;&#x68;&#117;&#98;&#x2d;&#x61;&#x63;&#116;&#x69;&#111;&#x6e;&#45;&#109;&#101;&#114;&#x67;&#x65;&#45;&#100;&#101;&#112;&#101;&#110;&#100;&#x61;&#98;&#x6f;&#x74;&#64;&#118;&#x32;&#x2e;&#x30;&#x2e;&#48;</a></li>
 <li>feat(code-gen): generate a code splittable api client
 (<a href="https://github.com/compasjs/compas/pull/756">#756</a>)</li>
 <li>feat(code-gen): introduce common, split generator output per &#39;group&#39;
