@@ -253,30 +253,30 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@compas/cli@0.0.148":
-  version "0.0.148"
-  resolved "https://registry.yarnpkg.com/@compas/cli/-/cli-0.0.148.tgz#257191357a2de915767434b88984d2f2324685f9"
-  integrity sha512-z4PSFrn+BAWbuCzdRWC3zdkDwIZxVlzBIABH8TNW2KACaX+mCrLfc55A9Wk0As1EV+c6Wv4HM+6LRc+XPytSKQ==
+"@compas/cli@0.0.149":
+  version "0.0.149"
+  resolved "https://registry.yarnpkg.com/@compas/cli/-/cli-0.0.149.tgz#b07791125596f61202559f629ced528d1a3154ba"
+  integrity sha512-uNAs/OEl8nQqdYUb9RYxPsrjLNZnpIMtVJ40lwoka8gyrhmc7GU9UKlC5pTObb1TpLwOTDc4fmCRfyEKk15DWw==
   dependencies:
-    "@compas/stdlib" "0.0.148"
+    "@compas/stdlib" "0.0.149"
     c8 "7.7.3"
     chokidar "3.5.2"
     http-proxy "1.18.1"
     recast "0.20.4"
     tree-kill "1.2.2"
 
-"@compas/code-gen@0.0.148":
-  version "0.0.148"
-  resolved "https://registry.yarnpkg.com/@compas/code-gen/-/code-gen-0.0.148.tgz#824a933f097df6db540b25e1ce9179854cc36932"
-  integrity sha512-vTLDkGCZExb0WhcgOy50OnIgcUytDYSOH9Nyx0nFvdvqdqgrLOoO2P0zCaPwlFhbFVNPhkQwbFBSfoqdVZKftg==
+"@compas/code-gen@0.0.149":
+  version "0.0.149"
+  resolved "https://registry.yarnpkg.com/@compas/code-gen/-/code-gen-0.0.149.tgz#ce2c69124e29e7d8263bb41f65adf85d04ff4ea3"
+  integrity sha512-dKTivImlCplPAERy4WJUHDcpAcAgC8XKheemGg4c+5917N8i5PVpMraeOMtySRHTxKdUDG27Cpqq2/UTxHehwA==
   dependencies:
-    "@compas/cli" "0.0.148"
-    "@compas/stdlib" "0.0.148"
+    "@compas/cli" "0.0.149"
+    "@compas/stdlib" "0.0.149"
 
-"@compas/lint-config@0.0.148":
-  version "0.0.148"
-  resolved "https://registry.yarnpkg.com/@compas/lint-config/-/lint-config-0.0.148.tgz#d2f2043b166061f5c3d4d7374bd41e6d11dd7ff5"
-  integrity sha512-dd2ig3w6PxWfPVin3uxZSBCNIvxzWBgS7xGLngmgoBtoKZwV8zgwnBrn65DFaFfCqbumGidcy+2jMYtSy6hg3A==
+"@compas/lint-config@0.0.149":
+  version "0.0.149"
+  resolved "https://registry.yarnpkg.com/@compas/lint-config/-/lint-config-0.0.149.tgz#24b64e9924bc6d6912b4debe14e27379b64c45f4"
+  integrity sha512-//GyWaht+/U9RhoAurnwM5d0L9Kl3XTdkmseFkJ4KLqeI9aej0OfRMPJgrZg/3gKwtfpHSPQGbkHyqSkvd9hWA==
   dependencies:
     "@babel/core" "7.14.6"
     "@babel/eslint-parser" "7.14.7"
@@ -285,35 +285,35 @@
     eslint-config-prettier "8.3.0"
     eslint-plugin-import "2.23.4"
     eslint-plugin-jsdoc "35.4.0"
-    prettier "2.3.1"
+    prettier "2.3.2"
 
-"@compas/server@0.0.148":
-  version "0.0.148"
-  resolved "https://registry.yarnpkg.com/@compas/server/-/server-0.0.148.tgz#620ec3ce71feceafacb8547cedfd09d947f1b29e"
-  integrity sha512-y+7g/Om3ACSzKCChgu6g26ZmwkZyCv14vIiYvccBVC2ObAZ6nElW5qAiuInsP5cTBdqeK6b8qwbU1n2szfpz1g==
+"@compas/server@0.0.149":
+  version "0.0.149"
+  resolved "https://registry.yarnpkg.com/@compas/server/-/server-0.0.149.tgz#1cdfd518192cfeb05b50cbf6f93b80d9732dc1ef"
+  integrity sha512-vjjDARPVWm/ViWrI/yNJnCBffidooZ1m3n76yGbUk0mdK5eBOUBtasf4QlFKFRnYeCei1y2qRFhwLuvrc3L+CQ==
   dependencies:
-    "@compas/stdlib" "0.0.148"
+    "@compas/stdlib" "0.0.149"
     co-body "6.1.0"
     formidable "2.0.0-canary.20200504.1"
     keygrip "1.1.0"
     koa "2.13.1"
     koa-session "6.2.0"
 
-"@compas/stdlib@0.0.148":
-  version "0.0.148"
-  resolved "https://registry.yarnpkg.com/@compas/stdlib/-/stdlib-0.0.148.tgz#e1e138f78a7ac58327bdd858ba51eeeb5fe13ed8"
-  integrity sha512-1uWgeesdWKOVJ0H97UyDUbP8ElNDWCLjySeq5/u2z+QXVU94eI4kQBybHUD1bOAlgNtCy0kFEmU8wrSEVIxMmA==
+"@compas/stdlib@0.0.149":
+  version "0.0.149"
+  resolved "https://registry.yarnpkg.com/@compas/stdlib/-/stdlib-0.0.149.tgz#6e1a9f1b5415027362fda817cc7bd3c379df335e"
+  integrity sha512-VHXSeKFO8WlOwnonmC9kDn1+0ORurM8snp2MHd0pI+X8bdn3dPs8HV2euGvZnQxyNXDj2f+8ntkN1tIQucDFbg==
   dependencies:
-    "@types/node" "15.12.4"
+    "@types/node" "15.12.5"
     dotenv "10.0.0"
     lodash.merge "4.6.2"
 
-"@compas/store@0.0.148":
-  version "0.0.148"
-  resolved "https://registry.yarnpkg.com/@compas/store/-/store-0.0.148.tgz#e7d678a7ad68222b5a8c1ab15a3a5a6e87e42e9e"
-  integrity sha512-TDLPPxbgM1ncLXoY+CTT7oNL18bSxASzBtwgMgRZxLcaw2pazAV6sKFDYvagRI65mh17b3ysTH+HKZQOQZjMTw==
+"@compas/store@0.0.149":
+  version "0.0.149"
+  resolved "https://registry.yarnpkg.com/@compas/store/-/store-0.0.149.tgz#daf1173f0d54d566714417d09a9a140e3575a0e8"
+  integrity sha512-R1VOqjctPWZCgRQhGmclydnpuJv3E2RaDzO74y2dwnOjfyuDftazmF4s836jaeodE/iKrAOaEhdaXi8VeRxAkQ==
   dependencies:
-    "@compas/stdlib" "0.0.148"
+    "@compas/stdlib" "0.0.149"
     "@types/minio" "7.0.7"
     minio "7.0.18"
     postgres "2.0.0-beta.5"
@@ -369,10 +369,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.16.tgz#3cc351f8d48101deadfed4c9e4f116048d437b4b"
   integrity sha512-naXYePhweTi+BMv11TgioE2/FXU4fSl29HAH1ffxVciNsH3rYXjNP2yM8wqmSm7jS20gM8TIklKiTen+1iVncw==
 
-"@types/node@15.12.4":
-  version "15.12.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.4.tgz#e1cf817d70a1e118e81922c4ff6683ce9d422e26"
-  integrity sha512-zrNj1+yqYF4WskCMOHwN+w9iuD12+dGm0rQ35HLl9/Ouuq52cEtd0CH9qMgrdNmi5ejC1/V7vKEXYubB+65DkA==
+"@types/node@15.12.5":
+  version "15.12.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.5.tgz#9a78318a45d75c9523d2396131bd3cca54b2d185"
+  integrity sha512-se3yX7UHv5Bscf8f1ERKvQOD6sTyycH3hdaoozvaLxgUiY5lIGEeH37AD0G0Qi9kPqihPn0HOfd2yaIEN9VwEg==
 
 accepts@^1.3.5:
   version "1.3.7"
@@ -2125,10 +2125,10 @@ prelude-ls@^1.2.1:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prettier@2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.3.1.tgz#76903c3f8c4449bc9ac597acefa24dc5ad4cbea6"
-  integrity sha512-p+vNbgpLjif/+D+DwAZAbndtRrR0md0MwfmOVN9N+2RgyACMT+7tfaRnT+WDPkqnuVwleyuBIG2XBxKDme3hPA==
+prettier@2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.3.2.tgz#ef280a05ec253712e486233db5c6f23441e7342d"
+  integrity sha512-lnJzDfJ66zkMy58OL5/NY5zp70S7Nz6KqcKkXYzn2tMVrNxvbqaBpg7H3qHaLxCJ5lNMsGuM8+ohS7cZrthdLQ==
 
 progress@^2.0.0:
   version "2.0.3"
