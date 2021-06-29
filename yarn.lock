@@ -253,30 +253,30 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@compas/cli@0.0.149":
-  version "0.0.149"
-  resolved "https://registry.yarnpkg.com/@compas/cli/-/cli-0.0.149.tgz#b07791125596f61202559f629ced528d1a3154ba"
-  integrity sha512-uNAs/OEl8nQqdYUb9RYxPsrjLNZnpIMtVJ40lwoka8gyrhmc7GU9UKlC5pTObb1TpLwOTDc4fmCRfyEKk15DWw==
+"@compas/cli@0.0.150":
+  version "0.0.150"
+  resolved "https://registry.yarnpkg.com/@compas/cli/-/cli-0.0.150.tgz#c22bc31594513713bd798a80d683262d53fbe355"
+  integrity sha512-ye8PB+9fSzc/76KFJgC51jf5esuoW89kBmvKKTfYgsMPGYegSfStgxZVXCWDviuIKALxG1bRowaCaHDpuGPs4A==
   dependencies:
-    "@compas/stdlib" "0.0.149"
+    "@compas/stdlib" "0.0.150"
     c8 "7.7.3"
     chokidar "3.5.2"
     http-proxy "1.18.1"
     recast "0.20.4"
     tree-kill "1.2.2"
 
-"@compas/code-gen@0.0.149":
-  version "0.0.149"
-  resolved "https://registry.yarnpkg.com/@compas/code-gen/-/code-gen-0.0.149.tgz#ce2c69124e29e7d8263bb41f65adf85d04ff4ea3"
-  integrity sha512-dKTivImlCplPAERy4WJUHDcpAcAgC8XKheemGg4c+5917N8i5PVpMraeOMtySRHTxKdUDG27Cpqq2/UTxHehwA==
+"@compas/code-gen@0.0.150":
+  version "0.0.150"
+  resolved "https://registry.yarnpkg.com/@compas/code-gen/-/code-gen-0.0.150.tgz#7b3f28e693d468475faa011056d96e5354b1946d"
+  integrity sha512-PPXCUZSPEMJ5/9DQK+k4eBmLIZrIaFwac3XT38gSFE1+wXdFktESZ1cYylZNt+BwLbW/GxBbfc/cEJjGA/lNpA==
   dependencies:
-    "@compas/cli" "0.0.149"
-    "@compas/stdlib" "0.0.149"
+    "@compas/cli" "0.0.150"
+    "@compas/stdlib" "0.0.150"
 
-"@compas/lint-config@0.0.149":
-  version "0.0.149"
-  resolved "https://registry.yarnpkg.com/@compas/lint-config/-/lint-config-0.0.149.tgz#24b64e9924bc6d6912b4debe14e27379b64c45f4"
-  integrity sha512-//GyWaht+/U9RhoAurnwM5d0L9Kl3XTdkmseFkJ4KLqeI9aej0OfRMPJgrZg/3gKwtfpHSPQGbkHyqSkvd9hWA==
+"@compas/lint-config@0.0.150":
+  version "0.0.150"
+  resolved "https://registry.yarnpkg.com/@compas/lint-config/-/lint-config-0.0.150.tgz#f78a34c81521755ff2ad4ecb6ae8691bed6aebcf"
+  integrity sha512-pS27JnDllBA97lrZV6YxIPpRtiJyvZM4NA2HzZuXnlyqEi43zdaRDfmbAk5967GAcG/AaKfVstiZcKhGYu4Kgw==
   dependencies:
     "@babel/core" "7.14.6"
     "@babel/eslint-parser" "7.14.7"
@@ -284,48 +284,48 @@
     eslint "7.29.0"
     eslint-config-prettier "8.3.0"
     eslint-plugin-import "2.23.4"
-    eslint-plugin-jsdoc "35.4.0"
+    eslint-plugin-jsdoc "35.4.1"
     prettier "2.3.2"
 
-"@compas/server@0.0.149":
-  version "0.0.149"
-  resolved "https://registry.yarnpkg.com/@compas/server/-/server-0.0.149.tgz#1cdfd518192cfeb05b50cbf6f93b80d9732dc1ef"
-  integrity sha512-vjjDARPVWm/ViWrI/yNJnCBffidooZ1m3n76yGbUk0mdK5eBOUBtasf4QlFKFRnYeCei1y2qRFhwLuvrc3L+CQ==
+"@compas/server@0.0.150":
+  version "0.0.150"
+  resolved "https://registry.yarnpkg.com/@compas/server/-/server-0.0.150.tgz#4980e838bf7c8065d1d2ba481d1300ee2fa17ebd"
+  integrity sha512-x8tboskKLEtpu6PAVGURjSv6AdWAFKX4YM9k7ww54lZU2TRnjyezoOhoqIqNRqyHldcTd0pbBT+jMZfZnBFhyg==
   dependencies:
-    "@compas/stdlib" "0.0.149"
+    "@compas/stdlib" "0.0.150"
     co-body "6.1.0"
     formidable "2.0.0-canary.20200504.1"
     keygrip "1.1.0"
     koa "2.13.1"
     koa-session "6.2.0"
 
-"@compas/stdlib@0.0.149":
-  version "0.0.149"
-  resolved "https://registry.yarnpkg.com/@compas/stdlib/-/stdlib-0.0.149.tgz#6e1a9f1b5415027362fda817cc7bd3c379df335e"
-  integrity sha512-VHXSeKFO8WlOwnonmC9kDn1+0ORurM8snp2MHd0pI+X8bdn3dPs8HV2euGvZnQxyNXDj2f+8ntkN1tIQucDFbg==
+"@compas/stdlib@0.0.150":
+  version "0.0.150"
+  resolved "https://registry.yarnpkg.com/@compas/stdlib/-/stdlib-0.0.150.tgz#9945bd58598df76bbe685082b76fd4b3fc758110"
+  integrity sha512-i0Ub/onfvOXsJwqtLW+KbL7ys5P0zwg8iYZQWDQf9Zergik777WmQosLMyTvgo4pdz0VhKn1O3dt2smHmZPLBw==
   dependencies:
     "@types/node" "15.12.5"
     dotenv "10.0.0"
     lodash.merge "4.6.2"
 
-"@compas/store@0.0.149":
-  version "0.0.149"
-  resolved "https://registry.yarnpkg.com/@compas/store/-/store-0.0.149.tgz#daf1173f0d54d566714417d09a9a140e3575a0e8"
-  integrity sha512-R1VOqjctPWZCgRQhGmclydnpuJv3E2RaDzO74y2dwnOjfyuDftazmF4s836jaeodE/iKrAOaEhdaXi8VeRxAkQ==
+"@compas/store@0.0.150":
+  version "0.0.150"
+  resolved "https://registry.yarnpkg.com/@compas/store/-/store-0.0.150.tgz#484edf14f619bb15a9fbfcbe584c83d70ad30ce3"
+  integrity sha512-taEI+A/MczcyPI+zFCrBhrBNP1H/UlH4LwyRXSOgf23Ni9HFiFBEPW0e6QK9NrbiX+k1usbGf8IfO8RKERW/iA==
   dependencies:
-    "@compas/stdlib" "0.0.149"
+    "@compas/stdlib" "0.0.150"
     "@types/minio" "7.0.7"
     minio "7.0.18"
     postgres "2.0.0-beta.5"
 
-"@es-joy/jsdoccomment@^0.8.0-alpha.2":
-  version "0.8.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@es-joy/jsdoccomment/-/jsdoccomment-0.8.0-alpha.2.tgz#78585147d8e6231270374dae528fe5b7b5587b5a"
-  integrity sha512-fjRY13Bh8sxDZkzO27U2R9L6xFqkh5fAbHuMGvGLXLfrTes8nTTMyOi6wIPt+CG0XPAxEUge8cDjhG+0aag6ew==
+"@es-joy/jsdoccomment@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@es-joy/jsdoccomment/-/jsdoccomment-0.8.0.tgz#1add451f50f57597676ab85ee7bd0a273d7b7c43"
+  integrity sha512-Xd3GzYsL2sz2pcdtYt5Q0Wz1ol/o9Nt2UQL4nFPDcaEomvPmwjJsbjkKx1SKhl2h3TgwazNBLdcNr2m0UiGiFA==
   dependencies:
     comment-parser "^1.1.5"
     esquery "^1.4.0"
-    jsdoc-type-pratt-parser "1.0.0-alpha.23"
+    jsdoc-type-pratt-parser "1.0.4"
 
 "@eslint/eslintrc@^0.4.2":
   version "0.4.2"
@@ -996,12 +996,12 @@ eslint-plugin-import@2.23.4:
     resolve "^1.20.0"
     tsconfig-paths "^3.9.0"
 
-eslint-plugin-jsdoc@35.4.0:
-  version "35.4.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-35.4.0.tgz#4f4809ffa9430070aed10087fe691b9ededa2b05"
-  integrity sha512-0cr+NkPTxpTiMCtYOd8W5fd2IyC/CmaTHKb+0bzkpP9p8HfmJ3B2/M6FWj97rQJOLwLMkx+g2MIEZsrttpbFmQ==
+eslint-plugin-jsdoc@35.4.1:
+  version "35.4.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-35.4.1.tgz#7fb2a8c9bd8e304ab1feee48aa34544df5f79839"
+  integrity sha512-lnpu2Bj+ta2eAqwCWnb6f3Xjc78TWKo/oMCpDH5NfpPhYnePNtGZJzoAMgU5uo9BQqmXJ8pql8aiodOhg82ofw==
   dependencies:
-    "@es-joy/jsdoccomment" "^0.8.0-alpha.2"
+    "@es-joy/jsdoccomment" "^0.8.0"
     comment-parser "1.1.5"
     debug "^4.3.1"
     esquery "^1.4.0"
@@ -1644,12 +1644,7 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-jsdoc-type-pratt-parser@1.0.0-alpha.23:
-  version "1.0.0-alpha.23"
-  resolved "https://registry.yarnpkg.com/jsdoc-type-pratt-parser/-/jsdoc-type-pratt-parser-1.0.0-alpha.23.tgz#01c232d92b99b7e7ef52235ab8c9115137426639"
-  integrity sha512-COtimMd97eo5W0h6R9ISFj9ufg/9EiAzVAeQpKBJ1xJs/x8znWE155HGBDR2rwOuZsCes1gBXGmFVfvRZxGrhg==
-
-jsdoc-type-pratt-parser@^1.0.4:
+jsdoc-type-pratt-parser@1.0.4, jsdoc-type-pratt-parser@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/jsdoc-type-pratt-parser/-/jsdoc-type-pratt-parser-1.0.4.tgz#5750d2d32ffb001866537d3baaedea7cf84c7036"
   integrity sha512-jzmW9gokeq9+bHPDR1nCeidMyFUikdZlbOhKzh9+/nJqB75XhpNKec1/UuxW5c4+O+Pi31Gc/dCboyfSm/pSpQ==
