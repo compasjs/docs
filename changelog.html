@@ -28,13 +28,48 @@
   CHANGELOG
   
 </h1>
-<h3 id="v00149">
-  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.149">v0.0.149</a>
-  <a name="v00149" class="anchor" href="#v00149">#</a>
+<h3 id="v00150">
+  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.150">v0.0.150</a>
+  <a name="v00150" class="anchor" href="#v00150">#</a>
 </h3>
 <h5 id="changes">
   Changes
   <a name="changes" class="anchor" href="#changes">#</a>
+</h5>
+<ul>
+<li>build(deps): bump eslint-plugin-jsdoc from 35.4.0 to 35.4.1
+(<a href="https://github.com/compasjs/compas/pull/1006">#1006</a>)<ul>
+<li><a href="https://github.com/gajus/eslint-plugin-jsdoc/releases">Release notes</a></li>
+</ul>
+</li>
+<li>chore(create-release): fix changelog parsing</li>
+<li>feat(server): sendFile support If-Modified-Since
+(<a href="https://github.com/compasjs/compas/pull/1003">#1003</a>)<ul>
+<li>Closes <a href="https://github.com/compasjs/compas/pull/1002">#1002</a></li>
+</ul>
+</li>
+<li>feat(store): add must-revalidate to default cacheControlHeader in FileCache
+(<a href="https://github.com/compasjs/compas/pull/1004">#1004</a>)</li>
+</ul>
+<h5 id="breaking-changes">
+  Breaking changes
+  <a name="breaking-changes" class="anchor" href="#breaking-changes">#</a>
+</h5>
+<ul>
+<li><strong>store</strong>: add must-revalidate to default cacheControlHeader in FileCache<ul>
+<li>The default cache-control value has changed from <code>max-age=1200</code> to
+<code>max-age=120, must-revalidate</code>. Provide your own as the last argument of
+<code>new FileCache()</code> if necessary.</li>
+</ul>
+</li>
+</ul>
+<h3 id="v00149">
+  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.149">v0.0.149</a>
+  <a name="v00149" class="anchor" href="#v00149">#</a>
+</h3>
+<h5 id="changes-1">
+  Changes
+  <a name="changes-1" class="anchor" href="#changes-1">#</a>
 </h5>
 <ul>
 <li>build(deps): bump @types/node from 15.12.4 to 15.12.5
@@ -55,9 +90,9 @@
 </ul>
 </li>
 </ul>
-<h5 id="breaking-changes">
+<h5 id="breaking-changes-1">
   Breaking changes
-  <a name="breaking-changes" class="anchor" href="#breaking-changes">#</a>
+  <a name="breaking-changes-1" class="anchor" href="#breaking-changes-1">#</a>
 </h5>
 <ul>
 <li><strong>store</strong>: remove file group view<ul>
@@ -559,7 +594,7 @@ conversion (<a href="https://github.com/compasjs/compas/pull/767">#767</a>)</li>
 <li>build(deps): bump eslint-plugin-jsdoc from 32.2.0 to 32.3.0
 (<a href="https://github.com/compasjs/compas/pull/749">#749</a>)</li>
 <li>chore(ci): use custom token to comment on PR&#39;s</li>
-<li>chore: move to fastify/<a href="mailto:&#x67;&#105;&#x74;&#x68;&#117;&#98;&#x2d;&#x61;&#x63;&#116;&#x69;&#111;&#x6e;&#45;&#109;&#101;&#114;&#x67;&#x65;&#45;&#100;&#101;&#112;&#101;&#110;&#100;&#x61;&#98;&#x6f;&#x74;&#64;&#118;&#x32;&#x2e;&#x30;&#x2e;&#48;">&#x67;&#105;&#x74;&#x68;&#117;&#98;&#x2d;&#x61;&#x63;&#116;&#x69;&#111;&#x6e;&#45;&#109;&#101;&#114;&#x67;&#x65;&#45;&#100;&#101;&#112;&#101;&#110;&#100;&#x61;&#98;&#x6f;&#x74;&#64;&#118;&#x32;&#x2e;&#x30;&#x2e;&#48;</a></li>
+<li>chore: move to fastify/<a href="mailto:&#x67;&#x69;&#116;&#104;&#117;&#98;&#x2d;&#97;&#99;&#x74;&#x69;&#111;&#x6e;&#45;&#x6d;&#x65;&#x72;&#x67;&#101;&#x2d;&#100;&#x65;&#x70;&#x65;&#x6e;&#x64;&#x61;&#98;&#x6f;&#x74;&#64;&#118;&#50;&#x2e;&#x30;&#x2e;&#x30;">&#x67;&#x69;&#116;&#104;&#117;&#98;&#x2d;&#97;&#99;&#x74;&#x69;&#111;&#x6e;&#45;&#x6d;&#x65;&#x72;&#x67;&#101;&#x2d;&#100;&#x65;&#x70;&#x65;&#x6e;&#x64;&#x61;&#98;&#x6f;&#x74;&#64;&#118;&#50;&#x2e;&#x30;&#x2e;&#x30;</a></li>
 <li>feat(code-gen): generate a code splittable api client
 (<a href="https://github.com/compasjs/compas/pull/756">#756</a>)</li>
 <li>feat(code-gen): introduce common, split generator output per &#39;group&#39;
