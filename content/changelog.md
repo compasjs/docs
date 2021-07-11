@@ -8,6 +8,72 @@ order: 4
 
 # CHANGELOG
 
+### [v0.0.152](https://github.com/compasjs/compas/releases/tag/v0.0.152)
+
+##### Changes
+
+- build(deps): bump @types/node from 16.0.1 to 16.3.1
+  ([#1018](https://github.com/compasjs/compas/pull/1018),
+  [#1026](https://github.com/compasjs/compas/pull/1026))
+  - [Release notes](https://github.com/DefinitelyTyped/DefinitelyTyped/releases)
+- build(deps): bump eslint-plugin-jsdoc from 35.4.1 to 35.4.3
+  ([#1019](https://github.com/compasjs/compas/pull/1019),
+  [#1025](https://github.com/compasjs/compas/pull/1025))
+  - [Release notes](https://github.com/gajus/eslint-plugin-jsdoc/releases)
+- chore(ci): disable setup-node auto cache for sync-docs
+- chore(codecov): make patch informational as well
+- feat(cli): change default worker count of test to 4 instead of number of cpus
+  - Closes [#1023](https://github.com/compasjs/compas/pull/1023)
+- feat(cli): run tests in parallel by default while collecting coverage
+  ([#1024](https://github.com/compasjs/compas/pull/1024))
+  - Closes [#1022](https://github.com/compasjs/compas/pull/1022)
+- feat(code-gen): error when relation key is a reserved query builder key
+  ([#1020](https://github.com/compasjs/compas/pull/1020))
+- feat(code-gen): add 'as' and 'limit' as reserved query builder keys
+
+##### Breaking changes
+
+- **cli**: run tests in parallel by default while collecting coverage
+  - `compas coverage` by defaults executes tests with the default settings
+    (parallel)
+  - `compas coverage` now also accepts all arguments of `compas test` like
+    `--serial` and `--parallel-count`. To get the old behaviour run
+    `compas coverage --serial`
+
+### [v0.0.151](https://github.com/compasjs/compas/releases/tag/v0.0.151)
+
+##### Changes
+
+- build(deps): bump @types/minio from 7.0.7 to 7.0.8
+  ([#1012](https://github.com/compasjs/compas/pull/1012))
+  - [Release notes](https://github.com/DefinitelyTyped/DefinitelyTyped/releases)
+- build(deps): bump @types/node from 15.12.5 to 16.0.1
+  ([#1008](https://github.com/compasjs/compas/pull/1008),
+  [#1010](https://github.com/compasjs/compas/pull/1010),
+  [#1014](https://github.com/compasjs/compas/pull/1014))
+  - [Release notes](https://github.com/DefinitelyTyped/DefinitelyTyped/releases)
+- build(deps): bump eslint from 7.29.0 to 7.30.0
+  ([#1011](https://github.com/compasjs/compas/pull/1011))
+  - [Release notes](https://github.com/eslint/eslint/releases)
+- build(deps): bump postgres from 2.0.0-beta.5 to 2.0.0-beta.6
+  ([#1015](https://github.com/compasjs/compas/pull/1015))
+  - [Release notes](https://github.com/porsager/postgres/releases)
+- chore: only support Node.js v16 and higher
+- chore(ci): disable auto-merge of dependabot PR's
+- chore(ci): use setup-node@v2 with built-in cache support
+- feat(code-gen): rename `ctx.event` in matched handlers with a `router.` prefix
+  ([#1017](https://github.com/compasjs/compas/pull/1017))
+- fix(stdlib): replace TimeoutError with AppError, fix formatting of info object
+  ([#1016](https://github.com/compasjs/compas/pull/1016))
+
+##### Breaking changes
+
+- **deps**: bump @types/node from 15.12.5 to 16.0.1
+  - Major version bump
+- **all**: only support Node.js v16 and higher
+  - Bump your local project to use Node.js v16, which should go in to LTS in a
+    few months
+
 ### [v0.0.150](https://github.com/compasjs/compas/releases/tag/v0.0.150)
 
 ##### Changes

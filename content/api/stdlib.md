@@ -54,7 +54,7 @@ Create a new event from a logger
 - logger `Logger`: Logger should have a context, like the default `ctx.log`
 - signal `AbortSignal|undefined?`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L83)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L86)_
 
 ## newEventFromEvent
 
@@ -68,7 +68,7 @@ Create a 'child' event, reuses the logger, adds callstack to the passed event
 
 - event `InsightEvent`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L95)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L98)_
 
 ## eventStart
 
@@ -83,7 +83,7 @@ Track event start times
 - event `InsightEvent`
 - name `string`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L125)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L131)_
 
 ## eventStop
 
@@ -97,7 +97,7 @@ Track event end times and log if necessary
 
 - event `InsightEvent`
 
-_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L181)_
+_[source](https://github.com/compasjs/compas/blob/main/packages/stdlib/src/events.js#L193)_
 
 ## isProduction
 
