@@ -28,13 +28,117 @@
   CHANGELOG
   
 </h1>
-<h3 id="v00150">
-  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.150">v0.0.150</a>
-  <a name="v00150" class="anchor" href="#v00150">#</a>
+<h3 id="v00152">
+  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.152">v0.0.152</a>
+  <a name="v00152" class="anchor" href="#v00152">#</a>
 </h3>
 <h5 id="changes">
   Changes
   <a name="changes" class="anchor" href="#changes">#</a>
+</h5>
+<ul>
+<li>build(deps): bump @types/node from 16.0.1 to 16.3.1
+(<a href="https://github.com/compasjs/compas/pull/1018">#1018</a>,
+<a href="https://github.com/compasjs/compas/pull/1026">#1026</a>)<ul>
+<li><a href="https://github.com/DefinitelyTyped/DefinitelyTyped/releases">Release notes</a></li>
+</ul>
+</li>
+<li>build(deps): bump eslint-plugin-jsdoc from 35.4.1 to 35.4.3
+(<a href="https://github.com/compasjs/compas/pull/1019">#1019</a>,
+<a href="https://github.com/compasjs/compas/pull/1025">#1025</a>)<ul>
+<li><a href="https://github.com/gajus/eslint-plugin-jsdoc/releases">Release notes</a></li>
+</ul>
+</li>
+<li>chore(ci): disable setup-node auto cache for sync-docs</li>
+<li>chore(codecov): make patch informational as well</li>
+<li>feat(cli): change default worker count of test to 4 instead of number of cpus<ul>
+<li>Closes <a href="https://github.com/compasjs/compas/pull/1023">#1023</a></li>
+</ul>
+</li>
+<li>feat(cli): run tests in parallel by default while collecting coverage
+(<a href="https://github.com/compasjs/compas/pull/1024">#1024</a>)<ul>
+<li>Closes <a href="https://github.com/compasjs/compas/pull/1022">#1022</a></li>
+</ul>
+</li>
+<li>feat(code-gen): error when relation key is a reserved query builder key
+(<a href="https://github.com/compasjs/compas/pull/1020">#1020</a>)</li>
+<li>feat(code-gen): add &#39;as&#39; and &#39;limit&#39; as reserved query builder keys</li>
+</ul>
+<h5 id="breaking-changes">
+  Breaking changes
+  <a name="breaking-changes" class="anchor" href="#breaking-changes">#</a>
+</h5>
+<ul>
+<li><strong>cli</strong>: run tests in parallel by default while collecting coverage<ul>
+<li><code>compas coverage</code> by defaults executes tests with the default settings
+(parallel)</li>
+<li><code>compas coverage</code> now also accepts all arguments of <code>compas test</code> like
+<code>--serial</code> and <code>--parallel-count</code>. To get the old behaviour run
+<code>compas coverage --serial</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="v00151">
+  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.151">v0.0.151</a>
+  <a name="v00151" class="anchor" href="#v00151">#</a>
+</h3>
+<h5 id="changes-1">
+  Changes
+  <a name="changes-1" class="anchor" href="#changes-1">#</a>
+</h5>
+<ul>
+<li>build(deps): bump @types/minio from 7.0.7 to 7.0.8
+(<a href="https://github.com/compasjs/compas/pull/1012">#1012</a>)<ul>
+<li><a href="https://github.com/DefinitelyTyped/DefinitelyTyped/releases">Release notes</a></li>
+</ul>
+</li>
+<li>build(deps): bump @types/node from 15.12.5 to 16.0.1
+(<a href="https://github.com/compasjs/compas/pull/1008">#1008</a>,
+<a href="https://github.com/compasjs/compas/pull/1010">#1010</a>,
+<a href="https://github.com/compasjs/compas/pull/1014">#1014</a>)<ul>
+<li><a href="https://github.com/DefinitelyTyped/DefinitelyTyped/releases">Release notes</a></li>
+</ul>
+</li>
+<li>build(deps): bump eslint from 7.29.0 to 7.30.0
+(<a href="https://github.com/compasjs/compas/pull/1011">#1011</a>)<ul>
+<li><a href="https://github.com/eslint/eslint/releases">Release notes</a></li>
+</ul>
+</li>
+<li>build(deps): bump postgres from 2.0.0-beta.5 to 2.0.0-beta.6
+(<a href="https://github.com/compasjs/compas/pull/1015">#1015</a>)<ul>
+<li><a href="https://github.com/porsager/postgres/releases">Release notes</a></li>
+</ul>
+</li>
+<li>chore: only support Node.js v16 and higher</li>
+<li>chore(ci): disable auto-merge of dependabot PR&#39;s</li>
+<li>chore(ci): use setup-node@v2 with built-in cache support</li>
+<li>feat(code-gen): rename <code>ctx.event</code> in matched handlers with a <code>router.</code> prefix
+(<a href="https://github.com/compasjs/compas/pull/1017">#1017</a>)</li>
+<li>fix(stdlib): replace TimeoutError with AppError, fix formatting of info object
+(<a href="https://github.com/compasjs/compas/pull/1016">#1016</a>)</li>
+</ul>
+<h5 id="breaking-changes-1">
+  Breaking changes
+  <a name="breaking-changes-1" class="anchor" href="#breaking-changes-1">#</a>
+</h5>
+<ul>
+<li><strong>deps</strong>: bump @types/node from 15.12.5 to 16.0.1<ul>
+<li>Major version bump</li>
+</ul>
+</li>
+<li><strong>all</strong>: only support Node.js v16 and higher<ul>
+<li>Bump your local project to use Node.js v16, which should go in to LTS in a
+few months</li>
+</ul>
+</li>
+</ul>
+<h3 id="v00150">
+  <a href="https://github.com/compasjs/compas/releases/tag/v0.0.150">v0.0.150</a>
+  <a name="v00150" class="anchor" href="#v00150">#</a>
+</h3>
+<h5 id="changes-2">
+  Changes
+  <a name="changes-2" class="anchor" href="#changes-2">#</a>
 </h5>
 <ul>
 <li>build(deps): bump eslint-plugin-jsdoc from 35.4.0 to 35.4.1
@@ -51,9 +155,9 @@
 <li>feat(store): add must-revalidate to default cacheControlHeader in FileCache
 (<a href="https://github.com/compasjs/compas/pull/1004">#1004</a>)</li>
 </ul>
-<h5 id="breaking-changes">
+<h5 id="breaking-changes-2">
   Breaking changes
-  <a name="breaking-changes" class="anchor" href="#breaking-changes">#</a>
+  <a name="breaking-changes-2" class="anchor" href="#breaking-changes-2">#</a>
 </h5>
 <ul>
 <li><strong>store</strong>: add must-revalidate to default cacheControlHeader in FileCache<ul>
@@ -67,9 +171,9 @@
   <a href="https://github.com/compasjs/compas/releases/tag/v0.0.149">v0.0.149</a>
   <a name="v00149" class="anchor" href="#v00149">#</a>
 </h3>
-<h5 id="changes-1">
+<h5 id="changes-3">
   Changes
-  <a name="changes-1" class="anchor" href="#changes-1">#</a>
+  <a name="changes-3" class="anchor" href="#changes-3">#</a>
 </h5>
 <ul>
 <li>build(deps): bump @types/node from 15.12.4 to 15.12.5
@@ -90,9 +194,9 @@
 </ul>
 </li>
 </ul>
-<h5 id="breaking-changes-1">
+<h5 id="breaking-changes-3">
   Breaking changes
-  <a name="breaking-changes-1" class="anchor" href="#breaking-changes-1">#</a>
+  <a name="breaking-changes-3" class="anchor" href="#breaking-changes-3">#</a>
 </h5>
 <ul>
 <li><strong>store</strong>: remove file group view<ul>
@@ -594,7 +698,7 @@ conversion (<a href="https://github.com/compasjs/compas/pull/767">#767</a>)</li>
 <li>build(deps): bump eslint-plugin-jsdoc from 32.2.0 to 32.3.0
 (<a href="https://github.com/compasjs/compas/pull/749">#749</a>)</li>
 <li>chore(ci): use custom token to comment on PR&#39;s</li>
-<li>chore: move to fastify/<a href="mailto:&#x67;&#105;&#116;&#104;&#x75;&#98;&#x2d;&#x61;&#x63;&#116;&#x69;&#111;&#110;&#45;&#x6d;&#101;&#114;&#103;&#101;&#x2d;&#100;&#101;&#x70;&#x65;&#x6e;&#x64;&#97;&#x62;&#x6f;&#116;&#x40;&#118;&#50;&#46;&#x30;&#46;&#x30;">&#x67;&#105;&#116;&#104;&#x75;&#98;&#x2d;&#x61;&#x63;&#116;&#x69;&#111;&#110;&#45;&#x6d;&#101;&#114;&#103;&#101;&#x2d;&#100;&#101;&#x70;&#x65;&#x6e;&#x64;&#97;&#x62;&#x6f;&#116;&#x40;&#118;&#50;&#46;&#x30;&#46;&#x30;</a></li>
+<li>chore: move to fastify/<a href="mailto:&#103;&#105;&#x74;&#104;&#117;&#x62;&#45;&#97;&#99;&#116;&#105;&#x6f;&#110;&#x2d;&#x6d;&#101;&#114;&#103;&#101;&#x2d;&#100;&#101;&#112;&#101;&#110;&#100;&#x61;&#98;&#111;&#116;&#x40;&#118;&#50;&#x2e;&#48;&#46;&#x30;">&#103;&#105;&#x74;&#104;&#117;&#x62;&#45;&#97;&#99;&#116;&#105;&#x6f;&#110;&#x2d;&#x6d;&#101;&#114;&#103;&#101;&#x2d;&#100;&#101;&#112;&#101;&#110;&#100;&#x61;&#98;&#111;&#116;&#x40;&#118;&#50;&#x2e;&#48;&#46;&#x30;</a></li>
 <li>feat(code-gen): generate a code splittable api client
 (<a href="https://github.com/compasjs/compas/pull/756">#756</a>)</li>
 <li>feat(code-gen): introduce common, split generator output per &#39;group&#39;
