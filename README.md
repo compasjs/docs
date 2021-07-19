@@ -1,5 +1,11 @@
 # Compas docs
 
+--- 
+
+## Docs are now in the main Compas repo: https://github.com/compasjs/compas/tree/main/docs
+
+---
+
 ```shell
 yarn
 yarn compas generate
